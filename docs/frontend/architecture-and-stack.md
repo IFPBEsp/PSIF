@@ -1,4 +1,4 @@
-# Arquitetura de frontend
+# Arquitetura e stack de frontend
 
 Referência para o frontend de sistemas de informação, pensada como ponto de partida de projetos novos, antes das funcionalidades de negócio. A base é Next.js com App Router, React, TypeScript, Tailwind CSS e shadcn/ui, em arquitetura orientada a features, com o Next atuando como BFF e renderização server-first. As prioridades são organização por domínio, baixo acoplamento, segurança, estado client-side mínimo, contratos sincronizados com o backend, evolução incremental, manutenção fácil e deploy simples com Docker.
 
