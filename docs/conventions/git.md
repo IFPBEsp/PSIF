@@ -76,10 +76,3 @@ Essa branch corrige o armazenamento do fuso horário das datas
 de execução do self-test no banco de dados
 → 9999-corrige-timezone-self-test
 ```
-
-## Referências
-
-- [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/)
-- [Angular: Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)
-- [Should I use past or present tense in git commit messages?](https://stackoverflow.com/questions/3580013/should-i-use-past-or-present-tense-in-git-commit-messages)
-- [Atomic git commits](https://www.aleksandrhovhannisyan.com/blog/atomic-git-commits/#atomic-commits-and-the-single-responsibility-principle)
