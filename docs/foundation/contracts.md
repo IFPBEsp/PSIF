@@ -8,7 +8,7 @@ Contratos técnicos compartilhados entre backend, frontend e deployment para a f
 
 Os serviços da stack inicial e seus papéis estão definidos em `docs/deployment/docker.md` (seção 1 - Arquitetura).
 
-O contrato fixa os nomes dos serviços para resolução de DNS interno no Docker, sem fixar `container_name`.
+Nomes dos serviços (resolução de DNS interno no Docker): `caddy`, `frontend`, `backend`, `postgres` e `minio`. O contrato não fixa `container_name`.
 
 ## 2. Portas
 
@@ -46,7 +46,7 @@ Endpoints e significado de saudável:
 - `frontend`: `/api/health` (porta 3000). Saudável quando o servidor web responde requisições HTTP.
 - `postgres`: porta 5432. Saudável quando aceita conexões TCP ativas.
 - `minio`: `/minio/health/live` (porta 9000). Saudável quando o serviço responde ativo.
-- `caddy`: sem healthcheck próprio inicial (a definir pelo time).
+- `caddy`: sem healthcheck na fundação (fora do escopo das issues #16 e #17).
 
 ## 6. OpenAPI
 
