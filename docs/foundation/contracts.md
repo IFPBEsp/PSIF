@@ -1,112 +1,55 @@
 # Contratos da fundação
 
-Fonte única dos contratos técnicos compartilhados entre backend, frontend e deployment.
+Contratos técnicos compartilhados entre backend, frontend e deployment para a fundação do projeto.
 
 ---
 
 ## 1. Serviços
 
-Os nomes dos serviços na rede interna do Docker:
+Os serviços da stack inicial e seus papéis estão definidos em `docs/deployment/docker.md` (seção 1 - Arquitetura).
 
-| Serviço | Papel | Tecnologia |
-| --- | --- | --- |
-| `caddy` | Reverse proxy e terminação TLS/HTTPS | Caddy |
-| `frontend` | Aplicação web e BFF | Next.js (App Router) |
-| `backend` | API REST e regras de negócio | Spring Boot |
-| `postgres` | Banco de dados relacional | PostgreSQL |
-| `minio` | Armazenamento de arquivos e objetos | MinIO |
-
-O contrato fixa o nome dos serviços para resolução de DNS interno no Docker. Nomes específicos de container (`container_name`) não são fixados por este contrato.
+O contrato fixa os nomes dos serviços para resolução de DNS interno no Docker, sem fixar `container_name`.
 
 ## 2. Portas
 
-### Desenvolvimento
+As regras de portas em produção (80 e 443 expostas apenas pelo Caddy) estão em `docs/deployment/docker.md` (seção 3 - Rede e comunicação).
 
-Portas publicadas no host para depuração e ferramentas locais:
+Em `docs/deployment/docker.md` (seção 7 - Desenvolvimento) é permitido expor portas adicionais em desenvolvimento sem listar quais. Este contrato fixa a lista publicada no host:
 
-| Serviço | Porta interna | Porta no host | Finalidade |
-| --- | --- | --- | --- |
-| `frontend` | 3000 | 3000 | Acesso local à aplicação web |
-| `backend` | 8080 | 8080 | Depuração da API e geração de client OpenAPI |
-| `postgres` | 5432 | 5432 | Acesso via clientes SQL externos |
-| `minio` | 9000 | 9000 | API S3 para testes locais |
-| `minio` | 9001 | 9001 | Console web administrativa |
-
-### Produção
-
-Em produção, os serviços internos não são expostos diretamente. Apenas o `caddy` publica portas para a internet:
-
-| Serviço | Porta externa | Protocolo |
-| --- | --- | --- |
-| `caddy` | 80 | HTTP (redirecionamento para HTTPS) |
-| `caddy` | 443 | HTTPS |
+- `frontend`: `3000`
+- `backend`: `8080`
+- `postgres`: `5432`
+- `minio`: `9000` (API) e `9001` (console)
 
 ## 3. URLs e comunicação
 
-### Comunicação interna (rede Docker)
+A comunicação interna pelos nomes dos serviços está em `docs/deployment/docker.md` (seção 3 - Rede e comunicação). Os domínios de referência para produção estão em `docs/deployment/docker.md` (seção 5 - Caddy e HTTPS).
 
-Containers comunicam-se pelos nomes dos serviços, sem depender de `localhost`:
-
-- Frontend (BFF) para Backend: `http://backend:8080`
-- Backend para PostgreSQL: host `postgres` na porta `5432`
-- Backend para MinIO: host `minio` na porta `9000`
-- Caddy para Frontend: host `frontend` na porta `3000`
-- Caddy para Backend: host `backend` na porta `8080`
-
-### URLs públicas
-
-- Desenvolvimento: `http://localhost:3000`
-- Produção (domínios de referência):
-  - Frontend: `https://app.example.com`
-  - Backend: `https://api.example.com`
+- Frontend (BFF) para backend: `API_INTERNAL_URL=http://backend:8080` (ver `docs/frontend/architecture-and-stack.md`, seção 21 - Segurança).
+- URL pública em desenvolvimento: `NEXT_PUBLIC_APP_URL=http://localhost:3000`.
 
 ## 4. Variáveis de ambiente
 
-As variáveis essenciais da fundação ficam registradas no arquivo `.env.example` na raiz do projeto. O `.env` real nunca é versionado e permanece no `.gitignore`.
+A lista e estrutura das variáveis da fundação estão no arquivo `.env.example` na raiz do projeto.
 
-Estrutura inicial:
+As regras de nomenclatura e o uso de `NEXT_PUBLIC_` seguem `docs/conventions/naming.md` (seção Ambiente).
 
-```env
-APP_ENV=dev
-
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-API_INTERNAL_URL=http://backend:8080
-
-POSTGRES_DB=
-POSTGRES_USER=
-POSTGRES_PASSWORD=
-
-MINIO_ROOT_USER=
-MINIO_ROOT_PASSWORD=
-```
-
-Regras de variáveis:
-- Nomes em `UPPER_SNAKE_CASE` com prefixo do grupo.
-- O prefixo `NEXT_PUBLIC_` é exclusivo para variáveis expostas ao navegador.
-- O backend consome as variáveis `POSTGRES_*` diretamente no datasource.
-- Variáveis de autenticação ficam para o épico de autenticação.
+O backend lê as variáveis `POSTGRES_*` diretamente no datasource. Variáveis de autenticação ficam para o épico de autenticação.
 
 ## 5. Healthchecks
 
-Cada serviço responde por sua própria verificação de saúde. A infraestrutura usa esses critérios para orquestrar a inicialização dependente:
+A ordem de inicialização entre serviços está em `docs/deployment/docker.md` (seção 6 - Healthchecks e inicialização). Os comandos exatos no Compose ficam para a issue #14.
 
-| Serviço | Endpoint / Critério | Significado de saudável |
-| --- | --- | --- |
-| `backend` | `/actuator/health` (porta 8080) | Aplicação iniciada, migrations concluídas e pronta para receber requisições |
-| `frontend` | `/api/health` (porta 3000) | Servidor Next.js respondendo requisições HTTP |
-| `postgres` | Conexão TCP ativa | Servidor PostgreSQL aceitando conexões de clientes |
-| `minio` | `/minio/health/live` (porta 9000) | Servidor MinIO ativo |
-| `caddy` | Sem healthcheck próprio | Monitoramento a definir pelo time |
+Endpoints e significado de saudável:
 
-Ordem de inicialização:
-```text
-postgres saudável -> backend conecta e executa migrations -> backend saudável -> aplicação disponível
-```
-
-A sintaxe exata dos comandos de healthcheck no Docker Compose é definida na issue #14.
+- `backend`: `/actuator/health` (porta 8080). Saudável quando migrations foram concluídas e a aplicação aceita requisições.
+- `frontend`: `/api/health` (porta 3000). Saudável quando o servidor web responde requisições HTTP.
+- `postgres`: porta 5432. Saudável quando aceita conexões TCP ativas.
+- `minio`: `/minio/health/live` (porta 9000). Saudável quando o serviço responde ativo.
+- `caddy`: sem healthcheck próprio inicial (a definir pelo time).
 
 ## 6. OpenAPI
 
-- Endpoint: `/v3/api-docs`
-- Descrição: caminho padrão do springdoc-openapi onde o backend publica o schema OpenAPI em JSON.
-- Consumo: utilizado pelo frontend via script `npm run api:generate` com Orval para gerar schemas, tipos TypeScript e clients de requisição.
+A integração do Orval com OpenAPI está em `docs/frontend/architecture-and-stack.md` (seção 12 - API client).
+
+O backend publica a especificação em `/v3/api-docs` (padrão springdoc-openapi, issue #9), de onde o frontend a consome.
