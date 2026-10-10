@@ -1,13 +1,15 @@
 # AGENTS: docs
 
-Documentação de referência do projeto. Leia só o arquivo que cobre a tarefa em mãos.
+Documentação de referência do projeto. Leia apenas os arquivos relevantes para a tarefa.
 
-## O que vive nessa pasta
+## Arquivos
 
-- `backend/architecture.md`: arquitetura do backend (Java, Spring Boot e PostgreSQL em monólito modular com Clean Architecture leve): organização por domínio, autenticação, banco, contratos, erros, API REST, integrações, storage, jobs e ordem de implementação.
+- `constitution/mission.md`: missão do projeto.
 
-- `frontend/architecture.md`: arquitetura do frontend (Next.js com App Router como BFF, React, TypeScript, Tailwind e shadcn/ui): estrutura por feature, autenticação e autorização, Server/Client Components, Server Actions, estado, formulários, API client gerado por OpenAPI, listagens e segurança.
+- `backend/architecture-and-stack.md`: arquitetura e stack do backend e banco de dados .
 
-- `conventions/git.md`: padrão de commits (Conventional Commits) e de nomes de branches.
+- `frontend/architecture-and-stack.md`: arquitetura e stack do frontend.
 
-- `deployment/docker.md`: execução e publicação com Docker, Docker Compose e Caddy nos ambientes `dev` e `production`: rede, persistência, HTTPS, healthchecks e operação.
+- `conventions/AGENTS.md`: roteamento das convenções desse projeto.
+
+- `deployment/docker.md`: Docker, Docker Compose e Caddy em `dev` e `production`. Cobre rede, persistência, HTTPS, healthchecks e operação.

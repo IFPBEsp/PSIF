@@ -1,4 +1,4 @@
-# Arquitetura de backend
+# Arquitetura e stack de backend
 
 Referência arquitetural para o backend de sistemas de informação, pensada como ponto de partida de novos projetos antes de implementar os domínios de negócio.
 
