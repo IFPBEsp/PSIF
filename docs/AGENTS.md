@@ -4,6 +4,8 @@ Documentação de referência do projeto. Leia apenas os arquivos relevantes par
 
 ## Arquivos
 
+- `constitution/mission.md`: missão do projeto.
+
 - `backend/architecture-and-stack.md`: arquitetura e stack do backend e banco de dados .
 
 - `frontend/architecture-and-stack.md`: arquitetura e stack do frontend.
