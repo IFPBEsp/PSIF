@@ -38,7 +38,7 @@ O backend lê as variáveis `POSTGRES_*` diretamente no datasource. Variáveis d
 
 ## 5. Healthchecks
 
-A ordem de inicialização entre serviços está em `docs/deployment/docker.md` (seção 6 - Healthchecks e inicialização). Os comandos exatos no Compose ficam para a issue #14.
+A ordem de inicialização entre serviços está em `docs/deployment/docker.md` (seção 6 - Healthchecks e inicialização). Os comandos exatos no Compose ficam para a issue #17.
 
 Endpoints e significado de saudável:
 
