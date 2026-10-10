@@ -1,32 +1,29 @@
 schema: spec-driven
 
-# Project context (optional)
-# Add only constraints that should guide OpenSpec artifacts and workflows.
-# Include constraints an agent cannot infer by reading the code.
-# Keep general project documentation and discoverable codebase facts out.
-# Example:
-#   context: |
-#     Designs and tasks must cover Windows, macOS, and Linux
-#     Write all artifacts in Spanish
+context: |
+  Antes de criar ou alterar artefatos, consulte os documentos aplicáveis:
+    Leia `AGENTS.md` da raiz antes de escrever qualquer artefato.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always state what is out of scope
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
-
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+rules:
+  proposal:
+    - Manter foco em por que a mudanca existe.
+    - Nao abrir a change sem objetivo e escopo claros (Definition of Ready).
+    - Explicitar o que fica fora de escopo (nao-objetivos).
+    - Escrever em portugues.
+  design:
+    - Explicar decisoes tecnicas e trade-offs.
+    - Cada decisao deve registrar o racional e a alternativa rejeitada.
+    - Cada risco deve vir com mitigacao, nao so o reconhecimento.
+    - Registrar duvidas em aberto de forma nomeada, nao como suposicao implicita.
+    - Escrever em portugues.
+  specs:
+    - Ficar no nivel da intencao (o que/por que); nao descer a nome de variavel ou detalhe de implementacao.
+    - Cada requisito deve ter cenario(s) cobrindo caminho feliz e bordas/erro.
+    - Cenarios devem usar exatamente #### (formato WHEN/THEN); 3 hashtags falha silenciosamente.
+    - Escrever em portugues.
+  tasks:
+    - Quebrar trabalho em passos atomicos e verificaveis.
+    - Ordenar por dependencia.
+    - Incluir validacao como fase final explicita (rodar testes/lint, conferir criterios).
+    - Nao marcar task como concluida sem evidencia (teste, execucao ou trecho conferido).
+    - Escrever em portugues.
