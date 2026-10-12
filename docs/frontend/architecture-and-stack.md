@@ -504,7 +504,7 @@ Os componentes preservam navegação por teclado, labels, focus states, contrast
 
 Tokens ficam em cookies httpOnly, o browser autenticado nunca acessa o backend diretamente, as permissões são validadas no servidor, CSRF é tratado quando necessário, a CSP é configurada, e não existem secrets em código client-side nem tokens em log.
 
-Toda variável `NEXT_PUBLIC_*` é visível ao navegador, então `API_SECRET`, `JWT_SECRET`, `PRIVATE_TOKEN` e `REFRESH_TOKEN_SECRET` nunca podem ser públicas. Quando o browser não precisa da API, prefira `API_INTERNAL_URL=http://backend:8080` a `NEXT_PUBLIC_API_URL`.
+Toda variável `NEXT_PUBLIC_*` é visível ao navegador, então `API_SECRET`, `JWT_SECRET`, `PRIVATE_TOKEN` e `REFRESH_TOKEN_SECRET` nunca podem ser públicas. Quando o browser não precisa da API, prefira `API_INTERNAL_URL=https://api.example.com` a `NEXT_PUBLIC_API_URL`.
 
 Como a autenticação usa cookies, avalie proteção CSRF para operações sensíveis. As opções dependem da infraestrutura (SameSite, validação de Origin, CSRF token, mutations apenas via BFF) e a escolha deve ser documentada em cada projeto. Configure CSP onde for apropriado, com atenção a scripts, imagens, iframes, fontes, editores externos e analytics, evitando políticas permissivas demais.
 
