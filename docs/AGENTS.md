@@ -6,6 +6,8 @@ Documentação de referência do projeto. Leia apenas os arquivos relevantes par
 
 - `constitution/mission.md`: missão do projeto.
 
+- `foundation/contracts.md`: contratos técnicos da fundação (serviços, portas, URLs, BFF, variáveis de ambiente, healthchecks e OpenAPI).
+
 - `backend/architecture-and-stack.md`: arquitetura e stack do backend e banco de dados .
 
 - `frontend/architecture-and-stack.md`: arquitetura e stack do frontend.
