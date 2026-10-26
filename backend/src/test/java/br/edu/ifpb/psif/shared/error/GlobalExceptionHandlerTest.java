@@ -2,18 +2,29 @@ package br.edu.ifpb.psif.shared.error;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Map;
+import java.util.Set;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.constraints.NotBlank;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 class GlobalExceptionHandlerTest {
@@ -36,6 +47,7 @@ class GlobalExceptionHandlerTest {
                                 {"name": ""}
                                 """))
                 .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.type").value("about:blank"))
                 .andExpect(jsonPath("$.status").value(400))
                 .andExpect(jsonPath("$.title").value("Dados inválidos"))
                 .andExpect(jsonPath("$.detail").value("Verifique os campos informados."))
@@ -43,9 +55,25 @@ class GlobalExceptionHandlerTest {
     }
 
     @Test
+    void shouldReturn400WithInvalidFieldsOnConstraintViolation() {
+        ConstraintViolation<?> violation = validator()
+                .validate(new ConstraintSample(""))
+                .iterator()
+                .next();
+
+        ResponseEntity<ProblemDetail> response = new GlobalExceptionHandler()
+                .handleConstraintViolation(new ConstraintViolationException(Set.of(violation)));
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(Map.of("code", "Código é obrigatório."), response.getBody().getProperties().get("fields"));
+    }
+
+    @Test
     void shouldReturn404WhenResourceIsMissing() throws Exception {
         mockMvc.perform(get("/test/errors/not-found"))
                 .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.type").value("about:blank"))
                 .andExpect(jsonPath("$.status").value(404))
                 .andExpect(jsonPath("$.title").value("Recurso não encontrado"))
                 .andExpect(jsonPath("$.detail").value("Produto não encontrado."))
@@ -114,9 +142,12 @@ class GlobalExceptionHandlerTest {
                 .andExpect(content().string(not(containsString("IllegalStateException"))));
     }
 
-    private Validator validator() {
+    private LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         validator.afterPropertiesSet();
         return validator;
+    }
+
+    record ConstraintSample(@NotBlank(message = "Código é obrigatório.") String code) {
     }
 }

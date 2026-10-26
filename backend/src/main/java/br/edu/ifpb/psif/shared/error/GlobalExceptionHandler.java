@@ -1,5 +1,6 @@
 package br.edu.ifpb.psif.shared.error;
 
+import java.net.URI;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private static final String UNEXPECTED_DETAIL = "Não foi possível concluir a operação.";
     private static final String EXTERNAL_INTEGRATION_MESSAGE = "Falha na integração externa";
     private static final String FIELDS_PROPERTY = "fields";
+    private static final URI TYPE = URI.create("about:blank");
 
     /**
      * Trata erros que já carregam status, título e detalhe.
@@ -105,6 +107,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ProblemDetail validationProblem(Map<String, String> fields) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, VALIDATION_DETAIL);
+        problem.setType(TYPE);
         problem.setTitle(VALIDATION_TITLE);
         problem.setProperty(FIELDS_PROPERTY, fields);
         return problem;
@@ -112,6 +115,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<ProblemDetail> problemResponse(HttpStatus status, String title, String detail) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(status, detail);
+        problem.setType(TYPE);
         problem.setTitle(title);
         return ResponseEntity.status(status).body(problem);
     }
