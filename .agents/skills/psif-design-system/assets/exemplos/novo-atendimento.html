@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Novo atendimento — PSIF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+</head>
+<body>
+<!-- Sprite de assets/icones.svg inline (§18). -->
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="position: absolute; width: 0; height: 0; overflow: hidden">
+<symbol id="psif-voltar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></symbol>
+<symbol id="psif-avancar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="psif-anterior" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol>
+<symbol id="psif-abrir-lista" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="psif-fechar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></symbol>
+<symbol id="psif-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
+<symbol id="psif-mais" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></symbol>
+
+<symbol id="psif-inicio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="psif-inicio-ativo" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="psif-atendimentos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="16" rx="2"/><rect x="9" y="3" width="6" height="4" rx="1"/></symbol>
+<symbol id="psif-atendimentos-ativo" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="16" rx="2"/><rect x="9" y="3" width="6" height="4" rx="1"/></symbol>
+<symbol id="psif-alunos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.8.3 5 2.6 5 5.8"/></symbol>
+<symbol id="psif-alunos-ativo" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6z"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.8.3 5 2.6 5 5.8h-5z"/></symbol>
+<symbol id="psif-relatorios" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8l5 5v3"/><path d="M14 3v5h5"/><circle cx="16" cy="16" r="3"/><path d="M18.2 18.2L21 21"/></symbol>
+<symbol id="psif-relatorios-ativo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" stroke="none" d="M6 2h7.6l6.4 6.4V12a6 6 0 0 0-8.5 9H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><circle cx="16" cy="16" r="3"/><path d="M18.2 18.2L21 21"/></symbol>
+
+<symbol id="psif-calendario" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></symbol>
+<symbol id="psif-perfil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></symbol>
+<symbol id="psif-notificacoes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></symbol>
+<symbol id="psif-termo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><path d="M8 13h8"/><path d="M8 17h5"/></symbol>
+<symbol id="psif-sair" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M9 8l-4 4 4 4"/><path d="M5 12h11"/></symbol>
+
+<symbol id="psif-alerta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6"/><path d="M12 17h.01"/></symbol>
+<symbol id="psif-busca" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+<symbol id="psif-email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="psif-cadeado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="psif-mostrar-senha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+</svg>
+<div class="psif-shell">
+<a class="psif-pular" href="#conteudo">Pular para o conteúdo</a>
+
+<nav class="psif-lateral" aria-label="Principal">
+<div class="psif-lateral__marca"><img src="../simbolo-psif.svg" alt="" width="32" height="32"><span class="psif-lateral__nome">PSIF</span></div>
+<ul class="psif-lateral__grupo">
+<li><a class="psif-item" title="Início" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-inicio"></use></svg><span class="psif-item__rotulo">Início</span></a></li>
+<li><a class="psif-item" title="Atendimentos" href="#" aria-current="page"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-atendimentos-ativo"></use></svg><span class="psif-item__rotulo">Atendimentos</span></a></li>
+<li><a class="psif-item" title="Alunos" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-alunos"></use></svg><span class="psif-item__rotulo">Alunos</span></a></li>
+<li><a class="psif-item" title="Relatórios" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-relatorios"></use></svg><span class="psif-item__rotulo">Relatórios</span></a></li>
+</ul>
+<ul class="psif-lateral__grupo">
+<li><a class="psif-item" title="Agenda" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-calendario"></use></svg><span class="psif-item__rotulo">Agenda</span></a></li>
+<li><a class="psif-item" title="Notificações" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg><span class="psif-item__rotulo">Notificações</span></a></li>
+<li><a class="psif-item" title="Meu perfil" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-perfil"></use></svg><span class="psif-item__rotulo">Meu perfil</span></a></li>
+<li><a class="psif-item" title="Termo" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-termo"></use></svg><span class="psif-item__rotulo">Termo</span></a></li>
+</ul>
+<button type="button" class="psif-item psif-lateral__sair" title="Sair"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-sair"></use></svg><span class="psif-item__rotulo">Sair</span></button>
+</nav>
+
+<div class="psif-coluna">
+<div class="psif-cabecalho psif-cabecalho--faixa" role="search">
+<button type="button" class="psif-botao-icone" aria-label="Recolher menu" aria-expanded="true"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
+<div class="psif-cabecalho__busca">
+<label class="psif-campo psif-campo--borda"><svg class="psif-ic" aria-hidden="true"><use href="#psif-busca"></use></svg><input type="search" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" aria-controls="busca-global-resultados"></label>
+<ul id="busca-global-resultados" class="psif-cartao psif-cartao--lista psif-lista psif-cabecalho__resultados" hidden></ul>
+</div>
+<a class="psif-botao-icone" href="#" aria-label="Notificações"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg></a>
+<a class="psif-botao-icone" href="#" aria-label="Meu perfil"><span class="psif-avatar psif-avatar--mini" aria-hidden="true">AP</span></a>
+</div>
+<div class="psif-area">
+
+
+<header class="psif-barra-superior">
+<button type="button" class="psif-botao-icone" aria-label="Voltar"><svg class="psif-ic psif-ic--sm" aria-hidden="true"><use href="#psif-voltar"></use></svg></button>
+<h1 class="psif-titulo-tela">Novo atendimento</h1>
+<button type="submit" form="form-atendimento" class="psif-botao psif-botao--compacto psif-botao--tela">Salvar atendimento</button>
+</header>
+
+<main id="conteudo" class="psif-conteudo psif-com-botao-tela">
+<form class="psif-form" id="form-atendimento" novalidate>
+
+<div class="psif-campo-grupo">
+<label class="psif-rotulo" id="r-aluno" for="c-aluno">Aluno</label>
+<button type="button" class="psif-campo psif-selecao" id="c-aluno" aria-haspopup="dialog" aria-labelledby="r-aluno v-aluno" aria-required="true"><span id="v-aluno" class="psif-selecao__vazio">Selecione</span><svg class="psif-chevron" style="width: var(--ic-md); height: var(--ic-md)" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
+</div>
+
+<div class="psif-campo-grupo">
+<label class="psif-rotulo" for="c-data">Data</label>
+<div class="psif-campo psif-campo--com-botao">
+<input id="c-data" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" aria-required="true">
+<button type="button" class="psif-botao-icone" aria-label="Abrir calendário" aria-haspopup="dialog"><svg class="psif-ic" aria-hidden="true"><use href="#psif-calendario"></use></svg></button>
+</div>
+</div>
+
+<div class="psif-campo-grupo">
+<label class="psif-rotulo" id="r-tipo" for="c-tipo">Tipo de atendimento</label>
+<button type="button" class="psif-campo psif-selecao" id="c-tipo" aria-haspopup="dialog" aria-labelledby="r-tipo v-tipo" aria-required="true"><span id="v-tipo" class="psif-selecao__vazio">Selecione</span><svg class="psif-chevron" style="width: var(--ic-md); height: var(--ic-md)" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
+</div>
+
+<div class="psif-campo-grupo">
+<label class="psif-rotulo" for="c-descricao">Descrição <span class="psif-opcional">(opcional)</span></label>
+<textarea id="c-descricao" class="psif-campo" rows="4" placeholder="Descreva o atendimento…"></textarea>
+</div>
+
+</form>
+</main>
+</div>
+</div>
+<script>
+document.querySelectorAll('.psif-cabecalho [aria-label="Recolher menu"]').forEach(function (botao) {
+  botao.addEventListener('click', function () {
+    var lateral = document.querySelector('.psif-lateral');
+    var recolhida = lateral.classList.toggle('psif-lateral--recolhida');
+    botao.setAttribute('aria-expanded', String(!recolhida));
+    botao.setAttribute('aria-label', recolhida ? 'Expandir menu' : 'Recolher menu');
+  });
+});
+</script>
+</body>
+</html>
