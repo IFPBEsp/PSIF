@@ -12,7 +12,7 @@ Cada valor tem uma origem declarada:
   do app). Valor aproximado: a imagem é JPEG.
 - **derivado**: o protótipo não desenha o caso (estado de erro, alerta,
   hover) ou desenha de um jeito que reprova acessibilidade. O valor foi
-  calculado para cobrir o caso e está **em aberto em §29** até o design
+  calculado para cobrir o caso e está **em aberto em §28** até o design
   ratificar.
 
 ### 3.1 Cor: Paleta canônica (produção)

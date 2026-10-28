@@ -127,16 +127,17 @@ def font_families(tokens):
     """
     familias = set()
     for pilha in tokens.get("typography", {}).get("font_family", {}).values():
-        primeira = str(pilha).split(",")[0].strip().strip("'\"").lower()
+        pilha = re.sub(r"var\(\s*--[\w-]+\s*,\s*([^)]*)\)", r"\1", str(pilha))
+        primeira = pilha.split(",")[0].strip().strip("'\"").lower()
         if primeira:
             familias.add(primeira)
     return familias
 
 
 def color_families(tokens):
-    """{"ocean", "ink", ...} a partir dos nomes de cor de tokens.json.
+    """{"navy", "ink", ...} a partir dos nomes de cor de tokens.json.
 
-    `ocean-700` -> ocean · `warning-border` -> warning · `white` -> white.
+    `navy-700` -> navy · `warning-border` -> warning · `white` -> white.
     """
     familias = set()
     for nome in tokens.get("color", {}):
@@ -291,7 +292,7 @@ HEX_PURO = re.compile(r"^#[0-9a-fA-F]{3,8}$")
 def colher_paleta(tokens):
     """Todo token com valor de cor em hex, de QUALQUER grupo do tokens.json.
 
-    Antes isto lia só o grupo `color`, e o grupo `dark` (§27) entrou fora do
+    Antes isto lia só o grupo `color`, e o grupo `dark` (§26) entrou fora do
     alcance: o lint passou a reprovar quatro hexes do próprio assets/tokens.css
     da skill. Varrer por formato do valor, e não por nome de grupo, faz o
     próximo grupo de cor entrar sozinho — a mesma razão de collect_token_names
@@ -808,7 +809,7 @@ class Linter:
 
     def run(self, text):
         self.findings = []
-        self.check_palette(text)
+        self.check_palette(blank_comments(text))
         self.check_token_names(text)
         self.check_declarations(text)
         self.check_utility_classes(text)

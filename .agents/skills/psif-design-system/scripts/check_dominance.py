@@ -51,7 +51,7 @@ def carrega_familias():
             "  e só a skill sabe quais são os seus. Declare o mapa "
             "papel -> prefixos de token, ex.:\n"
             '    "dominance_families": {"neutro": ["ink-", "white"], '
-            '"estrutural": ["ocean-"], "apoio": ["accent-"]}'
+            '"estrutural": ["navy-"], "apoio": ["blue-"]}'
         )
     return {papel: tuple(prefixos) for papel, prefixos in familias.items()}
 
@@ -85,7 +85,7 @@ SO_MARCA = ("color", "border", "outline", "outline-color", "stroke",
 DECL = re.compile(r"(?<![\w-])(--[a-z][\w-]*|[a-z][a-z-]*)\s*:\s*([^;{}\n]+)")
 
 # Num projeto shadcn/Tailwind a dominância NÃO se decide em `background:` — se
-# decide no mapeamento papel→escala (`--card: var(--ocean-800)`). Sem contar a
+# decide no mapeamento papel→escala (`--card: var(--navy-800)`). Sem contar a
 # declaração de custom property, o medidor fica cego justamente no arquivo onde
 # a inversão acontece: foi assim que dez papéis de superfície mudaram de cor sem
 # ninguém ver.
@@ -97,7 +97,7 @@ def papel_pinta_area(nome):
     """Custom property de papel: pinta área, a menos que seja marca."""
     return not PAPEL_DE_MARCA.search(nome)
 USO_TOKEN = re.compile(r"var\(\s*--([\w-]+)")
-# Utilitária do Tailwind: bg-ocean-700, text-ink-500, border-accent-200…
+# Utilitária do Tailwind: bg-navy-700, text-ink-700, border-ink-200…
 UTIL = re.compile(r"\b(bg|text|border|fill|ring|from|to|via)-([a-z]+-\d{2,3}|white)\b")
 
 ESCOPO_ESCURO = re.compile(r"(^|\s)(\.dark\b|\[data-theme=[\"']?dark)")
@@ -110,14 +110,6 @@ def familia(nome):
     return None
 
 
-def carrega_semanticos():
-    """Papéis do shadcn (`--primary`, `--card`) apontam para a escala. Sem
-    seguir o ponteiro, uma tela inteira em `bg-primary` não classifica nada."""
-    with open(TOKENS_PATH, encoding="utf-8") as f:
-        json.load(f)  # valida o arquivo; nomes vêm do CSS analisado
-    return {}
-
-
 def mapeia_papeis(css):
     """`--primary: var(--<estrutural>-700)` → primary conta como 'estrutural'."""
     mapa = {}
@@ -127,11 +119,12 @@ def mapeia_papeis(css):
 
 
 def resolve_familia(nome, mapa, profundidade=0):
-    fam = familia(nome)
-    if fam or profundidade > 5:
-        return fam
+    """Segue o ponteiro antes de olhar o prefixo: `--surface-brand` começa com
+    `surface-` (neutro), mas aponta para o marinho, e é marinho que ele pinta."""
     alvo = mapa.get(nome)
-    return resolve_familia(alvo, mapa, profundidade + 1) if alvo else None
+    if alvo and profundidade <= 5:
+        return resolve_familia(alvo, mapa, profundidade + 1)
+    return familia(nome)
 
 
 def analisa(textos, escopo_escuro):
@@ -139,7 +132,6 @@ def analisa(textos, escopo_escuro):
     mapa = mapeia_papeis(css_total)
 
     contagem = {"area": {}, "marca": {}}
-    exemplos = {}
 
     for texto in textos:
         for bloco_sel, corpo in blocos(texto):
@@ -149,7 +141,7 @@ def analisa(textos, escopo_escuro):
             for m in DECL.finditer(corpo):
                 prop, valor = m.group(1), m.group(2)
                 if prop.startswith("--"):
-                    # Declaração de papel: --card: var(--ocean-800)
+                    # Declaração de papel: --card: var(--navy-800)
                     grupo = "area" if papel_pinta_area(prop[2:]) else "marca"
                     if familia(prop[2:]):
                         continue  # é token da escala, não papel: não conta 2x
@@ -162,8 +154,6 @@ def analisa(textos, escopo_escuro):
                     fam = resolve_familia(uso.group(1), mapa)
                     if fam:
                         contagem[grupo][fam] = contagem[grupo].get(fam, 0) + 1
-                        exemplos.setdefault((grupo, fam), []).append(
-                            f"{prop}: var(--{uso.group(1)})")
         for m in UTIL.finditer(texto):
             papel, nome = m.group(1), m.group(2)
             fam = resolve_familia(nome, mapa)
@@ -171,8 +161,7 @@ def analisa(textos, escopo_escuro):
                 continue
             grupo = "area" if papel in ("bg", "fill", "from", "to", "via") else "marca"
             contagem[grupo][fam] = contagem[grupo].get(fam, 0) + 1
-            exemplos.setdefault((grupo, fam), []).append(f"{papel}-{nome}")
-    return contagem, exemplos
+    return contagem
 
 
 def blocos(css):
@@ -194,7 +183,7 @@ def blocos(css):
     return saida
 
 
-def relatorio(contagem, exemplos, rotulo):
+def relatorio(contagem, rotulo):
     area = contagem["area"]
     total_area = sum(area.values())
     print(f"\n── Dominância — {rotulo}")
@@ -224,7 +213,7 @@ def relatorio(contagem, exemplos, rotulo):
         falhas.append(
             f"estrutural pinta mais área que neutro ({prop['estrutural']:.0f}% vs "
             f"{prop['neutro']:.0f}%). A cor estrutural governa os PAPÉIS (chrome, ação), "
-            f"não as superfícies — §3.3. Em modo escuro, ver §27.1.")
+            f"não as superfícies — §3.3. Em modo escuro, ver §26.1.")
     if prop["apoio"] > 15:
         falhas.append(
             f"apoio em {prop['apoio']:.0f}% das superfícies — o teto "
@@ -264,8 +253,8 @@ def main():
                else [("claro", False)] if args.escopo == "claro"
                else [("modo escuro", True)])
     for rotulo, escuro in escopos:
-        contagem, exemplos = analisa(textos, escuro)
-        falhas += relatorio(contagem, exemplos, rotulo)
+        contagem = analisa(textos, escuro)
+        falhas += relatorio(contagem, rotulo)
 
     print("\nLimite do método: conta declaração, não área renderizada (ver "
           "docstring). Pega inversão grosseira, não ajusta 61% contra 59%.")

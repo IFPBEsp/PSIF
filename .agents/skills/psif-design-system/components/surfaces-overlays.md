@@ -43,9 +43,11 @@ situação em `--fs-body` (§12.2). O cartão inteiro abre o perfil.
 
 Cartão branco: título em `--fs-body` peso 600 (`--navy-700` para não lida,
 `--ink-900` para lida), corpo em `--fs-small` `--ink-700` `--lh-normal`, tempo
-relativo ("Há 15 min") em `--fs-caption` `--ink-900` no canto superior
+relativo ("Há 15 min") em `--fs-caption` `--ink-700` (metadado, §4.3; o
+protótipo usa preto, §28.2) no canto superior
 direito. Notificação de pendência ("Acompanhamento pendente") ganha marcador
-`--warning-700` e a palavra "Pendente" no título.
+`--warning-700` (`.psif-notificacao--pendente`) e a palavra "Pendente" no
+título.
 
 Não lida não se distingue só pela cor (§20.2): ganha também um ponto
 `--navy-700` de `--sp-2` antes do título e "não lida" no nome acessível.
@@ -63,13 +65,14 @@ do campo (§7.13).
 ### 9.7 Cartão de funcionalidade (página pública)
 
 Cartão branco com círculo `--navy-700` de 48px contendo ícone branco, título
-em `--fs-body` peso 600 `--ink-900` e descrição em `--fs-small` `--ink-700`.
-Só na página pública.
+em `--fs-body` peso 600 `--ink-900` e descrição em `--fs-small` `--ink-700`
+(`.psif-funcionalidade`). Só na página pública.
 
 ### 9.8 Cartão de autenticação
 
 Cartão branco central, `--radius-lg`, `--sh-sm`, com logo, subtítulo, campos e
-botão primário. Login e Recuperar senha.
+botão primário (`.psif-cartao--autenticacao` dentro de `.psif-autenticacao`).
+Login e Recuperar senha. Exemplo completo em `exemplos/login.html`.
 
 ### 9.9 Sobreposição fora do contêiner (regra de implementação)
 

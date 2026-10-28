@@ -1,6 +1,6 @@
-## 27. MODO ESCURO
+## 26. MODO ESCURO
 
-### 27.1 A regra
+### 26.1 A regra
 
 O PSIF tem tema claro, escuro e sistema (seção 15 de
 `docs/frontend/architecture-and-stack.md`, no projeto). O claro é o do protótipo e continua o padrão de desenho. O
@@ -15,9 +15,9 @@ A paleta escura é a **"noturno"**: derivada, não medida, porque o protótipo
 estático não desenha modo escuro. Foi validada no protótipo navegável contra
 as variações escuro, marinho, grafite e suave: fundo profundo, cartão um pouco
 mais azul e ação em céu claro, para as camadas céu e cartão se separarem no
-escuro. Está registrada em §29.4.
+escuro. Está registrada em §28.4.
 
-### 27.2 Como funciona
+### 26.2 Como funciona
 
 `assets/tokens.css` traz os tokens `--dark-*` e um bloco gerado
 `:root.dark, :root[data-theme="dark"]` que troca cada token pelo par escuro
@@ -26,7 +26,7 @@ escuro. Está registrada em §29.4.
 nada.
 
 - A classe fica no `<html>`. Os aliases (`--surface-base: var(--sky-100)`, a
-  ponte do shadcn em §28.3) são resolvidos no `<html>`; classe num elemento
+  ponte do shadcn em §27.3) são resolvidos no `<html>`; classe num elemento
   abaixo dele não troca esses aliases.
 - No Next.js, `next-themes` com `attribute="class"`, `defaultTheme="system"`,
   `enableSystem` e `disableTransitionOnChange`. O `<html>` leva
@@ -36,9 +36,9 @@ nada.
 - Evite a variante `dark:` do Tailwind na tela. O token já troca; um `dark:`
   avulso vira a segunda versão da paleta.
 - Apague o bloco `.dark { --background: ... }` que o shadcn gera no
-  `globals.css`. A ponte de §28.3 serve aos dois temas.
+  `globals.css`. A ponte de §27.3 serve aos dois temas.
 
-### 27.3 O que muda além da cor
+### 26.3 O que muda além da cor
 
 - **Sombra e véu trocam de tinta.** A sombra tingida de marinho some sobre o
   fundo escuro. No escuro, `--sh-sm` vira `0 4px 4px rgba(3,9,15,.35)`,
@@ -58,14 +58,14 @@ nada.
   `--sky-300` e `--blue-300` continuam proibidos como texto no escuro, mesmo
   quando o par escuro passaria.
 
-### 27.4 Troca de tema
+### 26.4 Troca de tema
 
 Fica no menu do usuário, com três opções escritas: "Claro", "Escuro" e
 "Sistema". "Sistema" é o padrão. A escolha vale para o aparelho, não para a
 conta: é uma das poucas preferências que cabem em estado local (seção 15
 da doc de frontend do projeto). Ícone sozinho (sol e lua) não basta: o rótulo diz o tema.
 
-### 27.5 Pares verificados
+### 26.5 Pares verificados
 
 Conferidos por `test_contrast_table.py` contra `check_contrast.py`. Combinação
 fora daqui passa por `check_contrast.py dark-<texto> dark-<fundo>`.

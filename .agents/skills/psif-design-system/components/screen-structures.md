@@ -30,13 +30,17 @@ verbo da tela. Detalhe em §15.
 ### 13.4 Autenticação
 
 Login, Recuperar senha. Fundo céu, cartão de autenticação central (§9.8).
+Login: logo, nome por extenso, e-mail e senha com ícone e borda (§8.3),
+"Mostrar senha" (§20.7), "Lembrar-me" (§8.7) e "Esqueceu a senha?", "Entrar",
+"Não tem acesso? Fale com a psicopedagoga do campus." e a assinatura (§1.2).
+Exemplo em `exemplos/login.html`.
 Recuperar senha: voltar, título, texto de orientação, campo de e-mail, botão
 "Enviar instruções", link "Voltar para o login" e a ilustração de envelope e
 cadeado no rodapé.
 
 ### 13.5 Splash
 
-Tela inteira `--surface-brand`. Centro: ícone do app (`--ic-brand`), "PSIF"
+Tela inteira `--surface-brand` (`.psif-splash`). Centro: ícone do app (`--ic-brand`), "PSIF"
 em `--fs-splash` branco, "Plataforma de Suporte Psicopedagógico" em
 `--fs-splash-sub` branco. Rodapé: barra de progresso branca sobre trilho
 `--ink-500`. Única tela marinha do sistema.

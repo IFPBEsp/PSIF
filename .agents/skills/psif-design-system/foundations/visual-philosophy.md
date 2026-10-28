@@ -4,15 +4,14 @@
 
 - **Calmo.** Uma família de azul, fundo claro, nada que pisque. O PSIF é
   aberto entre um atendimento e outro, às vezes com o aluno na sala.
-- **Institucional, não clínico.** Branco e marinho do IFPB-sério, sem o
-  verde-hospital nem o tom infantil de app escolar.
+- **Institucional.** Branco e marinho do IFPB, sem o verde de hospital nem o
+  tom infantil de app escolar.
 - **Um assunto por cartão.** Cada cartão branco responde uma pergunta
   ("quem atendo hoje?", "o que falta?").
 - **Dado primeiro.** Nome, horário e número em marinho; o resto em cinza.
-- **Ferramenta, não vitrine.** O app é de trabalho: a marca vive na cor, na
-  fonte e na densidade, e navegação e controles são os que todo mundo já sabe
-  usar. Estranheza sem propósito: botão enfeitado, controle inventado,
-  movimento gratuito: é defeito, não personalidade. Só a página pública
+- **Ferramenta de trabalho.** A marca vive na cor, na fonte e na densidade;
+  navegação e controles são os que você já sabe usar. Botão enfeitado,
+  controle inventado e movimento gratuito são defeito. Só a página pública
   (§13.7) pode chamar atenção.
 
 ### 2.2 Superfícies e camadas (modelo mental)
@@ -31,8 +30,9 @@ Folha modal (seletor de data, confirmação) é um cartão branco sobre
 
 ### 2.3 Iluminação e gradiente
 
-Sem gradiente. Sem glass. Sombra só no botão primário e no cartão de login
-(`--sh-sm`), e na folha modal (`--sh-md`). A ilustração de "Recuperar
+Sem gradiente. Sem glass. Sombra só no que chama a ação ou flutua: botão
+primário e cartão de login (`--sh-sm`); folha modal, toast, gaveta do celular
+e resultados da busca global (`--sh-md`). Cartão comum não tem sombra. A ilustração de "Recuperar
 senha" (mancha `--navy-500` translúcida, envelope e cadeado em
 `--navy-700`) é a única peça decorativa do sistema e só vale em tela de
 autenticação.

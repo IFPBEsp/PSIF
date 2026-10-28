@@ -49,7 +49,8 @@ Nenhum termo em inglês na tela: nada de "Loading", "Status", "Dashboard",
 
 ### 19.4 Tom e mensagens
 
-- Saudação: "Olá, psicopedagoga!" (vírgula, não ponto).
+- Saudação: "Olá, Ana!", com o primeiro nome e vírgula, não ponto; nunca o
+  papel (§16.2). Embaixo, a data de hoje, sem exclamação.
 - Erro diz o que fazer, não de quem é a culpa.
 - Notificação: título curto do fato + uma frase de contexto, sem dado
   sensível (§16.3).
@@ -82,5 +83,5 @@ Texto de interface sem vício de texto gerado:
 | Informatica - 3 ano | Informática · 3º ano |
 | Dados dos Alunos (no perfil de uma aluna) | Dados do aluno |
 | Cadastre-se acompanhe todos os atendimentos | Cadastre e acompanhe todos os atendimentos |
-| Olá. Psicopedagoga! | Olá, psicopedagoga! |
+| Olá. Psicopedagoga! | Olá, Ana! |
 | Descreva o Atendimento.... | Descreva o atendimento… |

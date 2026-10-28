@@ -10,14 +10,13 @@
 <link rel="stylesheet" href="../tokens.css">
 <link rel="stylesheet" href="../components.css">
 <style>
-/* Visível só a partir de --bp-md (768px): alerta, Meus alunos e
-   Notificações recentes entram na composição web do Início, §14.7. No
-   celular a hierarquia é só saudação, indicadores, próximos e atalhos.
+/* Visível só a partir de --bp-md (768px): Meus alunos e Notificações
+   recentes entram na composição web do Início, §14.2. O alerta aparece nos
+   dois formatos (§14.1).
    O display volta ao do componente (flex), não a block. */
 .inicio-so-web { display: none; }
-.inicio-coluna { display: flex; flex-direction: column; gap: var(--sp-6); }
 @media (min-width: 768px) {
-  .psif-alerta.inicio-so-web, .psif-cartao.inicio-so-web { display: flex; }
+  .psif-cartao.inicio-so-web { display: flex; }
 }
 </style>
 </head>
@@ -56,7 +55,7 @@
 <div class="psif-shell">
 <a class="psif-pular" href="#conteudo">Pular para o conteúdo</a>
 
-<nav class="psif-lateral" aria-label="Principal">
+<nav class="psif-lateral" id="navegacao" aria-label="Principal">
 <div class="psif-lateral__marca"><img src="../simbolo-psif.svg" alt="" width="32" height="32"><span class="psif-lateral__nome">PSIF</span></div>
 <ul class="psif-lateral__grupo">
 <li><a class="psif-item" title="Início" href="#" aria-current="page"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-inicio-ativo"></use></svg><span class="psif-item__rotulo">Início</span></a></li>
@@ -68,16 +67,15 @@
 <li><a class="psif-item" title="Agenda" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-calendario"></use></svg><span class="psif-item__rotulo">Agenda</span></a></li>
 <li><a class="psif-item" title="Notificações" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg><span class="psif-item__rotulo">Notificações</span></a></li>
 <li><a class="psif-item" title="Meu perfil" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-perfil"></use></svg><span class="psif-item__rotulo">Meu perfil</span></a></li>
-<li><a class="psif-item" title="Termo" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-termo"></use></svg><span class="psif-item__rotulo">Termo</span></a></li>
 </ul>
 <button type="button" class="psif-item psif-lateral__sair" title="Sair"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-sair"></use></svg><span class="psif-item__rotulo">Sair</span></button>
 </nav>
 
 <div class="psif-coluna">
-<div class="psif-cabecalho psif-cabecalho--faixa" role="search">
-<button type="button" class="psif-botao-icone" aria-label="Recolher menu" aria-expanded="true"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
-<div class="psif-cabecalho__busca">
-<label class="psif-campo psif-campo--borda"><svg class="psif-ic" aria-hidden="true"><use href="#psif-busca"></use></svg><input type="search" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" aria-controls="busca-global-resultados"></label>
+<div class="psif-cabecalho psif-cabecalho--faixa">
+<button type="button" class="psif-botao-icone" aria-label="Recolher menu" aria-controls="navegacao" aria-expanded="true"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
+<div class="psif-cabecalho__busca" role="search">
+<label class="psif-campo psif-campo--borda"><svg class="psif-ic" aria-hidden="true"><use href="#psif-busca"></use></svg><input type="search" class="psif-campo__entrada" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" aria-controls="busca-global-resultados"></label>
 <ul id="busca-global-resultados" class="psif-cartao psif-cartao--lista psif-lista psif-cabecalho__resultados" hidden></ul>
 </div>
 <a class="psif-botao-icone" href="#" aria-label="Notificações"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg></a>
@@ -88,15 +86,15 @@
 
 <header class="psif-barra-superior">
 <div class="psif-saudacao">
-<h1>Olá, psicopedagoga!</h1>
-<p>Bem-vindo(a) de volta!</p>
+<h1>Olá, Ana!</h1>
+<p><time datetime="2026-06-15">Segunda-feira, 15 de junho</time></p>
 </div>
-<button type="button" class="psif-botao-icone psif-so-celular" aria-label="Abrir menu" aria-expanded="false"><svg class="psif-ic" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
+<button type="button" class="psif-botao-icone psif-so-celular" aria-label="Abrir menu" aria-controls="navegacao" aria-expanded="false"><svg class="psif-ic" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
 </header>
 
 <main id="conteudo" class="psif-conteudo">
 
-<div class="psif-alerta inicio-so-web" role="status">
+<div class="psif-alerta" role="status">
 <svg class="psif-ic" aria-hidden="true"><use href="#psif-alerta"></use></svg>
 <p><strong>Acompanhamento pendente.</strong> Maria Ana está há mais de 30 dias sem registro de atendimento.</p>
 <a href="#">Ver aluno</a>
@@ -110,9 +108,9 @@
 </div>
 
 <div class="psif-grade-painel">
-<div class="inicio-coluna">
+<div class="psif-pilha">
 <section class="psif-cartao psif-cartao--lista" aria-labelledby="c-proximos">
-<h3 id="c-proximos" class="psif-cartao-titulo">Próximos atendimentos</h3>
+<h2 id="c-proximos" class="psif-cartao-titulo">Próximos atendimentos</h2>
 <ul class="psif-lista">
 <li><a class="psif-linha" href="#"><time class="psif-linha__dado psif-linha__dado--grande">09:00</time><span class="psif-linha__texto">Maria Ana<span class="psif-linha__apoio">Atendimento individual</span></span><svg class="psif-chevron" aria-hidden="true"><use href="#psif-avancar"></use></svg></a></li>
 <li><a class="psif-linha" href="#"><time class="psif-linha__dado psif-linha__dado--grande">10:00</time><span class="psif-linha__texto">José Antonio<span class="psif-linha__apoio">Reunião com professor</span></span><svg class="psif-chevron" aria-hidden="true"><use href="#psif-avancar"></use></svg></a></li>
@@ -121,7 +119,7 @@
 </section>
 
 <section class="psif-cartao psif-cartao--lista inicio-so-web" aria-labelledby="c-alunos">
-<h3 id="c-alunos" class="psif-cartao-titulo">Meus alunos</h3>
+<h2 id="c-alunos" class="psif-cartao-titulo">Meus alunos</h2>
 <ul class="psif-lista">
 <li><a class="psif-linha" href="#"><span class="psif-avatar psif-avatar--pequeno" aria-hidden="true">JA</span><span class="psif-linha__texto">José Antonio<span class="psif-linha__apoio">Informática · 3º ano</span><span class="psif-situacao">Em acompanhamento</span></span><svg class="psif-chevron" aria-hidden="true"><use href="#psif-avancar"></use></svg></a></li>
 <li><a class="psif-linha" href="#"><span class="psif-avatar psif-avatar--pequeno" aria-hidden="true">MA</span><span class="psif-linha__texto">Maria Ana<span class="psif-linha__apoio">Informática · 3º ano</span><span class="psif-situacao psif-situacao--pendente">Acompanhamento pendente</span></span><svg class="psif-chevron" aria-hidden="true"><use href="#psif-avancar"></use></svg></a></li>
@@ -131,23 +129,22 @@
 </section>
 </div>
 
-<div class="inicio-coluna">
+<div class="psif-pilha">
 <section class="psif-cartao" aria-labelledby="c-atalhos">
-<h3 id="c-atalhos" class="psif-cartao-titulo">Ações rápidas</h3>
+<h2 id="c-atalhos" class="psif-cartao-titulo">Ações rápidas</h2>
 <div class="psif-atalhos">
 <a class="psif-atalho" href="#"><span class="psif-atalho__icone"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-calendario"></use></svg></span><span class="psif-atalho__rotulo">Agenda</span></a>
 <a class="psif-atalho" href="#"><span class="psif-atalho__icone"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-perfil"></use></svg></span><span class="psif-atalho__rotulo">Meu perfil</span></a>
 <a class="psif-atalho" href="#"><span class="psif-atalho__icone"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg></span><span class="psif-atalho__rotulo">Notificações</span></a>
-<a class="psif-atalho" href="#"><span class="psif-atalho__icone"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-termo"></use></svg></span><span class="psif-atalho__rotulo">Termo</span></a>
 </div>
 </section>
 
 <section class="psif-cartao psif-cartao--lista inicio-so-web" aria-label="Notificações recentes">
-<h3 class="psif-cartao-titulo">Notificações recentes</h3>
+<h2 class="psif-cartao-titulo">Notificações recentes</h2>
 <ul class="psif-lista">
 <li class="psif-notificacao" aria-label="Não lida: Novo relatório enviado. Relatório semanal de Anitta Peniwyse. Há 15 minutos."><span class="psif-notificacao__ponto" aria-hidden="true"></span><span class="psif-notificacao__titulo">Novo relatório enviado</span><span class="psif-notificacao__tempo">Há 15 min</span><span class="psif-notificacao__texto">Relatório semanal de Anitta Peniwyse.</span></li>
 <li class="psif-notificacao psif-notificacao--lida"><span class="psif-notificacao__ponto" aria-hidden="true"></span><span class="psif-notificacao__titulo">Novo documento adicionado</span><span class="psif-notificacao__tempo">Há 1 hora</span><span class="psif-notificacao__texto">Novo documento no prontuário de Valquíria.</span></li>
-<li class="psif-notificacao psif-notificacao--lida"><span class="psif-notificacao__ponto" aria-hidden="true"></span><span class="psif-notificacao__titulo">Pendente: Acompanhamento</span><span class="psif-notificacao__tempo">Há 2 horas</span><span class="psif-notificacao__texto">Maria Ana está sem registro de atendimento há 30 dias.</span></li>
+<li class="psif-notificacao psif-notificacao--lida psif-notificacao--pendente"><span class="psif-notificacao__ponto" aria-hidden="true"></span><span class="psif-notificacao__titulo">Pendente: Acompanhamento</span><span class="psif-notificacao__tempo">Há 2 horas</span><span class="psif-notificacao__texto">Maria Ana está sem registro de atendimento há 30 dias.</span></li>
 </ul>
 <a class="psif-link" href="#">Ver todas</a>
 </section>
@@ -158,15 +155,6 @@
 </div>
 
 </div>
-<script>
-document.querySelectorAll('.psif-cabecalho [aria-label="Recolher menu"]').forEach(function (botao) {
-  botao.addEventListener('click', function () {
-    var lateral = document.querySelector('.psif-lateral');
-    var recolhida = lateral.classList.toggle('psif-lateral--recolhida');
-    botao.setAttribute('aria-expanded', String(!recolhida));
-    botao.setAttribute('aria-label', recolhida ? 'Expandir menu' : 'Recolher menu');
-  });
-});
-</script>
+<script src="exemplos.js"></script>
 </body>
 </html>

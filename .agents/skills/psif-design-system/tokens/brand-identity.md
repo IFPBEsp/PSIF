@@ -35,7 +35,7 @@ está escrito ao lado; sozinho, `role="img"` e `aria-label="PSIF"` (o
 O **logo de login**: coração formado por dois hemisférios de cérebro, traço
 `--blue-700`, seguido de "PSIF" em `--blue-700`, peso 700, sobre branco,
 fica só no cartão de login, até o design decidir se o símbolo o substitui
-(§29.4).
+(§28.4).
 
 Logo é isento de contraste (WCAG 1.4.3), mas nunca recebe texto por cima nem
 é recolorido para outra família.
@@ -45,8 +45,12 @@ Logo é isento de contraste (WCAG 1.4.3), mas nunca recebe texto por cima nem
 - Sigla sempre em caixa alta: **PSIF**.
 - Por extenso: "Plataforma de Suporte Psicopedagógico", sem "PSIF -" na
   frente, exceto no título da página pública.
-- Assinatura institucional: "Acesso exclusivo para psicopedagogos e
-  professores do IFPB" no rodapé do login.
+- Assinatura institucional no rodapé do login: "Acesso restrito a quem a
+  psicopedagoga do campus cadastrou." Se o pedido disser quem tem acesso
+  ("só psicopedagogos e professores"), a assinatura diz isso: quem pede a tela
+  conhece o escopo da entrega melhor que o padrão. O texto do protótipo ("exclusivo para
+  psicopedagogos e professores") deixava de fora alunos e responsáveis
+  (§16.2).
 
 ### 1.3 Marca dentro do app
 

@@ -7,19 +7,20 @@ contraste de todo par de token de design usado hoje em produção. Mas toda vez 
 tela nova propõe uma combinação de cor que NÃO está nessa tabela pré-calculada
 (um token novo, um par de tokens que ainda não foi testado, uma cor translúcida
 sobre um fundo diferente), confiar em "isso parece que passa" é exatamente o
-tipo de erro que a acessibilidade não perdoa — e o público operador da skill
-(secretárias, muitas vezes 60+) é o que mais sofre com baixo contraste. Em vez
-de estimar de cabeça, rode este script e tenha uma resposta objetiva.
+tipo de erro que a acessibilidade não perdoa. No PSIF, a tela é lida de
+relance entre atendimentos, às vezes com o aparelho virado para a família.
+Em vez de estimar de cabeça, rode este script e tenha uma resposta objetiva.
 
 Uso:
     python check_contrast.py <cor-texto> <cor-fundo> [--size normal|large|ui]
-    python check_contrast.py ocean-700 white
-    python check_contrast.py "#0B5FA5" "#FFFFFF" --size large
-    python check_contrast.py "rgba(255,255,255,.7)" ocean-800
+    python check_contrast.py navy-700 white
+    python check_contrast.py "#244A69" "#FFFFFF" --size large
+    python check_contrast.py "rgba(255,255,255,.7)" navy-800
+    python check_contrast.py dark-ink-700 dark-white
 
 <cor-texto> e <cor-fundo> aceitam:
-  · nome de token da skill (ex.: brand-700, accent-500, ink-900), com ou sem `--`
-  · var(--ocean-700)
+  · nome de token da skill (ex.: navy-700, ink-900, dark-white), com ou sem `--`
+  · var(--navy-700)
   · hex de 3, 4, 6 ou 8 dígitos (#fff, #0B5FA5, #0B5FA580)
   · rgb()/rgba()/hsl()/hsla()
 
@@ -78,8 +79,8 @@ def colher_cores(tokens):
     """Todo token com valor em hex, de QUALQUER grupo do tokens.json.
 
     Lia só o grupo `color`, e por isso não enxergava os oito tokens de
-    superfície do modo escuro (§27, grupo `dark`): pedir o contraste de um par
-    de §27 devolvia "não é uma cor reconhecível" — logo na seção mais nova e
+    superfície do modo escuro (§26, grupo `dark`): pedir o contraste de um par
+    de §26 devolvia "não é uma cor reconhecível" — logo na seção mais nova e
     menos rodada da skill, cujos nove pares AAA ninguém conseguia conferir com
     a ferramenta da própria skill.
 
@@ -181,7 +182,7 @@ def banlist_reason(value, tokens):
     """Razão pela qual este token nunca deve ser COR DE TEXTO, se for o caso.
 
     A banlist é uma regra sobre uso como texto — usar o mesmo token como FUNDO
-    (accent-500 atrás de texto branco, por exemplo) é uso previsto, então o
+    (navy-700 atrás de texto branco, por exemplo) é uso previsto, então o
     chamador só consulta isto para a cor de frente.
     """
     name = value.strip().lstrip("-")

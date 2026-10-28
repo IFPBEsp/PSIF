@@ -27,7 +27,10 @@ confirmar uma ação, nunca para decorar.
 ### 17.3 Transições de layout
 
 Navegação entre telas: troca direta, sem animação de deslize obrigatória.
-Folha modal sobe da base com `--dur-normal`.
+Folha modal sobe da base e a gaveta entra pela esquerda com `--dur-normal`
+`--ease-out`; o véu aparece junto. `components.css` faz isso com `@keyframes`
+sobre `translate` e `opacity`. No projeto, o `Sheet` do shadcn já anima; ajuste
+a duração dele para `--dur-normal` em vez de escrever a animação de novo.
 
 ### 17.4 Propriedades seguras e limites
 
@@ -65,14 +68,14 @@ protótipo (Material Symbols Rounded é o mais próximo). A cor sai do papel do
 | envelope | campo de e-mail | `--ic-md` |
 | lupa | busca | `--ic-md` |
 | calendário · pessoa · sino | Ações rápidas: Agenda · Meu perfil · Notificações (§7.8) | `--ic-lg` |
-| documento | Ações rápidas, Termo (provisório até definir o que é Termo, §29.4) | `--ic-lg` |
+| documento | Termo, escondido até decidir o que é (§28.4) | `--ic-lg` |
 | o mesmo do destino nas Ações rápidas | barra lateral e gaveta (§7.9, §7.10) | `--ic-lg` |
 | porta com seta para fora | Sair, no pé da barra lateral | `--ic-lg` |
 | círculo com ! | alerta e banner (§10.1), na cor `-700` da família | `--ic-md` |
 
 A cor vai no próprio ícone: `color` no `<svg>` que usa `currentColor`,
 `stroke`/`fill`, ou a classe do ícone, nunca num contêiner que também tem
-texto, que pintaria o texto junto (§20.1). O `lint_output.py` segue essa
+texto, que pintaria o texto junto (§3.2). O `lint_output.py` segue essa
 divisão: em ícone cobra o piso de UI (3:1), em texto o de texto (4.5:1).
 
 Os ícones ficam em `assets/icones.svg`, um `<symbol>` por nome, todos com

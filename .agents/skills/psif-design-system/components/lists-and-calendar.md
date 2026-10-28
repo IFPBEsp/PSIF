@@ -1,4 +1,4 @@
-## 11. DADOS E VISUALIZAÇÃO
+## 11. LISTAS, TABELA E CALENDÁRIO
 
 O PSIF não tem gráfico. Dado aparece como número de indicador (§9.2), lista,
 tabela (só no web, §11.8) e linha do tempo.
@@ -13,7 +13,8 @@ busca e filtros. No web, tabela (§11.8). Ordem padrão: alfabética.
 Um cartão branco com uma linha por arquivo: nome em `--fs-body` peso 500
 `--navy-700` (com extensão: "Laudo médico.pdf"), embaixo tamanho e data em
 `--fs-caption` `--ink-700` ("12 MB · 10/08/2025"), chevron à direita.
-Botão "+ Adicionar documento" no rodapé.
+Botão "+ Adicionar documento" no rodapé. O arquivo só baixa ao abrir, nunca
+na lista.
 
 ### 11.3 Indicadores
 
@@ -35,7 +36,7 @@ Eventos em ordem cronológica, ligados por linha vertical de 1px
 - Título em `--fs-body` peso 600 `--ink-900` ("Primeiro atendimento").
 - Descrição em `--fs-small` `--ink-700`.
 
-Tipos e cores (proposta: o protótipo usa emoji sem legenda, §29):
+Tipos e cores (proposta: o protótipo usa emoji sem legenda, §28):
 
 | Tipo | Marcador |
 |---|---|

@@ -45,7 +45,7 @@
 <div class="psif-shell">
 <a class="psif-pular" href="#conteudo">Pular para o conteúdo</a>
 
-<nav class="psif-lateral" aria-label="Principal">
+<nav class="psif-lateral" id="navegacao" aria-label="Principal">
 <div class="psif-lateral__marca"><img src="../simbolo-psif.svg" alt="" width="32" height="32"><span class="psif-lateral__nome">PSIF</span></div>
 <ul class="psif-lateral__grupo">
 <li><a class="psif-item" title="Início" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-inicio"></use></svg><span class="psif-item__rotulo">Início</span></a></li>
@@ -57,16 +57,15 @@
 <li><a class="psif-item" title="Agenda" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-calendario"></use></svg><span class="psif-item__rotulo">Agenda</span></a></li>
 <li><a class="psif-item" title="Notificações" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg><span class="psif-item__rotulo">Notificações</span></a></li>
 <li><a class="psif-item" title="Meu perfil" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-perfil"></use></svg><span class="psif-item__rotulo">Meu perfil</span></a></li>
-<li><a class="psif-item" title="Termo" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-termo"></use></svg><span class="psif-item__rotulo">Termo</span></a></li>
 </ul>
 <button type="button" class="psif-item psif-lateral__sair" title="Sair"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-sair"></use></svg><span class="psif-item__rotulo">Sair</span></button>
 </nav>
 
 <div class="psif-coluna">
-<div class="psif-cabecalho psif-cabecalho--faixa" role="search">
-<button type="button" class="psif-botao-icone" aria-label="Recolher menu" aria-expanded="true"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
-<div class="psif-cabecalho__busca">
-<label class="psif-campo psif-campo--borda"><svg class="psif-ic" aria-hidden="true"><use href="#psif-busca"></use></svg><input type="search" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" aria-controls="busca-global-resultados"></label>
+<div class="psif-cabecalho psif-cabecalho--faixa">
+<button type="button" class="psif-botao-icone" aria-label="Recolher menu" aria-controls="navegacao" aria-expanded="true"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
+<div class="psif-cabecalho__busca" role="search">
+<label class="psif-campo psif-campo--borda"><svg class="psif-ic" aria-hidden="true"><use href="#psif-busca"></use></svg><input type="search" class="psif-campo__entrada" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" aria-controls="busca-global-resultados"></label>
 <ul id="busca-global-resultados" class="psif-cartao psif-cartao--lista psif-lista psif-cabecalho__resultados" hidden></ul>
 </div>
 <a class="psif-botao-icone" href="#" aria-label="Notificações"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg></a>
@@ -76,9 +75,9 @@
 
 
 <header class="psif-barra-superior">
-<button type="button" class="psif-botao-icone" aria-label="Voltar"><svg class="psif-ic psif-ic--sm" aria-hidden="true"><use href="#psif-voltar"></use></svg></button>
+<button type="button" class="psif-botao-icone" aria-label="Voltar" data-descarte="folha-descarte" data-formulario="form-atendimento"><svg class="psif-ic psif-ic--sm" aria-hidden="true"><use href="#psif-voltar"></use></svg></button>
 <h1 class="psif-titulo-tela">Novo atendimento</h1>
-<button type="submit" form="form-atendimento" class="psif-botao psif-botao--compacto psif-botao--tela">Salvar atendimento</button>
+<button type="submit" form="form-atendimento" class="psif-botao psif-botao--tela">Salvar atendimento</button>
 </header>
 
 <main id="conteudo" class="psif-conteudo psif-com-botao-tela">
@@ -86,20 +85,20 @@
 
 <div class="psif-campo-grupo">
 <label class="psif-rotulo" id="r-aluno" for="c-aluno">Aluno</label>
-<button type="button" class="psif-campo psif-selecao" id="c-aluno" aria-haspopup="dialog" aria-labelledby="r-aluno v-aluno" aria-required="true"><span id="v-aluno" class="psif-selecao__vazio">Selecione</span><svg class="psif-chevron" style="width: var(--ic-md); height: var(--ic-md)" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
+<button type="button" class="psif-campo psif-selecao" id="c-aluno" aria-haspopup="dialog" aria-labelledby="r-aluno v-aluno" aria-required="true"><span id="v-aluno" class="psif-selecao__vazio">Selecione</span><svg class="psif-chevron" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
 </div>
 
 <div class="psif-campo-grupo">
 <label class="psif-rotulo" for="c-data">Data</label>
 <div class="psif-campo psif-campo--com-botao">
-<input id="c-data" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" aria-required="true">
+<input class="psif-campo__entrada" id="c-data" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" aria-required="true">
 <button type="button" class="psif-botao-icone" aria-label="Abrir calendário" aria-haspopup="dialog"><svg class="psif-ic" aria-hidden="true"><use href="#psif-calendario"></use></svg></button>
 </div>
 </div>
 
 <div class="psif-campo-grupo">
 <label class="psif-rotulo" id="r-tipo" for="c-tipo">Tipo de atendimento</label>
-<button type="button" class="psif-campo psif-selecao" id="c-tipo" aria-haspopup="dialog" aria-labelledby="r-tipo v-tipo" aria-required="true"><span id="v-tipo" class="psif-selecao__vazio">Selecione</span><svg class="psif-chevron" style="width: var(--ic-md); height: var(--ic-md)" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
+<button type="button" class="psif-campo psif-selecao" id="c-tipo" aria-haspopup="dialog" aria-labelledby="r-tipo v-tipo" aria-required="true"><span id="v-tipo" class="psif-selecao__vazio">Selecione</span><svg class="psif-chevron" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
 </div>
 
 <div class="psif-campo-grupo">
@@ -111,15 +110,15 @@
 </main>
 </div>
 </div>
-<script>
-document.querySelectorAll('.psif-cabecalho [aria-label="Recolher menu"]').forEach(function (botao) {
-  botao.addEventListener('click', function () {
-    var lateral = document.querySelector('.psif-lateral');
-    var recolhida = lateral.classList.toggle('psif-lateral--recolhida');
-    botao.setAttribute('aria-expanded', String(!recolhida));
-    botao.setAttribute('aria-label', recolhida ? 'Expandir menu' : 'Recolher menu');
-  });
-});
-</script>
+<!-- Confirmação de descarte (§10.3): folha na raiz do documento (§9.9). -->
+<section id="folha-descarte" class="psif-folha" role="dialog" aria-modal="true" aria-labelledby="t-descarte" aria-describedby="d-descarte" hidden>
+<h2 id="t-descarte" class="psif-folha__titulo">Descartar este atendimento?</h2>
+<p id="d-descarte" class="psif-folha__texto">O que você digitou será perdido.</p>
+<div class="psif-folha__acoes">
+<button type="button" class="psif-botao" data-continuar>Continuar editando</button>
+<button type="button" class="psif-botao psif-botao--texto-perigo" data-descartar>Descartar</button>
+</div>
+</section>
+<script src="exemplos.js"></script>
 </body>
 </html>

@@ -9,8 +9,10 @@ Uma navegação só, em dois formatos (seção 15 de
 - **Celular**: a mesma barra lateral, como gaveta que abre pelo ☰ (§7.9).
 
 Não há barra inferior. Os destinos, nesta ordem: **Início · Atendimentos ·
-Alunos · Relatórios**, depois **Agenda · Notificações · Meu perfil · Termo**,
-e **Sair** no pé. A lista sai de uma configuração central de navegação, e cada
+Alunos · Relatórios**, depois **Agenda · Notificações · Meu perfil**,
+e **Sair** no pé. "Termo", que o protótipo põe no menu e nos atalhos, fica
+escondido até alguém decidir o que ele é (§28.4), porque hoje ele não leva a
+tela nenhuma. A lista sai de uma configuração central de navegação, e cada
 item aparece só para o perfil com permissão para ele (§16.2).
 
 ### 7.2 Menu (☰)
@@ -23,7 +25,7 @@ ela tem ← (§7.4). No web o ☰ some, porque a barra lateral já está aberta.
 ### 7.3 Barra superior
 
 Barra superior de toda tela interna, sobre `--surface-base`, sem sombra,
-com `--appbar-pad`, logo abaixo do topo do shell (§5.1):
+com padding `--sp-2` em cima e `--sp-6` embaixo, logo abaixo do topo do shell (§5.1):
 
 - Esquerda: voltar (←) `--ic-sm` em alvo `--target-min`, cor `--ink-900`.
 - Centro: título da tela, `--fs-h1`, peso 600, `--navy-700`.
@@ -31,8 +33,9 @@ com `--appbar-pad`, logo abaixo do topo do shell (§5.1):
 
 No web, o cabeçalho (§7.13) fica acima da barra superior.
 
-O Início é a exceção: saudação à esquerda ("Olá, psicopedagoga!" em
-`--fs-h1` `--ink-900`, "Bem-vindo(a) de volta!" em `--fs-small` `--ink-700`)
+O Início é a exceção: saudação à esquerda com o primeiro nome ("Olá, Ana!" em
+`--fs-h1` `--ink-900`) e, embaixo, a data de hoje ("Segunda-feira, 15 de
+junho" em `--fs-small` `--ink-700`), sem exclamação (§19.4)
 e ☰ à direita (§7.2). Padding `--sp-2` `--page-pad` `--sp-6`: a saudação alinha com
 os cartões (§5.7).
 
@@ -66,7 +69,9 @@ ativo: fundo
 ### 7.7 Busca
 
 Campo branco de largura total no topo da lista (no web, há também a busca
-global do cabeçalho, §7.13), lupa à esquerda, placeholder
+global do cabeçalho, §7.13), lupa à esquerda (`.psif-campo` com
+`.psif-campo__entrada`), espera ~300ms depois da digitação antes de filtrar,
+placeholder
 "Pesquisar aluno" / "Pesquisar documento". Tem rótulo acessível mesmo sem
 rótulo visível (é o único campo em que isso vale: a lupa e a posição dizem o
 que ele é).
@@ -76,8 +81,8 @@ que ele é).
 Cartão "Ações rápidas" no Início: até quatro atalhos por linha (quebram
 linha em vez de encolher o quadrado), cada um um
 quadrado `--sky-300` de 48px com ícone `--navy-700` `--ic-lg` e rótulo
-`--fs-caption` `--ink-700` embaixo. Agenda · Meu perfil · Notificações ·
-Termo. No protótipo os quadrados estão vazios: o ícone é obrigatório
+`--fs-caption` `--ink-700` embaixo. Agenda · Meu perfil · Notificações. No protótipo os quadrados estão vazios: o
+ícone é obrigatório
 (§18).
 
 ### 7.9 Gaveta de navegação (celular)
@@ -90,7 +95,7 @@ esquerda, sobre o véu `--overlay` (`--z-overlay`), com `--z-modal`, largura
 - Fecha ao tocar num destino, no véu ou em Esc, e o foco volta para o ☰.
 - Abre com o foco no item ativo; o foco fica preso dentro dela enquanto
   aberta.
-- Movimento de entrada em `--dur-normal`; com movimento reduzido, aparece sem
+- Movimento de entrada em `--dur-normal` (§17.3); com movimento reduzido, aparece sem
   deslizar (§17.5).
 - Sair continua a dois toques: ☰ e Sair (§16.3).
 
@@ -107,7 +112,7 @@ De cima para baixo, com `--sp-6` de padding:
 1. Símbolo do PSIF (§1.1) em `--ic-xl` e, ao lado, **PSIF** em `--fs-h1`
    peso 600 `--navy-700`, com `--sp-3` de vão.
 2. Destinos principais: Início · Atendimentos · Alunos · Relatórios.
-3. Linha `--ink-200`, depois Agenda · Notificações · Meu perfil · Termo.
+3. Linha `--ink-200`, depois Agenda · Notificações · Meu perfil.
 4. **Sair**, no pé da barra.
 
 Recolhível no web (§7.12). Item: ícone `--ic-lg` + rótulo (`.psif-item__rotulo`) `--fs-body` peso 500, `--sp-3` de vão, padding
@@ -145,7 +150,7 @@ No web, a barra lateral (§7.10) recolhe para só ícones. No projeto, é o
   símbolo centralizado; itens centralizados com padding `--sp-3`. Cada item
   mantém `title` e nome acessível.
 - Ativo, hover e foco iguais aos de §7.10.
-- A escolha é preferência do aparelho, como o tema (§27.4).
+- A escolha é preferência do aparelho, como o tema (§26.4).
 - No celular não muda: continua a gaveta de §7.9.
 
 ### 7.13 Cabeçalho com busca global (web)
@@ -162,7 +167,8 @@ sombra, a faixa separa o cabeçalho do conteúdo sem competir com os cartões.
   Notificações · Meu perfil.
 - **Busca:** `.psif-campo--borda` (campo sobre branco, §8.3) com lupa à
   esquerda, placeholder "Pesquisar aluno", `aria-label` igual, dentro de
-  `role="search"`. Largura flexível até `--w-form`. A consulta passa pelo BFF
+  `role="search"` só no `.psif-cabecalho__busca`: Notificações e Meu perfil
+  ficam fora do landmark de busca. Largura flexível até `--w-form`. A consulta passa pelo BFF
   e espera a digitação parar (debounce). No projeto, `Command` do shadcn.
 - **Resultados:** ao digitar, cartão branco logo abaixo do campo (`--sh-md`,
   `--z-raised`) com linhas de aluno (avatar `--target-min`, nome, turma).
@@ -177,5 +183,5 @@ sombra, a faixa separa o cabeçalho do conteúdo sem competir com os cartões.
 - No celular não aparece: a busca fica nas telas de lista (§7.7).
 
 O painel de resultados é exceção a §9.6, que pede sobreposição como folha:
-vale só no web, onde o alvo de toque não é problema (§29.2).
+vale só no web, onde o alvo de toque não é problema (§28.2).
 

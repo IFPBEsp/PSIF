@@ -21,7 +21,7 @@ O toast cobre o feedback pontual de uma ação:
   ser fechado ou ter ação ("Tentar de novo").
 - **Aviso**: algo que a pessoa precisa saber agora e não bloqueia.
 
-Visual no tema do PSIF: o `Toaster` usa as cores da ponte (§28.3), cartão
+Visual no tema do PSIF: o `Toaster` usa as cores da ponte (§27.3), cartão
 `--surface-overlay` com texto `--ink-900`; sucesso com ícone `--success-700`,
 erro com ícone e texto `--danger-700`, aviso com ícone `--warning-700`. Estado nunca
 só na cor: ícone e texto dizem o tipo. `--z-toast`, acima do botão de rodapé no
@@ -39,7 +39,8 @@ Toast não serve para:
 
 Voltar de formulário com conteúdo abre folha (§9.6): "Descartar este
 atendimento?" com "Continuar editando" (primário) e "Descartar" (texto
-`--danger-700`).
+`--danger-700`, `.psif-botao--texto-perigo`). O foco abre em "Continuar
+editando"; Esc e o véu cancelam. Montada em `exemplos/novo-atendimento.html`.
 
 ### 10.4 Progresso
 
@@ -49,7 +50,9 @@ trabalho, progresso é o rótulo do botão ("Enviando…").
 ### 10.5 Carregando (esqueleto)
 
 Esqueleto no formato do componente (cartão de aluno, linha de lista) em
-`--ink-200` sobre o cartão branco. Sem spinner solto no meio da tela.
+`--ink-200` sobre o cartão branco. Sem spinner solto no meio da tela, e nunca
+tela em branco: o PSIF roda no celular, muitas vezes na rede da escola. O
+splash não segura o usuário depois que o app está pronto.
 
 ### 10.6 Estado vazio
 
@@ -85,7 +88,9 @@ protótipo:
   linhas no cartão e na lista, e aparece inteiro no perfil. Filho de flex ou
   grid com texto leva `min-width: 0`.
 - **Número grande** com ponto de milhar: "1.234 alunos" (§19.3).
-- **Lista longa** pagina ou carrega sob demanda (§26); lista vazia é estado
+- **Lista longa** pagina ou carrega sob demanda (§11.8); alunos ativos passam
+  de cem, e nunca se renderizam todos os cartões com foto de uma vez; lista
+  vazia é estado
   vazio (§10.6).
 - **Sem acesso** (professor fora da turma, sessão expirada): diz o que houve
   e quem libera: "Você não tem acesso a este aluno. Fale com a

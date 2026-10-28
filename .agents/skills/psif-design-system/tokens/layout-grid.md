@@ -30,7 +30,7 @@ e rodapé de tela de tarefa ficam na área à direita dela.
   que tudo foi medido.
 - No web, o conteúdo ocupa toda a área ao lado da barra lateral
   (`--w-sidebar`, 240px), sem largura máxima. Ele começa junto da barra,
-  nunca centralizado numa coluna estreita. (Derivado, §29.2.)
+  nunca centralizado numa coluna estreita. (Derivado, §28.2.)
 - Texto corrido continua até 70ch (§4.3): a área cresce, a linha de leitura
   não.
 - Formulário no web: grade de 3 colunas para campo curto (Aluno · Data ·
@@ -51,9 +51,10 @@ No web (a partir de `--bp-md`):
   `--bp-lg`; a partir de `--bp-lg`, 3 colunas com `--sp-6` de vão, a lista
   principal em 2 e o apoio em 1. Abaixo de `--bp-lg`, a coluna de apoio
   ficaria com uns 160px, e atalho e título de notificação não cabem.
-  Composição do Início em §14.7.
-- Lista de cartões iguais (alunos, documentos): 2 por linha; 3 a partir de
-  `--bp-lg`.
+  Composição do Início em §14.2.
+- Alunos e documentos no web viram tabela (§11.8). A grade de cartões iguais
+  (`.psif-grade-cartoes`: 2 por linha, 3 a partir de `--bp-lg`) fica para os
+  cartões de funcionalidade da página pública (§9.7).
 - Formulário em 3 colunas (§15.1).
 
 ### 5.4 Breakpoints (tokens)
@@ -78,7 +79,7 @@ botão primário de largura total fixo no rodapé, a `--page-pad` das bordas.
 É a única ação primária da tela. No web, o mesmo botão sobe para a direita da
 barra superior, com largura automática (§7.3).
 
-**É um botão só, não dois.** Escreva-o como o último filho de
+**Um botão só no DOM.** Escreva-o como o último filho de
 `.psif-barra-superior`, com a classe `.psif-botao--tela`:
 
 ```html
@@ -122,7 +123,7 @@ decorativo.
 
 ### 5.10 Áreas sem conteúdo
 
-Lista vazia não é área vazia: é estado vazio com motivo e ação (§10.6).
+Lista vazia vira estado vazio, com motivo e ação (§10.6).
 
 ### 5.11 Celular e web, lado a lado
 
@@ -144,8 +145,8 @@ detalhe.
 | Formulário | uma coluna | 3 colunas; texto longo na linha inteira (§15.1) |
 | Indicadores | 2×2 | linha de 4 (§9.2) |
 | Cartões | coluna única | coluna única até `--bp-lg`; depois grade de 3: principal 2, apoio 1 (§5.3) |
-| Lista de alunos e documentos | um por linha | 2 por linha; 3 a partir de `--bp-lg` |
-| Início | três cartões (§14.3) | alerta, indicadores; próximos e Meus alunos à esquerda, atalhos e notificações à direita (§14.7) |
+| Lista de alunos e documentos | cartões e linhas, um por linha | tabela (§11.8) |
+| Início | saudação, alerta, indicadores, próximos, atalhos (§14.1) | alerta, indicadores; próximos e Meus alunos à esquerda, atalhos e notificações à direita (§14.2) |
 | Perfil do aluno | uma coluna (§13.2) | duas colunas (§13.2) |
 | Agenda | calendário sobre a agenda do dia | lado a lado (§11.6) |
 | Hover | não há | igual ao pressionado (§17.2) |

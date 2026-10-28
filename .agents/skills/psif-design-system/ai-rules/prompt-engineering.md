@@ -1,14 +1,10 @@
 ## 22. COMO A IA DEVE INTERPRETAR ESTA SKILL
 
-### 22.1 Hierarquia de prioridades (em conflito, o de cima vence)
+### 22.1 Hierarquia de prioridades
 
-1. Sigilo do aluno (§16.3).
-2. Acessibilidade WCAG 2.2 AA (§20).
-3. Consistência com o catálogo (§6–§13).
-4. Fidelidade ao protótipo.
-
-Por isso a skill **corrige** o protótipo onde ele reprova (texto cinza,
-alvo de toque, rótulo só em placeholder), e registra cada correção em §29.
+A ordem é a da regra de ouro do `SKILL.md`: sigilo, acessibilidade,
+consistência, protótipo. Por isso a skill **corrige** o protótipo onde ele reprova (texto cinza,
+alvo de toque, rótulo só em placeholder), e registra cada correção em §28.
 
 ### 22.2 Dominância de cor: a regra que mais se erra
 
@@ -29,19 +25,15 @@ listas curtas com busca.
 ### 22.5 Preencher lacunas com coerência
 
 Estado que o protótipo não desenha (vazio, erro, carregando) sai de §10 com
-os tokens existentes. Valor novo não se inventa: vai para §29 como derivado.
+os tokens existentes. Valor novo não se inventa: vai para §28 como derivado.
 
 ## 23. PROMPTS PARA GERAR TELAS CONSISTENTES
 
-### 23.1 Regras invioláveis (a IA nunca faz)
+### 23.1 Regras invioláveis
 
-- Hex, px de raio ou sombra fora de `var(--token)`.
-- `--ink-600` (`#7D7D7D`) como texto.
-- Campo sem rótulo visível (exceto busca, §7.7).
-- Emoji como ícone ou marcador.
-- Dado clínico em lista, notificação ou pré-visualização.
-- Cor de tema escrita na tela (`dark:`, hex escuro): o tema escuro sai dos
-  tokens (§27).
+As do `SKILL.md` valem para todo prompt. Na geração, as que mais escapam:
+token banido como texto (banlist do cheat sheet) e cor de tema escrita na
+tela (`dark:`, hex escuro), quando o tema sai dos tokens (§26).
 
 ### 23.2 O que todo prompt de geração deve fixar
 

@@ -52,7 +52,9 @@ só em parte na aba "Atendimentos" do SUAP e no resto fica no papel.
 - Cada perfil registra só o que a permissão dele deixa: a psicopedagoga, o
   acompanhamento; o professor, atividades adaptadas e observações; o aluno,
   pedidos de reunião e informações. Professor não vê dado médico.
-- Em aberto: autocadastro no login ("Cadastre-se aqui") e o que é "Termo".
+- Sem autocadastro: a psicopedagoga cadastra os usuários; o login diz "Não
+  tem acesso? Fale com a psicopedagoga do campus.".
+- Em aberto: o que é "Termo".
 
 ## Brand Commitments
 

@@ -74,7 +74,6 @@
   --card-pad: 16px;
   --chip-pad: 8px 16px;
   --list-row-pad: 16px;
-  --appbar-pad: 8px 16px;
   --page-pad: 24px;
 
   /* Tamanho de ícone — §3.8 */
@@ -103,11 +102,10 @@
   /* Superfície — §3.10 */
   --surface-base: var(--sky-100);
   --surface-raised: var(--white);
-  --surface-sunken: var(--ink-100);
   --surface-overlay: var(--white);
   --surface-brand: var(--navy-700);
 
-  /* Paleta do modo escuro (o bloco .dark no fim do arquivo aponta cada token para cá) — §27 */
+  /* Paleta do modo escuro (o bloco .dark no fim do arquivo aponta cada token para cá) — §26 */
   --dark-navy-900: #DBEEFA;
   --dark-navy-800: #BEE0F6;
   --dark-navy-700: #9ECDF0;
@@ -144,7 +142,7 @@
   --bp-lg: 1200px;
 
   /* Família — §4.1 */
-  --font-sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: var(--font-figtree, 'Figtree'), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   /* Escala tipográfica — §4.2 */
   --fs-splash: 36px;
@@ -172,7 +170,7 @@
   --ease-out: cubic-bezier(0, 0, 0, 1);
 }
 
-/* Modo escuro (§27): `.dark` ou `[data-theme="dark"]` no <html>. */
+/* Modo escuro (§26): `.dark` ou `[data-theme="dark"]` no <html>. */
 :root.dark, :root[data-theme="dark"] {
   color-scheme: dark;
   --navy-900: var(--dark-navy-900);
@@ -231,7 +229,7 @@ a { text-underline-offset: .2em; }
 time, data, td { font-variant-numeric: tabular-nums; }
 input, select, textarea { font-size: var(--fs-h3); }
 
-/* Movimento reduzido (§3.9) — bloco lido de ../tokens/motion-icons.md,
+/* Movimento reduzido (§17.5) — bloco lido de ../tokens/motion-icons.md,
  * não recopiado: duas versões da mesma regra divergem, e já divergiram. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }

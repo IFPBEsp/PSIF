@@ -2,46 +2,30 @@
 
 O Início é o único painel do PSIF.
 
-### 14.1 Hierarquia de leitura (de cima para baixo)
+### 14.1 Hierarquia e regras
+
+No celular, de cima para baixo, com `--sp-6` entre os cartões:
 
 1. Saudação (§7.3).
-2. Indicadores (§9.2): o estado do dia.
-3. Próximos atendimentos (§9.3): o que vem agora.
-4. Ações rápidas (§7.8): atalhos.
+2. Alerta de pendência (§10.1), quando há. É o caso mais urgente do dia e
+   aparece nos dois formatos.
+3. Indicadores (§9.2): sempre os quatro (atendimentos hoje, alunos ativos,
+   relatórios pendentes, alertas importantes), número com rótulo em frase
+   completa. Indicador novo substitui um destes, não vira quinta célula.
+4. Próximos atendimentos (§9.3): o que vem agora.
+5. Ações rápidas (§7.8): atalhos.
 
-### 14.2 Indicadores do painel
+Sem filtro: o Início é sempre "hoje, meus alunos". Sem cartão decorativo ou de
+boas-vindas além da saudação. Cada indicador e cada linha é tocável e leva à
+lista ou ao perfil; "Alertas importantes" leva à lista de alertas (§10.1).
 
-Quatro, sempre os mesmos: atendimentos hoje, alunos ativos, relatórios
-pendentes, alertas importantes. Indicador novo entra no lugar de um destes,
-não como quinta célula.
-
-### 14.3 Cartões do painel
-
-No celular, três cartões, nesta ordem, com `--sp-6` entre eles; no web, a
-composição de §14.7, que acrescenta Meus alunos e Notificações recentes. Nenhum cartão decorativo ou de boas-vindas além da
-saudação.
-
-### 14.4 Filtros do painel
-
-Não há. O Início é sempre "hoje, meus alunos".
-
-### 14.5 Resumo
-
-Número com rótulo em frase completa. Se houver alerta, o indicador "Alertas
-importantes" leva à lista (§10.1).
-
-### 14.6 Detalhamento
-
-Cada indicador e cada linha de "Próximos atendimentos" é tocável e leva à
-lista ou ao perfil correspondente.
-
-### 14.7 Início no web
+### 14.2 Início no web
 
 A barra lateral libera largura; ela vai para o que a psicopedagoga abriria em
 seguida, não para enfeite, e nenhuma coluna fica vazia:
 
 1. Alerta de pendência (§10.1), quando há: "Acompanhamento pendente", com
-   "Ver aluno".
+   "Ver aluno". O mesmo do celular.
 2. Indicadores em linha de 4 (§9.2).
 3. Grade do painel (§5.3), em 3 colunas a partir de `--bp-lg`:
    - **Esquerda (2):** Próximos atendimentos, com horário em `--fs-h1` e tipo
@@ -84,7 +68,8 @@ formulário antes de pensar em etapas.
 
 Atendimento e relatório salvam rascunho local enquanto se digita. Voltar com
 conteúdo pergunta antes de descartar (§10.3). Abrir de novo recupera o
-rascunho com aviso "Rascunho recuperado".
+rascunho com aviso "Rascunho recuperado". Envio que falhou por rede fica
+marcado na lista e pode ser repetido.
 
 ### 15.4 Validação
 

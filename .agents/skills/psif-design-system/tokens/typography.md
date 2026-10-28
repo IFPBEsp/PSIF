@@ -2,12 +2,14 @@
 
 ### 4.1 Família
 
-**Figtree**, com pilha `'Figtree', system-ui, -apple-system, 'Segoe UI',
-Roboto, sans-serif` (`--font-sans`). Uma família só, para tudo.
+**Figtree**, com pilha `var(--font-figtree, 'Figtree'), system-ui,
+-apple-system, 'Segoe UI', Roboto, sans-serif` (`--font-sans`). Uma família
+só, para tudo. No Next.js, `--font-figtree` vem do `next/font` (§27.2); fora
+dele, vale o `'Figtree'` do fallback, carregado pelo Google Fonts.
 
 Identificada pelo desenho dos glifos: o PDF exportado do Figma converte o
 texto em glifos Type 3 e não guarda o nome da fonte. Confirme no arquivo
-Figma antes de travar a licença (§29).
+Figma antes de travar a licença (§28).
 
 Pesos usados: 400 (corpo), 500 (valor de campo, nome em lista), 600 (título
 de tela, título de cartão, número de indicador, botão).
@@ -57,4 +59,4 @@ Consolidações feitas (o protótipo usa 13 tamanhos):
 Altura de linha: `--lh-tight` 1.2 (título, número: é o que o Figma usa) ·
 `--lh-snug` 1.35 (linha de lista com duas linhas) · `--lh-normal` 1.5
 (parágrafo, descrição de notificação, campo de texto longo). O protótipo usa
-1.2 em tudo; em parágrafo isso aperta a leitura e foi corrigido (§29).
+1.2 em tudo; em parágrafo isso aperta a leitura e foi corrigido (§28).

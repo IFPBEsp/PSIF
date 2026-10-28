@@ -2,7 +2,7 @@
 """
 Automatiza a parte checável do §25 e diz, em voz alta, o que sobra manual.
 
-A assimetria que este script existe para corrigir: §28.4 declara que, em
+A assimetria que este script existe para corrigir: §27.4 declara que, em
 projeto Tailwind, o lint cobre pouco e "o checklist §25 passa a ser o
 instrumento principal" — e o §25 era 100% manual. A skill instrumentava o que
 declarou secundário e deixava cru o que declarou principal.
@@ -34,8 +34,6 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REGRAS = [
     ("20.5", "foco visível removido sem substituto",
      r"outline\s*:\s*['\\\"]?(none|0)\b", r":focus-visible", "ERRO"),
-    ("20.7", "placeholder usado como único rótulo",
-     r"<input(?![^>]*(aria-label|aria-labelledby|id=))[^>]*placeholder=", None, "ERRO"),
     # Só ícone até o </button>: ícone seguido de texto visível já tem nome.
     ("20.7", "botão só com ícone sem nome acessível",
      r"(?s)<button(?![^>]*(aria-label|aria-labelledby|title=))[^>]*>\s*"
@@ -46,7 +44,7 @@ REGRAS = [
      r'(className|class)="[^"]*\b(data-?grid|table-wrap|tabela)\b[^"]*"[^>]*>\s*<div',
      r"<table", "AVISO"),
     ("20.10", "animação sem respeitar movimento reduzido",
-     r"@keyframes|animation\s*:", r"prefers-reduced-motion", "AVISO"),
+     r"@keyframes|animation\s*:", r"prefers-reduced-motion|tokens\.css", "AVISO"),
     ("20.13", "unidade fixa em container de texto (quebra zoom 200%)",
      r"(?<!min-)(?:max-)?height\s*:\s*\d{3,}px", None, "AVISO"),
     ("24.4", "erro comunicado só por borda, sem texto",
@@ -65,8 +63,8 @@ REGRAS = [
 def carrega_manuais():
     """Itens do checklist que nenhum script decide — vêm de tokens.json.
 
-    Ficavam em código, com o texto de uma skill específica dentro do script
-    ("a tela parece Gabriel", "vocabulário paroquial"). Item de checklist é
+    Ficavam em código, com o texto de uma skill específica dentro do script.
+    Item de checklist é
     conteúdo da skill, não lógica: em código, ele obriga um fork do script por
     skill — que é como um verificador vira cinco verificadores divergentes.
 
@@ -85,6 +83,33 @@ FICA_MANUAL = carrega_manuais()
 # aceitam as duas grafias porque metade das violações reais chega em .tsx, não
 # em .css. Regra que só entende CSS puro é regra cega no projeto de verdade.
 COMENTARIO = re.compile(r"/\*.*?\*/|^\s*//.*$|\{/\*.*?\*/\}", re.S | re.M)
+
+
+INPUT = re.compile(r"<input\b[^>]*>", re.I)
+
+
+def placeholder_sem_rotulo(texto):
+    """Posição de cada <input> com placeholder e sem rótulo de verdade.
+
+    A regra antiga isentava qualquer input com `id=`, mesmo sem um
+    `<label for>` apontando para ele, e quase nunca disparava. Conta como
+    rótulo: aria-label, aria-labelledby, `<label for="id">` no arquivo, ou o
+    input estar dentro de um `<label>` aberto.
+    """
+    for m in INPUT.finditer(texto):
+        tag = m.group(0)
+        if "placeholder=" not in tag.lower():
+            continue
+        if re.search(r"aria-label(ledby)?\s*=", tag, re.I):
+            continue
+        ident = re.search(r"\bid\s*=\s*[\"']([^\"']+)", tag, re.I)
+        if ident and re.search(r"<label\b[^>]*\b(for|htmlFor)\s*=\s*[\"']"
+                               + re.escape(ident.group(1)) + r"[\"']", texto, re.I):
+            continue
+        antes = texto[:m.start()].lower()
+        if antes.rfind("<label") > antes.rfind("</label>"):
+            continue
+        yield m.start()
 
 
 def sem_comentarios(texto):
@@ -128,6 +153,11 @@ def main():
                     erros += 1
                 else:
                     avisos += 1
+        for pos in placeholder_sem_rotulo(texto):
+            linha = texto.count("\n", 0, pos) + 1
+            print(f"   [ERRO] {os.path.basename(caminho)}:{linha} §20.7 — "
+                  "placeholder usado como único rótulo")
+            erros += 1
 
     # Delega o que outros scripts já sabem fazer melhor.
     print("\n── delegado aos scripts existentes")

@@ -6,8 +6,8 @@
 |---|---|---|
 | **Primário** | fundo `--navy-700`, texto branco `--fs-h2` peso 600, `--radius-md`, `--sh-sm`, largura total, `min-height: var(--control-min)` | a ação da tela: "Salvar atendimento", "Entrar", "Enviar instruções" |
 | **Secundário** | fundo branco, borda 1px `--navy-700`, texto `--navy-700` | ação alternativa ao lado do primário: "Saiba mais" |
-| **Compacto** | primário com `--fs-small`, largura automática, altura `--target-min` | ação no cabeçalho da página pública: "Entrar" |
-| **Link** | texto `--navy-700`, sublinhado | navegação dentro de texto: "Esqueceu a senha?", "Cadastre-se aqui", "Voltar para o login" |
+| **Compacto** | primário com `--fs-small`, largura automática, altura `--target-min` | ação no cabeçalho da página pública: "Entrar". O botão de tela (§5.6) já fica compacto sozinho no web; não some `--compacto` a ele |
+| **Link** | texto `--navy-700`, sublinhado | navegação dentro de texto: "Esqueceu a senha?", "Fale com a psicopedagoga do campus", "Voltar para o login" |
 
 Estados: hover `--navy-800`; pressionado `--navy-900`; desabilitado
 `--o-disabled`; carregando troca o rótulo por "Salvando…" e bloqueia novo
@@ -55,7 +55,9 @@ seleção: Individual, Em grupo, Com a família, Reunião com professor.
 
 "+ Adicionar documento" abre o seletor do sistema. Depois do envio, a linha
 aparece na lista com nome, tamanho e data (§11.2). Tipos aceitos e tamanho
-máximo escritos antes do envio, não no erro.
+máximo escritos antes do envio, não no erro. Os valores vêm do backend; o
+PSIF ainda não os definiu (§28.4). Em protótipo, escreva "PDF, até 20 MB" e
+avise que é provisório.
 
 ### 8.6 Data e máscaras
 
@@ -66,4 +68,6 @@ de mês (§11.6): botão próprio, `--ink-900`, alvo `--target-min` (§18). Hora
 
 Quadrado de 16px, `--radius-xs`, borda `--ink-600`; marcado: fundo
 `--navy-700` com ✓ branco. Rótulo clicável à direita ("Lembrar-me"); a área
-de toque é a linha toda, com altura `--target-min`.
+de toque é a linha toda, com altura `--target-min`. Classe `.psif-caixa` no
+`<label>` que envolve o `<input type="checkbox">`; montada em
+`exemplos/login.html`.

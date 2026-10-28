@@ -10,7 +10,7 @@ description: >
   ou de atendimento a alunos no IFPB, e ao escolher cor, fonte, espaçamento,
   ícone ou texto de interface para esse produto.
 metadata:
-  version: "0.13.0"
+  version: "0.15.1"
   last-updated: "2026-10"
 ---
 
@@ -38,17 +38,17 @@ Quando duas regras brigarem, vale esta ordem:
 2. **Acessibilidade WCAG 2.2 AA** (§20).
 3. **Consistência.** Reutilize o padrão existente antes de inventar variação.
 4. **Fidelidade ao protótipo.** Onde ele reprova os itens 1 e 2, a skill
-   corrige e registra a correção em §29.
+   corrige e registra a correção em §28.
 
 ## Como usar esta skill
 
 O frontend do PSIF é Next.js com Tailwind CSS v4 e shadcn/ui. Esse é o caminho
-padrão, e §28 diz como os tokens entram nele.
+padrão, e §27 diz como os tokens entram nele.
 
-1. **Ligue os tokens ao Tailwind e ao shadcn (§28).** `assets/tokens.css`
-   entra no `globals.css` depois do Tailwind; a ponte de §28.3 aponta os
+1. **Ligue os tokens ao Tailwind e ao shadcn (§27).** `assets/tokens.css`
+   entra no `globals.css` depois do Tailwind; a ponte de §27.3 aponta os
    papéis do shadcn (`--primary`, `--card`) para os tokens. Na tela, use as
-   utilitárias da tabela de §28.6 ou `var(--token)`: um hex digitado à mão vira
+   utilitárias da tabela de §27.6 ou `var(--token)`: um hex digitado à mão vira
    a segunda versão da paleta, e ela diverge.
 2. **Monte a tela com os componentes do shadcn, no visual do catálogo.** Toda
    tela do PSIF é uma estrutura de §13 feita de cartão, linha de lista, campo e
@@ -59,20 +59,21 @@ padrão, e §28 diz como os tokens entram nele.
    (§10) e dado real, como nome longo ou falta de acesso (§10.8).
 4. **Decida celular e web juntos.** A mesma tela serve os dois e muda a partir
    de 768px (`md:` no Tailwind). O que muda está em §5.11.
-5. **Confira os dois temas.** Claro e escuro saem dos mesmos tokens (§27); não
+5. **Confira os dois temas.** Claro e escuro saem dos mesmos tokens (§26); não
    escreva `dark:` na tela.
 6. **Respeite o perfil de quem vê.** Psicopedagoga, professor, aluno e
    responsável veem coisas diferentes (§16).
 7. **Verifique antes de entregar** (fim deste arquivo).
 
 Se a skill não cobrir um caso, derive do protótipo, do token existente e do
-componente mais parecido, nessa ordem, e registre o valor novo em §29 como
+componente mais parecido, nessa ordem, e registre o valor novo em §28 como
 derivado.
 
 ## Mapa de referências
 
 Cada arquivo é dono das suas seções (§) e cuida delas sozinho. A numeração
 permite citar "ver §N.M" de qualquer lugar da skill.
+
 | Arquivo | § | Abra quando |
 |---|---|---|
 | `tokens/colors.md` | §3.1–§3.3 | precisa de uma cor e de onde ela veio (medida ou derivada), ou de um par de contraste já verificado |
@@ -81,30 +82,29 @@ permite citar "ver §N.M" de qualquer lugar da skill.
 | `tokens/layout-grid.md` | §5 | monta o esqueleto da tela: barra superior, rodapé, margens, grade, celular e web |
 | `tokens/brand-identity.md` | §1 | a tela mostra o símbolo, o logo ou o nome PSIF |
 | `tokens/motion-icons.md` | §17–§18 | vai animar algo ou escolher um ícone |
-| `tokens/dark-mode.md` | §27 | a tela precisa funcionar no tema escuro, ou vai mexer na troca de tema |
-| `tokens/palette-backlog.md` | §29 | vai usar ou criar valor que o protótipo não tem, ou quer saber o que está em aberto |
+| `tokens/dark-mode.md` | §26 | a tela precisa funcionar no tema escuro, ou vai mexer na troca de tema |
+| `tokens/palette-backlog.md` | §28 | vai usar ou criar valor que o protótipo não tem, ou quer saber o que está em aberto |
 | `foundations/visual-philosophy.md` | §2 | precisa decidir camada (céu, cartão, marinho), se cabe decoração ou como tratar o que o navegador desenha |
 | `foundations/accessibility.md` | §20 | campo, ícone sem texto, alvo de toque, foco, leitor de tela, dado sensível em tela |
-| `foundations/ux-principles.md` | §21 | precisa justificar uma decisão de fluxo |
-| `foundations/performance.md` | §26 | lista longa, foto, documento, rede ruim |
+| `foundations/ux-principles.md` | §21 | vai decidir um fluxo que a skill não cobre |
 | `components/principles.md` | §6 | quer a classe pronta de um componente, os estados dele, ou vai criar um novo |
 | `components/navigation.md` | §7 | barra lateral (fixa, recolhível, gaveta), cabeçalho com busca global, barra superior, breadcrumbs, voltar, menu, busca, filtros, ações rápidas |
 | `components/inputs-actions.md` | §8 | botão, link, campo, seleção, data, envio de arquivo, caixa de seleção |
 | `components/surfaces-overlays.md` | §9 | cartão (indicador, lista, aluno, notificação, login) ou folha modal |
-| `components/data-visualization.md` | §11 | lista de alunos ou documentos, tabela do web, linha do tempo da evolução, calendário, agenda |
-| `components/collaboration-ai.md` | §12 | avatar, situação do aluno, observações |
+| `components/lists-and-calendar.md` | §11 | lista de alunos ou documentos, tabela do web, linha do tempo da evolução, calendário, agenda |
+| `components/people-and-status.md` | §12 | avatar, situação do aluno, observações |
 | `components/screen-structures.md` | §13 | começa uma tela nova e precisa da estrutura dela |
 | `screen-patterns/dashboards-and-forms.md` | §14–§15 | mexe no Início ou num formulário (validação, rascunho, envio) |
 | `ux-patterns/feedback-and-states.md` | §10 | precisa de estado vazio, erro, carregando, toast, confirmação ou dado real |
-| `ux-patterns/operational-modes.md` | §16 | a tela é vista por professor, aluno ou responsável, ou mostra dado sensível do aluno |
+| `ux-patterns/profiles-and-privacy.md` | §16 | a tela é vista por professor, aluno ou responsável, ou mostra dado sensível do aluno |
 | `ux-patterns/language.md` | §19 | escreve qualquer texto de interface: rótulo, mensagem, data, notificação |
 | `ai-rules/prompt-engineering.md` | §22–§23 | vai gerar tela com IA ou escrever o prompt para isso |
 | `ai-rules/anti-patterns-checklist.md` | §24–§25 | revisa uma tela antes de entregar |
-| `ai-rules/tailwind-integration.md` | §28 | sempre que escrever código de tela: liga os tokens ao Tailwind v4 e ao shadcn/ui |
+| `ai-rules/tailwind-integration.md` | §27 | sempre que escrever código de tela: liga os tokens ao Tailwind v4 e ao shadcn/ui |
 
 Quando um tema aparece em mais de um arquivo, **o arquivo dono do § é a
-fonte de verdade** e os outros só apontam para ele. Conteúdo copiado em dois
-lugares diverge na primeira mudança.
+fonte de verdade** e os outros só apontam para ele. Se você copiar o
+conteúdo, a próxima mudança vai atualizar uma cópia e esquecer a outra.
 
 ## Cheat sheet: o mínimo que vale para todo resultado
 
@@ -112,7 +112,8 @@ lugares diverge na primeira mudança.
 Fonte:              'Figtree', system-ui · uma família, pesos 400/500/600
 Fundo da tela:      --surface-base (--sky-100 #CFE7F5)
 Cartão:             --surface-raised (branco), --radius-md 8px, sem borda, sem sombra
-Ação primária:      --navy-700 (#244A69), texto branco, min-height --control-min (48px)
+Ação primária:      --navy-700 (#244A69), texto branco, min-height --control-min (48px;
+                    web: 44px, compacto)
                     celular: largura total no rodapé · web: no topo, à direita
 Título de tela:     --fs-h1 20px, 600, --navy-700 · centralizado no celular, à esquerda no web
 Texto:              principal --ink-900 · dado-chave --navy-700 · secundário --ink-700
@@ -124,21 +125,23 @@ Alvo de toque:      --target-min (44px) em largura e altura
 Nunca como texto:   --ink-600 (o cinza #7D7D7D do protótipo), --ink-500,
                     --navy-500, --sky-300, --blue-300
                     (banlist em scripts/tokens.json)
-Tema escuro:        mesmos tokens, classe .dark no <html>; nada de dark: na tela (§27)
-Estilo:             utilitária do Tailwind ou var(--token), via ponte do shadcn (§28)
+Tema escuro:        mesmos tokens, classe .dark no <html>; nada de dark: na tela (§26)
+Estilo:             utilitária do Tailwind ou var(--token), via ponte do shadcn (§27)
 ```
 
 ## Assets e scripts
 
 - **`assets/tokens.css`**: o `:root` com todos os tokens, o bloco `.dark`
-  (§27), o foco visível, as superfícies do navegador (§2.4) e o movimento
-  reduzido. Entra no `globals.css` depois do Tailwind (§28).
+  (§26), o foco visível, as superfícies do navegador (§2.4) e o movimento
+  reduzido. Entra no `globals.css` depois do Tailwind (§27).
 - **`assets/components.css`**: as classes de cada componente, com todos os
   estados e o salto para o web (§6). **`assets/catalogo.html`** monta cada
   uma. No projeto, são a referência de medida e estado para as variantes do
-  shadcn, não CSS para importar ao lado do Tailwind (§28.7).
-- **`assets/exemplos/`**: telas completas do protótipo (Início, Meus alunos,
-  Perfil do aluno, Agenda e Novo atendimento), celular e web no mesmo HTML.
+  shadcn, não CSS para importar ao lado do Tailwind (§27.7).
+- **`assets/exemplos/`**: telas completas do protótipo (Login, Início, Meus
+  alunos, Perfil do aluno, Agenda e Novo atendimento), celular e web no mesmo
+  HTML. `exemplos.js` faz a gaveta, a barra recolhível, o "Mostrar senha" e a
+  confirmação de descarte funcionarem.
   Para começar uma tela parecida, parta da estrutura da mais próxima em vez do
   zero.
 - **`assets/icones.svg`**: os ícones do PSIF (§18), para usar com

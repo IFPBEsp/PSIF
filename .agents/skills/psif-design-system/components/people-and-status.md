@@ -3,7 +3,9 @@
 ### 12.1 Avatar
 
 Círculo (`--radius-pill`): `--avatar-md` (80px) no cartão de aluno,
-`--avatar-lg` (120px) no perfil. Foto real do aluno, recortada no rosto.
+`--avatar-lg` (120px) no perfil, `.psif-avatar--pequeno` (`--target-min`)
+em lista do Início e da busca, `.psif-avatar--mini` (`--sp-8`) no cabeçalho.
+Foto real do aluno, recortada no rosto, em miniatura carregada sob demanda.
 
 - Sem foto: iniciais ("JA") em peso 600 `--navy-700` sobre `--sky-300`,
   `--fs-h2` no `--avatar-md`, `--fs-display` no `--avatar-lg`. O protótipo deixa o espaço vazio (José Antonio): vazio parece

@@ -69,7 +69,7 @@ abaixo; os itens manuais são decisão humana, não pendência para depois.
 ### 25.3 Acessibilidade (WCAG 2.2 AA: bloqueante)
 
 - [ ] Contraste conferido em §3.2 ou com `check_contrast.py`.
-- [ ] Tela conferida no tema claro e no escuro (§27); nenhum `dark:` no código da tela.
+- [ ] Tela conferida no tema claro e no escuro (§26); nenhum `dark:` no código da tela.
 - [ ] Todo campo com rótulo; todo ícone sozinho com nome acessível.
 - [ ] Alvos de 44px; foco visível; ordem de foco (§20.4).
 
@@ -90,7 +90,7 @@ abaixo; os itens manuais são decisão humana, não pendência para depois.
 
 ### 25.7 Performance e microinterações
 
-- [ ] Lista longa paginada ou virtualizada; imagem sob demanda (§26).
+- [ ] Lista longa paginada ou virtualizada; imagem sob demanda (§10.8, §11.8).
 
 ### 25.8 Revisão de design (fechamento)
 

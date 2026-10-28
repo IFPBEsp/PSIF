@@ -1,17 +1,12 @@
 ## 20. ACESSIBILIDADE (WCAG 2.2 AA: inegociável)
 
 Onde o protótipo reprova, a skill corrige, e a correção está em aberto em
-§29 até o design ratificar.
+§28 até o design ratificar.
 
 ### 20.1 Contraste (WCAG 1.4.3 / 1.4.11)
 
-Tabela verificada em §3.2. As três armadilhas do PSIF:
-
-1. Texto secundário em `#7D7D7D` (como no protótipo) reprova: use
-   `--ink-700`.
-2. "Em acompanhamento" em `--success-700` passa sobre branco e **reprova**
-   sobre o céu: situação só dentro de cartão.
-3. `--navy-500` é cor de ilustração: como texto, reprova.
+Pares verificados e armadilhas do PSIF em §3.2 (escuro em §26.5). Par fora
+da tabela passa por `check_contrast.py`.
 
 ### 20.2 Cor nunca é o único canal (WCAG 1.4.1)
 
@@ -65,7 +60,8 @@ Voltar, menu e chevron: ícone pequeno, área de toque `--target-min`.
   quando o usuário digita.
 - Botão só com ícone (←, ☰, ›) tem `aria-label`: "Voltar", "Abrir menu",
   "Abrir perfil de Maria Ana".
-- Senha tem botão "Mostrar senha" com `aria-pressed`.
+- Senha tem botão "Mostrar senha" com `aria-pressed` (exemplo em
+  `exemplos/login.html`).
 
 ### 20.8 Leitores de tela
 
@@ -107,5 +103,5 @@ largura, a grade de indicadores vira coluna única e nada rola na horizontal.
 ### 20.14 Tema escuro
 
 O tema "Sistema" segue `prefers-color-scheme` do aparelho, e o escuro usa só
-os pares verificados de §27.5. Toda tela é conferida nos dois temas: contraste,
+os pares verificados de §26.5. Toda tela é conferida nos dois temas: contraste,
 foco visível e estado que não depende só da cor.

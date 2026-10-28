@@ -208,7 +208,8 @@ número e corpo. Hierarquia por tamanho e peso, nunca por caixa alta.
 
 ### Hierarchy
 - **Display** (600, 32px): número de indicador; título da página pública.
-- **H1** (600, 20px): título de tela, centralizado, em marinho; saudação do Início.
+- **H1** (600, 20px): título de tela em marinho, centralizado no celular e
+  à esquerda no web; saudação do Início.
 - **H2** (600, 18px): nome do aluno em cartão; rótulo do botão primário.
 - **H3** (500, 16px): rótulo e valor de campo: 16px evita o zoom do iPhone.
 - **Body** (400, 15px, 1.5): linha de lista e texto de cartão;
@@ -231,7 +232,8 @@ Acima da barra superior, só a área segura do aparelho, com mínimo de
 16px.
 
 A partir de 768px, a gaveta vira barra lateral fixa de 240px. O conteúdo ocupa a área ao lado dela, com margem de 32px,
-até 1200px, alinhado à esquerda; formulário vai até 720px. No
+sem largura máxima, alinhado à esquerda; texto corrido até 70ch e formulário
+em 3 colunas. No
 web, o título da tela fica à esquerda e a ação primária sobe para o topo, à
 direita.
 Indicadores em linha de 4; grade de 3 colunas, com a lista principal em 2 e
@@ -242,12 +244,15 @@ Alvo de toque mínimo de 44px; botão e campo com 48px.
 ## Elevation & Depth
 
 Plano por padrão: o cartão se separa do céu pelo branco. A sombra é tingida
-de marinho, nunca preta, e aparece em três lugares só.
+de marinho, nunca preta, e só aparece no que flutua ou chama a ação: botão
+primário, cartão de login, folha modal, toast, gaveta do celular e resultados
+da busca global.
 
 ### Shadow Vocabulary
 - **Ação** (`box-shadow: 0 4px 4px rgba(36,74,105,.25)`): botão primário e cartão de login.
-- **Folha** (`box-shadow: 0 12px 32px rgba(36,74,105,.24)`): folha modal e seletor de data, sobre o
-  véu (rgba(36,74,105,.48)).
+- **Flutuante** (`box-shadow: 0 12px 32px rgba(36,74,105,.24)`): folha modal, seletor de data,
+  toast, gaveta e resultados da busca, os dois primeiros sobre o véu
+  (rgba(36,74,105,.48)).
 
 ### Named Rules
 **A Regra do Plano.** Sem gradiente, sem vidro, sem desfoque, sem sombra em
@@ -255,7 +260,7 @@ cartão comum.
 
 ## Shapes
 
-Cantos suavemente arredondados (8px) em cartão, botão, campo,
+Cantos arredondados (8px) em cartão, botão, campo,
 filtro e atalho. Cartão de login em 10px, caixa de seleção em
 2px, círculo só em avatar e marcador. Borda existe em campo sobre
 cartão branco e em botão secundário: em mais nada.
@@ -295,7 +300,8 @@ cartão branco e em botão secundário: em mais nada.
   marinho em 600; hover #F3F3F3.
 
 ### Ações rápidas
-Quatro atalhos em linha no Início: quadrado #A4C7E4 de 48px com
+Até quatro atalhos por linha no Início (hoje três: Agenda, Meu perfil,
+Notificações), quebrando linha em vez de encolher: quadrado #A4C7E4 de 48px com
 ícone marinho e rótulo de 12px embaixo.
 
 ## Do's and Don'ts

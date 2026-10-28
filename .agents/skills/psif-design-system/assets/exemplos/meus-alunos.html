@@ -9,6 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../tokens.css">
 <link rel="stylesheet" href="../components.css">
+<style>
+/* Mesma lista em dois formatos (§11.8): cartões no celular, tabela no web. */
+.alunos-web { display: none; }
+@media (min-width: 768px) /* --bp-md */ {
+  .alunos-web { display: block; }
+  .alunos-celular { display: none; }
+}
+</style>
 </head>
 <body>
 <!-- Sprite de assets/icones.svg inline (§18). -->
@@ -45,7 +53,7 @@
 <div class="psif-shell">
 <a class="psif-pular" href="#conteudo">Pular para o conteúdo</a>
 
-<nav class="psif-lateral" aria-label="Principal">
+<nav class="psif-lateral" id="navegacao" aria-label="Principal">
 <div class="psif-lateral__marca"><img src="../simbolo-psif.svg" alt="" width="32" height="32"><span class="psif-lateral__nome">PSIF</span></div>
 <ul class="psif-lateral__grupo">
 <li><a class="psif-item" title="Início" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-inicio"></use></svg><span class="psif-item__rotulo">Início</span></a></li>
@@ -57,16 +65,15 @@
 <li><a class="psif-item" title="Agenda" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-calendario"></use></svg><span class="psif-item__rotulo">Agenda</span></a></li>
 <li><a class="psif-item" title="Notificações" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg><span class="psif-item__rotulo">Notificações</span></a></li>
 <li><a class="psif-item" title="Meu perfil" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-perfil"></use></svg><span class="psif-item__rotulo">Meu perfil</span></a></li>
-<li><a class="psif-item" title="Termo" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-termo"></use></svg><span class="psif-item__rotulo">Termo</span></a></li>
 </ul>
 <button type="button" class="psif-item psif-lateral__sair" title="Sair"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-sair"></use></svg><span class="psif-item__rotulo">Sair</span></button>
 </nav>
 
 <div class="psif-coluna">
-<div class="psif-cabecalho psif-cabecalho--faixa" role="search">
-<button type="button" class="psif-botao-icone" aria-label="Recolher menu" aria-expanded="true"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
-<div class="psif-cabecalho__busca">
-<label class="psif-campo psif-campo--borda"><svg class="psif-ic" aria-hidden="true"><use href="#psif-busca"></use></svg><input type="search" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" aria-controls="busca-global-resultados"></label>
+<div class="psif-cabecalho psif-cabecalho--faixa">
+<button type="button" class="psif-botao-icone" aria-label="Recolher menu" aria-controls="navegacao" aria-expanded="true"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
+<div class="psif-cabecalho__busca" role="search">
+<label class="psif-campo psif-campo--borda"><svg class="psif-ic" aria-hidden="true"><use href="#psif-busca"></use></svg><input type="search" class="psif-campo__entrada" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" aria-controls="busca-global-resultados"></label>
 <ul id="busca-global-resultados" class="psif-cartao psif-cartao--lista psif-lista psif-cabecalho__resultados" hidden></ul>
 </div>
 <a class="psif-botao-icone" href="#" aria-label="Notificações"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg></a>
@@ -77,20 +84,17 @@
 
 <header class="psif-barra-superior">
 <h1 class="psif-titulo-tela">Meus alunos</h1>
-<button type="button" class="psif-botao-icone psif-so-celular" aria-label="Abrir menu" aria-expanded="false"><svg class="psif-ic" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
+<button type="button" class="psif-botao-icone psif-so-celular" aria-label="Abrir menu" aria-controls="navegacao" aria-expanded="false"><svg class="psif-ic" aria-hidden="true"><use href="#psif-menu"></use></svg></button>
 </header>
 
 <main id="conteudo" class="psif-conteudo">
 
-<!-- Busca (§7.7): rótulo acessível sem rótulo visível, a lupa e a posição
-     dizem o que é. Sem classe própria em components.css para ícone à
-     esquerda do campo; o input reaproveita .psif-campo como contêiner
-     flex e zera a própria borda/fundo, como .psif-campo--com-botao já faz
-     para o botão à direita. -->
+<!-- Busca (§7.7): rótulo acessível sem rótulo visível; a lupa e a posição
+     dizem o que é. -->
 <div class="psif-campo-grupo">
 <div class="psif-campo">
-<svg class="psif-ic psif-ic--sm" aria-hidden="true"><use href="#psif-busca"></use></svg>
-<input type="search" id="busca-aluno" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" style="flex: 1 1 auto; min-width: 0; border: 0; background: transparent; color: inherit; font: inherit; padding: 0">
+<svg class="psif-ic" aria-hidden="true"><use href="#psif-busca"></use></svg>
+<input type="search" id="busca-aluno" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" class="psif-campo__entrada">
 </div>
 </div>
 
@@ -100,26 +104,34 @@
 <button type="button" class="psif-filtro" aria-pressed="false" aria-haspopup="dialog">Período <svg class="psif-ic psif-ic--sm" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
 </div>
 
-<ul class="psif-grade-cartoes">
+<ul class="psif-grade-cartoes alunos-celular">
 <li><a class="psif-cartao psif-aluno" href="#"><span class="psif-avatar" aria-hidden="true">JA</span><span class="psif-linha__texto"><span class="psif-aluno__nome">José Antonio</span><span class="psif-aluno__turma">Informática · 3º ano</span><span class="psif-situacao">Em acompanhamento</span></span></a></li>
 <li><a class="psif-cartao psif-aluno" href="#"><span class="psif-avatar" aria-hidden="true">MA</span><span class="psif-linha__texto"><span class="psif-aluno__nome">Maria Ana</span><span class="psif-aluno__turma">Informática · 3º ano</span><span class="psif-situacao psif-situacao--pendente">Acompanhamento pendente</span></span></a></li>
 <li><a class="psif-cartao psif-aluno" href="#"><span class="psif-avatar" aria-hidden="true">VM</span><span class="psif-linha__texto"><span class="psif-aluno__nome">Valquíria Melo</span><span class="psif-aluno__turma">Informática · 3º ano</span><span class="psif-situacao psif-situacao--encerrada">Acompanhamento encerrado</span></span></a></li>
 <li><a class="psif-cartao psif-aluno" href="#"><span class="psif-avatar" aria-hidden="true">AP</span><span class="psif-linha__texto"><span class="psif-aluno__nome">Anitta Peniwyse</span><span class="psif-aluno__turma">Informática · 2º ano</span><span class="psif-situacao">Em acompanhamento</span></span></a></li>
 </ul>
 
+<div class="psif-cartao psif-tabela-cartao alunos-web">
+<table class="psif-tabela">
+<caption class="psif-so-leitor">Meus alunos, filtrados por 3º ano</caption>
+<thead><tr><th scope="col" aria-sort="ascending">Aluno</th><th scope="col">Turma</th><th scope="col">Situação</th></tr></thead>
+<tbody>
+<tr><td><a class="psif-link psif-tabela__chave psif-tabela__aluno" href="#"><span class="psif-avatar psif-avatar--pequeno" aria-hidden="true">JA</span><span class="psif-tabela__nome">José Antonio</span></a></td><td>Informática · 3º ano</td><td><span class="psif-situacao">Em acompanhamento</span></td></tr>
+<tr><td><a class="psif-link psif-tabela__chave psif-tabela__aluno" href="#"><span class="psif-avatar psif-avatar--pequeno" aria-hidden="true">MA</span><span class="psif-tabela__nome">Maria Ana</span></a></td><td>Informática · 3º ano</td><td><span class="psif-situacao psif-situacao--pendente">Acompanhamento pendente</span></td></tr>
+<tr><td><a class="psif-link psif-tabela__chave psif-tabela__aluno" href="#"><span class="psif-avatar psif-avatar--pequeno" aria-hidden="true">VM</span><span class="psif-tabela__nome">Valquíria Melo</span></a></td><td>Informática · 3º ano</td><td><span class="psif-situacao psif-situacao--encerrada">Acompanhamento encerrado</span></td></tr>
+<tr><td><a class="psif-link psif-tabela__chave psif-tabela__aluno" href="#"><span class="psif-avatar psif-avatar--pequeno" aria-hidden="true">AP</span><span class="psif-tabela__nome">Anitta Peniwyse</span></a></td><td>Informática · 2º ano</td><td><span class="psif-situacao">Em acompanhamento</span></td></tr>
+</tbody>
+</table>
+<div class="psif-paginacao">
+<span>1–4 de 4</span>
+<span><button type="button" class="psif-botao psif-botao--secundario psif-botao--compacto" disabled>Anterior</button> <button type="button" class="psif-botao psif-botao--secundario psif-botao--compacto" disabled>Próxima</button></span>
+</div>
+</div>
+
 </main>
 </div>
 
 </div>
-<script>
-document.querySelectorAll('.psif-cabecalho [aria-label="Recolher menu"]').forEach(function (botao) {
-  botao.addEventListener('click', function () {
-    var lateral = document.querySelector('.psif-lateral');
-    var recolhida = lateral.classList.toggle('psif-lateral--recolhida');
-    botao.setAttribute('aria-expanded', String(!recolhida));
-    botao.setAttribute('aria-label', recolhida ? 'Expandir menu' : 'Recolher menu');
-  });
-});
-</script>
+<script src="exemplos.js"></script>
 </body>
 </html>

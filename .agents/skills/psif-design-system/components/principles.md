@@ -32,21 +32,24 @@
 
 | Componente | Classes | § |
 |---|---|---|
-| Estrutura da tela | `psif-shell`, `psif-coluna`, `psif-area`, `psif-conteudo`, `psif-pular` | §5.1, §20.4 |
-| Barra superior | `psif-barra-superior`, `psif-titulo-tela`, `psif-saudacao`, `psif-botao-icone` | §7.3 |
+| Estrutura da tela | `psif-shell`, `psif-coluna`, `psif-area`, `psif-conteudo`, `psif-pular`, `psif-so-leitor` (texto só para leitor de tela, como a legenda da tabela) | §5.1, §20.4 |
+| Barra superior | `psif-barra-superior`, `psif-titulo-tela`, `psif-saudacao`, `psif-botao-icone`, `psif-espaco-icone` (vão do tamanho de um alvo, do lado sem botão, para o título ficar no centro) | §7.3 |
 | Navegação | `psif-lateral`, `psif-lateral--aberta`, `psif-lateral--recolhida`, `psif-item`, `psif-item__rotulo`, `psif-trilha` | §7.1, §7.9–§7.12 |
 | Cabeçalho (web) | `psif-cabecalho`, `psif-cabecalho--faixa`, `psif-cabecalho__busca`, `psif-cabecalho__resultados` | §7.13 |
-| Tabela (web) | `psif-tabela-cartao`, `psif-tabela`, `psif-tabela__chave`, `psif-tabela__numero`, `psif-paginacao` | §11.8 |
-| Botão e link | `psif-botao` (`--secundario`, `--compacto`, `--tela`), `psif-link` | §8.1, §5.6 |
-| Campo | `psif-campo-grupo`, `psif-rotulo`, `psif-opcional`, `psif-campo` (`--borda`, `--com-botao`), `psif-selecao`, `psif-erro-campo` | §8.3–§8.6 |
+| Tabela (web) | `psif-tabela-cartao`, `psif-tabela`, `psif-tabela__chave`, `psif-tabela__numero`, `psif-tabela__aluno` (`__nome`), `psif-paginacao` | §11.8 |
+| Botão e link | `psif-botao` (`--secundario`, `--compacto`, `--tela`, `--texto-perigo`), `psif-link` | §8.1, §5.6, §10.3 |
+| Caixa de seleção | `psif-caixa` | §8.7 |
+| Campo | `psif-campo-grupo`, `psif-rotulo`, `psif-opcional`, `psif-campo` (`--borda`, `--com-botao`), `psif-campo__entrada` (o `<input>` de campo com ícone: busca, e-mail, senha), `psif-selecao`, `psif-erro-campo` | §8.3–§8.6 |
 | Filtro | `psif-filtros`, `psif-filtro` | §7.6 |
-| Cartão e lista | `psif-cartao` (`--lista`), `psif-cartao-titulo`, `psif-lista`, `psif-linha` | §9.1, §9.3 |
+| Cartão e lista | `psif-cartao` (`--lista`, `--resumo`), `psif-cartao-titulo`, `psif-lista`, `psif-linha`, `psif-secoes` (menu de seções do perfil) | §9.1, §9.3, §7.5 |
 | Aluno | `psif-aluno`, `psif-avatar` (`--grande`, `--pequeno`, `--mini`), `psif-situacao` (`--perfil`, `--pendente`, `--encerrada`) | §9.4, §12 |
 | Indicadores | `psif-indicadores`, `psif-indicador` | §9.2 |
 | Ações rápidas | `psif-atalhos`, `psif-atalho` | §7.8 |
 | Feedback | `psif-alerta` (`--erro`), `psif-toast`, `psif-vazio`, `psif-esqueleto` | §10 |
-| Folha modal | `psif-veu`, `psif-folha` | §9.6 |
-| Notificação | `psif-notificacao` (`--lida`) | §9.5 |
+| Folha modal | `psif-veu`, `psif-folha`, `psif-folha__titulo`, `psif-folha__texto`, `psif-folha__acoes` | §9.6, §10.3 |
+| Autenticação | `psif-autenticacao`, `psif-cartao--autenticacao`, `psif-logo-login`, `psif-autenticacao__subtitulo`, `psif-autenticacao__linha`, `psif-autenticacao__assinatura` | §9.8, §13.4 |
+| Página pública e splash | `psif-funcionalidade` (`__icone`, `__titulo`, `__texto`), `psif-splash` (`__nome`, `__sub`), `psif-progresso` (`__barra`) | §9.7, §13.5 |
+| Notificação | `psif-notificacao` (`--lida`, `--pendente`) | §9.5 |
 | Linha do tempo | `psif-linha-tempo`, `psif-evento` (`--avanco`, `--relatorio`) | §11.5 |
 | Calendário | `psif-mes-cabecalho`, `psif-semana`, `psif-mes`, `psif-dia`, `psif-ponto` | §11.6 |
-| Grades | `psif-grade-cartoes`, `psif-grade-painel`, `psif-metades`, `psif-form` | §5.3 |
+| Grades | `psif-grade-cartoes`, `psif-grade-painel`, `psif-metades`, `psif-form`, `psif-pilha` (cartões empilhados com `--sp-6`) | §5.3 |

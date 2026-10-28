@@ -67,7 +67,6 @@
 <li><a class="psif-item" title="Agenda" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-calendario"></use></svg><span class="psif-item__rotulo">Agenda</span></a></li>
 <li><a class="psif-item" title="Notificações" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg><span class="psif-item__rotulo">Notificações</span></a></li>
 <li><a class="psif-item" title="Meu perfil" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-perfil"></use></svg><span class="psif-item__rotulo">Meu perfil</span></a></li>
-<li><a class="psif-item" title="Termo" href="#"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-termo"></use></svg><span class="psif-item__rotulo">Termo</span></a></li>
 </ul>
 <button type="button" class="psif-item psif-lateral__sair" title="Sair"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-sair"></use></svg><span class="psif-item__rotulo">Sair</span></button>
 </nav>
@@ -90,6 +89,7 @@
 <button type="button" class="psif-botao psif-botao--secundario">Saiba mais</button>
 <button type="button" class="psif-botao psif-botao--compacto">Entrar</button>
 <button type="button" class="psif-botao" disabled>Salvando…</button>
+<button type="button" class="psif-botao psif-botao--texto-perigo">Descartar</button>
 <button type="button" class="psif-botao-icone" aria-label="Voltar"><svg class="psif-ic psif-ic--sm" aria-hidden="true"><use href="#psif-voltar"></use></svg></button>
 <a class="psif-link" href="#">Esqueceu a senha?</a>
 </div>
@@ -100,17 +100,17 @@
 <form class="psif-form" novalidate>
 <div class="psif-campo-grupo">
 <label class="psif-rotulo" id="r-aluno" for="c-aluno">Aluno</label>
-<button type="button" class="psif-campo psif-selecao" id="c-aluno" aria-haspopup="dialog" aria-labelledby="r-aluno v-aluno"><span id="v-aluno">Anitta Peniwyse</span><svg class="psif-chevron" style="width: var(--ic-md); height: var(--ic-md)" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
+<button type="button" class="psif-campo psif-selecao" id="c-aluno" aria-haspopup="dialog" aria-labelledby="r-aluno v-aluno"><span id="v-aluno">Anitta Peniwyse</span><svg class="psif-chevron" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
 </div>
 <div class="psif-campo-grupo">
 <label class="psif-rotulo" id="r-tipo" for="c-tipo">Tipo de atendimento</label>
-<button type="button" class="psif-campo psif-selecao" id="c-tipo" aria-haspopup="dialog" aria-labelledby="r-tipo v-tipo" aria-describedby="e-tipo" aria-invalid="true"><span id="v-tipo" class="psif-selecao__vazio">Selecione</span><svg class="psif-chevron" style="width: var(--ic-md); height: var(--ic-md)" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
+<button type="button" class="psif-campo psif-selecao" id="c-tipo" aria-haspopup="dialog" aria-labelledby="r-tipo v-tipo" aria-describedby="e-tipo" aria-invalid="true"><span id="v-tipo" class="psif-selecao__vazio">Selecione</span><svg class="psif-chevron" aria-hidden="true"><use href="#psif-abrir-lista"></use></svg></button>
 <p id="e-tipo" class="psif-erro-campo">Selecione o tipo de atendimento.</p>
 </div>
 <div class="psif-campo-grupo">
 <label class="psif-rotulo" for="c-data">Data</label>
 <div class="psif-campo psif-campo--com-botao">
-<input id="c-data" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" value="15/06/2026" aria-required="true">
+<input class="psif-campo__entrada" id="c-data" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" value="15/06/2026" aria-required="true">
 <button type="button" class="psif-botao-icone" aria-label="Abrir calendário" aria-haspopup="dialog"><svg class="psif-ic" aria-hidden="true"><use href="#psif-calendario"></use></svg></button>
 </div>
 </div>
@@ -118,6 +118,7 @@
 <label class="psif-rotulo" for="c-descricao">Descrição <span class="psif-opcional">(opcional)</span></label>
 <textarea id="c-descricao" class="psif-campo" rows="4" placeholder="Descreva o atendimento…"></textarea>
 </div>
+<label class="psif-caixa"><input type="checkbox" checked>Lembrar-me</label>
 </form>
 </section>
 
@@ -131,7 +132,7 @@
 </section>
 
 <section class="cat-secao" aria-labelledby="c-painel">
-<h2 id="c-painel" class="cat-titulo">Painel — §9.2, §9.3, §7.8, §14.7</h2>
+<h2 id="c-painel" class="cat-titulo">Painel — §9.2, §9.3, §7.8, §14.2</h2>
 <div class="psif-indicadores" aria-label="Indicadores de hoje">
 <a class="psif-indicador" href="#" aria-label="8 atendimentos hoje"><data class="psif-indicador__numero" value="8">08</data><span class="psif-indicador__rotulo">Atendimentos hoje</span></a>
 <a class="psif-indicador" href="#" aria-label="120 alunos ativos"><data class="psif-indicador__numero" value="120">120</data><span class="psif-indicador__rotulo">Alunos ativos</span></a>
@@ -152,7 +153,6 @@
 <a class="psif-atalho" href="#"><span class="psif-atalho__icone"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-calendario"></use></svg></span><span class="psif-atalho__rotulo">Agenda</span></a>
 <a class="psif-atalho" href="#"><span class="psif-atalho__icone"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-perfil"></use></svg></span><span class="psif-atalho__rotulo">Meu perfil</span></a>
 <a class="psif-atalho" href="#"><span class="psif-atalho__icone"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-notificacoes"></use></svg></span><span class="psif-atalho__rotulo">Notificações</span></a>
-<a class="psif-atalho" href="#"><span class="psif-atalho__icone"><svg class="psif-ic psif-ic--lg" aria-hidden="true"><use href="#psif-termo"></use></svg></span><span class="psif-atalho__rotulo">Termo</span></a>
 </div>
 </section>
 </div>
@@ -185,6 +185,14 @@
 </div>
 <div class="psif-toast" role="status" style="position: static">Atendimento salvo.</div>
 <div class="psif-toast psif-toast--erro" role="alert" style="position: static">Não foi possível salvar o atendimento. Tente de novo.</div>
+<section class="psif-folha" aria-labelledby="c-descarte" style="position: static; border-radius: var(--radius-lg)">
+<h3 id="c-descarte" class="psif-folha__titulo">Descartar este atendimento?</h3>
+<p class="psif-folha__texto">O que você digitou será perdido.</p>
+<div class="psif-folha__acoes">
+<button type="button" class="psif-botao">Continuar editando</button>
+<button type="button" class="psif-botao psif-botao--texto-perigo">Descartar</button>
+</div>
+</section>
 </section>
 
 <section class="cat-secao" aria-labelledby="c-notif">
@@ -193,6 +201,7 @@
 <ul class="psif-lista">
 <li class="psif-notificacao" aria-label="Não lida: Novo relatório enviado. Relatório semanal de Anitta Peniwyse. Há 15 minutos."><span class="psif-notificacao__ponto" aria-hidden="true"></span><span class="psif-notificacao__titulo">Novo relatório enviado</span><span class="psif-notificacao__tempo">Há 15 min</span><span class="psif-notificacao__texto">Relatório semanal de Anitta Peniwyse.</span></li>
 <li class="psif-notificacao psif-notificacao--lida"><span class="psif-notificacao__ponto" aria-hidden="true"></span><span class="psif-notificacao__titulo">Novo documento adicionado</span><span class="psif-notificacao__tempo">Há 1 hora</span><span class="psif-notificacao__texto">Novo documento no prontuário de Valquíria.</span></li>
+<li class="psif-notificacao psif-notificacao--pendente"><span class="psif-notificacao__ponto" aria-hidden="true"></span><span class="psif-notificacao__titulo">Pendente: Acompanhamento</span><span class="psif-notificacao__tempo">Há 2 horas</span><span class="psif-notificacao__texto">Maria Ana está sem registro de atendimento há 30 dias.</span></li>
 </ul>
 </section>
 </section>
@@ -235,6 +244,22 @@
 </ul>
 </section>
 </div>
+</section>
+
+<section class="cat-secao" aria-labelledby="c-publica">
+<h2 id="c-publica" class="cat-titulo">Página pública e splash — §9.7, §13.5</h2>
+<div class="psif-cartao psif-funcionalidade">
+<span class="psif-funcionalidade__icone"><svg class="psif-ic" aria-hidden="true"><use href="#psif-calendario"></use></svg></span>
+<h3 class="psif-funcionalidade__titulo">Agenda de atendimentos</h3>
+<p class="psif-funcionalidade__texto">Reuniões e atendimentos num só lugar, com pedido de reunião pelo aluno.</p>
+</div>
+<div class="psif-splash" style="min-height: auto; border-radius: var(--radius-md)">
+<img src="simbolo-psif.svg" alt="" width="96" height="96">
+<p class="psif-splash__nome">PSIF</p>
+<p class="psif-splash__sub">Plataforma de Suporte Psicopedagógico</p>
+<div class="psif-progresso" role="progressbar" aria-label="Carregando" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60"><div class="psif-progresso__barra" style="transform: scaleX(.6)"></div></div>
+</div>
+<p>Login completo, com cartão de autenticação, campo com borda, "Mostrar senha" e caixa de seleção: <code>exemplos/login.html</code>.</p>
 </section>
 
 <section class="cat-secao" aria-labelledby="c-icones">

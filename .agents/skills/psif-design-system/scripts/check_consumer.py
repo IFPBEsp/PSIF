@@ -42,8 +42,8 @@ DECL = re.compile(r"(?<![\w-])--([\w-]+)\s*:\s*([^;{}]+)(?=[;}])")
 ALIAS = re.compile(r"^var\(\s*--([\w-]+)\s*\)$")
 
 # Escopos que legitimamente redefinem token e NÃO são divergência:
-#   @theme      — ponte de namespace do Tailwind v4 (§28.2)
-#   .dark etc.  — sobrescrita de modo escuro (§27)
+#   @theme      — ponte de namespace do Tailwind v4 (§27.2)
+#   .dark etc.  — sobrescrita de modo escuro (§26)
 ESCOPO_LEGITIMO = re.compile(
     r"(^|\s)(@theme\b|\.dark\b|\[data-theme|@media[^{]*prefers-color-scheme)"
 )
@@ -79,7 +79,7 @@ def blocos_base(css):
 
     Sem isto o checker acusa a ponte `--radius-md: var(--tw-radius-md)` do
     `@theme` e toda sobrescrita do `.dark` como divergência, que é ruído: as
-    duas são o uso previsto (§27, §28.2). Um checker com 20 falsos positivos
+    duas são o uso previsto (§26, §27.2). Um checker com 20 falsos positivos
     é pior que checker nenhum — ninguém lê o vigésimo primeiro.
     """
     trechos, i = [], 0
@@ -102,7 +102,7 @@ def blocos_base(css):
 
 
 def resolve(nome, valor, skill):
-    """`--contact-700: var(--accent-700)` não é divergência: é o alias que o
+    """`--surface-base: var(--sky-100)` não é divergência: é o alias que o
     próprio tokens.css da skill emite. Segue o ponteiro antes de comparar."""
     m = ALIAS.match(valor.strip())
     if m and m.group(1) in skill:
@@ -145,8 +145,8 @@ def analisa(caminho, skill):
         #
         # A isenção já foi `-\d?xl$|-\d+$`, e o segundo ramo engolia a regra
         # inteira: toda família de escala da skill termina em número
-        # (`ocean-900`, `ink-300`, `sp-4`), então o detector de typo ficava
-        # cego para o grosso da paleta — `--ocan-900` passava calado enquanto
+        # (`navy-900`, `ink-700`, `sp-4`), então o detector de typo ficava
+        # cego para o grosso da paleta — `--navi-900` passava calado enquanto
         # `--surfce-base` era pego. Só o sufixo `xl` precisa da isenção.
         if perto and not re.search(r"-\d?xl$", nome):
             parecidos.append((nome, perto[0], linha))
