@@ -48,6 +48,10 @@
   /* Scrim de modal e drawer — §3.5 */
   --overlay: rgba(36,74,105,.48);
 
+  /* Linhas sobre o céu (derivadas de --navy-700) — §3.5 */
+  --line-on-sky: rgba(36,74,105,.35);
+  --divider-on-sky: rgba(36,74,105,.12);
+
   /* Opacidade — §3.5 */
   --o-disabled: .45;
 
@@ -55,6 +59,8 @@
   --radius-xs: 2px;
   --radius-md: 8px;
   --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
   --radius-pill: 999px;
 
   /* Espaçamento — §3.7 */
@@ -82,12 +88,15 @@
   --ic-lg: 24px;
   --ic-xl: 32px;
   --ic-brand: 136px;
+  --tile-icon: 40px;
+  --tile-icon-lg: 48px;
 
   /* Alvo de toque — mínimo de todo clicável; botão e campo têm o seu — §20.6 */
   --target-min: 44px;
   --control-min: 48px;
 
   /* Avatar — cartão de aluno e perfil — §12.1 */
+  --avatar-sm: 56px;
   --avatar-md: 80px;
   --avatar-lg: 120px;
 
@@ -130,6 +139,8 @@
   --dark-overlay: rgba(3,9,15,.65);
   --dark-sh-sm: 0 4px 4px rgba(3,9,15,.35);
   --dark-sh-md: 0 12px 32px rgba(3,9,15,.45);
+  --dark-line-on-sky: rgba(255,255,255,.35);
+  --dark-divider-on-sky: rgba(255,255,255,.12);
 
   /* Largura máxima — §5.2 */
   --w-mobile: 390px;
@@ -197,7 +208,15 @@
   --overlay: var(--dark-overlay);
   --sh-sm: var(--dark-sh-sm);
   --sh-md: var(--dark-sh-md);
+  --line-on-sky: var(--dark-line-on-sky);
+  --divider-on-sky: var(--dark-divider-on-sky);
 }
+
+/* Daqui para baixo, regra de elemento, em `@layer base`: o `:root` acima
+ * fica fora de camada para vencer o tema do Tailwind, mas uma regra de
+ * elemento fora de camada venceria também as utilitárias (`rounded-md`
+ * perdia para a regra de foco). Em camada, a utilitária da tela ganha. */
+@layer base {
 
 /* Base mínima: fonte e superfície de página. Sem isto, a tela herda a
  * fonte do navegador, o fundo branco puro e a margem de 8px do <body>,
@@ -217,7 +236,6 @@ body {
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--navy-700);
   outline-offset: 2px;
-  border-radius: var(--radius-xs);
 }
 
 /* Superfícies do navegador (§2.4): o que a tela não desenha
@@ -233,4 +251,6 @@ input, select, textarea { font-size: var(--fs-h3); }
  * não recopiado: duas versões da mesma regra divergem, e já divergiram. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
 }

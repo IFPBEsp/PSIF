@@ -112,6 +112,30 @@ def placeholder_sem_rotulo(texto):
         yield m.start()
 
 
+ICONE_SO = r"(?:\s*<(?:svg\b.*?</svg>|(?:[A-Z]\w*Icon|Icone|Icon)\b[^>]*/>)\s*)*"
+SELO = re.compile(r"<Badge\b[^>]*/>|<Badge\b[^>]*>" + ICONE_SO + r"</Badge>", re.S)
+
+
+def selo_sem_texto(texto):
+    """§24.3: selo só com cor (ou só com ícone). `<Badge />` vazio ou com só
+    um ícone dentro não diz nada a quem não vê a cor."""
+    for m in SELO.finditer(texto):
+        yield m.start()
+
+
+def filtro_sem_estado(texto):
+    """§24.3: dentro de um grupo de filtros (`aria-label` que começa com
+    "Filtro"), todo botão anuncia o estado (`aria-pressed`, ou `aria-checked`
+    do `role="radio"`) ou diz que abre folha (`aria-haspopup`).
+    `ToggleGroupItem` passa: o Radix já põe o estado sozinho."""
+    for g in re.finditer(r"<(\w+)\b[^>]*aria-label=[\"']Filtro[^\"']*[\"'][^>]*>", texto):
+        fim = texto.find(f"</{g.group(1)}>", g.end())
+        bloco = texto[g.end():fim if fim != -1 else len(texto)]
+        for b in re.finditer(r"<(?:button|Button)\b([^>]*)>", bloco):
+            if not re.search(r"aria-(?:pressed|checked|haspopup)\b", b.group(1)):
+                yield g.end() + b.start()
+
+
 def sem_comentarios(texto):
     return COMENTARIO.sub("", texto)
 
@@ -153,6 +177,12 @@ def main():
                     erros += 1
                 else:
                     avisos += 1
+        for verifica, sec, desc in ((selo_sem_texto, "24.3", "selo sem texto"),
+                                    (filtro_sem_estado, "24.3", "filtro sem aria-pressed")):
+            for pos in verifica(texto):
+                linha = texto.count("\n", 0, pos) + 1
+                print(f"   [ERRO] {os.path.basename(caminho)}:{linha} §{sec} — {desc}")
+                erros += 1
         for pos in placeholder_sem_rotulo(texto):
             linha = texto.count("\n", 0, pos) + 1
             print(f"   [ERRO] {os.path.basename(caminho)}:{linha} §20.7 — "

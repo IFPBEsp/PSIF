@@ -28,9 +28,8 @@ confirmar uma ação, nunca para decorar.
 
 Navegação entre telas: troca direta, sem animação de deslize obrigatória.
 Folha modal sobe da base e a gaveta entra pela esquerda com `--dur-normal`
-`--ease-out`; o véu aparece junto. `components.css` faz isso com `@keyframes`
-sobre `translate` e `opacity`. No projeto, o `Sheet` do shadcn já anima; ajuste
-a duração dele para `--dur-normal` em vez de escrever a animação de novo.
+`--ease-out`; o véu aparece junto. O `Sheet` do shadcn já anima; ajuste a
+duração dele para `--dur-normal` em vez de escrever a animação de novo.
 
 ### 17.4 Propriedades seguras e limites
 
@@ -80,7 +79,9 @@ divisão: em ícone cobra o piso de UI (3:1), em texto o de texto (4.5:1).
 
 Os ícones ficam em `assets/icones.svg`, um `<symbol>` por nome, todos com
 linha de 2px no grid de 24 e cor herdada:
-`<svg class="psif-ic" aria-hidden="true"><use href="icones.svg#psif-calendario"></use></svg>`.
+`<Icon name="psif-calendario" />`, o componente descrito abaixo, que desenha
+`<svg aria-hidden="true"><use href="#psif-calendario" /></svg>` com o tamanho
+pedido.
 Desenhe um ícone novo no mesmo traço e acrescente-o ao arquivo; um ícone
 avulso na tela quebra o conjunto.
 
@@ -90,8 +91,12 @@ sprite inline uma vez no `<body>` (no Next.js, no layout raiz) e referencie
 por `href="#psif-…"`. O `<svg>` do sprite leva tamanho zero
 (`position: absolute; width: 0; height: 0`): sem isso ele ocupa 300×150px no
 topo da página. `display: none` não serve, porque alguns navegadores deixam
-de desenhar o `<use>`. É o que os arquivos de `assets/exemplos/` e o
-`catalogo.html` fazem. Se o projeto já usar a fonte Material
+de desenhar o `<use>`.
+
+No projeto, o sprite vira um componente `Icon` em `src/shared/components`
+(código em inglês, como pede a convenção do projeto), que recebe `name` e
+`size`. O shadcn traz `lucide-react`; use lucide só para o
+que o sprite não tem, no mesmo traço de 2px. Se o projeto já usar a fonte Material
 Symbols Rounded, a coluna da direita dá o equivalente.
 
 | Nome | Onde | Material Symbols |
@@ -105,6 +110,7 @@ Symbols Rounded, a coluna da direita dá o equivalente.
 | `psif-calendario` · `psif-perfil` · `psif-notificacoes` · `psif-termo` | Agenda, Meu perfil, Notificações, Termo | `calendar_today` · `person` · `notifications` · `description` |
 | `psif-sair` | Sair | `logout` |
 | `psif-alerta` | alerta (§10.1) | `error` |
+| `psif-sucesso` | toast de sucesso (§10.2), confirmação | `check_circle` |
 | `psif-busca` · `psif-email` · `psif-cadeado` · `psif-mostrar-senha` | busca e campos de login | `search` · `mail` · `lock` · `visibility` |
 
 Ícone sozinho, sem texto, sempre tem nome acessível (§20.7). Emoji nunca é

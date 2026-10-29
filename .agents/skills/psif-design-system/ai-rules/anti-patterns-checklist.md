@@ -12,8 +12,9 @@
 
 - Valor literal no lugar de `var(--token)`.
 - Texto abaixo de 12px.
-- Título de tela fora do padrão (§4.3): preto, à esquerda, outro tamanho.
-- Raio diferente de `--radius-md` em retângulo.
+- Título de tela fora do padrão (§4.3): preto, centralizado no celular fora de
+  folha e autenticação, ou outro tamanho.
+- Raio fora do papel (§6, item 2).
 - Campo com fonte abaixo de 16px (o iPhone dá zoom ao focar, §8.3).
 - Texto corrido sem limite de linha no web: mais de 75 caracteres (§4.3).
 
@@ -30,6 +31,9 @@
   ícone e texto (§20.2).
 - Folha modal para o que cabe na própria tela (§9.6).
 - Componente interativo sem os estados de §6.
+- Selo só com cor, sem texto.
+- Filtro sem `aria-pressed` (ou o `role="radio"` do `ToggleGroup`), ou que
+  abre folha sem `aria-haspopup`.
 
 ### 24.4 Formulários e tabelas
 
@@ -63,8 +67,11 @@ abaixo; os itens manuais são decisão humana, não pendência para depois.
 
 ### 25.2 UI e consistência
 
-- [ ] Componentes do catálogo; um primário por tela.
-- [ ] Título de tela no padrão (§7.3).
+- [ ] Componentes de §6; um primário por tela.
+- [ ] Título de tela no padrão (§4.3): `--fs-display` à esquerda, abaixo da
+  barra de ações.
+- [ ] Raio de cada peça pelo papel (§6, item 2).
+- [ ] Todo selo com texto; todo filtro anuncia o estado.
 
 ### 25.3 Acessibilidade (WCAG 2.2 AA: bloqueante)
 
@@ -109,4 +116,4 @@ não se perca entre ajustes:
 
 Cada achado diz onde está, o impacto para quem usa e a correção. Feche com
 uma nota de 0 a 4 em acessibilidade, desempenho, uso de token, responsivo e
-consistência com o catálogo, e com o que está bom e deve ser mantido.
+consistência com §6, e com o que está bom e deve ser mantido.

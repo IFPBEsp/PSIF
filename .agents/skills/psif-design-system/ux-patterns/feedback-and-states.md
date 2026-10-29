@@ -22,7 +22,7 @@ O toast cobre o feedback pontual de uma ação:
 - **Aviso**: algo que a pessoa precisa saber agora e não bloqueia.
 
 Visual no tema do PSIF: o `Toaster` usa as cores da ponte (§27.3), cartão
-`--surface-overlay` com texto `--ink-900`; sucesso com ícone `--success-700`,
+`--surface-overlay` com texto `--ink-900`; sucesso com o ícone `psif-sucesso` (§18) em `--success-700`,
 erro com ícone e texto `--danger-700`, aviso com ícone `--warning-700`. Estado nunca
 só na cor: ícone e texto dizem o tipo. `--z-toast`, acima do botão de rodapé no
 celular. O Sonner já anuncia ao leitor de tela; não duplique `role`.
@@ -35,12 +35,17 @@ Toast não serve para:
 - **Dado sensível.** O toast pode aparecer com a tela virada para a família:
   "Documento enviado.", nunca o nome do laudo (§16.3).
 
-### 10.3 Confirmação de descarte
+### 10.3 Confirmação de descarte e de exclusão
 
 Voltar de formulário com conteúdo abre folha (§9.6): "Descartar este
 atendimento?" com "Continuar editando" (primário) e "Descartar" (texto
-`--danger-700`, `.psif-botao--texto-perigo`). O foco abre em "Continuar
-editando"; Esc e o véu cancelam. Montada em `exemplos/novo-atendimento.html`.
+`--danger-700`). O foco abre em "Continuar
+editando"; Esc e o véu cancelam.
+
+Excluir abre folha com "Excluir este documento?", o que sai ("Laudo
+médico.pdf sai do prontuário de José Antonio.") e "Não dá para desfazer.".
+Primário "Manter documento" (foco inicial); "Excluir" em texto
+`--danger-700`, hover `--danger-100`. Usa `role="alertdialog"`.
 
 ### 10.4 Progresso
 
@@ -50,7 +55,8 @@ trabalho, progresso é o rótulo do botão ("Enviando…").
 ### 10.5 Carregando (esqueleto)
 
 Esqueleto no formato do componente (cartão de aluno, linha de lista) em
-`--ink-200` sobre o cartão branco. Sem spinner solto no meio da tela, e nunca
+`--ink-200` sobre o cartão branco: blocos com `--radius-md` e, na linha de
+lista, um quadro de `--tile-icon` no lugar do ícone (§11.2). Sem spinner solto no meio da tela, e nunca
 tela em branco: o PSIF roda no celular, muitas vezes na rede da escola. O
 splash não segura o usuário depois que o app está pronto.
 

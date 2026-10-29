@@ -60,12 +60,14 @@ temas: apague o bloco `.dark { --background: ... }` que o `shadcn init` gera.
 | `--sidebar-border` · `--sidebar-ring` | `--ink-200` · `--navy-700` |
 
 **Raio.** O `shadcn init` gera uma escala calculada a partir de `--radius`
-(`rounded-sm` = `--radius` - 4px, `rounded-xl` = `--radius` + 4px), e o
-`Card` dele usa `rounded-xl`, o que daria 12px, fora da escala. Apague esse
-bloco de cálculo e use o mapa de §27.8: `rounded-xl` e `rounded-2xl` caem em
-`--radius-md`, então o `Card` já sai com 8px (regra de ouro) sem edição. Trocar
-a classe dele para `rounded-md` é só reforço. 10px fica para `rounded-lg`, o
-cartão de login.
+(`rounded-sm` = `--radius` - 4px, `rounded-xl` = `--radius` + 4px). Apague
+esse bloco de cálculo: os nomes `--radius-xs` … `--radius-2xl` já vêm do
+`tokens.css` e valem o raio do PSIF (`rounded-xl` = 12px, `rounded-2xl` =
+16px). O raio segue o papel (§6, item 2), e o shadcn não sabe disso: o `Card`
+dele usa `rounded-xl` sozinho e precisa de `rounded-xl md:rounded-2xl`; o
+`Button`, o `Input` e o `Textarea` usam `rounded-md` e precisam de
+`rounded-lg`. Desde a 0.17.0 o `Card` deixa de sair certo sem edição: a
+classe entra na variante do componente, uma vez, em `shared/components/ui`.
 
 ### 27.4 O que o lint NÃO cobre em projeto Tailwind
 
@@ -90,18 +92,28 @@ projeto: ele compara cada token colado com `scripts/tokens.json`.
 | `--ink-700` | `text-muted-foreground` |
 | `--ink-200` | `border-border` |
 | `--danger-700` | `text-destructive` |
-| `--radius-md` | `rounded-md` · `rounded-xl` · `rounded-2xl` |
-| `--radius-lg` | `rounded-lg` (cartão de login) |
-| `--radius-xs` | `rounded-sm` |
+| `--radius-xs` | `rounded-sm` · `rounded-xs` |
+| `--radius-md` | `rounded-md` (quadro de ícone, linha clicável, item de menu) |
+| `--radius-lg` | `rounded-lg` (botão, campo, folha, cartão de login) |
+| `--radius-xl` · `--radius-2xl` | `rounded-xl md:rounded-2xl` (cartão) |
+| `--radius-pill` | `rounded-full` (avatar, filtro, selo, botão só de ícone) |
+| `--line-on-sky` · `--divider-on-sky` | `border-(--line-on-sky)` · `border-t border-(--divider-on-sky)` |
+| `--tile-icon` · `--tile-icon-lg` | `size-(--tile-icon)` · `size-(--tile-icon-lg)` |
+| `--avatar-sm` · `--avatar-md` · `--avatar-lg` | `size-(--avatar-sm)` · `size-(--avatar-md)` · `size-(--avatar-lg)` |
+| `--fs-display` … `--fs-caption` | `text-display` · `text-h1` · `text-h2` · `text-h3` · `text-body` · `text-small` · `text-caption`, cada um já com a altura de linha de §4.3 (título e número `--lh-tight`, corpo `--lh-normal`, metadado `--lh-snug`) |
+| `--sh-sm` · `--sh-md` | `shadow-acao` · `shadow-flutuante` |
+| `--control-min` · `--target-min` | `min-h-(--control-min)` · `min-h-(--target-min)` |
 
 Prefira o papel (`bg-primary`) ao token cru (`bg-navy-700`) quando os dois
 existem: o componente do shadcn já fala a língua do papel.
 
 ### 27.7 Um mecanismo de estilização por projeto
 
-Utilitárias com o repasse acima. `assets/components.css` é a referência de
-medida e estado para as variantes do shadcn (`Button`, `Card`, `Input`), não
-uma folha para importar ao lado do Tailwind: as duas brigam por especificidade.
+Componentes do shadcn e utilitárias com o repasse acima, e nada mais. A skill
+não traz folha de componentes: uma folha de classes próprias ao lado do
+Tailwind briga por especificidade e vira uma segunda versão de cada
+componente. A tabela de §6 diz qual componente do shadcn e quais utilitárias
+fazem cada peça do PSIF.
 
 ### 27.8 O `globals.css` de referência
 
@@ -144,8 +156,6 @@ uma folha para importar ao lado do Tailwind: as duas brigam por especificidade.
 
 @theme inline {
   --radius-sm: var(--radius-xs);
-  --radius-xl: var(--radius-md);
-  --radius-2xl: var(--radius-md);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -172,18 +182,83 @@ uma folha para importar ao lado do Tailwind: as duas brigam por especificidade.
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
   --color-navy-700: var(--navy-700);
-  --color-sky-100: var(--sky-100);
+  --color-navy-500: var(--navy-500);
   --color-sky-300: var(--sky-300);
-  --color-ink-700: var(--ink-700);
-  --color-ink-900: var(--ink-900);
+  --color-sky-100: var(--sky-100);
+  --color-blue-700: var(--blue-700);
+  --color-blue-300: var(--blue-300);
   --color-success-700: var(--success-700);
   --color-success-100: var(--success-100);
   --color-warning-700: var(--warning-700);
   --color-warning-100: var(--warning-100);
+  --color-danger-700: var(--danger-700);
   --color-danger-100: var(--danger-100);
+  --color-ink-900: var(--ink-900);
+  --color-ink-700: var(--ink-700);
+  --color-ink-600: var(--ink-600);
+  --color-ink-500: var(--ink-500);
+  --color-ink-200: var(--ink-200);
+  --color-ink-100: var(--ink-100);
+  --text-display: var(--fs-display);
+  --text-h1: var(--fs-h1);
+  --text-h2: var(--fs-h2);
+  --text-h3: var(--fs-h3);
+  --text-body: var(--fs-body);
+  --text-small: var(--fs-small);
+  --text-caption: var(--fs-caption);
+  --text-display--line-height: var(--lh-tight);
+  --text-h1--line-height: var(--lh-tight);
+  --text-h2--line-height: var(--lh-tight);
+  --text-h3--line-height: var(--lh-tight);
+  --text-body--line-height: var(--lh-normal);
+  --text-small--line-height: var(--lh-normal);
+  --text-caption--line-height: var(--lh-snug);
+  --shadow-acao: var(--sh-sm);
+  --shadow-flutuante: var(--sh-md);
 }
 ```
 
+`--radius-xl` e `--radius-2xl` não aparecem no `@theme`: o `tokens.css` já
+os declara com o mesmo nome (12px e 16px) e vence o tema do Tailwind. Repetir
+aqui (`--radius-xl: var(--radius-xl)`) criaria uma referência circular.
+
 O `@custom-variant dark` existe porque os componentes do shadcn trazem `dark:`
 por dentro. Código do projeto não escreve `dark:` (§26.2).
+
+O `:root` do `tokens.css` precisa vencer o `@layer theme` do Tailwind (é
+assim que `rounded-md` vira 8px), e vence importado sem camada. As regras de
+elemento dele (fonte do `body`, anel de foco, seleção, movimento reduzido) já
+vêm dentro de `@layer base`, então qualquer utilitária da tela vence elas.
+Antes da 0.16.1 a regra de foco ficava fora de camada e trocava o `rounded-md`
+do botão focado por 2px.
+
+### 27.9 O `cn()` do shadcn com os tamanhos do PSIF
+
+O `cn()` usa o `tailwind-merge`, que não conhece `text-h1` … `text-caption` e
+os trata como cor: `cn("text-h2", "text-primary")` apaga um dos dois. Ensine
+os nomes a ele, em `src/shared/lib/cn.ts`:
+
+```ts
+import { clsx, type ClassValue } from "clsx";
+import { extendTailwindMerge } from "tailwind-merge";
+
+const twMerge = extendTailwindMerge({
+  extend: {
+    theme: {
+      text: ["display", "h1", "h2", "h3", "body", "small", "caption"],
+      shadow: ["acao", "flutuante"],
+    },
+  },
+});
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+No `components.json`, aponte `utils` para `@/shared/lib/cn` e `ui` para
+`@/shared/components/ui`, como pede a estrutura do frontend do projeto.
+

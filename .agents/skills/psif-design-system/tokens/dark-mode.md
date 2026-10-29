@@ -90,6 +90,7 @@ fora daqui passa por `check_contrast.py dark-<texto> dark-<fundo>`.
 --dark-warning-700 / --dark-warning-100  8.20:1 ✓ AAA   atenção no alerta
 --dark-danger-700 / --dark-white       7.26:1 ✓ AAA   erro de campo no cartão
 --dark-danger-700 / --dark-danger-100  7.48:1 ✓ AAA   erro no alerta
+--dark-ink-700 / --dark-ink-100        6.79:1 ✓ AA    selo "Encerrado" (§12.2)
 ```
 
 Componente de interface (piso 3:1): `--dark-ink-600` sobre `--dark-white`

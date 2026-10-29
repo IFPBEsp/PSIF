@@ -31,7 +31,7 @@ seguida, não para enfeite, e nenhuma coluna fica vazia:
    - **Esquerda (2):** Próximos atendimentos, com horário em `--fs-h1` e tipo
      em `--fs-caption` (a mesma linha da Agenda, §9.3); embaixo, **Meus
      alunos**: cartão de lista com avatar `--target-min`
-     (`.psif-avatar--pequeno`), nome, turma e a situação como terceira linha
+     nome, turma e a situação como terceira linha
      (§12.2), e "Ver todos".
    - **Direita (1):** Ações rápidas e, embaixo, Notificações recentes: as três
      últimas, em linhas com o título, a frase e o tempo de §9.5, e "Ver
@@ -67,7 +67,13 @@ formulário antes de pensar em etapas.
 ### 15.3 Rascunho automático
 
 Atendimento e relatório salvam rascunho local enquanto se digita. Voltar com
-conteúdo pergunta antes de descartar (§10.3). Abrir de novo recupera o
+conteúdo pergunta antes de descartar (§10.3). O rascunho pode conter dado
+sensível do aluno (§16.3), e o computador da escola é compartilhado. Por
+isso ele fica em `sessionStorage`: sobrevive a recarregar a página, a voltar
+e a cair a rede, e some quando a aba fecha. A chave leva o id do usuário
+(`psif:rascunho:<usuario>:<formulario>`), e o rascunho é apagado ao salvar,
+ao descartar e no logout. Rascunho que precise sobreviver ao fechamento da
+aba vai para o backend, nunca para `localStorage`. Abrir de novo recupera o
 rascunho com aviso "Rascunho recuperado". Envio que falhou por rede fica
 marcado na lista e pode ser repetido.
 

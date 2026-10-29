@@ -53,7 +53,7 @@ typography:
     fontFamily: "'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
     fontSize: "16px"
     fontWeight: 500
-    lineHeight: 1.5
+    lineHeight: 1.2
   body:
     fontFamily: "'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
     fontSize: "15px"
@@ -68,11 +68,13 @@ typography:
     fontFamily: "'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
     fontSize: "12px"
     fontWeight: 400
-    lineHeight: 1.5
+    lineHeight: 1.35
 rounded:
   radius-xs: "2px"
   radius-md: "8px"
   radius-lg: "10px"
+  radius-xl: "12px"
+  radius-2xl: "16px"
   radius-pill: "999px"
 spacing:
   sp-1: "4px"
@@ -89,7 +91,7 @@ components:
     backgroundColor: "{colors.navy-700}"
     textColor: "{colors.white}"
     typography: "{typography.h2}"
-    rounded: "{rounded.radius-md}"
+    rounded: "{rounded.radius-lg}"
     padding: "12px 16px"
     height: "48px"
   button-primary-hover:
@@ -99,30 +101,46 @@ components:
   button-secondary:
     backgroundColor: "{colors.white}"
     textColor: "{colors.navy-700}"
-    rounded: "{rounded.radius-md}"
+    rounded: "{rounded.radius-lg}"
     padding: "12px 16px"
     height: "48px"
   input:
     backgroundColor: "{colors.white}"
     textColor: "{colors.navy-700}"
     typography: "{typography.h3}"
-    rounded: "{rounded.radius-md}"
+    rounded: "{rounded.radius-lg}"
     padding: "12px 16px"
     height: "48px"
   card:
     backgroundColor: "{colors.white}"
-    rounded: "{rounded.radius-md}"
+    rounded: "{rounded.radius-xl}"
     padding: "16px"
+  card-web:
+    rounded: "{rounded.radius-2xl}"
   chip:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.ink-700}"
+    textColor: "{colors.navy-700}"
     typography: "{typography.small}"
-    rounded: "{rounded.radius-md}"
+    rounded: "{rounded.radius-pill}"
     padding: "8px 16px"
     height: "44px"
   chip-selected:
     backgroundColor: "{colors.navy-700}"
     textColor: "{colors.white}"
+  badge-success:
+    backgroundColor: "{colors.success-100}"
+    textColor: "{colors.success-700}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.radius-pill}"
+  badge-warning:
+    backgroundColor: "{colors.warning-100}"
+    textColor: "{colors.warning-700}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.radius-pill}"
+  icon-tile:
+    backgroundColor: "{colors.sky-100}"
+    textColor: "{colors.navy-700}"
+    rounded: "{rounded.radius-md}"
+    size: "40px"
   quick-action:
     backgroundColor: "{colors.sky-300}"
     textColor: "{colors.navy-700}"
@@ -131,7 +149,7 @@ components:
   nav-item-active:
     backgroundColor: "{colors.sky-100}"
     textColor: "{colors.navy-700}"
-    rounded: "{rounded.radius-md}"
+    rounded: "{rounded.radius-lg}"
 ---
 
 <!-- GERADO por scripts/gen_design_md.py: frontmatter do tokens.json, corpo de scripts/design_md_body.md. Não edite aqui. -->
@@ -163,7 +181,9 @@ página pública pode chamar atenção.
 - Três planos: céu no chão, cartão branco para o conteúdo, marinho para a ação.
 - Uma família tipográfica, pesos 400, 500 e 600.
 - Plano por padrão: cartão sem borda e sem sombra.
-- Raio único de 8px em todo retângulo.
+- Raio por papel: cartão 12px no celular e 16px no web;
+  botão, campo e folha 10px; quadro de ícone 8px; pílula
+  em avatar, filtro e selo.
 - WCAG 2.2 AA inegociável: o protótipo foi corrigido onde reprovava.
 
 ## Colors
@@ -207,9 +227,10 @@ protótipo (#7D7D7D) vira #616161 quando é texto.
 número e corpo. Hierarquia por tamanho e peso, nunca por caixa alta.
 
 ### Hierarchy
-- **Display** (600, 32px): número de indicador; título da página pública.
-- **H1** (600, 20px): título de tela em marinho, centralizado no celular e
-  à esquerda no web; saudação do Início.
+- **Display** (600, 32px): título de tela em marinho, à esquerda,
+  abaixo da barra de ações (folha e autenticação centralizam); número de
+  indicador; título da página pública.
+- **H1** (600, 20px): saudação do Início; marca na barra lateral.
 - **H2** (600, 18px): nome do aluno em cartão; rótulo do botão primário.
 - **H3** (500, 16px): rótulo e valor de campo: 16px evita o zoom do iPhone.
 - **Body** (400, 15px, 1.5): linha de lista e texto de cartão;
@@ -260,34 +281,43 @@ cartão comum.
 
 ## Shapes
 
-Cantos arredondados (8px) em cartão, botão, campo,
-filtro e atalho. Cartão de login em 10px, caixa de seleção em
-2px, círculo só em avatar e marcador. Borda existe em campo sobre
-cartão branco e em botão secundário: em mais nada.
+O raio segue o papel. Cartão 12px no celular e 16px no
+web; botão, campo, folha e cartão de login 10px; quadro de ícone,
+linha clicável e atalho 8px; caixa de seleção 2px;
+pílula em avatar, filtro, selo e botão só de ícone. Borda existe em campo e
+em botão secundário; filtro inativo e área de envio usam uma linha
+translúcida de marinho sobre o céu.
 
 ## Components
 
 ### Buttons
-- **Shape:** 8px, altura mínima 48px, largura total.
+- **Shape:** 10px, altura mínima 48px, largura total.
 - **Primary:** fundo marinho, texto branco em 600, sombra de ação. Um por tela.
 - **Hover / Focus:** hover #1D3B54, pressionado #162E41; foco com
   anel de 2px em marinho, afastado 2px.
 - **Secondary:** fundo branco, borda de 1px e texto em marinho.
 
 ### Chips
-- **Style:** filtro branco, texto #616161 em 14px, altura mínima
-  44px.
-- **State:** selecionado em marinho com texto branco e × para limpar.
+- **Style:** pílula transparente com borda de 1px em rgba(36,74,105,.35), texto
+  marinho 500 em 14px, altura mínima 44px. No celular a linha
+  rola na horizontal.
+- **State:** ativo em marinho com texto branco 600; filtro que abre folha
+  mostra o valor e × para limpar.
+
+### Badges
+- **Style:** pílula com fundo da família em -100 e texto -700, 600 em
+  12px, ponto de 6px antes do texto. Sempre com texto.
+- **Use:** situação no cabeçalho do perfil; "Sigiloso" em documento.
 
 ### Cards / Containers
-- **Corner Style:** 8px
+- **Corner Style:** 12px no celular, 16px no web
 - **Background:** branco
 - **Shadow Strategy:** nenhuma (ver Elevation & Depth)
 - **Border:** nenhuma
 - **Internal Padding:** 16px
 
 ### Inputs / Fields
-- **Style:** fundo branco, sem borda sobre o céu, valor em marinho 500 de
+- **Style:** fundo branco, borda de 1px #7D7D7D, raio 10px, valor em marinho 500 de
   16px, rótulo visível acima. Opcional leva "(opcional)" no rótulo.
 - **Focus:** anel de foco padrão.
 - **Error / Disabled:** borda #B42318 e mensagem em texto abaixo;
@@ -296,8 +326,10 @@ cartão branco e em botão secundário: em mais nada.
 ### Navigation
 - **Celular:** a mesma barra lateral, como gaveta aberta pelo menu; sem
   barra inferior.
-- **Web:** barra lateral branca; item ativo com fundo #CFE7F5 e texto
-  marinho em 600; hover #F3F3F3.
+- **Web:** barra lateral branca com a busca global sob a marca e, no pé, o
+  cartão do usuário; item ativo com fundo #CFE7F5, raio 10px e
+  texto marinho em 600; hover #F3F3F3. No topo do conteúdo, breadcrumbs e
+  Notificações.
 
 ### Ações rápidas
 Até quatro atalhos por linha no Início (hoje três: Agenda, Meu perfil,

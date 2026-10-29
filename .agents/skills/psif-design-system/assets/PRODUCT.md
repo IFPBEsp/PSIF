@@ -74,7 +74,8 @@ origem. Não há depoimentos, métricas nem números reais de uso: não invente.
 
 1. Sigilo do aluno acima de tudo.
 2. O Início responde "quem é o próximo?" sem toque.
-3. Registrar cabe em uma tela, e rascunho nunca se perde.
+3. Registrar cabe em uma tela, e o rascunho não se perde ao recarregar,
+   voltar ou cair a rede.
 4. Consistência vence novidade: reutilizar o padrão existente antes de criar.
 
 ## Accessibility & Inclusion

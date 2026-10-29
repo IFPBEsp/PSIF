@@ -21,17 +21,26 @@ que flutua é branca e opaca.
 |---|---|---|
 | `--overlay` | `rgba(36,74,105,.48)` | véu atrás de folha modal (seletor de data, confirmação): derivado |
 | `--o-disabled` | `.45` | elemento desabilitado: derivado |
+| `--line-on-sky` | `rgba(36,74,105,.35)` | borda do filtro inativo, borda tracejada da área de envio: derivado de `--navy-700` (§3.2) |
+| `--divider-on-sky` | `rgba(36,74,105,.12)` | linha acima da barra de ação do celular: derivado |
+
+No noturno, as duas viram branco a 35% e a 12% (§26). Os valores noturnos
+são proposta: confira na tela e ajuste se a linha sumir.
 
 ### 3.6 Raio (border-radius)
 
 | Token | Valor | Uso |
 |---|---|---|
 | `--radius-xs` | `2px` | caixa de seleção (medido) |
-| `--radius-md` | `8px` | **o raio do PSIF**: cartão, botão, campo, atalho, filtro (medido em todos) |
-| `--radius-lg` | `10px` | cartão de login (medido) |
-| `--radius-pill` | `999px` | avatar circular |
+| `--radius-md` | `8px` | quadro de ícone, linha clicável dentro do cartão, item de menu, atalho (medido) |
+| `--radius-lg` | `10px` | botão, campo, folha modal (cantos de cima), cartão de login, item ativo da barra lateral |
+| `--radius-xl` | `12px` | cartão no celular (derivado, §28.2) |
+| `--radius-2xl` | `16px` | cartão no web, a partir de `--bp-md` (derivado, §28.2) |
+| `--radius-pill` | `999px` | avatar, filtro, selo, botão só de ícone |
 
-Filho nunca tem raio maior que o pai. Nenhum outro valor.
+O raio segue o papel da peça (§6, item 2). Filho nunca tem raio maior que o
+pai; pílula e círculo não contam (selo dentro da linha de 8px, avatar dentro
+do cartão). Nenhum outro valor.
 
 ### 3.7 Espaçamento (base 4px)
 
@@ -61,6 +70,11 @@ campos: `--sp-6`.
 | `--ic-lg` | `24px` | ícone de atalho |
 | `--ic-xl` | `32px` | símbolo do PSIF na barra lateral |
 | `--ic-brand` | `136px` | símbolo do PSIF no splash (medido: 137×130 no Figma; o símbolo é quadrado) |
+| `--tile-icon` | `40px` | quadro do ícone em linha de lista e de tabela (derivado) |
+| `--tile-icon-lg` | `48px` | quadro do ícone em cartão de destaque e na área de envio (derivado) |
+
+Quadro de ícone: `--radius-md`, fundo `--sky-100`, ícone `--ic-md` em
+`--navy-700` no centro.
 
 ### 3.9 Movimento (tokens)
 

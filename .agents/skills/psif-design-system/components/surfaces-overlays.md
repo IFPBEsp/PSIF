@@ -46,8 +46,7 @@ Cartão branco: título em `--fs-body` peso 600 (`--navy-700` para não lida,
 relativo ("Há 15 min") em `--fs-caption` `--ink-700` (metadado, §4.3; o
 protótipo usa preto, §28.2) no canto superior
 direito. Notificação de pendência ("Acompanhamento pendente") ganha marcador
-`--warning-700` (`.psif-notificacao--pendente`) e a palavra "Pendente" no
-título.
+`--warning-700` e a palavra "Pendente" no título.
 
 Não lida não se distingue só pela cor (§20.2): ganha também um ponto
 `--navy-700` de `--sp-2` antes do título e "não lida" no nome acessível.
@@ -65,16 +64,38 @@ do campo (§7.13).
 ### 9.7 Cartão de funcionalidade (página pública)
 
 Cartão branco com círculo `--navy-700` de 48px contendo ícone branco, título
-em `--fs-body` peso 600 `--ink-900` e descrição em `--fs-small` `--ink-700`
-(`.psif-funcionalidade`). Só na página pública.
+em `--fs-body` peso 600 `--ink-900` e descrição em `--fs-small` `--ink-700`.
+Só na página pública.
 
 ### 9.8 Cartão de autenticação
 
 Cartão branco central, `--radius-lg`, `--sh-sm`, com logo, subtítulo, campos e
-botão primário (`.psif-cartao--autenticacao` dentro de `.psif-autenticacao`).
-Login e Recuperar senha. Exemplo completo em `exemplos/login.html`.
+botão primário. Login e Recuperar senha.
 
 ### 9.9 Sobreposição fora do contêiner (regra de implementação)
 
 Folha modal e lista de seleção são renderizadas na raiz do documento, não
 dentro do cartão que as abriu, senão o `overflow` do cartão as corta.
+
+### 9.10 Cabeçalho do aluno (web)
+
+Cartão branco `--radius-2xl` no topo da área do aluno: avatar `--avatar-sm`
+em `--sky-300`, nome em `--fs-display` 600 `--navy-700`, curso e turma em
+`--fs-small` `--ink-700` e o selo de situação (§12.2). Embaixo, as abas
+(§7.5).
+
+### 9.11 Próximo atendimento
+
+Cartão branco com quadro de ícone `--tile-icon-lg` (`psif-calendario`, fundo
+`--sky-100`), rótulo "Próximo atendimento" em `--fs-caption` 600 `--ink-700`,
+quando em `--fs-h3` 600 `--navy-700` ("Quinta, 05/11 · 10:00"), tipo em
+`--fs-small` `--ink-700` e chevron que leva à agenda. Sem atendimento
+marcado: "Nenhum atendimento marcado." e o link "+ Novo agendamento".
+
+### 9.12 Aviso de sigilo
+
+Cartão branco com o ícone `psif-cadeado` num círculo `--warning-100`, ícone
+em `--warning-700`, título "Documentos sigilosos" e o texto de quem pode ver
+("Laudos e relatórios psicológicos são da psicopedagoga. Outros perfis só
+abrem o que for liberado para eles."). Fica na coluna lateral da aba Documentos, no web.
+

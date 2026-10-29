@@ -79,7 +79,22 @@ Pares aprovados (texto normal, piso 4.5:1):
 --danger-700 / #fff: 6.57:1 ✓ AA
 --danger-700 / --danger-100: 5.75:1 ✓ AA
 #fff / --danger-700: 6.57:1 ✓ AA
+--ink-700 / --ink-100: 5.58:1 ✓ AA
 ```
+
+Linhas sobre o céu (§3.5), medidas como componente de interface (piso 3:1):
+
+```
+--line-on-sky / --sky-100      1.77:1  ✗ UI sozinha: só onde o texto já identifica o controle
+--line-on-sky / #fff           1.86:1  ✗ UI sozinha: idem (área de envio sobre cartão)
+--divider-on-sky / --sky-100   1.20:1  decorativa: separa a barra de ação, não identifica nada
+```
+
+`--line-on-sky` desenha o contorno do filtro inativo e da área de envio. Nos
+dois, o rótulo escrito identifica o controle, e é isso que WCAG 1.4.11 pede;
+a linha só agrupa. Por isso ela nunca é o único sinal: campo de formulário
+continua com borda `--ink-600` (3.22:1 sobre o céu), porque um campo vazio só
+se reconhece pelo contorno.
 
 Pares que **reprovam** e por isso não existem em tela:
 

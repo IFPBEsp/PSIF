@@ -2,15 +2,17 @@
 name: psif-design-system
 description: >
   Design system do PSIF, a Plataforma de Suporte Psicopedagógico do IFPB. Use
-  ao criar, revisar ou ajustar qualquer tela, componente, CSS, HTML, JSX ou
-  protótipo do PSIF, no celular ou no web (Início, atendimentos, alunos, perfil
-  do aluno, relatórios, agenda, documentos, evolução, notificações, login,
-  página pública). Use também quando o pedido não cita o PSIF pelo nome mas
-  fala de app de psicopedagogia, de acompanhamento psicopedagógico de alunos
-  ou de atendimento a alunos no IFPB, e ao escolher cor, fonte, espaçamento,
-  ícone ou texto de interface para esse produto.
+  ao criar, revisar ou ajustar qualquer tela, página, componente ou protótipo
+  do PSIF, no celular ou no web: código React/TSX em Next.js com Tailwind e
+  shadcn/ui, CSS ou HTML (Início, atendimentos, alunos, perfil do aluno,
+  relatórios, agenda, documentos, evolução, notificações, login, página
+  pública). Use também quando o pedido não cita o PSIF pelo nome mas fala de
+  app de psicopedagogia, de acompanhamento psicopedagógico ou de atendimento a
+  alunos no IFPB; ao escolher cor, fonte, espaçamento, ícone, tema escuro ou
+  texto de interface para esse produto; e ao ligar os tokens ao Tailwind e ao
+  shadcn no frontend do PSIF.
 metadata:
-  version: "0.15.1"
+  version: "0.17.1"
   last-updated: "2026-10"
 ---
 
@@ -50,11 +52,11 @@ padrão, e §27 diz como os tokens entram nele.
    papéis do shadcn (`--primary`, `--card`) para os tokens. Na tela, use as
    utilitárias da tabela de §27.6 ou `var(--token)`: um hex digitado à mão vira
    a segunda versão da paleta, e ela diverge.
-2. **Monte a tela com os componentes do shadcn, no visual do catálogo.** Toda
-   tela do PSIF é uma estrutura de §13 feita de cartão, linha de lista, campo e
-   botão. `assets/components.css` e `assets/catalogo.html` são a referência de
-   medida, estado e marcação de cada um (§6); no projeto, eles viram variantes
-   do `Button`, do `Card` e do `Input` do shadcn, não uma folha de CSS paralela.
+2. **Monte a tela com os componentes do shadcn.** Toda tela do PSIF é uma
+   estrutura de §13 feita de cartão, linha de lista, campo e botão. A tabela de
+   §6 diz qual componente do shadcn e quais utilitárias fazem cada peça. Se o
+   projeto já tem o componente em `src/shared/components`, use o dele: ele é o
+   catálogo de verdade.
 3. **Desenhe os estados que o protótipo não tem**: vazio, erro, carregando
    (§10) e dado real, como nome longo ou falta de acesso (§10.8).
 4. **Decida celular e web juntos.** A mesma tela serve os dois e muda a partir
@@ -111,17 +113,22 @@ conteúdo, a próxima mudança vai atualizar uma cópia e esquecer a outra.
 ```
 Fonte:              'Figtree', system-ui · uma família, pesos 400/500/600
 Fundo da tela:      --surface-base (--sky-100 #CFE7F5)
-Cartão:             --surface-raised (branco), --radius-md 8px, sem borda, sem sombra
+Cartão:             --surface-raised (branco), --radius-xl no celular / --radius-2xl no web,
+                    sem borda, sem sombra
 Ação primária:      --navy-700 (#244A69), texto branco, min-height --control-min (48px;
                     web: 44px, compacto)
                     celular: largura total no rodapé · web: no topo, à direita
-Título de tela:     --fs-h1 20px, 600, --navy-700 · centralizado no celular, à esquerda no web
+Título de tela:     --fs-display 32px, 600, --navy-700, à esquerda, abaixo da barra de ações
+                    (folha e autenticação: centralizado)
 Texto:              principal --ink-900 · dado-chave --navy-700 · secundário --ink-700
 Corpo:              --fs-body 15px · campo 16px · menor texto possível 12px (--fs-caption)
 Espaçamento:        escala de 4px, 4px … 48px · margem --page-pad 24px (web: 32px)
-Raio:               2px / 8px / 10px / 999px, e nenhum outro
+Raio:               por papel: cartão 12/16px · botão, campo, folha 10px ·
+                    quadro de ícone e linha 8px · avatar, filtro, selo pílula · nada fora disso
 Contraste mínimo:   4.5:1 texto · 3:1 texto grande e ícone
 Alvo de toque:      --target-min (44px) em largura e altura
+Selo:               fundo -100, texto -700, pílula, sempre com texto
+Filtro:             pílula; inativo borda --line-on-sky, ativo --navy-700
 Nunca como texto:   --ink-600 (o cinza #7D7D7D do protótipo), --ink-500,
                     --navy-500, --sky-300, --blue-300
                     (banlist em scripts/tokens.json)
@@ -134,18 +141,8 @@ Estilo:             utilitária do Tailwind ou var(--token), via ponte do shadcn
 - **`assets/tokens.css`**: o `:root` com todos os tokens, o bloco `.dark`
   (§26), o foco visível, as superfícies do navegador (§2.4) e o movimento
   reduzido. Entra no `globals.css` depois do Tailwind (§27).
-- **`assets/components.css`**: as classes de cada componente, com todos os
-  estados e o salto para o web (§6). **`assets/catalogo.html`** monta cada
-  uma. No projeto, são a referência de medida e estado para as variantes do
-  shadcn, não CSS para importar ao lado do Tailwind (§27.7).
-- **`assets/exemplos/`**: telas completas do protótipo (Login, Início, Meus
-  alunos, Perfil do aluno, Agenda e Novo atendimento), celular e web no mesmo
-  HTML. `exemplos.js` faz a gaveta, a barra recolhível, o "Mostrar senha" e a
-  confirmação de descarte funcionarem.
-  Para começar uma tela parecida, parta da estrutura da mais próxima em vez do
-  zero.
 - **`assets/icones.svg`**: os ícones do PSIF (§18), para usar com
-  `<svg><use href="icones.svg#psif-calendario"></use></svg>`.
+  `<Icon name="psif-calendario" />` (o componente de §18, que lê o sprite).
 - **`assets/simbolo-psif.svg`**: o símbolo, para colar inline (§1.1).
   `simbolo-psif-glifo.svg` traz só o glifo, em `currentColor`; os `.png`
   servem onde SVG não entra.
@@ -168,7 +165,7 @@ Estilo:             utilitária do Tailwind ou var(--token), via ponte do shadcn
 ## Regras invioláveis
 
 ```
-✗ Inventar item novo quando um do catálogo já resolve.
+✗ Inventar componente quando um de §6 já resolve.
 ✗ Usar valor "no olho": todo valor sai do dado canônico.
 ✗ Mostrar laudo, diagnóstico ou observação fora do perfil do aluno.
 ✗ Deixar campo sem rótulo visível, ou usar emoji como ícone ou marcador.
@@ -176,10 +173,11 @@ Estilo:             utilitária do Tailwind ou var(--token), via ponte do shadcn
 
 ## Antes de entregar
 
-1. Rode `lint_output.py` e `check_checklist.py` no que você gerou e corrija
-   todo `[ERRO]`. Cada `[AVISO]` pede uma decisão: corrija, ou escreva por
-   que ele passa.
-2. Passe pelos itens manuais de §25.
+1. Rode `check_checklist.py` no que você gerou e passe pelos itens manuais
+   de §25 que ele lista. Em TSX com Tailwind, é ele que cobre mais (§27.4).
+2. Rode `lint_output.py` como complemento: ele lê CSS e `style`, e só parte
+   das utilitárias. Corrija todo `[ERRO]`; cada `[AVISO]` pede uma decisão:
+   corrija, ou escreva por que ele passa.
 3. Se a tela copiou do protótipo o texto cinza `#7D7D7D`, o botão de 39px, o
    título preto à esquerda ou o rótulo só em placeholder, refaça a tela. Esses
    quatro reprovam acessibilidade ou fogem do padrão.

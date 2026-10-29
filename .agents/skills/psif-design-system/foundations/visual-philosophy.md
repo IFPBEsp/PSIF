@@ -21,7 +21,7 @@ Três planos, sempre nesta ordem:
 1. **Céu** (`--surface-base`): o chão. Nunca recebe texto longo direto,
    só título de tela, rótulo de campo e título de seção.
 2. **Cartão branco** (`--surface-raised`): onde mora o conteúdo. Raio
-   `--radius-md`, sem borda, sem sombra.
+   `--radius-xl` no celular e `--radius-2xl` no web, sem borda, sem sombra.
 3. **Marinho** (`--navy-700`): a ação. Botão primário, e nada mais de área
    grande.
 

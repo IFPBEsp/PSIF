@@ -10,11 +10,16 @@ busca e filtros. No web, tabela (§11.8). Ordem padrão: alfabética.
 
 ### 11.2 Lista de documentos
 
-Um cartão branco com uma linha por arquivo: nome em `--fs-body` peso 500
-`--navy-700` (com extensão: "Laudo médico.pdf"), embaixo tamanho e data em
-`--fs-caption` `--ink-700` ("12 MB · 10/08/2025"), chevron à direita.
-Botão "+ Adicionar documento" no rodapé. O arquivo só baixa ao abrir, nunca
-na lista.
+Documentos agrupados por período, cada grupo com título em `--fs-caption`
+600 `--navy-700` ("Este mês", "Anteriores") e um cartão branco
+(`--radius-xl`, `--sp-1` de respiro interno). Cada linha: altura mínima
+56px, `--radius-md`, hover `--ink-100`; à esquerda, quadro de ícone
+`--tile-icon` em `--sky-100` com `psif-termo` em `--navy-700`; nome em
+`--fs-body` 500 `--navy-700` com extensão ("Laudo médico.pdf"); embaixo,
+tamanho e data em `--fs-caption` `--ink-700` ("12 MB · 10/08/2025") e, se for
+o caso, o selo "Sigiloso" (§16.3); chevron à direita. Filtros por tipo acima
+da lista (§7.6). "+ Adicionar documento" na barra de ação (§8.1). O arquivo só
+baixa ao abrir.
 
 ### 11.3 Indicadores
 
@@ -22,9 +27,11 @@ Ver §9.2. Indicador sem dado mostra "0", nunca vazio.
 
 ### 11.4 Filtros
 
-Filtros de "Meus alunos": **Turma · Série · Período**. Cada filtro abre
-folha de seleção; com valor escolhido, mostra o valor ("3º ano") em fundo
-`--navy-700` e texto branco, com × para limpar.
+Filtros de "Meus alunos": **Turma · Série · Período**. Cada filtro é uma
+pílula (§7.6) que abre folha de seleção; com valor escolhido, fica no estilo
+ativo (fundo `--navy-700`, texto branco, peso 600), mostra o valor ("3º ano")
+e um × para limpar. Na lista de documentos o filtro é por tipo, de escolha
+direta: Todos · Laudos · Relatórios · Declarações.
 
 ### 11.5 Linha do tempo (Evolução do aluno)
 
@@ -91,14 +98,19 @@ URL, com nuqs: `?page=0&size=20&search=mar&sort=name,asc`. A busca espera a
 digitação parar (debounce) antes de consultar. Recarregar, voltar e
 compartilhar o link mantêm a lista como estava.
 
-**Visual** (classes `psif-tabela*` de `components.css`):
+**Visual** (`Table` do shadcn, classes em §6):
 
-- A tabela fica dentro de um cartão branco (§9.1), `--radius-md`, sem borda e
+- A tabela fica dentro de um cartão branco (§9.1), `--radius-2xl`, sem borda e
   sem sombra. Rolagem horizontal, se houver, é dentro do cartão, nunca na
   página.
-- Cabeçalho em `--fs-small` peso 600 `--ink-700`, linha `--ink-200` embaixo.
-- Linha com altura mínima `--target-min`, padding `--sp-3` `--sp-4`,
-  separador `--ink-200`, hover `--ink-100`.
+- Cabeçalho em `--fs-caption` peso 600 `--ink-700`.
+- Linha com altura mínima `--target-min`, padding `--sp-3` `--sp-4`, separada
+  por `--ink-100`, hover `--ink-100`.
+- A célula-chave leva o quadro de ícone (`--tile-icon`), o nome e, embaixo, o
+  tamanho e o selo ("Sigiloso", §16.3).
+- Coluna "Enviado por": iniciais num círculo `--ink-100` de 28px e o nome.
+- A coluna de ações não tem rótulo visível; o cabeçalho dela existe só para
+  leitor de tela.
 - A coluna-chave (nome do aluno, título do relatório) em `--navy-700` peso 500
   e é o link para o detalhe. Número alinhado à direita, com algarismos
   tabulares; data no formato de §19.3.
@@ -108,8 +120,8 @@ compartilhar o link mantêm a lista como estava.
 - Seleção com caixa só quando existe ação em lote.
 
 **Em volta da tabela.** Acima: busca (§7.7) e filtros (§11.4); a ação
-primária fica na barra superior (§7.3). Abaixo: paginação, com "1–20 de 134"
-em `--fs-small` `--ink-700`, botões "Anterior" e "Próxima" de `--target-min` e
+primária fica na barra superior (§7.3). Abaixo: o rodapé "Mostrando 4 de 4"
+em `--fs-caption` `--ink-700` e, quando há mais de uma página, a paginação, botões "Anterior" e "Próxima" de `--target-min` e
 seletor de itens por página.
 
 **Estados** (§10):

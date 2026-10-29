@@ -168,6 +168,22 @@ NON_TOKEN_GROUPS = {
 }
 
 # Onde `color` pinta ícone (via currentColor), e não texto.
+def eh_icone(texto, inicio, fim):
+    """A tag que leva este class/className é ícone? <svg>, componente que
+    termina em Icon/Icone (lucide, o `Icon` do projeto) ou elemento com
+    aria-hidden. `text-ink-600` pinta ícone (§18), não texto; sem isto o lint
+    reprovava a cor que a própria §6 manda usar no ícone de campo."""
+    abre = texto.rfind("<", 0, inicio)
+    fecha = texto.find(">", fim)
+    if abre == -1:
+        return False
+    tag = texto[abre:fecha + 1 if fecha != -1 else fim]
+    nome = re.match(r"<\s*([\w.]+)", tag)
+    nome = nome.group(1) if nome else ""
+    return (nome.lower() in SVG_TAGS or bool(re.search(r"(?:Icon|Icone)$", nome))
+            or bool(re.search(r"\baria-hidden\b", tag)))
+
+
 SVG_TAGS = {"svg", "path", "circle", "rect", "line", "polyline", "polygon",
             "ellipse", "g", "use"}
 ICON_CLASS_RE = re.compile(
@@ -749,11 +765,12 @@ class Linter:
         for m in CLASS_ATTR_RE.finditer(text):
             line = find_line(text, m.start())
             raw = next(g for g in m.groups() if g is not None)
+            icone = eh_icone(text, m.start(), m.end())
             for cls in raw.split():
                 base = cls.split(":")[-1].lstrip("!")
                 if UTILITY_HINT.match(base):
                     utility_count += 1
-                self.check_utility_class(base, line)
+                self.check_utility_class(base, line, icone)
 
         if utility_count >= 6:
             self.add(
@@ -766,7 +783,7 @@ class Linter:
                 f"CSS com var(--token).",
             )
 
-    def check_utility_class(self, cls, line):
+    def check_utility_class(self, cls, line, icone=False):
         color_m = UTILITY_COLOR_RE.match(cls)
         if color_m:
             prefix, family, step = color_m.groups()
@@ -779,7 +796,7 @@ class Linter:
                     f"na paleta desta skill. Famílias válidas: "
                     f"{', '.join(sorted(color_families(self.tokens)))}.",
                 )
-            elif prefix == "text" and token in self.banlist:
+            elif prefix == "text" and token in self.banlist and not (icone and token in self.icon_ok):
                 self.add(
                     "ERRO",
                     line,

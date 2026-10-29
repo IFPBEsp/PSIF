@@ -21,7 +21,8 @@ com clique. Folha modal prende o foco e fecha com Esc.
 
 ### 20.4 Ordem de foco (WCAG 2.4.3)
 
-Voltar (←) → título → conteúdo na ordem visual → botão primário do rodapé.
+Voltar (←) → título → conteúdo na ordem visual → botão primário. O botão de
+tela vem depois dos campos no DOM, nos dois formatos (§5.6).
 Nas telas-raiz, que não têm voltar: título (ou saudação) → ☰ → conteúdo. Com
 a gaveta aberta, o foco fica nela (§7.9). No web: "Pular para o conteúdo" (link que aparece ao receber foco)
 → barra lateral → conteúdo.
@@ -60,8 +61,7 @@ Voltar, menu e chevron: ícone pequeno, área de toque `--target-min`.
   quando o usuário digita.
 - Botão só com ícone (←, ☰, ›) tem `aria-label`: "Voltar", "Abrir menu",
   "Abrir perfil de Maria Ana".
-- Senha tem botão "Mostrar senha" com `aria-pressed` (exemplo em
-  `exemplos/login.html`).
+- Senha tem botão "Mostrar senha" com `aria-pressed`.
 
 ### 20.8 Leitores de tela
 
@@ -98,7 +98,8 @@ em pré-visualização; só dentro do perfil, depois de um toque deliberado
 ### 20.13 Zoom, reflow e redimensionamento (WCAG 1.4.4 / 1.4.10)
 
 Nada de altura fixa em cartão com texto: o cartão cresce. A 200% e a 320px de
-largura, a grade de indicadores vira coluna única e nada rola na horizontal.
+largura nada rola na horizontal. Os indicadores continuam em 2×2: cada célula
+fica com uns 136px, que comportam o número de 32px e o rótulo em duas linhas.
 
 ### 20.14 Tema escuro
 

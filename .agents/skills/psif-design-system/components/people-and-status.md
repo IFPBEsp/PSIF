@@ -2,9 +2,11 @@
 
 ### 12.1 Avatar
 
-Círculo (`--radius-pill`): `--avatar-md` (80px) no cartão de aluno,
-`--avatar-lg` (120px) no perfil, `.psif-avatar--pequeno` (`--target-min`)
-em lista do Início e da busca, `.psif-avatar--mini` (`--sp-8`) no cabeçalho.
+Círculo (`--radius-pill`): `--avatar-md` (80px) no cartão de aluno e no
+perfil do celular (à esquerda do nome, com anel branco de 4px),
+`--avatar-sm` (56px) no cabeçalho do aluno no web (§9.10), `--target-min` em
+lista do Início e da busca, `--sp-8` na barra lateral. `--avatar-lg` (120px)
+fica reservado.
 Foto real do aluno, recortada no rosto, em miniatura carregada sob demanda.
 
 - Sem foto: iniciais ("JA") em peso 600 `--navy-700` sobre `--sky-300`,
@@ -16,16 +18,19 @@ Foto real do aluno, recortada no rosto, em miniatura carregada sob demanda.
 
 ### 12.2 Situação do aluno
 
-Texto, não etiqueta colorida solta:
+No cabeçalho do perfil (celular e web) a situação é selo: pílula com fundo
+`-100`, texto `-700` peso 600 `--fs-caption`, e um ponto de 6px na cor `-700`
+antes do texto. O texto está sempre presente: a cor só repete o que ele diz
+(§20.2). Em lista e tabela continua texto simples.
 
-| Situação | Cor do texto | Onde pode aparecer |
+| Situação | Selo (cabeçalho) | Texto (lista e tabela) |
 |---|---|---|
-| Em acompanhamento | `--success-700` no perfil · `--navy-700` na lista | sempre sobre branco |
-| Acompanhamento pendente | `--warning-700` | sobre branco |
-| Acompanhamento encerrado | `--ink-700` | sobre branco |
+| Em acompanhamento | `--success-100` / `--success-700` | `--navy-700` |
+| Acompanhamento pendente | `--warning-100` / `--warning-700` | `--warning-700` |
+| Acompanhamento encerrado | `--ink-100` / `--ink-700` | `--ink-700` |
 
-A lista do protótipo usa marinho e o perfil usa verde para a mesma situação.
-Mantido assim: no perfil a situação é destaque; na lista, o nome é.
+Os três pares do selo passam AA nos dois temas (§3.2, §26.5). Texto de
+situação só sobre branco: `--success-700` reprova sobre o céu (§3.2).
 
 ### 12.3 Observações
 

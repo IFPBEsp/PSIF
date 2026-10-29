@@ -15,7 +15,7 @@ selo marinho. O marinho é ação e dado; área é céu e branco (§3.3).
 
 1. Existe em §7–§13? Use.
 2. Dá para montar com cartão + linha de lista + campo + botão? Monte.
-3. Só então crie, e acrescente ao catálogo (§6).
+3. Só então crie, e acrescente uma linha à tabela de §6.
 
 ### 22.4 Quando simplificar vs. adensar
 
@@ -46,12 +46,13 @@ carregando) a tela precisa.
 ```
 Gere a tela <nome> do PSIF usando a skill psif-design-system.
 Estrutura: <§13.x>. Ação primária: "<verbo + objeto>".
+Quem vê: <psicopedagoga | professor | aluno | responsável>.
 Dados: <campos>, com sigilo <nenhum | perfil | documento sensível>.
 Estados: cheio, vazio ("<frase>"), erro, carregando.
-Cole assets/tokens.css; nenhum valor fora de var(--token).
+Use os componentes de §6 e as utilitárias de §27.6; confira nos temas claro e escuro.
 ```
 
 ### 23.4 Como validar a saída de uma IA
 
-Rode `lint_output.py` e `check_checklist.py` no arquivo gerado; corrija todo
+Rode `check_checklist.py` (e `lint_output.py` como complemento) no que foi gerado; corrija todo
 `[ERRO]`; passe pelos itens manuais de §25.
