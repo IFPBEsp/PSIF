@@ -12,3 +12,12 @@ export const navigationItems: readonly NavigationItem[] = [
   { label: "Agenda", href: "/agenda", icon: CalendarDays },
   { label: "Usuários", href: "/usuarios", icon: Users },
 ];
+
+export const segmentLabels: ReadonlyMap<string, string> = new Map([
+  ["novo", "Novo"],
+  ["new", "Novo"],
+  ["editar", "Editar"],
+  ["edit", "Editar"],
+]);
+
+export const dynamicSegmentLabel = "Detalhes";
