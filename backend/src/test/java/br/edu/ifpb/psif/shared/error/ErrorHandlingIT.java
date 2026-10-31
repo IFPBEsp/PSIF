@@ -11,6 +11,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 
+import br.edu.ifpb.psif.TestcontainersConfiguration;
+
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -26,7 +28,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import(ErrorHandlingIT.FailingFilterConfiguration.class)
+@Import({TestcontainersConfiguration.class, ErrorHandlingIT.FailingFilterConfiguration.class})
 class ErrorHandlingIT {
 
     private static final String PROBLEM_JSON = "application/problem+json";
