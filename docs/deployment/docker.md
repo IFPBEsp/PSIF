@@ -33,7 +33,7 @@ docker-compose.dev.yml
 docker-compose.prod.yml
 ```
 
-A configuração vem de variáveis de ambiente. O `.env` fica fora do Git e guarda os valores reais; o `.env.example` serve de referência das variáveis necessárias para rodar o projeto. Os grupos de configuração cobrem aplicação, frontend, backend, PostgreSQL, MinIO, autenticação, domínios e integrações externas.
+A configuração vem de variáveis de ambiente. O `.env` fica fora do Git e guarda os valores reais; o `.env.example` serve de referência das variáveis necessárias para rodar o projeto. Para desenvolvimento, crie o `.env` local a partir do `.env.example` e preencha `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `MINIO_ROOT_USER` e `MINIO_ROOT_PASSWORD`. Os grupos de configuração cobrem aplicação, frontend, backend, PostgreSQL, MinIO, autenticação, domínios e integrações externas.
 
 Secrets e credenciais nunca vão para o repositório.
 
@@ -61,7 +61,7 @@ project
 
 ## 3. Rede e comunicação
 
-Os containers se comunicam pelos nomes dos serviços (`backend → postgres`, `backend → minio`, `caddy → frontend`, `caddy → backend`), compartilhando uma rede Docker interna. Dentro de um container `localhost` é o próprio container, então serviços diferentes não podem depender dele para se encontrar.
+Os quatro serviços de desenvolvimento compartilham a rede bridge dedicada `psif-dev`. Os containers se comunicam pelos nomes dos serviços (`frontend → backend`, `backend → postgres`), compartilhando uma rede Docker interna. Dentro de um container `localhost` é o próprio container, então serviços diferentes não podem depender dele para se encontrar. O frontend usa `API_INTERNAL_URL=http://backend:8080`, e o datasource do backend usa `postgres:5432`.
 
 Em produção, só o Caddy recebe tráfego direto da internet:
 
@@ -73,7 +73,7 @@ PostgreSQL, MinIO, backend e frontend não precisam de exposição pública quan
 
 ## 4. Persistência
 
-Containers são descartáveis e volumes são persistentes. Dados importantes ficam fora do filesystem efêmero dos containers, em volumes que sobrevivem à recriação: PostgreSQL, MinIO e Caddy.
+Containers são descartáveis e volumes são persistentes. Dados importantes ficam fora do filesystem efêmero dos containers, em volumes que sobrevivem à recriação: PostgreSQL, MinIO e Caddy. No desenvolvimento, `postgres-data` persiste os dados em `/var/lib/postgresql/data` e `minio-data` persiste os objetos em `/data`. `docker compose down` remove containers e rede, mas preserva esses volumes; não use `down -v` se quiser manter dados locais.
 
 O PostgreSQL usa armazenamento persistente e é acessado pelo backend através da rede Docker, sem exposição pública em produção a menos que haja necessidade específica. A evolução do schema é controlada pela aplicação, através da solução de migrations adotada pelo projeto.
 
@@ -108,13 +108,33 @@ A aplicação não depende de alteração manual no schema para iniciar corretam
 
 ## 7. Desenvolvimento
 
-O ambiente de dev roda com `docker-compose.dev.yml` e as variáveis do `.env`:
+Pré-requisitos: Docker Engine com Docker Compose v2 e um `.env` local preenchido a partir do `.env.example`. O ambiente de dev roda com `docker-compose.dev.yml` e as variáveis do `.env`:
 
 ```bash
 docker compose --env-file .env -f docker-compose.dev.yml up -d --build
 ```
 
 Aqui portas adicionais podem ser expostas quando isso facilitar testes e depuração.
+
+| Serviço | Acesso no host |
+| --- | --- |
+| Frontend | `http://localhost:3000` |
+| Backend e OpenAPI | `http://localhost:8080` e `http://localhost:8080/v3/api-docs` |
+| PostgreSQL | `localhost:5432` |
+| MinIO API | `http://localhost:9000` |
+| MinIO console | `http://localhost:9001` |
+
+Os diretórios locais `backend` e `frontend` são bind mounts para refletir alterações de código. Volumes anônimos protegem `backend/target`, `frontend/node_modules` e `frontend/.next` dos mounts locais.
+
+```bash
+# parar sem remover volumes persistentes
+docker compose --env-file .env -f docker-compose.dev.yml down
+
+# reiniciar os serviços
+docker compose --env-file .env -f docker-compose.dev.yml restart
+```
+
+O Compose de desenvolvimento não declara healthchecks. `depends_on` apenas ordena a inicialização do backend após o PostgreSQL, sem garantir que o banco esteja pronto para conexões. O MinIO é iniciado e persistido, mas ainda não há integração dele no backend.
 
 ## 8. Produção
 
@@ -180,6 +200,8 @@ Secrets e `.env` fora do Git, HTTPS em produção, banco não exposto publicamen
 | Dados           | desenvolvimento          | reais                      |
 | Debug           | permitido                | controlado                 |
 | Secrets         | locais                   | fortes e exclusivos        |
+| Healthchecks    | não declarados           | previstos quando aplicável |
+| MinIO no backend | não integrado           | conforme implementação     |
 
 ## 12. Resumo
 
