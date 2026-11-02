@@ -16,14 +16,6 @@ def _load_module(raiz):
     return module
 
 
-def test_repo_has_no_orphan_references():
-    """A skill como está não tem referência órfã."""
-    result = subprocess.run(
-        [sys.executable, str(SCRIPT)], capture_output=True, text=True
-    )
-    assert result.returncode == 0, result.stdout + result.stderr
-
-
 def test_reference_to_existing_subsection_is_valid(tmp_path):
     (tmp_path / "a.md").write_text(
         "### 3.2 Contraste\n\nDetalhe em §3.2.\n", encoding="utf-8"

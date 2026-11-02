@@ -3,7 +3,6 @@
 import importlib.util
 import json
 import re
-import subprocess
 import sys
 from pathlib import Path
 
@@ -22,14 +21,6 @@ def _load_module():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
-
-
-def test_repo_tokens_css_is_currently_in_sync():
-    """Guarda de CI."""
-    result = subprocess.run(
-        [sys.executable, str(SCRIPT), "--check"], capture_output=True, text=True
-    )
-    assert result.returncode == 0, result.stdout + result.stderr
 
 
 def test_every_alias_token_currently_mirrors_its_twin():

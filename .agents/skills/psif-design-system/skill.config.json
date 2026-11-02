@@ -40,7 +40,6 @@
       "scripts/check_all.py",
       "scripts/check_refs.py",
       "scripts/tests/_fixtures.py",
-      "scripts/tests/test_breakpoints.py",
       "scripts/tests/test_check_checklist.py",
       "scripts/tests/test_check_consumer.py",
       "scripts/tests/test_check_contrast.py",
@@ -51,8 +50,8 @@
       "scripts/tests/test_doc_counts.py",
       "scripts/tests/test_gen_design_md.py",
       "scripts/tests/test_gen_tokens_css.py",
-      "scripts/tests/test_line_heights.py",
-      "scripts/tests/test_lint_output.py"
+      "scripts/tests/test_lint_output.py",
+      "scripts/tests/test_tailwind_theme.py"
     ]
   }
 }

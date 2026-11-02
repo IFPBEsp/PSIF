@@ -12,7 +12,7 @@ description: >
   tema escuro ou texto de interface para esse produto; e ao ligar os tokens ao
   Tailwind e ao shadcn no frontend do PSIF.
 metadata:
-  version: "0.18.7"
+  version: "0.18.8"
   last-updated: "2026-11"
 ---
 

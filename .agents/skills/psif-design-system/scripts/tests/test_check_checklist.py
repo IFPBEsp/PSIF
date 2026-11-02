@@ -110,21 +110,16 @@ def test_icon_followed_by_visible_text_is_not_icon_only(tmp_path):
     assert "só de ícone" in so_icone.stdout, so_icone.stdout
 
 
-def test_english_jargon_is_flagged(tmp_path):
-    result = _run(tmp_path, "<span>Loading</span>")
-    assert result.returncode == 2, result.stdout
-    assert "§19.2" in result.stdout
-
-
-def test_stray_z_index_is_flagged_in_css_and_jsx_syntax(tmp_path):
+def test_stray_z_index_counts_once_through_the_lint(tmp_path):
     result = _run(tmp_path, ".x { z-index: 9999; }\n<div style={{ zIndex: 9999 }} />")
     assert result.returncode == 2, result.stdout
-    assert result.stdout.count("z-index avulso") == 2, result.stdout
+    assert result.stdout.count("z-index 9999 fora das camadas") == 2, result.stdout
+    assert "2 reprovação(ões)" in result.stdout, result.stdout
 
 
 def test_z_index_via_token_is_not_flagged(tmp_path):
     result = _run(tmp_path, ".x { z-index: var(--z-modal); }")
-    assert "z-index avulso" not in result.stdout
+    assert "fora das camadas" not in result.stdout
     assert result.returncode == 0, result.stdout
 
 

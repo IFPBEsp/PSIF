@@ -56,8 +56,6 @@ REGRAS = [
     ("17.4", "propriedade de layout animada", "opacity, transform ou cor",
      r"transition\s*:\s*['\\\"]?[^;'\\\"]*\b(width|height|top|left|margin|padding)\b",
      None, "AVISO"),
-    ("3.10", "z-index avulso", "var(--z-*)",
-     r"(z-index|zIndex)\s*:\s*['\\\"]?(?!var\()\d{4,}", None, "ERRO"),
 ]
 
 COMENTARIO = re.compile(r"/\*.*?\*/|^\s*//.*$|\{/\*.*?\*/\}", re.S | re.M)
