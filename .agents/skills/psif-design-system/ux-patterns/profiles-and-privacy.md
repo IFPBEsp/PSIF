@@ -53,9 +53,9 @@ psicológico): dado sensível na LGPD.
 - Laudo, relatório psicológico e diagnóstico são da psicopedagoga. Outro
   perfil só os vê se o backend liberar aquele documento para ele.
 - Documento sigiloso (laudo, relatório psicológico, diagnóstico) leva o selo
-  "Sigiloso" (`psif-cadeado` e texto, `--warning-100` / `--warning-700`) na
-  lista e na tabela. O resumo da seção Documentos mostra a contagem ("2
-  sigilosos"), nunca os nomes.
+  "Sigiloso" na lista e na tabela: `--warning-100` / `--warning-700`, com
+  `psif-cadeado` em `--ic-sm` no lugar do ponto, antes do texto. O resumo da
+  seção Documentos mostra a contagem ("2 sigilosos"), nunca os nomes.
 - O selo só informa; quem pode abrir continua sendo decidido pelo backend.
 
 ### 16.4 Professor

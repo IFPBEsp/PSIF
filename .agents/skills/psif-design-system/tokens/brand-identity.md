@@ -8,8 +8,8 @@ psicopedagoga, pelos professores, pelos alunos atendidos e pelos responsáveis
 
 O símbolo é o cérebro com cruz, branco, sobre quadrado `--blue-300` de cantos
 arredondados. Aparece no topo da barra lateral (§7.10, em `--ic-xl`), no
-cartão de login (§9.8), no cabeçalho da página pública (em branco sobre
-quadrado `--navy-700`) e como favicon.
+cartão de login (§9.8, em `--tile-icon-lg`), no cabeçalho da página pública
+(em branco sobre quadrado `--navy-700`) e como favicon.
 
 - `assets/simbolo-psif.svg`: o símbolo completo, para colar inline.
 - `assets/simbolo-psif-glifo.svg`: só o glifo, em `currentColor`: branco

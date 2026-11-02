@@ -4,19 +4,19 @@
 
 Círculo (`--radius-pill`):
 
-| Token | Onde |
-|---|---|
-| `--avatar-md` | cartão de aluno, cabeçalho do perfil na tela estreita (com anel branco de 4px) |
-| `--avatar-sm` | cabeçalho do aluno na tela larga (§9.9) |
-| `--target-min` | lista do Início e resultados da busca |
-| `--sp-8` | barra lateral |
-| `--avatar-lg` | reservado |
+| Token | Onde | Iniciais |
+|---|---|---|
+| `--avatar-lg` | reservado | `--fs-display` |
+| `--avatar-md` | cartão de aluno, cabeçalho do perfil na tela estreita (com anel branco de 4px) | `--fs-h2` |
+| `--avatar-sm` | cabeçalho do aluno na tela larga (§9.9) | `--fs-h2` |
+| `--target-min` | lista do Início e resultados da busca | `--fs-small` |
+| `--sp-8` | barra lateral e "Enviado por" (§11.8) | `--fs-caption` |
 
 Foto real do aluno, recortada no rosto, em miniatura carregada sob demanda.
 
-- Sem foto: iniciais ("JA") em peso 600 `--navy-700` sobre `--sky-300`,
-  `--fs-h2` no `--avatar-md`, `--fs-display` no `--avatar-lg`. Nunca círculo
-  vazio: parece erro de carregamento.
+- Sem foto: iniciais ("JA") em peso 600 `--navy-700` sobre `--sky-300`, no
+  tamanho da coluna Iniciais. Nunca círculo vazio: parece erro de
+  carregamento.
 - Nunca foto de banco de imagem.
 - `alt` com o nome do aluno.
 

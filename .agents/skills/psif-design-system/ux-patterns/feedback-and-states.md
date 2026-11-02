@@ -2,10 +2,10 @@
 
 ### 10.1 Alertas fixos
 
-Cartão no topo do conteúdo, fundo `--warning-100` (atenção) ou `--danger-100`
-(erro), texto `--fs-small` na cor `-700` da família, ícone à esquerda e ação
-em link à direita ("Ver alunos"). "Alertas importantes" do Início leva à
-lista deles.
+Cartão no topo do conteúdo, com o raio de cartão de §3.6, fundo
+`--warning-100` (atenção) ou `--danger-100` (erro), texto `--fs-small` na cor
+`-700` da família, ícone à esquerda e ação em link à direita ("Ver alunos").
+"Alertas importantes" do Início leva à lista deles.
 
 ### 10.2 Toast
 

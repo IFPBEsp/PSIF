@@ -53,12 +53,12 @@ entre rótulo e campo `--sp-2`.
 
 | Token | Uso |
 |---|---|
-| `--ic-sm` | voltar, chevron |
+| `--ic-sm` | voltar, chevron, cadeado do selo "Sigiloso" |
 | `--ic-md` | ícone em linha e em campo |
 | `--ic-lg` | ícone de atalho e da barra lateral |
 | `--ic-xl` | símbolo na barra lateral |
 | `--tile-icon` | quadro de ícone em lista e tabela |
-| `--tile-icon-lg` | quadro de ícone em cartão de destaque e na área de envio |
+| `--tile-icon-lg` | quadro de ícone em cartão de destaque e na área de envio; símbolo no cartão de login |
 
 Quadro de ícone: `--radius-md`, fundo `--sky-100`, ícone `--ic-md` em
 `--navy-700`.

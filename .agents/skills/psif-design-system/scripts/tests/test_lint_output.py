@@ -397,10 +397,12 @@ def test_max_width_outside_tokens_is_flagged(tmp_path):
            '<div className="max-w-7xl">c</div>\n'
            '<div className="max-w-[900px]">d</div>\n'
            '<div className="max-w-(--qualquer)">e</div>\n'
+           '<p className="max-w-prose">f</p>\n'
            '<style>.x { max-width: 960px; } .y { max-width: var(--w-form); }</style>\n')
     result = _run_as(tmp_path, tsx, "a.tsx")
     out = result.stdout
-    assert out.count("fora dos tokens de largura") == 3, out
+    assert out.count("fora dos tokens de largura") == 4, out
+    assert "'max-w-prose'" in out, out
     assert "max-width: 960px fora dos tokens" in out, out
     assert "max-w-(--w-content)'" not in out and "max-w-[70ch]'" not in out
 

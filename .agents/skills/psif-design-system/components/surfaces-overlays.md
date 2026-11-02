@@ -61,8 +61,10 @@ Círculo `--navy-700` de `--control-min` com ícone `--white`, título em
 
 ### 9.8 Cartão de autenticação
 
-Cartão central até `--w-auth`, `--radius-lg`, `--sh-sm`: símbolo e "PSIF",
-nome por extenso, campos e botão primário. Login e Recuperar senha.
+Cartão central até `--w-auth`, `--radius-lg`, `--sh-sm`: símbolo em
+`--tile-icon-lg`, "PSIF" em `--fs-display` 600 `--navy-700`, nome por extenso
+em `--fs-small` `--ink-700`, campos e botão primário. Login e Recuperar
+senha.
 
 ### 9.9 Cabeçalho do aluno (tela larga)
 

@@ -86,8 +86,7 @@ estreita; muda a apresentação.
   `--ink-100`.
 - **Célula-chave**: quadro de ícone, nome em `--navy-700` 500 como link para
   o detalhe e, embaixo, tamanho e selo.
-- **"Enviado por"**: avatar sem foto de §12.1 (iniciais sobre `--sky-300`),
-  no tamanho `--sp-8` da barra lateral, e o nome.
+- **"Enviado por"**: avatar `--sp-8` de §12.1 e o nome.
 - **Ações**: botão ⋯ com `aria-label` ("Ações de José Antonio"), menu com
   mouse ou folha no toque (§8.2); a coluna não tem rótulo visível.
   Destrutiva pede confirmação (§10.3).

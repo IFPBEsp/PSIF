@@ -640,7 +640,8 @@ class Linter:
         nome = token and (token.group(1) or token.group(2))
         if nome and (nome in medidas or nome.startswith(("sidebar-width", "radix-"))):
             return
-        if valor in ("none", "full", "fit", "min", "max", "prose", "[70ch]"):
+        # max-w-prose é 65ch; a regra de texto corrido é 70ch.
+        if valor in ("none", "full", "fit", "min", "max", "[70ch]"):
             return
         self.add("AVISO", line, f"'{cls}' fora dos tokens de largura",
                  "max-w-(--w-content), max-w-(--w-form), max-w-(--w-auth) ou max-w-[70ch]", "5.2")

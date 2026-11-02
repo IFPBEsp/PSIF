@@ -162,5 +162,7 @@ A partir de `--bp-md`.
   leva a Meus alunos com a busca aplicada; Esc limpa. Sem resultado: §10.6.
   Só nome e turma, só alunos que o perfil pode ver (§16.2, §16.3).
 - **Topo do conteúdo:** breadcrumbs à esquerda; à direita, Notificações em
-  pílula `--surface-raised`, alvo `--target-min`, com `aria-label` que diz
-  as não lidas ("Notificações, 2 não lidas").
+  pílula `--surface-raised`, alvo `--target-min`: sino `--ic-md` e o texto
+  "2 não lidas" em `--fs-small` 500 `--navy-700`, e `aria-label`
+  "Notificações, 2 não lidas", que contém o texto visível. Sem não lida, só
+  o sino, com `aria-label` "Notificações".

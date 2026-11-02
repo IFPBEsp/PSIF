@@ -42,7 +42,7 @@ de §5.12.
 | Navegação | `Sidebar collapsible="icon"`, `SidebarTrigger` no topo da barra, `SidebarMenuButton` | item `rounded-lg`; ativo (`isActive`) `bg-sky-100 text-primary font-semibold`; inativo `text-ink-700`; pé com cartão `bg-ink-100 rounded-xl` (iniciais, nome, papel, Sair); recolhida por padrão até `lg:`; na tela estreita o `Sidebar` vira gaveta sozinho | §7.1, §7.9, §7.10, §7.12 |
 | Breadcrumbs | `Breadcrumb` | `hidden md:flex text-small`, no topo do conteúdo; item atual sem link, com `aria-current="page"` | §7.11 |
 | Busca global (tela larga) | `Command` na barra lateral sob a marca; resultados em `Popover` com mouse e na folha de §9.6 no toque | campo `bg-ink-100 border-0 rounded-lg`; resultados `shadow-flutuante` | §7.13 |
-| Topo do conteúdo (tela larga) | breadcrumbs e `Button` de Notificações | Notificações `rounded-full bg-card min-h-(--target-min)`, `aria-label` com as não lidas | §7.13 |
+| Topo do conteúdo (tela larga) | breadcrumbs e `Button` de Notificações | Notificações `rounded-full bg-card min-h-(--target-min) px-4 text-small font-medium text-primary`: sino e "2 não lidas"; sem não lida, só o sino | §7.13 |
 | Botão primário | `Button` (variante padrão) | `w-full min-h-(--control-min) text-h2 font-semibold rounded-lg shadow-acao transition-colors duration-(--dur-fast)`; botão de tela a partir de `md:` com `md:w-auto md:min-h-(--target-min) md:text-small` (§5.6) | §8.1, §5.6 |
 | Botão secundário | `Button variant="outline"` | `rounded-lg border-primary bg-card text-primary` | §8.1 |
 | Ação destrutiva em texto ("Descartar") | `Button variant="ghost"` | `text-destructive` | §10.3 |
@@ -53,7 +53,7 @@ de §5.12.
 | Data | `Calendar` em `Popover` com mouse, na folha de §9.6 no toque | dia `aspect-square w-full max-w-(--target-min) min-w-6 rounded-full`; hoje `ring-1 ring-primary`; selecionado `bg-primary text-primary-foreground` | §8.6, §11.6 |
 | Caixa de seleção | `Checkbox` com `Label` | `size-4 rounded-xs border-ink-600 data-[state=checked]:bg-primary`; a linha toda `min-h-(--target-min)` | §8.7 |
 | Filtro em pílula | escolha direta: `ToggleGroup type="single"` com `ToggleGroupItem`; filtro com valor: `Button` que abre a seleção de §8.4, com o `aria-haspopup` de lá | `rounded-full min-h-(--target-min) px-4 text-small font-medium text-primary border border-(--line-on-sky) bg-transparent`; ativo `bg-primary text-primary-foreground font-semibold` (`data-[state=on]:` no `ToggleGroupItem`); na tela estreita a linha rola na horizontal (`overflow-x-auto`) | §7.6, §11.4 |
-| Selo | `Badge` | `rounded-full bg-<família>-100 text-<família>-700 font-semibold text-caption`, ponto `size-2 rounded-full bg-<família>-700` antes do texto; sempre com texto | §12.2, §16.3 |
+| Selo | `Badge` | `rounded-full bg-<família>-100 text-<família>-700 font-semibold text-caption`, ponto `size-2 rounded-full bg-<família>-700` antes do texto ("Sigiloso" troca o ponto por `psif-cadeado` em `size-(--ic-sm)`); sempre com texto | §12.2, §16.3 |
 | Abas do aluno (tela larga) | `Tabs`, com cada gatilho como link | ativa `text-primary font-semibold` com sublinhado de 3px `border-b-3 border-primary`; contador `rounded-full bg-sky-100`; inativa `text-ink-700 font-medium`; alvo `min-h-(--target-min)` | §7.5 |
 | Área de envio | componente próprio: `<button>` que abre o seletor e aceita arrastar; sem equivalente no shadcn | `rounded-2xl border-2 border-dashed border-(--line-on-sky) bg-card hover:bg-ink-100`; quadro `size-(--tile-icon-lg) rounded-md bg-sky-100` | §8.5 |
 | Cartão | `Card` | `rounded-xl md:rounded-2xl border-0 shadow-none p-4 bg-card`; título `text-body font-semibold text-primary` | §9.1 |
@@ -61,13 +61,13 @@ de §5.12.
 | Linha de lista | `<ul>` com `<li>` | linha clicável `rounded-md hover:bg-ink-100 p-(--list-row-pad)` com quadro de ícone à esquerda e chevron `size-(--ic-sm) text-ink-600` à direita; cartão com `p-1` de respiro | §9.3, §11.2 |
 | Indicadores | `Card` com grade | `grid grid-cols-2 md:grid-cols-4`; número `text-display font-semibold text-primary` | §9.2 |
 | Ações rápidas | `Link` com ícone | quadrado `size-12 rounded-md bg-sky-300 text-primary`; rótulo `text-caption text-ink-700` | §7.8 |
-| Avatar | `Avatar` com `AvatarFallback` | `size-(--avatar-md)` no cartão e no perfil em tela estreita (anel de 4px, `ring-4 ring-card`), `size-(--avatar-sm)` no cabeçalho do aluno em tela larga, `size-(--target-min)` em lista, `size-8` na barra lateral; iniciais `bg-sky-300 text-primary font-semibold` | §12.1 |
+| Avatar | `Avatar` com `AvatarFallback` | `size-(--avatar-md)` no cartão e no perfil em tela estreita (anel de 4px, `ring-4 ring-card`), `size-(--avatar-sm)` no cabeçalho do aluno em tela larga, `size-(--target-min)` em lista, `size-(--sp-8)` na barra lateral e em "Enviado por"; iniciais `bg-sky-300 text-primary font-semibold`, no tamanho de §12.1 | §12.1 |
 | Situação do aluno | no cabeçalho do perfil, `Badge` (selo); em lista e tabela, texto | selo: ver linha Selo; texto: `text-primary`, pendente `text-warning-700`, encerrado `text-ink-700` | §12.2 |
 | Tabela (a partir de `md:`) | `Table` do shadcn com TanStack Table (`DataTable` em `shared`) | dentro de `Card`; cabeçalho `text-caption font-semibold text-ink-700`; célula-chave com quadro de ícone, nome e, embaixo, tamanho e selo; linha `h-(--target-min) hover:bg-ink-100`, separada por `border-ink-200`; colunas secundárias `hidden lg:table-cell`; ações sem rótulo visível (`sr-only`), com `mouse:size-(--target-fine)`; número `text-right tabular-nums` | §11.8 |
 | Folha e diálogo | tela estreita: `Drawer`, que sobe da base e fecha arrastando; a partir de `md:`: `Dialog` centralizado | `Drawer` com `rounded-t-lg`; `Dialog` com `rounded-lg max-w-(--w-form)`; os dois com `shadow-flutuante`; ações em coluna, primário primeiro | §9.6, §10.3 |
 | Menu de opções | mouse: `DropdownMenu`; toque: a folha de §9.6 (`Drawer` ou `Dialog`) | itens `min-h-(--target-min)`, com mouse `mouse:min-h-(--target-fine)`, `rounded-md` | §8.2, §5.12 |
 | Toast | `Toaster` do Sonner, com as cores da ponte | ícone na cor do tipo | §10.2 |
-| Alerta fixo | `Alert` | `bg-warning-100 text-warning-700` ou `bg-danger-100 text-danger-700` | §10.1, §20.2 |
+| Alerta fixo | `Alert` | `rounded-xl md:rounded-2xl`, raio de cartão; `bg-warning-100 text-warning-700` ou `bg-danger-100 text-danger-700` | §10.1, §20.2 |
 | Carregando | `Skeleton` | `bg-ink-200 rounded-md`, no formato do componente; na lista, quadro `size-(--tile-icon)` | §10.5 |
 | Notificação | lista dentro de `Card` | ponto `size-2 rounded-full bg-primary` (não lida) ou `bg-warning-700` (pendente) | §9.5 |
 | Linha do tempo | lista ordenada da feature | marcador `size-4 rounded-full` na cor do tipo; linha `border-l border-ink-200` | §11.5 |

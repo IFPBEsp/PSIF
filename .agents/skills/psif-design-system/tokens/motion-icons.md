@@ -55,9 +55,9 @@ do papel do ícone:
 | destino inativo da navegação | `--ink-700`, igual ao rótulo |
 | indicação sem ação própria: chevron ›, ⌄ da seleção, ícone à esquerda do campo | `--ink-600`: passa 3:1 como ícone, nunca como texto |
 
-Tamanhos: `--ic-sm` para ← e ›; `--ic-md` para ícone de campo, ⌄ e alerta;
-`--ic-lg` para navegação, ☰ e atalhos. Botão só de ícone tem alvo
-`--target-min` (§5.12).
+Tamanhos: `--ic-sm` para ←, › e o cadeado do selo; `--ic-md` para ícone de
+campo, ⌄ e alerta; `--ic-lg` para navegação, ☰ e atalhos. Nenhum ícone fica
+abaixo de `--ic-sm`. Botão só de ícone tem alvo `--target-min` (§20.6).
 
 A cor vai no próprio ícone (`currentColor` no `<svg>` ou a classe do ícone),
 nunca num contêiner que também tem texto (§3.2). O `lint_output.py` cobra
