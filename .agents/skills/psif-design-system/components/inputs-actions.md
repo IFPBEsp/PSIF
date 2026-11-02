@@ -35,17 +35,17 @@ Rótulo acima do campo, `--fs-h3` `--ink-900`. Campo: fundo `--white`, borda
 
 ### 8.4 Seleção
 
-"Aluno" e "Tipo de atendimento" abrem a lista como o menu de §8.2. Busca no topo da lista quando ela passa de sete itens (Aluno sempre).
-Chevron (⌄) `--ic-md` à direita. Aluno vem sempre da lista, nunca digitado.
-Tipo de atendimento: Individual, Em grupo, Com a família, Reunião com
-professor.
+"Aluno" e "Tipo de atendimento" abrem a lista como o menu de §8.2. Busca no
+topo da lista quando ela passa de sete itens (Aluno sempre). Chevron (⌄)
+`--ic-md` à direita. Aluno vem sempre da lista, nunca digitado. Tipo de
+atendimento: Individual, Em grupo, Com a família, Reunião com professor.
 
 Marcação: `<label>` visível e gatilho com `aria-labelledby` no rótulo e no
 valor ("Aluno, Anitta Peniwyse"). O gatilho anuncia o que abre:
 `aria-haspopup="listbox"` no menu com mouse (`Select`, ou `Command` num
-`Popover` quando há busca) e `aria-haspopup="dialog"` na folha do toque. Sem valor,
-"Selecione" no estilo de placeholder. Escolher fecha a lista e devolve o foco
-ao botão.
+`Popover` quando há busca) e `aria-haspopup="dialog"` na folha do toque. Sem
+valor, "Selecione" no estilo de placeholder. Escolher fecha a lista e devolve
+o foco ao botão.
 
 ### 8.5 Envio de arquivo
 

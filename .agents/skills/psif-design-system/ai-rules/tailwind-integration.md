@@ -51,10 +51,12 @@ shadcn não conhece o raio por papel de §3.6; ajuste a variante de `Card`,
 
 `lint_output.py` lê CSS, `style` e as classes, inclusive dentro de `cn()` e
 `cva()`. Em classe utilitária confere cor (família, palavra-chave, `dark:`,
-`--dark-*`, azul da marca), z-index, foco, alvo, altura fixa, `max-w` e valor
-entre colchetes, com as regras do CSS; o papel de cada cor e o degrau de
-espaçamento e raio ficam com a revisão. Em projeto Tailwind,
-`check_checklist.py` e a revisão manual de §24 são o instrumento principal.
+`--dark-*`, azul da marca), a sombra preta do Tailwind (`shadow-sm` …
+`shadow-2xl`), raio fora da escala (`rounded-3xl`), z-index, foco, alvo,
+altura fixa a partir de 100px, `max-w` e valor entre colchetes, com as regras
+do CSS; o papel de cada cor e o degrau de espaçamento ficam com a revisão. Em
+projeto Tailwind, `check_checklist.py` e a revisão manual de §24 são o
+instrumento principal.
 
 ### 26.5 Duas cópias dos tokens: como acusar divergência
 

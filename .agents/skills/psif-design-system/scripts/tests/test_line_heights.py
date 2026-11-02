@@ -9,7 +9,7 @@ TOKENS = json.loads((RAIZ / "scripts" / "tokens.json").read_text(encoding="utf-8
 TAILWIND = RAIZ / "ai-rules" / "tailwind-integration.md"
 
 
-def test_section_27_8_line_heights_match_tokens_json():
+def test_section_26_8_line_heights_match_tokens_json():
     mapa = TOKENS["typography"]["line_height_by_size"]
     texto = TAILWIND.read_text(encoding="utf-8")
     declarados = set(re.findall(r"--text-([\w-]+):\s*var\(--fs-[\w-]+\)", texto))

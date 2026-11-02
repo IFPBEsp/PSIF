@@ -1,4 +1,4 @@
-"""Regression tests para check_contrast.py."""
+"""Testes de check_contrast.py."""
 
 import json
 import subprocess

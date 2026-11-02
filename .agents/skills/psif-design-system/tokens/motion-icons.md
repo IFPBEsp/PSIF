@@ -9,16 +9,19 @@ uma ação, nunca decora.
 fechar folha, diálogo, gaveta e item expansível (§3.9). Entrada com
 `--ease-out`; o resto com `--ease-standard`.
 
+Dois tempos não animam e são lidos no código: `--dur-debounce`, a espera da
+busca depois da última tecla (§7.7), e `--dur-toast`, quanto o toast de
+sucesso fica na tela (§10.2). No cliente,
+`parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--dur-toast"))`
+dá os milissegundos, para o `duration` do Sonner ou o `setTimeout`.
+
 ### 17.2 Estados por gatilho
 
-- Botão primário: hover `--navy-800`, pressionado `--navy-900`.
-- Linha de lista com chevron: fundo `--ink-100` ao pressionar.
-- Atalho de Ações rápidas: pressionado, o fundo vai de `--sky-300` para
-  `--sky-100`; foco com o anel padrão (§20.5).
-- Hover, só com mouse (§5.12): linha de lista, indicador, cartão clicável e
-  item da barra lateral ganham `--ink-100`, a mesma cor do pressionado
-  dessas peças; atalho, `--sky-100`. Botão tem hover e pressionado próprios
-  (acima). Nada aparece ou some só no hover.
+Hover e pressionado de botão, campo, linha, indicador, cartão clicável e
+item da barra lateral estão na tabela de estados de §6. Fora dela, o atalho
+de Ações rápidas: pressionado e com hover, o fundo vai de `--sky-300` para
+`--sky-100`; foco com o anel padrão (§20.5). Hover só com mouse (§5.12), e
+nada aparece ou some só no hover.
 
 ### 17.3 Transições de layout
 
@@ -73,9 +76,8 @@ em pré-visualização, captura e `file://`; `display: none` no sprite faz
 alguns navegadores deixarem de desenhar o `<use>`.
 
 No projeto, o sprite vira o componente `Icon` em `src/shared/components`
-(`name` e `size`), que desenha
-`<svg aria-hidden="true"><use href="#psif-…" /></svg>`. Use `lucide-react`
-só para o que o sprite não tem, no mesmo traço.
+(`name` e `size`), que desenha `<svg aria-hidden="true"><use href="#psif-…"
+/></svg>`. Use `lucide-react` só para o que o sprite não tem, no mesmo traço.
 
 | Nome | Onde | Material Symbols |
 |---|---|---|

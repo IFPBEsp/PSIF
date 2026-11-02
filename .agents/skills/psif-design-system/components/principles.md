@@ -48,7 +48,7 @@ de §5.12.
 | Ação destrutiva em texto ("Descartar") | `Button variant="ghost"` | `text-destructive` | §10.3 |
 | Link | `Button variant="link"` ou `Link` do Next | `text-primary underline` | §8.1 |
 | Campo | `Label` e `Input` ou `Textarea` | `min-h-(--control-min) text-h3 font-medium text-primary rounded-lg border-input`, sobre o céu ou sobre cartão; no `Textarea`, `leading-normal` (texto longo, §8.3); erro com `aria-invalid` e mensagem `text-small text-destructive` embaixo | §8.3 |
-| Campo com ícone (busca, e-mail, senha) | `Input` num contêiner com o ícone à esquerda; "Mostrar senha" é `Button variant="ghost" size="icon"` com `aria-pressed` | ícone `size-5 text-ink-600` | §8.3, §20.7 |
+| Campo com ícone (busca, e-mail, senha) | `Input` num contêiner com o ícone à esquerda; "Mostrar senha" é `Button variant="ghost" size="icon"` com `aria-pressed` | ícone `size-(--ic-md) text-ink-600` | §8.3, §20.7 |
 | Seleção (aluno, tipo) | `Select`; `Popover` com `Command` quando a lista tem busca | mesmo visual do campo; a lista abre como em §8.2 | §8.4 |
 | Data | `Calendar` em `Popover` com mouse, na folha de §9.6 no toque | dia `aspect-square w-full max-w-(--target-min) min-w-6 rounded-full`; hoje `ring-1 ring-primary`; selecionado `bg-primary text-primary-foreground` | §8.6, §11.6 |
 | Caixa de seleção | `Checkbox` com `Label` | `size-4 rounded-xs border-ink-600 data-[state=checked]:bg-primary`; a linha toda `min-h-(--target-min)` | §8.7 |
@@ -58,11 +58,11 @@ de §5.12.
 | Área de envio | componente próprio: `<button>` que abre o seletor e aceita arrastar; sem equivalente no shadcn | `rounded-2xl border-2 border-dashed border-(--line-on-sky) bg-card hover:bg-ink-100`; quadro `size-(--tile-icon-lg) rounded-md bg-sky-100` | §8.5 |
 | Cartão | `Card` | `rounded-xl md:rounded-2xl border-0 shadow-none p-4 bg-card`; título `text-body font-semibold text-primary` | §9.1 |
 | Quadro de ícone | `<span>` com o `Icon` | `size-(--tile-icon) rounded-md bg-sky-100 text-primary` (lista e tabela) ou `size-(--tile-icon-lg)` (destaque) | §3.8 |
-| Linha de lista | `<ul>` com `<li>` | linha clicável `rounded-md hover:bg-ink-100 p-(--list-row-pad)` com quadro de ícone à esquerda e chevron `size-4 text-ink-600` à direita; cartão com `p-1` de respiro | §9.3, §11.2 |
+| Linha de lista | `<ul>` com `<li>` | linha clicável `rounded-md hover:bg-ink-100 p-(--list-row-pad)` com quadro de ícone à esquerda e chevron `size-(--ic-sm) text-ink-600` à direita; cartão com `p-1` de respiro | §9.3, §11.2 |
 | Indicadores | `Card` com grade | `grid grid-cols-2 md:grid-cols-4`; número `text-display font-semibold text-primary` | §9.2 |
 | Ações rápidas | `Link` com ícone | quadrado `size-12 rounded-md bg-sky-300 text-primary`; rótulo `text-caption text-ink-700` | §7.8 |
 | Avatar | `Avatar` com `AvatarFallback` | `size-(--avatar-md)` no cartão e no perfil em tela estreita (anel de 4px, `ring-4 ring-card`), `size-(--avatar-sm)` no cabeçalho do aluno em tela larga, `size-(--target-min)` em lista, `size-8` na barra lateral; iniciais `bg-sky-300 text-primary font-semibold` | §12.1 |
-| Situação do aluno | no cabeçalho do perfil, `Badge` (selo); em lista e tabela, texto | selo: ver linha Selo; texto: `text-primary`, pendente `text-warning-700`, encerrado `text-ink-700`, no perfil `text-success-700` | §12.2 |
+| Situação do aluno | no cabeçalho do perfil, `Badge` (selo); em lista e tabela, texto | selo: ver linha Selo; texto: `text-primary`, pendente `text-warning-700`, encerrado `text-ink-700` | §12.2 |
 | Tabela (a partir de `md:`) | `Table` do shadcn com TanStack Table (`DataTable` em `shared`) | dentro de `Card`; cabeçalho `text-caption font-semibold text-ink-700`; célula-chave com quadro de ícone, nome e, embaixo, tamanho e selo; linha `h-(--target-min) hover:bg-ink-100`, separada por `border-ink-200`; colunas secundárias `hidden lg:table-cell`; ações sem rótulo visível (`sr-only`), com `mouse:size-(--target-fine)`; número `text-right tabular-nums` | §11.8 |
 | Folha e diálogo | tela estreita: `Drawer`, que sobe da base e fecha arrastando; a partir de `md:`: `Dialog` centralizado | `Drawer` com `rounded-t-lg`; `Dialog` com `rounded-lg max-w-(--w-form)`; os dois com `shadow-flutuante`; ações em coluna, primário primeiro | §9.6, §10.3 |
 | Menu de opções | mouse: `DropdownMenu`; toque: a folha de §9.6 (`Drawer` ou `Dialog`) | itens `min-h-(--target-min)`, com mouse `mouse:min-h-(--target-fine)`, `rounded-md` | §8.2, §5.12 |

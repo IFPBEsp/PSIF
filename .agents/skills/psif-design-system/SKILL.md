@@ -12,7 +12,7 @@ description: >
   tema escuro ou texto de interface para esse produto; e ao ligar os tokens ao
   Tailwind e ao shadcn no frontend do PSIF.
 metadata:
-  version: "0.18.5"
+  version: "0.18.6"
   last-updated: "2026-11"
 ---
 
@@ -51,7 +51,8 @@ para §27.
 
 ## Mapa de referências
 
-Cada regra mora num arquivo só, o dono do §; os outros apontam para ele.
+Cada regra mora num arquivo só, o dono do §; os outros apontam para ele, e o
+`scripts/check_refs.py` trava que toda referência resolve.
 
 | Arquivo | § | Abra quando |
 |---|---|---|
@@ -95,7 +96,7 @@ Texto:              --ink-900 · dado-chave --navy-700 · secundário --ink-700
 Corpo:              --fs-body · campo --fs-h3 · menor texto --fs-caption
 Espaçamento:        escala de 4px · margem --page-pad (larga: --sp-8)
 Raio:               por papel (§3.6)
-Alvo:               --target-min no toque · --target-fine no mouse (§5.12)
+Alvo:               --target-min no toque (§20.6) · --target-fine no mouse (§5.12)
 Nunca como texto:   a banlist de scripts/tokens.json (§3.2)
 Tema escuro:        mesmos tokens, .dark no <html>, nada de dark: na tela
 ```
@@ -114,10 +115,8 @@ Tema escuro:        mesmos tokens, .dark no <html>, nada de dark: na tela
 - `scripts/tokens.json`: fonte dos tokens. Mudou? Rode
   `scripts/gen_tokens_css.py` e `scripts/gen_design_md.py`; nunca edite
   `tokens.css` nem `DESIGN.md` à mão.
-
 - `scripts/check_all.py`: roda os `--check`, o `check_refs.py` e a suíte de
   `scripts/tests/`.
-
 
 ## Antes de entregar
 

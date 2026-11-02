@@ -1,4 +1,4 @@
-"""Regression tests para check_consumer.py."""
+"""Testes de check_consumer.py."""
 
 import re
 import subprocess
@@ -92,7 +92,7 @@ def test_quiet_flag_suppresses_the_line_by_line_report(tmp_path):
 
 
 def test_typo_in_scale_family_is_reported(tmp_path):
-    """A isenção de sufixo já foi `-\d?xl$|-\d+$`, e o segundo ramo cegava o detector para toda família de escala."""
+    """Só o sufixo de escala do Tailwind (`-xl`, `-2xl`) fica isento; erro de grafia na família é acusado."""
     # O typo é DERIVADO do nome real da família: escrito à mão, ele deixaria
     # de ser um typo assim que a skill renomeasse a paleta — e o teste passaria
     # a verificar um nome que ninguém erra.
@@ -139,7 +139,7 @@ def test_theme_block_redefining_a_skill_token_is_flagged(tmp_path):
     assert "--radius-sm" not in result.stdout
 
 
-def test_reference_globals_of_section_27_8_has_no_divergence(tmp_path):
+def test_reference_globals_of_section_26_8_has_no_divergence(tmp_path):
     md = (SCRIPT.parent.parent / "ai-rules" / "tailwind-integration.md").read_text(encoding="utf-8")
     secao = md.split("### 26.8", 1)[1].split("\n### ", 1)[0]
     css = re.search(r"```css\n(.*?)```", secao, re.S).group(1)
@@ -148,9 +148,19 @@ def test_reference_globals_of_section_27_8_has_no_divergence(tmp_path):
     assert "0 divergência" in result.stdout
 
 
-def test_findings_are_sorted_by_line_and_cite_27_5(tmp_path):
+def test_findings_are_sorted_by_line_and_cite_26_5(tmp_path):
     css = ":root {\n  --surfce-base: #fff;\n  --sky-100: #000;\n}\n"
     linhas = [l for l in _run(tmp_path, css).stdout.splitlines() if l.startswith("[")]
     numeros = [int(re.search(r"linha (\d+)", l).group(1)) for l in linhas]
     assert numeros == sorted(numeros) and len(numeros) == 2, linhas
     assert all("§26.5" in l for l in linhas)
+
+
+def test_number_spelling_is_not_divergence(tmp_path):
+    """Formatador que troca `.2` por `0.2` não muda o valor."""
+    tokens = (SCRIPT.parent.parent / "assets" / "tokens.css").read_text(encoding="utf-8")
+    original = re.search(r"--ease-standard:\s*([^;]+);", tokens).group(1)
+    formatado = re.sub(r"(?<![\d.])\.(\d)", r"0.\1", original)
+    assert formatado != original
+    result = _run(tmp_path, f":root {{ --ease-standard: {formatado}; }}")
+    assert "[ERRO]" not in result.stdout, result.stdout

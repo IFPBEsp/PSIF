@@ -80,7 +80,7 @@ e `lint_output.py` conferem. Item `· manual`: decisão humana; o
 - [ ] De 320px a monitor grande sem rolagem horizontal, e zoom de 200% (§20.13) · manual
 - [ ] Conferida na tela estreita, na faixa intermediária e a partir de `--bp-lg` (§5.2) · manual
 - [ ] Hover, menu suspenso e alvo menor só com mouse (§5.12) · manual
-- [ ] `max-w` só com os tokens de largura ou 70ch (§5.2)
+- [ ] `max-w` por token ou 70ch, nunca pela escala do Tailwind nem em px (§5.2)
 - [ ] Conteúdo até `--w-content`, centralizado em monitor grande (§5.2) · manual
 
 ### 24.9 Relatório de revisão

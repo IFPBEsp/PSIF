@@ -276,7 +276,7 @@ def render(tokens):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__.split("\n")[1])
+    parser = argparse.ArgumentParser(description=" ".join(__doc__.split("\n\n")[0].split()))
     parser.add_argument(
         "--check",
         action="store_true",

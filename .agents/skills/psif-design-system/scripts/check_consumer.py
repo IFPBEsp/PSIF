@@ -58,10 +58,18 @@ def tokens_da_skill():
     return plano
 
 
+NUMERO = re.compile(r"(?<![\w#.])(\d*)\.(\d+)")
+
+
+def _numero(m):
+    inteiro, fracao = m.group(1).lstrip("0") or "0", m.group(2).rstrip("0")
+    return f"{inteiro}.{fracao}" if fracao else inteiro
+
+
 def normaliza(valor):
-    """Ignora caixa, espaço e aspas."""
+    """Ignora caixa, espaço, aspas e a grafia do número (`.25`, `0.25`, `0.250`)."""
     valor = " ".join(valor.split()).strip().strip("\'\"")
-    return valor.lower().replace(", ", ",")
+    return NUMERO.sub(_numero, valor.lower().replace(", ", ","))
 
 
 def blocos_base(css):
@@ -122,7 +130,7 @@ def analisa(caminho, skill):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__.split("\n")[1])
+    parser = argparse.ArgumentParser(description=" ".join(__doc__.split("\n\n")[0].split()))
     parser.add_argument("arquivo", help="CSS do projeto consumidor (ex.: globals.css)")
     parser.add_argument("--quiet", action="store_true", help="só o resumo")
     args = parser.parse_args()

@@ -173,10 +173,15 @@ def frontmatter():
     return "\n".join(linhas)
 
 
+def lista_da_banlist():
+    nomes = [f"`{n}`" for n in TOKENS["text_color_banlist"]]
+    return ", ".join(nomes[:-1]) + " e " + nomes[-1] if len(nomes) > 1 else "".join(nomes)
+
+
 def corpo():
     with open(BODY_PATH, encoding="utf-8") as f:
         texto = f.read()
-    plano = planos()
+    plano = {**planos(), "text_color_banlist": lista_da_banlist()}
 
     def troca(m):
         nome = m.group(1)
@@ -194,7 +199,7 @@ def render():
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__.split("\n")[1])
+    parser = argparse.ArgumentParser(description=" ".join(__doc__.split("\n\n")[0].split()))
     parser.add_argument("--check", action="store_true",
                         help="não escreve; saída 2 se assets/DESIGN.md estiver defasado")
     args = parser.parse_args()

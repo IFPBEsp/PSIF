@@ -1,4 +1,4 @@
-"""Regression tests para check_refs.py."""
+"""Testes de check_refs.py."""
 
 import importlib.util
 import subprocess
@@ -17,7 +17,7 @@ def _load_module(raiz):
 
 
 def test_repo_has_no_orphan_references():
-    """Guarda de regressão contra o estado real do repositório."""
+    """A skill como está não tem referência órfã."""
     result = subprocess.run(
         [sys.executable, str(SCRIPT)], capture_output=True, text=True
     )
@@ -66,13 +66,6 @@ def test_reference_to_right_section_wrong_subsection_number_is_orphan(tmp_path):
     assert orfas[0][2] == "11.4"
 
 
-def test_changelog_is_excluded_from_reference_check(tmp_path):
-    (tmp_path / "CHANGELOG.md").write_text(
-        "Removemos a seção §99 nesta versão.\n", encoding="utf-8"
-    )
-    modulo = _load_module(tmp_path)
-    orfas, _, _ = modulo.referencias_orfas()
-    assert orfas == []
 
 
 def test_python_docstrings_are_also_checked(tmp_path):
@@ -92,3 +85,9 @@ def test_python_headings_never_count_as_a_definition(tmp_path):
     orfas, secoes, _ = modulo.referencias_orfas()
     assert "5" not in secoes
     assert len(orfas) == 1
+
+
+def test_help_prints_usage_without_running_the_check():
+    result = subprocess.run([sys.executable, str(SCRIPT), "--help"], capture_output=True, text=True)
+    assert result.returncode == 0
+    assert "usage:" in result.stdout and "✓" not in result.stdout

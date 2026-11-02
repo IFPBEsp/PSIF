@@ -53,11 +53,11 @@ marcador.
 Cabeçalho "Junho 2026" com ‹ e › (`aria-label` "Mês anterior" e "Próximo
 mês"), linha Dom … Sáb e a grade. Dia: círculo com 1/7 da linha, até
 `--target-min`; na tela estreita fica menor, nunca abaixo de 24px (WCAG
-2.5.8): em 320px, num cartão, dá uns 34px. Hoje com
-anel `--navy-700` e `aria-current="date"`; selecionado com fundo `--navy-700`,
-número `--white` e `aria-pressed="true"`; dia com atendimento com ponto
-`--navy-500` embaixo. Abre em folha ou diálogo a partir do campo de data
-(§9.6), ou fica no topo da Agenda.
+2.5.8): em 320px, num cartão, dá uns 34px. Hoje com anel `--navy-700` e
+`aria-current="date"`; selecionado com fundo `--navy-700`, número `--white` e
+`aria-pressed="true"`; dia com atendimento com ponto `--navy-500` embaixo.
+Abre em folha ou diálogo a partir do campo de data (§9.6), ou fica no topo da
+Agenda.
 
 A partir de `--bp-md`, divide a Agenda ao meio com a agenda do dia.
 
@@ -74,7 +74,8 @@ TanStack Table, com colunas da feature. É a mesma consulta da lista da tela
 estreita; muda a apresentação.
 
 - **Estado na URL** (nuqs): `?page=0&size=20&search=mar&sort=name,asc`.
-  Busca com debounce. Recarregar e compartilhar o link mantêm a lista.
+  Busca com `--dur-debounce` (§7.7). Recarregar e compartilhar o link
+  mantêm a lista.
 - **Cartão**: dentro de um cartão `--radius-2xl`; tabela que não cabe rola
   dentro dele.
 - **Faixa intermediária**: só as colunas principais; as secundárias ("Enviado
@@ -85,7 +86,8 @@ estreita; muda a apresentação.
   `--ink-100`.
 - **Célula-chave**: quadro de ícone, nome em `--navy-700` 500 como link para
   o detalhe e, embaixo, tamanho e selo.
-- **"Enviado por"**: iniciais num círculo `--ink-100` de `--ic-xl` e o nome.
+- **"Enviado por"**: avatar sem foto de §12.1 (iniciais sobre `--sky-300`),
+  no tamanho `--sp-8` da barra lateral, e o nome.
 - **Ações**: botão ⋯ com `aria-label` ("Ações de José Antonio"), menu com
   mouse ou folha no toque (§8.2); a coluna não tem rótulo visível.
   Destrutiva pede confirmação (§10.3).

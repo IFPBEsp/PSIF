@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
 """
 Confere que toda referência §N ou §N.M da skill tem heading `## N.` ou
-`### N.M` num .md de conteúdo. Lê os .md (menos CHANGELOG.md) e os .py de
-scripts/ (menos tests/).
+`### N.M` num .md de conteúdo. Lê os .md e os .py de scripts/ (menos
+tests/).
 
 Uso:
     python check_refs.py
+    python check_refs.py --quiet   # só os erros
 
 Saída: 0 tudo resolve; 2 referência sem seção.
 """
 
+import argparse
 import re
 import sys
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
-EXCLUI_ARQ = {"CHANGELOG.md"}
+EXCLUI_ARQ = set()
 EXCLUI_DIR = {"__pycache__", "tests"}
 
 HEADING_SECAO = re.compile(r'^##\s+(\d+)\.\s')
@@ -67,11 +69,16 @@ def referencias_orfas():
 
 
 def main():
+    parser = argparse.ArgumentParser(description=" ".join(__doc__.split("\n\n")[0].split()))
+    parser.add_argument("--quiet", action="store_true", help="não imprime o resumo sem erro")
+    args = parser.parse_args()
+
     orfas, secoes, subsecoes = referencias_orfas()
 
     if not orfas:
-        print(f"✓ toda referência §N/§N.M resolve para uma seção real "
-              f"({len(secoes)} seções, {len(subsecoes)} subseções)")
+        if not args.quiet:
+            print(f"✓ toda referência §N/§N.M resolve para uma seção real "
+                  f"({len(secoes)} seções, {len(subsecoes)} subseções)")
         return 0
 
     for caminho, n_linha, numero, linha in orfas:

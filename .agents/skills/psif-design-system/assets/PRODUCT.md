@@ -62,8 +62,9 @@ só em parte na aba "Atendimentos" do SUAP e no resto fica no papel.
 
 PSIF (Plataforma de Suporte Psicopedagógico), do IFPB. O símbolo é o cérebro
 com cruz branco sobre quadrado azul (`simbolo-psif.svg` desta pasta). A
-identidade visual é a da skill `psif-design-system` (DESIGN.md desta pasta) e não se substitui:
-mudança de cor, fonte, raio ou espaçamento passa pela skill, não pela tela.
+identidade visual é a da skill `psif-design-system` (DESIGN.md desta pasta) e
+não se substitui: mudança de cor, fonte, raio ou espaçamento passa pela skill,
+não pela tela.
 
 ## Evidence on Hand
 
@@ -80,6 +81,6 @@ origem. Não há depoimentos, métricas nem números reais de uso: não invente.
 
 ## Accessibility & Inclusion
 
-WCAG 2.2 AA inegociável: contraste de 4.5:1 em texto, alvo de 44px no toque,
-rótulo visível em todo campo, foco visível, estado nunca só na cor, respeito a
-movimento reduzido.
+WCAG 2.2 AA inegociável: contraste de 4.5:1 em texto, alvo `--target-min` no
+toque, rótulo visível em todo campo, foco visível, estado nunca só na cor,
+respeito a movimento reduzido.

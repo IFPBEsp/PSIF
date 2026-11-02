@@ -27,7 +27,7 @@ def secoes_reais():
 
 
 def test_faixa_de_secoes_afirmada_bate_com_os_headings():
-    """A afirmação "os §1–§25" sobreviveu à entrada de §25, §26 e §27."""
+    """A faixa "§N ao §M" citada na prosa bate com os headings."""
     numeros = secoes_reais()
     if not numeros:
         return  # skill sem numeração § — legítimo; nada a conferir.

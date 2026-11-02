@@ -70,9 +70,9 @@ lê o erro com `has-[[aria-invalid=true]]:`:
 
 Todo clicável tem `min-width` e `min-height` de `var(--target-min)`; botão
 primário de largura total e campo, `var(--control-min)`; botão compacto,
-`var(--target-min)` (§8.1). Alvo com mouse: §5.12. Dia do calendário na tela
-estreita: §11.6. Ícone pequeno não encolhe
-a área: voltar, menu e chevron mantêm o alvo.
+`var(--target-min)` (§8.1). Ícone pequeno não encolhe a área: voltar, menu e
+chevron mantêm o alvo. As exceções, com mouse e no calendário, estão em
+§5.12.
 
 ### 20.7 Rótulos, nomes e ARIA
 
@@ -114,8 +114,9 @@ dentro do perfil, depois de abrir o item (§16.3).
 
 ### 20.13 Zoom e reflow (WCAG 1.4.4 / 1.4.10)
 
-Cartão com texto não tem altura fixa: cresce. A 200% e a 320px de largura
-nada rola na horizontal. Os indicadores seguem em 2×2: cada célula fica com
+Cartão com texto não tem altura fixa: cresce. A 200% e a 320px de largura a
+página não rola na horizontal; só a linha de filtros (§7.6) e a tabela larga
+(§11.8) rolam dentro de si. Os indicadores seguem em 2×2: cada célula fica com
 uns 120px (320 − 2 × `--page-pad` − 2 × `--card-pad`, dividido por 2), que
 comportam o número e o rótulo em duas linhas.
 

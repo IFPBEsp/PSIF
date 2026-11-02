@@ -8,7 +8,8 @@ estreita é a prioridade, e tudo funciona a partir de 320px.
 
 1. **Barra de ações** (§7.3): voltar à esquerda; busca, ⋯ ou ☰ à direita.
    Acima dela, a área segura do aparelho, nunca menos de `--sp-4`
-   (`padding-top: max(var(--sp-4), env(safe-area-inset-top))`).
+   (`padding-top: max(var(--sp-4), env(safe-area-inset-top))`). O `env()`
+   só vale com `viewportFit: "cover"` no `viewport` do layout raiz.
 2. **Título** (§4.3) e **conteúdo**: cartões sobre `--surface-base`.
 3. **Barra de ação**: só em tela de tarefa, com o botão primário (§5.6).
 
@@ -74,7 +75,7 @@ de `--bp-md`, a grade o põe na linha do título, à direita, compacto (§8.1):
     {/* campos */}
   </form>
   <div className="fixed inset-x-0 bottom-0 z-(--z-sticky) border-t border-(--divider-on-sky)
-                  bg-background px-6 pt-3 pb-6
+                  bg-background px-6 pt-3 pb-[max(var(--sp-6),env(safe-area-inset-bottom))]
                   md:static md:col-start-2 md:row-start-1 md:border-0 md:bg-transparent md:p-0">
     <Button type="submit" form="form-atendimento"
       className="w-full md:w-auto md:min-h-(--target-min) md:text-small">
@@ -84,12 +85,13 @@ de `--bp-md`, a grade o põe na linha do título, à direita, compacto (§8.1):
 </div>
 ```
 
-O `pb-36` impede que o último campo fique sob a faixa. A grade reserva o
-espaço do botão: título longo quebra linha em vez de passar por baixo dele.
-Tela com regra de envio (Documentos: "PDF, até 20 MB") põe a regra num `<p>`
-sob o botão, visível em toda largura, ligada por `aria-describedby`; sem
-regra, nem o `<p>` nem o `aria-describedby`. Um botão só: duplicar (um para
-cada largura) deixa um deles fora da ordem de foco.
+O `pb-36` impede que o último campo fique sob a faixa, e a área segura de
+baixo (§5.1) tira o botão de cima da barra de gestos do aparelho. A grade
+reserva o espaço do botão: título longo quebra linha em vez de passar por
+baixo dele. Tela com regra de envio (Documentos: "PDF, até 20 MB") põe a regra
+num `<p>` sob o botão, visível em toda largura, ligada por `aria-describedby`;
+sem regra, nem o `<p>` nem o `aria-describedby`. Um botão só: duplicar (um
+para cada largura) deixa um deles fora da ordem de foco.
 
 ### 5.7 Alinhamento
 
@@ -123,13 +125,14 @@ Lista vazia vira estado vazio, com motivo e ação (§10.6).
 ### 5.12 Toque e mouse
 
 A largura não diz como a pessoa aponta: há tablet com mouse e notebook com
-tela de toque. O que depende da entrada usa
-`@media (hover: hover) and (pointer: fine)`, a variante `mouse:` de §26.8:
+tela de toque. O que depende da entrada usa `@media (hover: hover) and
+(pointer: fine)`, a variante `mouse:` de §26.8:
 
 - **Hover**: só com mouse; no toque, o pressionado faz o papel (§17.2).
 - **Menu suspenso e dica** (`DropdownMenu`, `Tooltip`): só com mouse. No
   toque, a mesma lista abre em folha, que é `Drawer` na tela estreita e
   `Dialog` na larga (§9.6).
-- **Alvo**: `--target-min` no toque. Com mouse, ação densa (ícone em linha de
-  tabela, item de menu) pode usar `--target-fine`, nunca abaixo de 24px (WCAG
-  2.5.8). Esta é a regra; §20.6 aponta para cá.
+- **Alvo**: o mínimo de §20.6 vale no toque. Com mouse, ação densa (ícone em
+  linha de tabela, item de menu) pode usar `--target-fine`, nunca abaixo de
+  24px (WCAG 2.5.8). A outra exceção é o dia do calendário na tela estreita
+  (§11.6).

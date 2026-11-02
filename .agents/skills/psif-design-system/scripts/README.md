@@ -9,8 +9,7 @@ Mensagens de erro: `[ERRO] linha N: <o que> (<esperado>, §X.Y)`.
 
 ## `scripts/check_all.py`
 
-Roda todos os `--check`, o `check_refs.py` e a suíte. É o que o hook e o CI
-chamam.
+Roda todos os `--check`, o `check_refs.py` e a suíte. É o que o CI chama.
 
 ```sh
 python3 scripts/check_all.py           # tudo
@@ -19,7 +18,8 @@ python3 scripts/check_all.py --quick   # só os --check
 
 ## `scripts/check_refs.py`
 
-Toda referência `§N` / `§N.M` precisa de heading.
+Toda referência `§N` / `§N.M` precisa de heading. `--quiet` só imprime os
+erros.
 
 ## `scripts/tests/`
 
@@ -52,9 +52,10 @@ python3 scripts/check_checklist.py tela.tsx --tokens src/app/globals.css
 
 ## `scripts/lint_output.py`
 
-Cor fora da paleta, token banido como texto, `var()` para token inexistente,
-raio e espaçamento fora da escala, sombra preta, z-index avulso, fonte e alvo.
-Classe utilitária só em parte.
+Cor fora da paleta ou escrita literal, token banido como texto, `var()` para
+token inexistente, raio e espaçamento fora da escala, sombra preta, z-index
+avulso, foco, fonte, alvo, altura fixa e `max-w`. Classe do Tailwind passa
+pelas mesmas regras; o que fica com a revisão está em §26.4.
 
 ```sh
 python3 scripts/lint_output.py tela.tsx [--strict]
@@ -75,14 +76,19 @@ Proporção de cor por papel (§3.3), por contagem de declaração.
 
 ## `scripts/check_consumer.py`
 
-Compara os tokens colados no `globals.css` do projeto com o `tokens.json`.
+Compara os tokens colados no `globals.css` do projeto com o `:root` de
+`assets/tokens.css` e acusa token da skill redefinido no `@theme` (§26.5).
+
+```sh
+python3 scripts/check_consumer.py src/app/globals.css
+```
 
 ---
 
-> **Cópia de consumo.** Esta pasta foi exportada pelo `export_skill.py` do
-> repositório de origem de `psif-design-system`: catálogos, verificadores, geradores de
-> token e testes (`scripts/check_all.py` roda tudo). Hook, versionamento e
-> pacote `dist/` ficam na origem.
+> **Cópia de consumo.** Esta pasta é a cópia de `psif-design-system` para o
+> projeto: catálogos, verificadores, geradores de token e testes
+> (`scripts/check_all.py` roda tudo). Versão e pacote ficam no
+> repositório de origem da skill.
 >
 > Token muda em `scripts/tokens.json`, com `gen_tokens_css.py` e
 > `gen_design_md.py` em seguida. Regra muda na origem, e a skill é exportada

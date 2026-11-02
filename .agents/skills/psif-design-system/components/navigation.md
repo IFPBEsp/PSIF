@@ -48,8 +48,8 @@ Documentos · Observações · Evolução.
 
 **Tela larga**: abas sob o cabeçalho do aluno (§9.9): Visão geral (com os
 dados do aluno) · Atendimentos · Relatórios · Documentos · Observações ·
-Evolução. Ativa em `--navy-700` 600, com
-sublinhado de 3px e contador em pílula `--sky-100`; inativas em `--ink-700`
+Evolução. Ativa em `--navy-700` 600, com sublinhado de 3px e contador em
+pílula `--sky-100`; inativas em `--ink-700`
 500. Cada aba é um link (`aria-current="page"` na ativa), com alvo
 `--target-min`.
 
@@ -72,8 +72,8 @@ horizontal, sem quebrar.
 ### 7.7 Busca
 
 Campo de largura total no topo da lista, lupa à esquerda, placeholder
-"Pesquisar aluno" ou "Pesquisar documento", e espera ~300ms depois da
-digitação. Rótulo só acessível: é o único campo sem rótulo visível, porque a
+"Pesquisar aluno" ou "Pesquisar documento", e espera `--dur-debounce` depois
+da digitação. Rótulo só acessível: é o único campo sem rótulo visível, porque a
 lupa e a posição dizem o que ele é.
 
 Na tela estreita, em tela com título grande, a busca começa como botão de
@@ -102,7 +102,9 @@ conteúdo e ordem. No projeto, o `Sidebar` do shadcn já faz isso.
 A partir de `--bp-md`, fixa à esquerda, altura da janela, fundo
 `--surface-raised`, sem borda e sem sombra, `<nav aria-label="Principal">`.
 Entre `--bp-md` e `--bp-lg` começa recolhida (§7.12); a partir de `--bp-lg`,
-aberta com `--w-sidebar`.
+aberta com `--w-sidebar`. O `Sidebar` do shadcn vem com 16rem: passe a largura
+no `SidebarProvider`, com `style={{ "--sidebar-width": "var(--w-sidebar)" } as
+React.CSSProperties}`.
 
 De cima para baixo, com `--sp-6` de padding:
 
@@ -140,9 +142,9 @@ A barra recolhe para só ícones (`Sidebar collapsible="icon"`, com o
 - **Controle:** ☰ (`psif-menu`, `--ic-lg`, alvo `--target-min`,
   `--radius-pill`) à direita da marca; recolhida, logo abaixo do símbolo.
   `aria-label` "Recolher menu" ou "Expandir menu" e `aria-expanded`.
-- **Recolhida:** rótulos e nome PSIF somem; itens centralizados; a busca
-  vira botão de lupa, que abre a busca como em §7.13; o cartão do pé vira as iniciais. Cada item mantém
-  `title` e nome acessível.
+- **Recolhida:** rótulos e nome PSIF somem; itens centralizados; a busca vira
+  botão de lupa, que abre a busca como em §7.13; o cartão do pé vira as
+  iniciais. Cada item mantém `title` e nome acessível.
 - Começa recolhida entre `--bp-md` e `--bp-lg`, e aberta depois. A escolha
   da pessoa vale para o aparelho, como o tema (§25.4).
 
@@ -152,7 +154,7 @@ A partir de `--bp-md`.
 
 - **Busca global** na barra lateral, sob a marca: fundo `--ink-100` sem
   borda, lupa, placeholder e `aria-label` "Pesquisar aluno", dentro de
-  `role="search"`. Passa pelo BFF, com debounce. No projeto, `Command`;
+  `role="search"`. Passa pelo BFF, com `--dur-debounce`. No projeto, `Command`;
   resultados em `Popover` com mouse e na folha de §9.6 no toque.
 - **Resultados:** com mouse, cartão branco ancorado no campo (`--sh-md`,
   `--z-overlay`); no toque, a folha de §9.6, em qualquer largura (§5.12).

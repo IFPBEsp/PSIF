@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from _fixtures import TOKENS, concreto  # noqa: E402
+from _fixtures import TOKENS, concreto, ESTRUTURAL_700, HEX_ESTRUTURAL_700  # noqa: E402
 
 SCRIPT = Path(__file__).resolve().parent.parent / "lint_output.py"
 
@@ -403,3 +403,60 @@ def test_max_width_outside_tokens_is_flagged(tmp_path):
     assert out.count("fora dos tokens de largura") == 3, out
     assert "max-width: 960px fora dos tokens" in out, out
     assert "max-w-(--w-content)'" not in out and "max-w-[70ch]'" not in out
+
+
+def test_focus_visible_outline_none_is_not_a_ring(tmp_path):
+    tsx = ('<button className="focus-visible:outline-none">a</button>\n'
+           '<button className="outline-hidden">b</button>\n'
+           '<button className="outline-none focus-visible:ring-2 focus-visible:ring-ring">c</button>\n')
+    out = _run_as(tmp_path, tsx, "a.tsx").stdout
+    assert "linha 1: 'outline-none' sem anel" in out, out
+    assert "linha 2: 'outline-hidden' sem anel" in out, out
+    assert "linha 3" not in out, out
+
+
+def test_palette_color_written_literal_in_css_is_flagged(tmp_path):
+    css = (f".card {{ background: {HEX_ESTRUTURAL_700}; }}\n"
+           f":root {{ --{ESTRUTURAL_700}: {HEX_ESTRUTURAL_700}; }}\n"
+           f".ok {{ background: var(--{ESTRUTURAL_700}); }}\n")
+    css += ".sombra { box-shadow: 0 1px 2px rgba(36, 74, 105, .08); }\n"
+    out = _run_as(tmp_path, css, "a.css").stdout
+    assert out.count("cor literal") == 1, out
+    assert f"linha 1: cor literal '{HEX_ESTRUTURAL_700}' (--{ESTRUTURAL_700})" in out, out
+    assert "§26.6" in out
+
+
+def test_tailwind_black_shadow_and_radius_off_scale(tmp_path):
+    tsx = '<div className="shadow-lg rounded-3xl shadow-acao rounded-2xl shadow-none">a</div>\n'
+    result = _run_as(tmp_path, tsx, "a.tsx")
+    out = result.stdout
+    assert "'shadow-lg' é a sombra preta do Tailwind" in out and "§3.4" in out, out
+    assert "'rounded-3xl' fora da escala de raio" in out and "§3.6" in out, out
+    assert "shadow-acao'" not in out and "rounded-2xl'" not in out and "shadow-none'" not in out
+
+
+def test_fixed_height_is_fine_on_media_skeleton_and_scroll_area(tmp_path):
+    tsx = ('<Image className="h-40" src="/a.png" alt="" />\n'
+           '<Skeleton className="h-32 w-full" />\n'
+           '<ScrollArea className="h-72">a</ScrollArea>\n'
+           '<div className="h-40"><p>Texto</p></div>\n')
+    out = _run_as(tmp_path, tsx, "a.tsx").stdout
+    assert out.count("altura fixa") == 1 and "linha 4" in out, out
+
+
+def test_max_width_accepts_size_tokens_and_component_vars(tmp_path):
+    tsx = ('<span className="max-w-(--target-min) max-w-(--avatar-md)">a</span>\n'
+           '<aside className="max-w-(--sidebar-width)">b</aside>\n')
+    out = _run_as(tmp_path, tsx, "a.tsx").stdout
+    assert "fora dos tokens de largura" not in out, out
+
+
+def test_stray_z_index_is_an_error_in_css_like_in_the_utility(tmp_path):
+    result = _run_as(tmp_path, ".x { z-index: 9999; }", "a.css")
+    assert result.returncode == 2, result.stdout
+    assert "[ERRO] linha 1: z-index 9999 fora das camadas" in result.stdout
+
+
+def test_js_line_comment_is_not_a_declaration(tmp_path):
+    result = _run_as(tmp_path, "// z-index: 9999;\nconst a = 1;\n", "a.tsx")
+    assert result.returncode == 0, result.stdout

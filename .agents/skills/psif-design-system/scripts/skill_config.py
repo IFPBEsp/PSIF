@@ -48,18 +48,6 @@ class Config:
         """Avulsos que a exportação leva além das pastas de conteúdo."""
         return list(self._d.get("export", {}).get("files", ["SKILL.md"]))
 
-    @property
-    def secoes_de_manutencao(self):
-        """Headings do scripts/README.md que a exportação remove."""
-        return list(self._d.get("export", {}).get("maintenance_sections", []))
-
-    @property
-    def dist_dir(self):
-        return self._d.get("dist", {}).get("dir", "../dist")
-
-    @property
-    def gera_dist(self):
-        return self._d.get("dist", {}).get("enabled", True)
 
     @property
     def design(self):

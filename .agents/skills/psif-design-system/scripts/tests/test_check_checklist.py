@@ -94,7 +94,7 @@ def test_placeholder_with_label_for_or_wrapping_label_passes(tmp_path):
 def test_icon_only_button_without_accessible_name_is_flagged(tmp_path):
     result = _run(tmp_path, "<button><svg /></button>")
     assert result.returncode == 2, result.stdout
-    assert "botão só de ícone sem nome acessível" in result.stdout
+    assert "botão ou link só de ícone sem nome acessível" in result.stdout
 
 
 def test_icon_followed_by_visible_text_is_not_icon_only(tmp_path):
@@ -104,10 +104,10 @@ def test_icon_followed_by_visible_text_is_not_icon_only(tmp_path):
         f'<button type="button">{icone}\nSair</button>\n'
         f'<button aria-label="Abrir menu">{icone}\n</button>',
         "a.html")
-    assert "botão só de ícone" not in com_texto.stdout, com_texto.stdout
+    assert "só de ícone" not in com_texto.stdout, com_texto.stdout
 
     so_icone = _run(tmp_path, f'<button type="button">{icone}\n</button>', "b.html")
-    assert "botão só de ícone" in so_icone.stdout, so_icone.stdout
+    assert "só de ícone" in so_icone.stdout, so_icone.stdout
 
 
 def test_english_jargon_is_flagged(tmp_path):
@@ -224,3 +224,55 @@ def test_fixed_height_in_jsx_style_is_flagged(tmp_path):
 def test_delegated_lint_findings_are_shown(tmp_path):
     result = _run(tmp_path, '<div className="h-[120px]"><p>Texto</p></div>\n')
     assert "altura fixa em contêiner" in result.stdout, result.stdout
+
+
+def test_icon_only_shadcn_button_and_link_are_flagged(tmp_path):
+    tsx = ('<Button variant="ghost" size="icon"><Search /></Button>\n'
+           '<Link href="/alunos"><Icon name="psif-voltar" /></Link>\n'
+           '<Button variant="ghost" size="icon" aria-label="Pesquisar"><Search /></Button>\n'
+           '<Button><Search /> Pesquisar</Button>\n')
+    result = _run(tmp_path, tsx)
+    assert result.stdout.count("só de ícone sem nome acessível") == 2, result.stdout
+
+
+def test_field_without_label_is_flagged(tmp_path):
+    tsx = ('<Input id="nome" />\n'
+           '<Label htmlFor="email">E-mail</Label><Input id="email" />\n'
+           '<FieldLabel htmlFor="turma">Turma</FieldLabel><Input id="turma" />\n'
+           '<FormItem><FormLabel>Nome</FormLabel><FormControl><Input /></FormControl></FormItem>\n'
+           '<input type="hidden" name="id" />\n')
+    result = _run(tmp_path, tsx)
+    assert result.stdout.count("campo sem rótulo") == 1, result.stdout
+    assert "linha 1: campo sem rótulo" in result.stdout
+
+
+def test_focus_visible_block_that_removes_the_outline_is_not_an_exemption(tmp_path):
+    result = _run(tmp_path, ".x:focus-visible { outline: none; }", "a.css")
+    assert "foco visível removido" in result.stdout, result.stdout
+    anel = _run(tmp_path, ".x { outline: none; }\n.x:focus-visible { box-shadow: 0 0 0 2px "
+                          f"var(--{ESTRUTURAL_500}); }}", "b.css")
+    assert "foco visível removido" not in anel.stdout, anel.stdout
+
+
+def test_error_only_on_the_tailwind_border_is_flagged(tmp_path):
+    result = _run(tmp_path, '<div className="border border-destructive">x</div>')
+    assert "erro só na borda" in result.stdout, result.stdout
+    ligado = _run(tmp_path, '<Input aria-invalid={true} aria-describedby="erro-nome" '
+                            'className="border-destructive" aria-label="Nome" />')
+    assert "erro só na borda" not in ligado.stdout, ligado.stdout
+
+
+def test_english_in_attributes_is_flagged(tmp_path):
+    tsx = ('<Input placeholder="Search" aria-label="Pesquisar" />\n'
+           '<Button aria-label="Settings"><Icon name="psif-ajustes" /></Button>\n'
+           '<Input placeholder="Pesquisar aluno" aria-label="Pesquisar aluno" />\n')
+    result = _run(tmp_path, tsx)
+    assert result.stdout.count("termo em inglês") == 2, result.stdout
+
+
+def test_each_lint_error_counts_in_the_summary(tmp_path):
+    tsx = ('<button className="focus-visible:outline-none">a</button>\n'
+           f'<div style={{{{ background: "{HEX_ESTRUTURAL_700}" }}}}>b</div>\n')
+    result = _run(tmp_path, tsx)
+    assert result.returncode == 2, result.stdout
+    assert "2 reprovação(ões)" in result.stdout, result.stdout

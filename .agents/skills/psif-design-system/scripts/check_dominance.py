@@ -61,7 +61,8 @@ def papel_pinta_area(nome):
 USO_TOKEN = re.compile(r"var\(\s*--([\w-]+)")
 UTIL = re.compile(r"\b(bg|text|border|fill|ring|from|to|via)-([a-z]+-\d{2,3}|white)\b")
 
-ESCOPO_ESCURO = re.compile(r"(^|\s)(\.dark\b|\[data-theme=[\"']?dark)")
+# `.dark` em qualquer ponto do seletor: `:root.dark`, `html.dark`, `.dark .x`.
+ESCOPO_ESCURO = re.compile(r"\.dark(?![\w-])|\[data-theme=[\"']?dark")
 
 
 def familia(nome):
@@ -185,7 +186,7 @@ def relatorio(contagem, rotulo):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__.split("\n")[1])
+    parser = argparse.ArgumentParser(description=" ".join(__doc__.split("\n\n")[0].split()))
     parser.add_argument("arquivos", nargs="+")
     parser.add_argument("--escopo", choices=["claro", "dark", "ambos"],
                         default="ambos", help="qual tema medir (padrão: ambos)")

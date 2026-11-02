@@ -159,6 +159,8 @@
   /* Motion — Duração — §3.9 */
   --dur-fast: 150ms;
   --dur-normal: 200ms;
+  --dur-debounce: 300ms;
+  --dur-toast: 4000ms;
 
   /* Motion — Easing — §3.9 */
   --ease-standard: cubic-bezier(.2, 0, 0, 1);

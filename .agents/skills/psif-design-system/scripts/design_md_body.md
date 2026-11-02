@@ -60,9 +60,8 @@ Azul institucional sobre céu claro; cor de estado só onde carrega significado.
 **A Regra de Ouro.** Fundo céu, cartão branco, ação em marinho. O único
 bloco largo de marinho na tela é o botão primário.
 
-**A Regra do Cinza que Não É Texto.** `ink-600`, `ink-500`, `navy-500`,
-`sky-300` e `blue-300` nunca pintam texto: todos reprovam AA. Texto
-secundário é {{ink-700}}.
+**A Regra do Cinza que Não É Texto.** {{text_color_banlist}} nunca pintam
+texto: todos reprovam AA. Texto secundário é {{ink-700}}.
 
 ## Typography
 
@@ -90,15 +89,15 @@ número e corpo. Hierarquia por tamanho e peso, nunca por caixa alta.
 
 ## Layout
 
-Web responsivo, da tela estreita para a larga, por `min-width`. Ritmo em degraus de {{sp-1}},
-{{sp-6}} entre cartões e entre campos.
+Web responsivo, da tela estreita para a larga, por `min-width`. Ritmo em
+degraus de {{sp-1}}, {{sp-6}} entre cartões e entre campos.
 
 - **Estreita** (abaixo de {{bp-md}}): coluna única, margem de {{page-pad}},
   navegação em gaveta, ação primária numa faixa presa à base. Acima da barra
   de ações, a área segura do aparelho, com mínimo de {{sp-4}}.
-- **Larga, faixa intermediária** ({{bp-md}} a {{bp-lg}}): barra lateral recolhida a
-  ícones, painel e perfil em coluna única, margem de {{sp-8}}, folha vira diálogo,
-  listagem vira tabela com as colunas principais.
+- **Larga, faixa intermediária** ({{bp-md}} a {{bp-lg}}): barra lateral
+  recolhida a ícones, painel e perfil em coluna única, margem de {{sp-8}},
+  folha vira diálogo, listagem vira tabela com as colunas principais.
 - **A partir de {{bp-lg}}:** barra lateral aberta de {{w-sidebar}},
   indicadores em linha de 4, grade de 3 colunas com a lista principal em 2 e
   o apoio em 1; formulário em 3 colunas.
@@ -128,12 +127,12 @@ cartão comum.
 
 ## Shapes
 
-O raio segue o papel. Cartão {{radius-xl}} na tela estreita e
-{{radius-2xl}} na larga; botão, campo, folha e cartão de login {{radius-lg}}; quadro de ícone,
-linha clicável e atalho {{radius-md}}; caixa de seleção {{radius-xs}};
-pílula em avatar, filtro, selo e botão só de ícone. Borda existe em campo e
-em botão secundário; filtro inativo e área de envio usam uma linha
-translúcida de marinho sobre o céu.
+O raio segue o papel. Cartão {{radius-xl}} na tela estreita e {{radius-2xl}}
+na larga; botão, campo, folha e cartão de login {{radius-lg}}; quadro de
+ícone, linha clicável e atalho {{radius-md}}; caixa de seleção {{radius-xs}};
+pílula em avatar, filtro, selo e botão só de ícone. Borda existe em campo e em
+botão secundário; filtro inativo e área de envio usam uma linha translúcida de
+marinho sobre o céu.
 
 ## Components
 

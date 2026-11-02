@@ -1,4 +1,4 @@
-"""Regression tests para gen_tokens_css.py."""
+"""Testes de gen_tokens_css.py."""
 
 import importlib.util
 import json
@@ -49,7 +49,7 @@ def test_every_alias_token_currently_mirrors_its_twin():
 
 
 def test_every_var_reference_in_the_docs_resolves_to_a_real_token():
-    """Guarda contra a classe de bug que já mordeu duas vezes."""
+    """Todo var(--x) citado na documentação existe no tokens.json."""
     sys.path.insert(0, str(SCRIPT.parent))
     from lint_output import collect_token_names
 

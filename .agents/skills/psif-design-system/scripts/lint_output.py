@@ -123,6 +123,13 @@ WHITE_FIXO_RE = re.compile(r"#fff(?:fff)?\b|\bwhite\b|rgba?\(\s*255[\s,]+255[\s,
 INTERACTIVE_COMPONENTS = {"Button", "Link", "NavLink", "TabsTrigger", "ToggleGroupItem",
                           "SelectTrigger", "DropdownMenuTrigger", "DropdownMenuItem"}
 PX_RE = re.compile(r"(-?\d*\.?\d+)px\b")
+ANEL_RE = re.compile(r"(?:ring|outline)(?:-.+)?")
+TIRA_FOCO = {"outline-none", "outline-hidden", "outline-0"}
+SHADOW_TAILWIND_RE = re.compile(r"shadow(?:-(?:2xs|xs|sm|md|lg|xl|2xl))?")
+RAIO_FORA_RE = re.compile(r"rounded(?:-(?:[trbles]|tl|tr|br|bl|ss|se|es|ee))?-(?:3xl|4xl)")
+# Altura fixa é o normal em mídia, esqueleto e área de rolagem.
+ALTURA_LIVRE = {"img", "image", "video", "canvas", "iframe", "svg", "picture",
+                "skeleton", "scrollarea"}
 
 # Grupos do tokens.json que guardam valores ou exceções, não nomes de token.
 NON_TOKEN_GROUPS = {
@@ -370,11 +377,11 @@ def collect_token_names(node, out=None):
 
 
 def blank_comments(text):
-    """Troca comentário CSS e HTML por espaços, mantendo posição e número de linha."""
+    """Troca comentário CSS, HTML e linha `//` do JS por espaços, mantendo posição e número de linha."""
     def blank(m):
         return re.sub(r"[^\n]", " ", m.group(0))
 
-    return re.sub(r"/\*.*?\*/|<!--.*?-->", blank, text, flags=re.S)
+    return re.sub(r"/\*.*?\*/|<!--.*?-->|^[ \t]*//[^\n]*", blank, text, flags=re.S | re.M)
 
 
 def declared_locally(text):
@@ -562,11 +569,33 @@ class Linter:
                      f"cor '{m.group(0)}' ({as_hex}) fora da paleta",
                      "var(--token); tinta crua só com alpha, em sombra e véu", "3.1")
 
+    def nomes_da_cor_literal(self, valor):
+        """Tokens da paleta que um hex, rgb() ou hsl() opaco escrito literal reproduz.
+        Com alpha é tinta de sombra e véu, que check_palette já confere."""
+        if valor.startswith("#"):
+            hexa, alpha = expand_hex(valor[1:])
+        else:
+            m = FUNC_COLOR_RE.fullmatch(valor)
+            triple, alpha = parse_func_color(m.group(1), m.group(2)) if m else (None, False)
+            hexa = "#{:02x}{:02x}{:02x}".format(*triple) if triple is not None else None
+        if alpha or hexa not in self.palette.values():
+            return []
+        return self.hex_to_names.get(hexa, [])
+
+    def check_literal_color(self, value, line):
+        """Fora de custom property, cor da paleta vai por var(): a escrita literal não troca no tema."""
+        for m in re.finditer(HEX_RE.pattern + "|" + FUNC_COLOR_RE.pattern, value, re.I):
+            nomes = self.nomes_da_cor_literal(m.group(0))
+            if nomes:
+                self.add("ERRO", line, f"cor literal '{m.group(0)}' ({', '.join('--' + n for n in nomes)})",
+                         f"var(--{nomes[0]}) ou o papel do shadcn", "26.6")
+
     def check_declarations(self, text):
         mouse = faixas_mouse(text)
-        for prop, value, pos in iter_declarations(apaga_classes(text)):
+        for prop, value, pos in iter_declarations(apaga_classes(blank_comments(text))):
             line = find_line(text, pos)
             low = value.lower()
+            antes = len(self.findings)
 
             if not prop.startswith("--"):
                 self.check_theme_and_brand_vars(value, line)
@@ -599,12 +628,17 @@ class Linter:
             if prop == "max-width" and re.search(r"\d(px|rem|em)\b", low):
                 self.add("AVISO", line, f"max-width: {value} fora dos tokens",
                          "var(--w-content), var(--w-form), var(--w-auth) ou 70ch", "5.2")
+            if not prop.startswith("--") and len(self.findings) == antes:
+                self.check_literal_color(value, line)
 
     def check_max_width(self, cls, line):
         valor = cls[len("max-w-"):]
-        larguras = set(self.tokens.get("width", {}))
+        medidas = set()
+        for grupo in ("width", "touch_target", "avatar", "icon_size"):
+            medidas |= set(self.tokens.get(grupo, {}))
         token = re.fullmatch(r"\((?:length:)?--([\w-]+)\)|\[var\(--([\w-]+)\)\]", valor)
-        if token and (token.group(1) or token.group(2)) in larguras:
+        nome = token and (token.group(1) or token.group(2))
+        if nome and (nome in medidas or nome.startswith(("sidebar-width", "radix-"))):
             return
         if valor in ("none", "full", "fit", "min", "max", "prose", "[70ch]"):
             return
@@ -708,7 +742,7 @@ class Linter:
         if not m:
             return
         if int(value) not in self.known_z:
-            self.add("AVISO", line, f"z-index {value} fora das camadas",
+            self.add("ERRO", line, f"z-index {value} fora das camadas",
                      "var(--z-*)", "3.10")
 
     def check_font(self, value, line):
@@ -763,25 +797,26 @@ class Linter:
                                  "token que troca sozinho no tema", "25.2")
                     if UTILITY_HINT.match(base):
                         utility_count += 1
-                    self.check_utility_class(base, line, icone)
+                    self.check_utility_class(base, line, icone, componente_ui)
             self.check_class_group(bases, tag)
 
         if utility_count >= 6:
             self.add("INFO", None,
-                     f"{utility_count} classes utilitárias; o lint confere cor, dark:, z-index, "
-                     f"foco, alvo e valor entre colchetes",
-                     "papel da cor e degrau de espaçamento e raio conferidos à mão", "26.4")
+                     f"{utility_count} classes utilitárias; o lint confere cor, sombra, raio, dark:, "
+                     f"z-index, foco, alvo e valor entre colchetes",
+                     "papel da cor e degrau de espaçamento conferidos à mão", "26.4")
 
     def check_class_group(self, bases, tag):
         """Regras que olham o conjunto de classes de uma tag ou de uma chamada cn/cva."""
-        tem_foco = (self.focus_within
-                    or any("focus-visible" in v for _, vs, _ in bases for v in vs))
+        tem_foco = self.focus_within or any(
+            ANEL_RE.fullmatch(b) and b not in TIRA_FOCO and any("focus-visible" in v for v in vs)
+            for b, vs, _ in bases)
         for base, variantes, line in bases:
-            if base in ("outline-none", "outline-0") and not tem_foco:
+            if base in TIRA_FOCO and not tem_foco:
                 self.add("ERRO", line, f"'{base}' sem anel em focus-visible:",
                          "focus-visible:ring-2, ou anel no contêiner com focus-within:", "20.5")
             altura = re.fullmatch(r"h-(\d+(?:\.\d+)?)", base)
-            midia = tag and tag[0].lower() in {"img", "video", "canvas", "iframe", "svg", "picture"}
+            midia = tag and tag[0].lower() in ALTURA_LIVRE
             if altura and float(altura.group(1)) * 4 >= 100 and not midia:
                 self.add("AVISO", line, f"'{base}': altura fixa em contêiner",
                          f"min-{base}", "20.13")
@@ -806,9 +841,17 @@ class Linter:
                      "mouse:size-(--target-fine)" if com_mouse else "size-(--target-min)",
                      "5.12" if com_mouse else "20.6")
 
-    def check_utility_class(self, cls, line, icone=False):
+    def check_utility_class(self, cls, line, icone=False, componente_ui=False):
         if cls.startswith("max-w-"):
             self.check_max_width(cls, line)
+            return
+        if SHADOW_TAILWIND_RE.fullmatch(cls) and not componente_ui:
+            self.add("AVISO", line, f"'{cls}' é a sombra preta do Tailwind",
+                     "shadow-acao ou shadow-flutuante", "3.4")
+            return
+        if RAIO_FORA_RE.fullmatch(cls):
+            self.add("ERRO", line, f"'{cls}' fora da escala de raio",
+                     "rounded-sm, rounded-md, rounded-lg, rounded-xl, rounded-2xl ou rounded-full", "3.6")
             return
         original = cls
         opaca = OPACITY_SUFFIX_RE.match(cls)
@@ -945,7 +988,7 @@ def formata(severity, line, oque, esperado, secao):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__.split("\n")[1])
+    parser = argparse.ArgumentParser(description=" ".join(__doc__.split("\n\n")[0].split()))
     parser.add_argument("arquivos", nargs="+", help="HTML, CSS, JSX ou TSX; - lê da entrada padrão")
     parser.add_argument("--strict", action="store_true", help="[AVISO] também reprova")
     args = parser.parse_args()

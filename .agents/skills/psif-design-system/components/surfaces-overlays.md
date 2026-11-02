@@ -51,8 +51,8 @@ seleção, confirmação, menu no toque (§8.2). `--surface-overlay`,
   até `--w-form`; fecha em "Fechar", no véu ou Esc.
 
 Exceção: com mouse, os resultados da busca global abrem como cartão ancorado
-no campo (§7.13). Folha, diálogo e lista são renderizados na raiz do documento, senão
-o `overflow` do cartão os corta.
+no campo (§7.13). Folha, diálogo e lista são renderizados na raiz do
+documento, senão o `overflow` do cartão os corta.
 
 ### 9.7 Cartão de funcionalidade (página pública)
 

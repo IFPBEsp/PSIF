@@ -1,8 +1,6 @@
-"""Regression tests para check_dominance.py."""
+"""Testes de check_dominance.py."""
 
 import subprocess
-import sys
-from pathlib import Path
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -26,7 +24,7 @@ def _run(tmp_path, css, *extra_args):
 
 
 def test_blue_role_mapping_alone_triggers_dominance_even_without_background(tmp_path):
-    """`--card."""
+    """`--card` em marinho pinta área: inverte a regra mesmo sem `background`."""
     result = _run(tmp_path, f":root {{ --card: var(--{ESTRUTURAL_800}); }}")
     assert result.returncode == 2, result.stdout
     assert "estrutural pinta mais área que neutro" in result.stdout
@@ -113,3 +111,11 @@ def test_neutral_prefixed_alias_follows_its_pointer(tmp_path):
     result = _run(tmp_path, css)
     assert result.returncode == 2, result.stdout
     assert "estrutural pinta mais área que neutro" in result.stdout
+
+
+def test_dark_scope_in_root_dark_selector_is_read(tmp_path):
+    css = (f":root.dark {{ --background: var(--{ESTRUTURAL_900}); --card: var(--{ESTRUTURAL_800}); }}\n"
+           f".dark-mode-x {{ --popover: var(--{ESTRUTURAL_800}); }}\n")
+    result = _run(tmp_path, css, "--escopo", "dark")
+    assert result.returncode == 2, result.stdout
+    assert "estrutural    2" in result.stdout, result.stdout

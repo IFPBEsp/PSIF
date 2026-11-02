@@ -155,7 +155,7 @@ def banlist_reason(value, tokens):
 
 def main():
     parser = argparse.ArgumentParser(
-        description=__doc__.split("\n")[1]
+        description=" ".join(__doc__.split("\n\n")[0].split())
     )
     parser.add_argument("foreground", help="Cor do texto/elemento: token, hex, rgb() ou hsl()")
     parser.add_argument("background", help="Cor de fundo: token, hex, rgb() ou hsl()")

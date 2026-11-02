@@ -14,7 +14,7 @@ Sonner, com as cores da ponte (§26.3): cartão `--surface-overlay`, texto
 `--danger-700`, aviso em `--warning-700`). `--z-toast`, acima da barra de
 ação. O Sonner já anuncia ao leitor de tela.
 
-- **Sucesso**: "Atendimento salvo." Some em 4 segundos.
+- **Sucesso**: "Atendimento salvo." Some depois de `--dur-toast`.
 - **Erro de negócio ou de integração**: o que houve e o que fazer ("Não foi
   possível salvar o atendimento. Tente de novo."). Fica até ser fechado.
 - **Aviso**: algo que a pessoa precisa saber agora e não bloqueia.

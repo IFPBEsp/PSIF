@@ -53,16 +53,6 @@
       "scripts/tests/test_gen_tokens_css.py",
       "scripts/tests/test_line_heights.py",
       "scripts/tests/test_lint_output.py"
-    ],
-    "maintenance_sections": [
-      "`scripts/version_lock.py",
-      "`scripts/build_dist.py",
-      "`scripts/export_skill.py",
-      "`scripts/hooks/"
     ]
-  },
-  "dist": {
-    "dir": "../dist",
-    "enabled": true
   }
 }

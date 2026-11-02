@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Roda todas as verificações da skill: hook de pre-commit e CI.
+Roda todas as verificações da skill, a mesma lista local e no CI.
 
 Uso:
     python check_all.py           # tudo
@@ -23,20 +23,14 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 TESTS = HERE / "tests"
 
-# Só roda o script que existe. check_dominance e check_checklist medem tela e ficam no CI do projeto.
-CANDIDATAS = [
+# check_dominance e check_checklist medem tela e ficam no CI do projeto.
+VERIFICACOES = [
     ("assets derivados em sincronia com a fonte de dados",
      ["gen_tokens_css.py", "--check"]),
     ("DESIGN.md em sincronia com tokens.json e o corpo",
      ["gen_design_md.py", "--check"]),
-    ("dist/ em sincronia com a pasta da skill (.md, código e .skill)",
-     ["build_dist.py", "--check"]),
-    ("versão travada ao conteúdo que ela descreve", ["version_lock.py", "--check"]),
     ("toda referência §N/§N.M resolve", ["check_refs.py"]),
 ]
-
-VERIFICACOES = [(rotulo, cmd) for rotulo, cmd in CANDIDATAS
-                if (HERE / cmd[0]).exists()]
 
 
 def roda_script(args):
@@ -79,7 +73,7 @@ def roda_testes_embutido():
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__.split("\n")[1])
+    parser = argparse.ArgumentParser(description=" ".join(__doc__.split("\n\n")[0].split()))
     parser.add_argument("--quick", action="store_true",
                         help="pula a suíte de testes; só os --check")
     args = parser.parse_args()

@@ -3,8 +3,9 @@
 ### 16.1 Entre atendimentos (interrupção)
 
 A psicopedagoga abre o PSIF entre um aluno e outro, por poucos minutos. O
-Início responde "quem é o próximo" sem nenhum clique; registrar um atendimento cabe
-em uma tela; rascunho não se perde ao recarregar, voltar ou cair a rede (§15.3).
+Início responde "quem é o próximo" sem nenhum clique; registrar um atendimento
+cabe em uma tela; rascunho não se perde ao recarregar, voltar ou cair a rede
+(§15.3).
 
 ### 16.2 Perfis
 
@@ -26,10 +27,10 @@ Padrões que valem para todos:
 - **O que o perfil não pode, não aparece.** Item de menu, atalho e botão sem
   permissão somem, em vez de aparecer desabilitados. Campo que o perfil não
   pode editar aparece como texto, não como campo.
-- **O Início responde a pergunta do perfil sem nenhum clique**: a psicopedagoga, quem
-  é o próximo; o professor, que aluno dele tem orientação nova; o aluno e o
-  responsável, qual a próxima reunião. Mesma estrutura de Início (§14), com os
-  cartões que o perfil pode ver.
+- **O Início responde a pergunta do perfil sem nenhum clique**: a
+  psicopedagoga, quem é o próximo; o professor, que aluno dele tem orientação
+  nova; o aluno e o responsável, qual a próxima reunião. Mesma estrutura de
+  Início (§14), com os cartões que o perfil pode ver.
 - **Saudação** com o primeiro nome, nunca o papel (§19.4).
 - **Sem acesso** é tela própria com o que houve e quem libera (§10.7), nunca
   uma tela em branco.

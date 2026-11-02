@@ -5,8 +5,8 @@
 Tema claro, escuro e sistema (seção 15 de
 `docs/frontend/architecture-and-stack.md`, no projeto). O claro é o padrão de
 desenho; o escuro é a mesma hierarquia com outros valores: **fundo noite,
-cartão um degrau acima, ação em céu claro**. O papel de cada token não muda,
-e a regra de ouro (§2.2) vale igual.
+cartão um degrau acima, ação em céu claro**. O papel de cada token não muda, e
+a regra de ouro (§2.2) vale igual.
 
 ### 25.2 Como funciona
 
@@ -37,14 +37,13 @@ e a regra de ouro (§2.2) vale igual.
 
 ### 25.4 Troca de tema
 
-Em Meu perfil (§7.1), com três opções escritas: "Claro", "Escuro" e
-"Sistema" (padrão), no mesmo lugar em qualquer largura. Vale para o aparelho, em estado local, não para a conta. Ícone
-sozinho (sol e lua) não basta.
+Em Meu perfil (§7.1), com três opções escritas: "Claro", "Escuro" e "Sistema"
+(padrão), no mesmo lugar em qualquer largura. Vale para o aparelho, em estado
+local, não para a conta. Ícone sozinho (sol e lua) não basta.
 
 ### 25.5 Pares verificados
 
-Combinação fora daqui passa por
-`check_contrast.py dark-<texto> dark-<fundo>`.
+Combinação fora daqui passa por `check_contrast.py dark-<texto> dark-<fundo>`.
 
 ```
 --dark-ink-900 / --dark-sky-100       16.33:1 ✓ AAA   texto principal no fundo
