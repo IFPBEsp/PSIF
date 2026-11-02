@@ -1,25 +1,15 @@
 #!/usr/bin/env python3
 """
-Mede a regra 60-30-10 (§3.3) — a regra de ouro, até aqui a única sem instrumento.
+Mede a proporção de cor por papel (§3.3): neutro, estrutural e apoio.
 
-Por quê: "cubra mentalmente a cor de apoio" é experimento mental. Uma violação
-real (um modo escuro inteiro tingido de estrutural) passou por lint, checklist e revisão, e só
-apareceu quando alguém olhou a tela. O que o olho viu era mensurável: dez
-papéis de superfície apontando para duas cores de chrome.
-
-MÉTODO E SEU LIMITE. Proporção de verdade é área renderizada, e área depende de
-layout — este script não renderiza. Ele conta DECLARAÇÕES por família de token,
-separadas por papel (fundo, texto, borda), porque é onde a dominância nasce:
-fundo pinta área, texto e borda não. É aproximação, e a aproximação erra quando
-uma tela tem um `<div>` de fundo gigante e vinte cards pequenos. Serve para
-pegar inversão grosseira — que é o modo de falha real —, não para auditar 61%
-contra 59%.
+Conta declarações por família de token, não área renderizada: pega inversão
+grosseira, não 61% contra 59%.
 
 Uso:
     python check_dominance.py globals.css
-    python check_dominance.py src/app/**/*.tsx --escopo dark
+    python check_dominance.py "src/app/**/*.tsx" --escopo dark
 
-Exit 0 = dentro da regra. Exit 2 = inversão detectada.
+Saída: 0 dentro da regra; 2 inversão.
 """
 
 import argparse
@@ -33,34 +23,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 TOKENS_PATH = os.path.join(HERE, "tokens.json")
 
 def carrega_familias():
-    """Famílias de dominância: papel visual -> prefixos de token.
-
-    Vem de `dominance_families` em tokens.json e NÃO tem default. Um default
-    aqui seria a pior falha possível deste script: ele mediria a proporção de
-    famílias que a skill não tem, acharia 0% em tudo, e imprimiria um ✓. A
-    guarda que passa medindo a coisa errada é pior que a guarda ausente.
-    """
+    """Papel -> prefixos de token, de tokens.json["dominance_families"]; sem padrão."""
     with open(TOKENS_PATH, encoding="utf-8") as f:
         tokens = json.load(f)
     familias = tokens.get("dominance_families")
     if not familias:
-        sys.exit(
-            "tokens.json sem `dominance_families`.\n"
-            "  A regra de dominância é a proporção entre papéis de cor "
-            "(ex.: neutro/estrutural/apoio/semântica),\n"
-            "  e só a skill sabe quais são os seus. Declare o mapa "
-            "papel -> prefixos de token, ex.:\n"
-            '    "dominance_families": {"neutro": ["ink-", "white"], '
-            '"estrutural": ["navy-"], "apoio": ["blue-"]}'
-        )
+        sys.exit('[ERRO] tokens.json sem dominance_families '
+                 '({"neutro": [...], "estrutural": [...], "apoio": [...]}, §3.3)')
     return {papel: tuple(prefixos) for papel, prefixos in familias.items()}
 
 
-# Vocabulário canônico de papéis. Os PREFIXOS são da skill; os NOMES dos
-# papéis, não: a lógica compara "quem pinta mais área que quem", e para isso
-# precisa saber qual papel é o fundo, qual é a estrutura e qual é o acento.
-# Papel livre viraria um script que mede quatro números sem saber o que
-# significam.
 PAPEIS = ("neutro", "estrutural", "apoio")
 ALVOS = {"neutro": "~60%", "estrutural": "~30%", "apoio": "fração de ~10%"}
 
@@ -68,27 +40,15 @@ FAMILIAS = carrega_familias()
 
 _faltando = [p for p in PAPEIS if p not in FAMILIAS]
 if _faltando:
-    sys.exit(
-        f"tokens.json: `dominance_families` sem o(s) papel(éis) {_faltando}.\n"
-        f"  Os três papéis {PAPEIS} são obrigatórios — a regra de dominância é\n"
-        f"  a proporção ENTRE eles. 'semantica' é opcional e não entra na base."
-    )
+    sys.exit(f"[ERRO] dominance_families sem {_faltando} (os papéis {PAPEIS}, §3.3)")
 
-# Propriedades que pintam área vs. as que só marcam.
 PINTA_AREA = ("background", "background-color", "border-color", "fill")
 SO_MARCA = ("color", "border", "outline", "outline-color", "stroke",
             "box-shadow", "caret-color", "text-decoration-color")
 
-# Casa `--card: ...` (custom property) OU `background: ...` (propriedade
-# plana). Só o primeiro ramo existia antes — PINTA_AREA/SO_MARCA nunca batiam
-# de verdade, porque nenhuma declaração sem `--` era capturada.
 DECL = re.compile(r"(?<![\w-])(--[a-z][\w-]*|[a-z][a-z-]*)\s*:\s*([^;{}\n]+)")
 
-# Num projeto shadcn/Tailwind a dominância NÃO se decide em `background:` — se
-# decide no mapeamento papel→escala (`--card: var(--navy-800)`). Sem contar a
-# declaração de custom property, o medidor fica cego justamente no arquivo onde
-# a inversão acontece: foi assim que dez papéis de superfície mudaram de cor sem
-# ninguém ver.
+# No shadcn a dominância nasce no mapa papel -> escala (--card: var(--navy-800)).
 PAPEL_DE_MARCA = re.compile(
     r"(foreground|border|ring|input|outline|shadow|caret|placeholder)$")
 
@@ -96,8 +56,9 @@ PAPEL_DE_MARCA = re.compile(
 def papel_pinta_area(nome):
     """Custom property de papel: pinta área, a menos que seja marca."""
     return not PAPEL_DE_MARCA.search(nome)
+
+
 USO_TOKEN = re.compile(r"var\(\s*--([\w-]+)")
-# Utilitária do Tailwind: bg-navy-700, text-ink-700, border-ink-200…
 UTIL = re.compile(r"\b(bg|text|border|fill|ring|from|to|via)-([a-z]+-\d{2,3}|white)\b")
 
 ESCOPO_ESCURO = re.compile(r"(^|\s)(\.dark\b|\[data-theme=[\"']?dark)")
@@ -119,8 +80,7 @@ def mapeia_papeis(css):
 
 
 def resolve_familia(nome, mapa, profundidade=0):
-    """Segue o ponteiro antes de olhar o prefixo: `--surface-brand` começa com
-    `surface-` (neutro), mas aponta para o marinho, e é marinho que ele pinta."""
+    """Segue o var() antes de olhar o prefixo: o alias pinta a cor para onde aponta."""
     alvo = mapa.get(nome)
     if alvo and profundidade <= 5:
         return resolve_familia(alvo, mapa, profundidade + 1)
@@ -141,10 +101,9 @@ def analisa(textos, escopo_escuro):
             for m in DECL.finditer(corpo):
                 prop, valor = m.group(1), m.group(2)
                 if prop.startswith("--"):
-                    # Declaração de papel: --card: var(--navy-800)
                     grupo = "area" if papel_pinta_area(prop[2:]) else "marca"
                     if familia(prop[2:]):
-                        continue  # é token da escala, não papel: não conta 2x
+                        continue
                 else:
                     grupo = ("area" if prop in PINTA_AREA
                              else "marca" if prop in SO_MARCA else None)
@@ -165,13 +124,13 @@ def analisa(textos, escopo_escuro):
 
 
 def blocos(css):
-    """(seletor, corpo) de cada bloco, para saber se estamos no `.dark`."""
+    """(seletor, corpo) de cada bloco."""
     saida, i = [], 0
     while True:
         abre = css.find("{", i)
         if abre == -1:
             if i == 0:
-                saida.append(("", css))  # arquivo sem blocos (ex.: .tsx)
+                saida.append(("", css))
             break
         seletor = css[css.rfind("}", 0, abre) + 1: abre]
         prof, fim = 1, abre + 1
@@ -191,9 +150,7 @@ def relatorio(contagem, rotulo):
         print("   nenhuma declaração de fundo com token reconhecido.")
         return 0
 
-    # Cor semântica é CONDICIONAL: success/warning/danger só pintam quando o
-    # estado acontece, e são mutuamente exclusivas. Contá-las no regime
-    # permanente infla o denominador e afunda o neutro artificialmente.
+    # Cor de estado só pinta quando o estado acontece: fica fora da base.
     base = {f: area.get(f, 0) for f in PAPEIS}
     total_base = sum(base.values()) or 1
     print("   Regime permanente (fundo, borda de área, fill):")
@@ -211,17 +168,14 @@ def relatorio(contagem, rotulo):
     falhas = []
     if prop["estrutural"] > prop["neutro"]:
         falhas.append(
-            f"estrutural pinta mais área que neutro ({prop['estrutural']:.0f}% vs "
-            f"{prop['neutro']:.0f}%). A cor estrutural governa os PAPÉIS (chrome, ação), "
-            f"não as superfícies — §3.3. Em modo escuro, ver §26.1.")
+            f"estrutural pinta mais área que neutro, {prop['estrutural']:.0f}% contra "
+            f"{prop['neutro']:.0f}% (neutro acima, §3.3; no escuro, §25.1)")
     if prop["apoio"] > 15:
         falhas.append(
-            f"apoio em {prop['apoio']:.0f}% das superfícies — o teto "
-            f"prático é uma fração dos 10% de acento (§3.3).")
+            f"apoio em {prop['apoio']:.0f}% das superfícies (até 15%, §3.3)")
     if prop["neutro"] < 40:
         falhas.append(
-            f"neutro em só {prop['neutro']:.0f}% das superfícies; a regra pede "
-            f"~60%. Tela sem respiro neutro lê como monocromática.")
+            f"neutro em só {prop['neutro']:.0f}% das superfícies (perto de 60%, §3.3)")
 
     for f in falhas:
         print(f"   [ERRO] {f}")
@@ -243,7 +197,7 @@ def main():
     textos = []
     for c in caminhos:
         if not os.path.isfile(c):
-            sys.exit(f"arquivo não encontrado: {c}")
+            sys.exit(f"[ERRO] arquivo não encontrado: {c}")
         with open(c, encoding="utf-8") as f:
             textos.append(f.read())
 
@@ -256,8 +210,6 @@ def main():
         contagem = analisa(textos, escuro)
         falhas += relatorio(contagem, rotulo)
 
-    print("\nLimite do método: conta declaração, não área renderizada (ver "
-          "docstring). Pega inversão grosseira, não ajusta 61% contra 59%.")
     return 2 if falhas else 0
 
 

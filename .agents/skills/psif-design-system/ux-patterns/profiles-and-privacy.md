@@ -3,14 +3,13 @@
 ### 16.1 Entre atendimentos (interrupção)
 
 A psicopedagoga abre o PSIF entre um aluno e outro, por poucos minutos. O
-Início responde "quem é o próximo" sem toque; registrar um atendimento cabe
+Início responde "quem é o próximo" sem nenhum clique; registrar um atendimento cabe
 em uma tela; rascunho não se perde ao recarregar, voltar ou cair a rede (§15.3).
 
 ### 16.2 Perfis
 
 O PSIF tem uma visão por perfil (`docs/constitution/mission.md`, no projeto).
-A skill não desenha uma tela por perfil: ela dá os padrões para que cada tela
-nasça certa para quem a vê.
+Não há uma tela por perfil: os padrões abaixo valem para toda tela.
 
 | Perfil | Vê | Registra |
 |---|---|---|
@@ -27,12 +26,12 @@ Padrões que valem para todos:
 - **O que o perfil não pode, não aparece.** Item de menu, atalho e botão sem
   permissão somem, em vez de aparecer desabilitados. Campo que o perfil não
   pode editar aparece como texto, não como campo.
-- **O Início responde a pergunta do perfil sem toque**: a psicopedagoga, quem
+- **O Início responde a pergunta do perfil sem nenhum clique**: a psicopedagoga, quem
   é o próximo; o professor, que aluno dele tem orientação nova; o aluno e o
   responsável, qual a próxima reunião. Mesma estrutura de Início (§14), com os
   cartões que o perfil pode ver.
-- **A saudação usa o primeiro nome** ("Olá, Ana!"), nunca o papel.
-- **Sem acesso** é tela própria com o que houve e quem libera (§10.8), nunca
+- **Saudação** com o primeiro nome, nunca o papel (§19.4).
+- **Sem acesso** é tela própria com o que houve e quem libera (§10.7), nunca
   uma tela em branco.
 - **Um vocabulário só** (§19.2). Atendimento, aluno e reunião têm o mesmo nome
   em todos os perfis.
@@ -45,10 +44,11 @@ psicológico): dado sensível na LGPD.
 - Notificação diz **que** algo aconteceu, não **o que**: "Novo documento no
   prontuário de Valquíria", nunca o nome do laudo ou o diagnóstico.
 - Lista mostra nome, turma e situação; nada clínico.
-- Documento sensível abre só depois de um toque no item, nunca em
+- Documento sensível abre só quando a pessoa abre o item, nunca em
   pré-visualização.
 - Toast segue a mesma regra: "Documento enviado.", nunca o nome do laudo.
-- Sair fica sempre a dois toques (☰ e Sair).
+- Sair fica sempre a dois passos: ☰ e Sair na tela estreita, pé da barra
+  lateral na larga (§7.10).
 - Laudo, relatório psicológico e diagnóstico são da psicopedagoga. Outro
   perfil só os vê se o backend liberar aquele documento para ele.
 - Documento sigiloso (laudo, relatório psicológico, diagnóstico) leva o selo
@@ -88,4 +88,4 @@ psicológico): dado sensível na LGPD.
   liberar. Em leitura, salvo permissão explícita.
 - Responsável com mais de um aluno escolhe o aluno no topo da tela, e o nome
   dele fica visível em todas as telas, para não confundir os dois.
-- A tela pode estar no celular da família: vale tudo de §16.3.
+- A tela pode estar num aparelho da família: vale tudo de §16.3.

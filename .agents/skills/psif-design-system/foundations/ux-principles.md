@@ -1,7 +1,10 @@
 ## 21. PRINCÍPIOS DE UX
 
-As regras de §7 a §16 já aplicam o que importa, e cada uma diz o porquê. Em
-três linhas: o Início mostra o estado sem toque e a linguagem é a da escola
-(Nielsen); a ação principal é larga e ao alcance do polegar (Fitts); lista
-mostra o mínimo, o perfil o resto e o documento sensível pede mais um toque
-(revelação progressiva). Ao decidir um fluxo novo, use estes três como teste.
+Três testes para um fluxo novo:
+
+- **Estado à vista** (Nielsen): o Início mostra o dia sem nenhum clique, na
+  linguagem da escola.
+- **Ação fácil de alcançar** (Fitts): a ação principal é grande e fica onde a
+  mão ou o cursor já está (§5.6).
+- **Revelação progressiva**: a lista mostra o mínimo, o perfil o resto, e o
+  documento sensível pede que a pessoa o abra (§16.3).

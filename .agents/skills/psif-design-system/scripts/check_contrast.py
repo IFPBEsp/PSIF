@@ -1,34 +1,15 @@
 #!/usr/bin/env python3
 """
-Verificador de contraste WCAG 2.2 para o design system desta skill.
-
-Por quê este script existe: a Seção 3.2 do design system já documenta o
-contraste de todo par de token de design usado hoje em produção. Mas toda vez que uma
-tela nova propõe uma combinação de cor que NÃO está nessa tabela pré-calculada
-(um token novo, um par de tokens que ainda não foi testado, uma cor translúcida
-sobre um fundo diferente), confiar em "isso parece que passa" é exatamente o
-tipo de erro que a acessibilidade não perdoa. No PSIF, a tela é lida de
-relance entre atendimentos, às vezes com o aparelho virado para a família.
-Em vez de estimar de cabeça, rode este script e tenha uma resposta objetiva.
+Contraste WCAG 2.2 entre duas cores.
 
 Uso:
-    python check_contrast.py <cor-texto> <cor-fundo> [--size normal|large|ui]
+    python check_contrast.py <texto> <fundo> [--size normal|large|ui]
     python check_contrast.py navy-700 white
-    python check_contrast.py "#244A69" "#FFFFFF" --size large
     python check_contrast.py "rgba(255,255,255,.7)" navy-800
-    python check_contrast.py dark-ink-700 dark-white
 
-<cor-texto> e <cor-fundo> aceitam:
-  · nome de token da skill (ex.: navy-700, ink-900, dark-white), com ou sem `--`
-  · var(--navy-700)
-  · hex de 3, 4, 6 ou 8 dígitos (#fff, #0B5FA5, #0B5FA580)
-  · rgb()/rgba()/hsl()/hsla()
-
-Cor de texto translúcida (alpha < 1, via hex de 4/8 dígitos ou rgba/hsla) é
-composta sobre o fundo antes do cálculo — é assim que o navegador desenha, e
-ignorar isso superestima o contraste real.
-
-Exit code: 0 se passa AA · 1 em erro de entrada · 2 se NÃO passa AA.
+Entradas: token (navy-700, dark-white), var(--token), hex de 3/4/6/8 dígitos,
+rgb()/rgba()/hsl()/hsla(). Texto translúcido é composto sobre o fundo.
+Saída: 0 passa AA; 1 entrada inválida; 2 não passa AA.
 """
 
 import argparse
@@ -39,7 +20,6 @@ from pathlib import Path
 
 TOKENS_PATH = Path(__file__).parent / "tokens.json"
 
-# Rótulo humano de cada contexto + de onde sai o limiar em tokens.json.
 SIZE_LABEL = {
     "normal": "texto de corpo (<18px)",
     "large": "texto grande/bold (>=18px, ou >=14px bold)",
@@ -76,18 +56,7 @@ def hsl_to_rgb(h, s, l):
 
 
 def colher_cores(tokens):
-    """Todo token com valor em hex, de QUALQUER grupo do tokens.json.
-
-    Lia só o grupo `color`, e por isso não enxergava os oito tokens de
-    superfície do modo escuro (§26, grupo `dark`): pedir o contraste de um par
-    de §26 devolvia "não é uma cor reconhecível" — logo na seção mais nova e
-    menos rodada da skill, cujos nove pares AAA ninguém conseguia conferir com
-    a ferramenta da própria skill.
-
-    É a mesma correção que colher_paleta() recebeu em lint_output.py na 3.5.1;
-    o outro consumidor do tokens.json ficou para trás. Varrer por formato do
-    valor faz o próximo grupo de cor entrar sozinho.
-    """
+    """Todo token com valor hex, de qualquer grupo."""
     cores = {}
 
     def colhe(no):
@@ -102,10 +71,7 @@ def colher_cores(tokens):
 
 
 def resolve_color(value, tokens):
-    """Aceita token, var(--token), hex de 3/4/6/8 dígitos ou rgb()/hsl().
-
-    Retorna (r, g, b, alpha).
-    """
+    """-> (r, g, b, alpha)."""
     v = value.strip()
     colors = colher_cores(tokens)
 
@@ -141,13 +107,13 @@ def resolve_color(value, tokens):
         return expand_hex(colors[name].lstrip("#"))
 
     raise ValueError(
-        f"'{value}' não é uma cor reconhecível nem um token da skill. "
-        f"Tokens disponíveis: {', '.join(sorted(colors))}"
+        f"'{value}' não é uma cor reconhecível (token, hex, rgb() ou hsl(); "
+        f"tokens: {', '.join(sorted(colors))})"
     )
 
 
 def composite(fg, bg):
-    """Achata a cor de frente translúcida sobre o fundo (fundo sempre opaco)."""
+    """Cor de frente translúcida sobre fundo opaco."""
     r_f, g_f, b_f, a = fg
     r_b, g_b, b_b, _ = bg
     return (
@@ -179,12 +145,7 @@ def to_hex(rgb):
 
 
 def banlist_reason(value, tokens):
-    """Razão pela qual este token nunca deve ser COR DE TEXTO, se for o caso.
-
-    A banlist é uma regra sobre uso como texto — usar o mesmo token como FUNDO
-    (navy-700 atrás de texto branco, por exemplo) é uso previsto, então o
-    chamador só consulta isto para a cor de frente.
-    """
+    """Motivo da banlist de texto; só vale para a cor de frente."""
     name = value.strip().lstrip("-")
     var_match = re.fullmatch(r"var\(\s*--([A-Za-z0-9-]+)\s*\)", name)
     if var_match:
@@ -194,7 +155,7 @@ def banlist_reason(value, tokens):
 
 def main():
     parser = argparse.ArgumentParser(
-        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+        description=__doc__.split("\n")[1]
     )
     parser.add_argument("foreground", help="Cor do texto/elemento: token, hex, rgb() ou hsl()")
     parser.add_argument("background", help="Cor de fundo: token, hex, rgb() ou hsl()")
@@ -214,15 +175,12 @@ def main():
         fg = resolve_color(args.foreground, tokens)
         bg = resolve_color(args.background, tokens)
     except ValueError as e:
-        print(f"Erro: {e}", file=sys.stderr)
+        print(f"[ERRO] {e}", file=sys.stderr)
         sys.exit(1)
 
     if bg[3] < 1:
-        print(
-            f"Aviso: o fundo '{args.background}' é translúcido (alpha {bg[3]:.2f}). "
-            f"Tratando como opaco — para um resultado fiel, informe o fundo já achatado.",
-            file=sys.stderr,
-        )
+        print(f"[AVISO] fundo translúcido (alpha {bg[3]:.2f}) tratado como opaco "
+              "(informe o fundo já composto)", file=sys.stderr)
         bg = bg[:3] + (1.0,)
 
     fg_effective = composite(fg, bg) if fg[3] < 1 else fg
@@ -233,38 +191,28 @@ def main():
     print(f"{args.foreground} ({to_hex(fg)}) sobre {args.background} ({to_hex(bg)})")
     print(f"Contexto: {SIZE_LABEL[args.size]}")
     if fg[3] < 1:
-        print(
-            f"Alpha {fg[3]:.2f} composto sobre o fundo -> cor efetiva {to_hex(fg_effective)} "
-            f"(é o que o olho vê, e o que a norma mede)."
-        )
+        print(f"Alpha {fg[3]:.2f} composto sobre o fundo: {to_hex(fg_effective)}")
     print(f"Razão de contraste: {ratio:.2f}:1")
 
     passes_aa = ratio >= min_aa
     print(f"WCAG AA (mínimo {min_aa}:1):  {'✓ PASSA' if passes_aa else '✗ NÃO PASSA'}")
 
     if args.size == "ui":
-        # WCAG 1.4.11 (non-text contrast) existe só em nível AA, com piso de 3:1.
-        # Não há nível AAA para elemento não-textual — reportar um "AAA de UI"
-        # seria inventar norma.
-        print("WCAG AAA: não se aplica a elemento não-textual (1.4.11 só tem nível AA).")
+        print("WCAG AAA: não se aplica a elemento não textual (1.4.11).")
     else:
         target = minimums["internal_target_aaa"] if args.size == "normal" else minimums["body_text"]
         passes_aaa = ratio >= target
         print(
             f"WCAG AAA (meta {target}:1):   "
-            f"{'✓ PASSA' if passes_aaa else '✗ não passa (mas AA já é o mínimo aceitável)'}"
+            f"{'✓ PASSA' if passes_aaa else '✗ não passa (AA é o mínimo)'}"
         )
 
     reason = banlist_reason(args.foreground, tokens)
     if reason:
-        print(f"\n⚠ ATENÇÃO — {args.foreground} está na banlist de cor de texto: {reason}")
+        print(f"\n[AVISO] {args.foreground} está na banlist de texto: {reason} (§3.2)")
 
     if not passes_aa:
-        print(
-            "\n✗ Esta combinação NÃO é aceitável. Troque por um token mais "
-            "escuro/claro da mesma família (ver tokens/colors.md §3.2) "
-            "até passar AA — 4.5:1 é o piso inegociável, não uma meta a se aproximar."
-        )
+        print(f"\n[ERRO] contraste {ratio:.2f}:1 ({min_aa}:1 no mínimo, §3.2)")
         sys.exit(2)
 
 

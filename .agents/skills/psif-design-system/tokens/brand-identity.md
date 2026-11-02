@@ -1,67 +1,40 @@
 ## 1. MARCA E IDENTIDADE
 
-**PSIF (Plataforma de Suporte Psicopedagógico)**, do IFPB. Usado pela
+**PSIF (Plataforma de Suporte Psicopedagógico)**, do IFPB, usado pela
 psicopedagoga, pelos professores, pelos alunos atendidos e pelos responsáveis
 (§16.2).
 
-### 1.1 Símbolo e logo
+### 1.1 Símbolo
 
-**O símbolo do PSIF é o cérebro com cruz**: branco, sobre quadrado
-`--blue-300` de cantos arredondados (raio de 21% do lado: 29px em 137px no
-Figma). Aparece no splash (`--ic-brand`), no topo da barra lateral do web
-(§7.10, em `--ic-xl`) e como ícone do app. No cabeçalho da página pública ele
-vem em branco sobre quadrado `--navy-700`.
+O símbolo é o cérebro com cruz, branco, sobre quadrado `--blue-300` de cantos
+arredondados. Aparece no topo da barra lateral (§7.10, em `--ic-xl`), no
+cartão de login (§9.8), no cabeçalho da página pública (em branco sobre
+quadrado `--navy-700`) e como favicon.
 
-Arquivos: o SVG é o principal; é texto, então cola direto no HTML, sem
-arquivo de imagem:
+- `assets/simbolo-psif.svg`: o símbolo completo, para colar inline.
+- `assets/simbolo-psif-glifo.svg`: só o glifo, em `currentColor`: branco
+  sobre `--blue-300` ou `--navy-700`, `--navy-700` sobre branco ou céu.
+- `assets/simbolo-psif.png` e `assets/simbolo-psif-quadrado.png` (sem recorte,
+  para favicon e ícone de atalho do navegador): 512px, onde SVG não entra.
 
-- `assets/simbolo-psif.svg`: o símbolo completo (quadrado `--blue-300` e
-  glifo branco), `viewBox="0 0 512 512"`.
-- `assets/simbolo-psif-glifo.svg`: só o cérebro com cruz, em
-  `fill="currentColor"`: herda a cor de onde é colado. Branco sobre
-  `--blue-300` ou `--navy-700`; `--navy-700` sobre branco ou céu. Outra cor,
-  não (§1.4).
-- `assets/simbolo-psif.png` (cantos recortados) e
-  `assets/simbolo-psif-quadrado.png` (sem recorte, para ícone de sistema
-  operacional, que aplica a própria máscara): 512px, para onde SVG não
-  entra.
+Não redesenhe, não distorça e não ponha texto por cima. Inline, leva
+`aria-hidden="true"` quando "PSIF" está escrito ao lado; sozinho,
+`role="img"` e `aria-label="PSIF"`. O símbolo é isento de contraste (WCAG
+1.4.3) e mantém as cores próprias nos dois temas (§25.3).
 
-O vetor foi traçado da imagem do protótipo (98% de sobreposição com ela). Não
-redesenhe nem distorça: o quadro do Figma é 137×130; o símbolo é quadrado,
-e não ponha texto por cima. Inline, leva `aria-hidden="true"` quando "PSIF"
-está escrito ao lado; sozinho, `role="img"` e `aria-label="PSIF"` (o
-`simbolo-psif.svg` já vem assim).
+### 1.2 Nome
 
-O **logo de login**: coração formado por dois hemisférios de cérebro, traço
-`--blue-700`, seguido de "PSIF" em `--blue-700`, peso 700, sobre branco,
-fica só no cartão de login, até o design decidir se o símbolo o substitui
-(§28.4).
-
-Logo é isento de contraste (WCAG 1.4.3), mas nunca recebe texto por cima nem
-é recolorido para outra família.
-
-### 1.2 Nome e assinatura
-
-- Sigla sempre em caixa alta: **PSIF**.
+- Sigla em caixa alta: **PSIF**.
 - Por extenso: "Plataforma de Suporte Psicopedagógico", sem "PSIF -" na
   frente, exceto no título da página pública.
-- Assinatura institucional no rodapé do login: "Acesso restrito a quem a
-  psicopedagoga do campus cadastrou." Se o pedido disser quem tem acesso
-  ("só psicopedagogos e professores"), a assinatura diz isso: quem pede a tela
-  conhece o escopo da entrega melhor que o padrão. O texto do protótipo ("exclusivo para
-  psicopedagogos e professores") deixava de fora alunos e responsáveis
-  (§16.2).
 
-### 1.3 Marca dentro do app
+### 1.3 Marca dentro do sistema
 
-No web, a barra lateral abre com o símbolo e o nome PSIF (§7.10).
+A marca aparece no topo da barra lateral (§7.10), no login e no cabeçalho da
+página pública. A barra de ações de cada tela é funcional (§7.3), sem marca.
 
-O PSIF não tem cabeçalho de marca dentro do app: a barra superior é funcional
-(§7.3) e a marca aparece só no splash (§13.5), no login e no cabeçalho da
-página pública (ícone do app à esquerda, "Entrar" à direita, fundo branco).
+### 1.4 Tokens de marca
 
-### 1.4 Regra dos Tokens de Marca
-
-`--blue-700` e `--blue-300` existem **só** para logo e ícone do app. Em UI,
-botão, link, ícone, seleção: o azul é `--navy-700`. Se um `--blue-*` aparece
-fora da marca, a tela ganhou uma segunda cor de ação.
+`--blue-700` e `--blue-300` existem só para o símbolo. Em interface (botão,
+link, ícone, seleção) o azul é `--navy-700`; um `--blue-*` fora da marca é
+uma segunda cor de ação.

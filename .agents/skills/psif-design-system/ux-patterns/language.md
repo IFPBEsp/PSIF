@@ -9,7 +9,7 @@ Verbo + objeto, e o objeto é o da tela:
 | Tela | Rótulo |
 |---|---|
 | Novo atendimento | Salvar atendimento |
-| Relatórios | Salvar relatório (o protótipo repete "Salvar o atendimento", que é erro) |
+| Relatórios | Salvar relatório |
 | Agenda | + Novo agendamento |
 | Documentos | + Adicionar documento |
 | Login | Entrar |
@@ -50,7 +50,8 @@ Nenhum termo em inglês na tela: nada de "Loading", "Status", "Dashboard",
 ### 19.4 Tom e mensagens
 
 - Saudação: "Olá, Ana!", com o primeiro nome e vírgula, não ponto; nunca o
-  papel (§16.2). Embaixo, a data de hoje, sem exclamação.
+  papel. Embaixo, a data de hoje ("Segunda-feira, 15 de junho"), sem
+  exclamação.
 - Erro diz o que fazer, não de quem é a culpa.
 - Notificação: título curto do fato + uma frase de contexto, sem dado
   sensível (§16.3).
@@ -65,23 +66,16 @@ Texto de interface sem vício de texto gerado:
 - **Voz ativa, com quem age**: "A psicopedagoga liberou o relatório", não
   "O relatório foi liberado". Na mensagem para quem usa, "você".
 - **Diga o que é**, sem a volta do "não é X, é Y".
-- **Um ponto de exclamação no app inteiro**: o da saudação.
+- **Um ponto de exclamação no sistema inteiro**: o da saudação.
 - **Sem travessão em texto de tela**: use vírgula ou ponto.
 
-### 19.5 Ortografia: erros do protótipo que não passam para o produto
+### 19.5 Ortografia
 
-| No protótipo | Correto |
-|---|---|
-| Relatório pentende | Relatórios pendentes |
-| atendimento de hoje | Atendimentos hoje |
-| Relatorios / Relatorio Semanal | Relatórios / Relatório semanal |
-| Relátorio psicologico.pdf | Relatório psicológico.pdf |
-| Laudo medico.pdf | Laudo médico.pdf |
-| Declação.pdf | Declaração.pdf |
-| informe o seu E-gmail | Informe seu e-mail |
-| Serie · Periodo | Série · Período |
-| Informatica - 3 ano | Informática · 3º ano |
-| Dados dos Alunos (no perfil de uma aluna) | Dados do aluno |
-| Cadastre-se acompanhe todos os atendimentos | Cadastre e acompanhe todos os atendimentos |
-| Olá. Psicopedagoga! | Olá, Ana! |
-| Descreva o Atendimento.... | Descreva o atendimento… |
+- Acento sempre: "Relatório psicológico.pdf", "Laudo médico.pdf", "Série",
+  "Período", "Informática".
+- Maiúscula só na primeira palavra e em nome próprio: "Relatório semanal",
+  "Dados do aluno", "Descreva o atendimento".
+- Plural quando a tela conta: "Relatórios pendentes", "Atendimentos hoje".
+- "e-mail", minúsculo e com hífen. Ordinal com º: "3º ano".
+- Separador entre dados: " · " ("Informática · 3º ano"), nunca hífen.
+- Reticências num caractere só (…), sem ponto a mais.

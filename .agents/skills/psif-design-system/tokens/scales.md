@@ -1,98 +1,79 @@
-### 3.4 Elevação e Sombra
+Os valores destas escalas estão em `assets/tokens.css`; aqui fica o papel de
+cada token.
 
-O protótipo usa sombra em dois lugares só: botão primário e cartão de login.
-Cartão comum **não tem sombra**: ele se separa do fundo céu pelo branco.
+### 3.4 Sombra
 
-| Token | Valor | Uso |
-|---|---|---|
-| `--sh-sm` | `0 4px 4px rgba(36,74,105,.25)` | botão primário, cartão de login (medido: geometria do Figma, tinta trocada) |
-| `--sh-md` | `0 12px 32px rgba(36,74,105,.24)` | o que flutua: folha modal, seletor de data, menu, toast, gaveta do celular, resultados da busca global (derivado) |
+Cartão comum não tem sombra: ele se separa do céu pelo branco.
 
-A sombra do Figma é preta (`rgba(0,0,0,.25)`); sobre o fundo céu ela suja o
-azul de cinza. Aqui a tinta é `--navy-700` com alpha: mesma geometria, sem
-o cinza. Nunca `rgba(0,0,0,…)`.
+| Token | Uso |
+|---|---|
+| `--sh-sm` | botão primário, cartão de login |
+| `--sh-md` | o que flutua: folha, diálogo, menu suspenso, toast, gaveta, resultados da busca global |
 
-### 3.5 Desfoque, vidro, véu e opacidade
+A tinta é `--navy-700` com alpha; nunca `rgba(0,0,0,…)`.
 
-O PSIF **não usa** blur nem glass (declarado em `absent_groups`). Superfície
-que flutua é branca e opaca.
+### 3.5 Véu, opacidade e linhas
 
-| Token | Valor | Uso |
-|---|---|---|
-| `--overlay` | `rgba(36,74,105,.48)` | véu atrás de folha modal (seletor de data, confirmação): derivado |
-| `--o-disabled` | `.45` | elemento desabilitado: derivado |
-| `--line-on-sky` | `rgba(36,74,105,.35)` | borda do filtro inativo, borda tracejada da área de envio: derivado de `--navy-700` (§3.2) |
-| `--divider-on-sky` | `rgba(36,74,105,.12)` | linha acima da barra de ação do celular: derivado |
+Sem blur e sem vidro: o que flutua é branco e opaco.
 
-No noturno, as duas viram branco a 35% e a 12% (§26). Os valores noturnos
-são proposta: confira na tela e ajuste se a linha sumir.
+| Token | Uso |
+|---|---|
+| `--overlay` | véu atrás de folha, diálogo e gaveta |
+| `--o-disabled` | elemento desabilitado |
+| `--line-on-sky` | borda do filtro inativo e da área de envio (contraste em §3.2) |
+| `--divider-on-sky` | linha acima da barra de ação da tela estreita |
 
-### 3.6 Raio (border-radius)
+### 3.6 Raio
 
-| Token | Valor | Uso |
-|---|---|---|
-| `--radius-xs` | `2px` | caixa de seleção (medido) |
-| `--radius-md` | `8px` | quadro de ícone, linha clicável dentro do cartão, item de menu, atalho (medido) |
-| `--radius-lg` | `10px` | botão, campo, folha modal (cantos de cima), cartão de login, item ativo da barra lateral |
-| `--radius-xl` | `12px` | cartão no celular (derivado, §28.2) |
-| `--radius-2xl` | `16px` | cartão no web, a partir de `--bp-md` (derivado, §28.2) |
-| `--radius-pill` | `999px` | avatar, filtro, selo, botão só de ícone |
+| Token | Uso |
+|---|---|
+| `--radius-xs` | caixa de seleção |
+| `--radius-md` | quadro de ícone, linha clicável, item de menu, atalho |
+| `--radius-lg` | botão, campo, folha e diálogo, cartão de login, item da barra lateral |
+| `--radius-xl` | cartão em tela estreita |
+| `--radius-2xl` | cartão em tela larga |
+| `--radius-pill` | avatar, filtro, selo, botão só de ícone |
 
-O raio segue o papel da peça (§6, item 2). Filho nunca tem raio maior que o
-pai; pílula e círculo não contam (selo dentro da linha de 8px, avatar dentro
-do cartão). Nenhum outro valor.
+Filho nunca tem raio maior que o pai; pílula e círculo não contam.
 
-### 3.7 Espaçamento (base 4px)
+### 3.7 Espaçamento
 
-Escala: `--sp-1` 4px · `--sp-2` 8px · `--sp-3` 12px · `--sp-4` 16px ·
-`--sp-5` 20px · `--sp-6` 24px · `--sp-8` 32px · `--sp-10` 40px · `--sp-12` 48px.
+Escala de 4px: `--sp-1` a `--sp-12`. Entre cartões e entre campos `--sp-6`;
+entre rótulo e campo `--sp-2`.
 
-Padding de componente:
+| Token | Onde |
+|---|---|
+| `--page-pad` | margem lateral em tela estreita |
+| `--card-pad` | interior de cartão |
+| `--list-row-pad` | linha de lista |
+| `--btn-pad` · `--input-pad` | botão e campo |
+| `--chip-pad` | filtro |
 
-| Token | Valor | Onde |
-|---|---|---|
-| `--page-pad` | `24px` | margem lateral da tela (medido: cartões a 22–24px da borda) |
-| `--card-pad` | `16px` | interior de cartão (medido) |
-| `--list-row-pad` | `16px` | linha de lista dentro de cartão |
-| `--btn-pad` | `12px 16px` | botão (derivado: altura vai de 37–39px para 48px, §20.6) |
-| `--input-pad` | `12px 16px` | campo (derivado, mesmo motivo) |
-| `--chip-pad` | `8px 16px` | filtro (derivado: o protótipo tem 23px de altura) |
+### 3.8 Ícone e quadro de ícone
 
-Entre cartões da mesma tela: `--sp-6`. Entre rótulo e campo: `--sp-2`. Entre
-campos: `--sp-6`.
-
-### 3.8 Tamanhos de Ícone
-
-| Token | Valor | Uso |
-|---|---|---|
-| `--ic-sm` | `16px` | voltar (←), chevron (›) |
-| `--ic-md` | `20px` | ícone de ação em linha |
-| `--ic-lg` | `24px` | ícone de atalho |
-| `--ic-xl` | `32px` | símbolo do PSIF na barra lateral |
-| `--ic-brand` | `136px` | símbolo do PSIF no splash (medido: 137×130 no Figma; o símbolo é quadrado) |
-| `--tile-icon` | `40px` | quadro do ícone em linha de lista e de tabela (derivado) |
-| `--tile-icon-lg` | `48px` | quadro do ícone em cartão de destaque e na área de envio (derivado) |
+| Token | Uso |
+|---|---|
+| `--ic-sm` | voltar, chevron |
+| `--ic-md` | ícone em linha e em campo |
+| `--ic-lg` | ícone de atalho e da barra lateral |
+| `--ic-xl` | símbolo na barra lateral |
+| `--tile-icon` | quadro de ícone em lista e tabela |
+| `--tile-icon-lg` | quadro de ícone em cartão de destaque e na área de envio |
 
 Quadro de ícone: `--radius-md`, fundo `--sky-100`, ícone `--ic-md` em
-`--navy-700` no centro.
+`--navy-700`.
 
-### 3.9 Movimento (tokens)
+### 3.9 Movimento
 
-`--dur-fast` 150ms · `--dur-normal` 200ms · `--dur-slow` 300ms ·
-`--ease-standard` · `--ease-out`. Todos derivados: o protótipo é estático.
-Uso em §17.
+`--dur-fast`, `--dur-normal`, `--ease-standard`, `--ease-out`. Uso em §17.
 
-### 3.10 Superfície e Z-index
+### 3.10 Superfície e camada
 
-Superfícies:
+| Token | Uso |
+|---|---|
+| `--surface-base` | fundo da tela |
+| `--surface-raised` | cartão, campo |
+| `--surface-overlay` | folha, diálogo, menu |
 
-| Token | Aponta para | Uso |
-|---|---|---|
-| `--surface-base` | `--sky-100` | fundo da tela |
-| `--surface-raised` | `--white` | cartão, campo |
-| `--surface-overlay` | `--white` | folha modal |
-| `--surface-brand` | `--navy-700` | splash |
-
-Camadas: `--z-base` 0 (o piso, para zerar um `z-index` herdado) · `--z-raised` 10 · `--z-sticky` 100 (barra superior e
-botão de rodapé) · `--z-overlay` 300 · `--z-modal` 400 · `--z-toast` 600. Nunca
-um z-index avulso.
+Camadas, de baixo para cima: `--z-base`, `--z-raised`, `--z-sticky` (barra de
+ação), `--z-overlay`, `--z-modal`, `--z-toast`. Nunca um z-index avulso.

@@ -1,19 +1,6 @@
-/* PSIF Design System — tokens de design de produção
- *
- * ARQUIVO GERADO por scripts/gen_tokens_css.py a partir de scripts/tokens.json.
- * Não edite aqui: mude o tokens.json e rode o gerador de novo (o
- * `--check` acusa quando os dois estão fora de sincronia).
- *
- * Uso: cole/importe este arquivo antes do seu CSS e consuma sempre por
- * var(--token). Nenhum valor de cor, raio, sombra, espaçamento ou
- * tipografia deve aparecer literal na sua folha de estilo — se faltar um
- * token para o que você precisa, o caso está nos catálogos da skill, não
- * num valor novo inventado.
- *
- * Regra de ouro: fundo céu, cartão branco, ação em marinho: o marinho marca o que se clica e o que se lê primeiro; nunca pinta área grande fora do splash
- *
- * NUNCA como cor de texto: --ink-600, --ink-500, --navy-500, --sky-300, --blue-300 —
- * todos falham WCAG AA (banlist em scripts/tokens.json).
+/* PSIF Design System: tokens. Gerado de scripts/tokens.json por gen_tokens_css.py; não edite.
+ * Consuma por var(--token).
+ * Nunca como cor de texto: --ink-600, --ink-500, --navy-500, --sky-300, --blue-300 (§3.2).
  */
 
 :root {
@@ -48,7 +35,7 @@
   /* Scrim de modal e drawer — §3.5 */
   --overlay: rgba(36,74,105,.48);
 
-  /* Linhas sobre o céu (derivadas de --navy-700) — §3.5 */
+  /* Linhas sobre o céu — §3.5 */
   --line-on-sky: rgba(36,74,105,.35);
   --divider-on-sky: rgba(36,74,105,.12);
 
@@ -87,13 +74,13 @@
   --ic-md: 20px;
   --ic-lg: 24px;
   --ic-xl: 32px;
-  --ic-brand: 136px;
   --tile-icon: 40px;
   --tile-icon-lg: 48px;
 
   /* Alvo de toque — mínimo de todo clicável; botão e campo têm o seu — §20.6 */
   --target-min: 44px;
   --control-min: 48px;
+  --target-fine: 32px;
 
   /* Avatar — cartão de aluno e perfil — §12.1 */
   --avatar-sm: 56px;
@@ -112,9 +99,8 @@
   --surface-base: var(--sky-100);
   --surface-raised: var(--white);
   --surface-overlay: var(--white);
-  --surface-brand: var(--navy-700);
 
-  /* Paleta do modo escuro (o bloco .dark no fim do arquivo aponta cada token para cá) — §26 */
+  /* Paleta do modo escuro (o bloco .dark no fim do arquivo aponta cada token para cá) — §25 */
   --dark-navy-900: #DBEEFA;
   --dark-navy-800: #BEE0F6;
   --dark-navy-700: #9ECDF0;
@@ -142,13 +128,14 @@
   --dark-line-on-sky: rgba(255,255,255,.35);
   --dark-divider-on-sky: rgba(255,255,255,.12);
 
-  /* Largura máxima — §5.2 */
-  --w-mobile: 390px;
-  --w-content: 1200px;
+  /* Larguras: conteúdo, barra lateral, coluna lateral, diálogo e login — §5.2 */
+  --w-auth: 400px;
   --w-form: 720px;
   --w-sidebar: 240px;
+  --w-aside: 320px;
+  --w-content: 1440px;
 
-  /* Breakpoints — layout mobile-first, cresce por min-width — §5.4 */
+  /* Breakpoints — da tela estreita para a larga, por min-width — §5.4 */
   --bp-md: 768px;
   --bp-lg: 1200px;
 
@@ -156,9 +143,7 @@
   --font-sans: var(--font-figtree, 'Figtree'), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   /* Escala tipográfica — §4.2 */
-  --fs-splash: 36px;
   --fs-display: 32px;
-  --fs-splash-sub: 26px;
   --fs-h1: 20px;
   --fs-h2: 18px;
   --fs-h3: 16px;
@@ -174,15 +159,14 @@
   /* Motion — Duração — §3.9 */
   --dur-fast: 150ms;
   --dur-normal: 200ms;
-  --dur-slow: 300ms;
 
   /* Motion — Easing — §3.9 */
   --ease-standard: cubic-bezier(.2, 0, 0, 1);
   --ease-out: cubic-bezier(0, 0, 0, 1);
 }
 
-/* Modo escuro (§26): `.dark` ou `[data-theme="dark"]` no <html>. */
-:root.dark, :root[data-theme="dark"] {
+/* Modo escuro (§25): .dark no <html> */
+:root.dark {
   color-scheme: dark;
   --navy-900: var(--dark-navy-900);
   --navy-800: var(--dark-navy-800);
@@ -212,15 +196,9 @@
   --divider-on-sky: var(--dark-divider-on-sky);
 }
 
-/* Daqui para baixo, regra de elemento, em `@layer base`: o `:root` acima
- * fica fora de camada para vencer o tema do Tailwind, mas uma regra de
- * elemento fora de camada venceria também as utilitárias (`rounded-md`
- * perdia para a regra de foco). Em camada, a utilitária da tela ganha. */
+/* Regras de elemento em @layer base: a utilitária da tela vence. */
 @layer base {
 
-/* Base mínima: fonte e superfície de página. Sem isto, a tela herda a
- * fonte do navegador, o fundo branco puro e a margem de 8px do <body>,
- * que abre uma faixa em volta da tela — nada disso é da skill. */
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -231,15 +209,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Foco visível é requisito WCAG 2.4.7, não enfeite (§20.5). Remover o
- * outline sem substituto é falha crítica; este é o substituto padrão. */
+/* Foco visível (§20.5) */
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--navy-700);
   outline-offset: 2px;
 }
 
-/* Superfícies do navegador (§2.4): o que a tela não desenha
- * também é da skill. */
+/* Superfícies do navegador (§2.4) */
 ::selection { background: var(--sky-300); color: var(--ink-900); }
 :root { accent-color: var(--navy-700); }
 input, textarea { caret-color: var(--navy-700); }
@@ -247,8 +223,7 @@ a { text-underline-offset: .2em; }
 time, data, td { font-variant-numeric: tabular-nums; }
 input, select, textarea { font-size: var(--fs-h3); }
 
-/* Movimento reduzido (§17.5) — bloco lido de ../tokens/motion-icons.md,
- * não recopiado: duas versões da mesma regra divergem, e já divergiram. */
+/* Movimento reduzido (§17.5) */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }

@@ -1,108 +1,125 @@
-## 20. ACESSIBILIDADE (WCAG 2.2 AA: inegociável)
-
-Onde o protótipo reprova, a skill corrige, e a correção está em aberto em
-§28 até o design ratificar.
+## 20. ACESSIBILIDADE (WCAG 2.2 AA, inegociável)
 
 ### 20.1 Contraste (WCAG 1.4.3 / 1.4.11)
 
-Pares verificados e armadilhas do PSIF em §3.2 (escuro em §26.5). Par fora
-da tabela passa por `check_contrast.py`.
+Pares verificados em §3.2 (escuro em §25.5). Par fora da tabela passa por
+`check_contrast.py`.
 
 ### 20.2 Cor nunca é o único canal (WCAG 1.4.1)
 
-Situação do aluno, tipo de evento na linha do tempo e severidade de
-notificação sempre têm **texto**. O marcador colorido repete o texto; não o
-substitui.
+Situação do aluno, tipo de evento da linha do tempo e severidade de
+notificação sempre têm texto. A cor repete o texto, não o substitui. Estado
+vai em texto e ícone, nunca numa faixa colorida na borda de cartão, alerta
+ou linha.
 
-### 20.3 Teclado (WCAG 2.1.1 / 2.1.2 / 2.4.7)
+### 20.3 Teclado (WCAG 2.1.1 / 2.1.2)
 
-Todo cartão que abre detalhe é um `<a>` ou `<button>` inteiro, não um `<div>`
-com clique. Folha modal prende o foco e fecha com Esc.
+Cartão que abre detalhe é `<a>` ou `<button>` inteiro, nunca `<div>` com
+clique. Folha, diálogo e gaveta prendem o foco e fecham com Esc.
 
 ### 20.4 Ordem de foco (WCAG 2.4.3)
 
-Voltar (←) → título → conteúdo na ordem visual → botão primário. O botão de
-tela vem depois dos campos no DOM, nos dois formatos (§5.6).
-Nas telas-raiz, que não têm voltar: título (ou saudação) → ☰ → conteúdo. Com
-a gaveta aberta, o foco fica nela (§7.9). No web: "Pular para o conteúdo" (link que aparece ao receber foco)
-→ barra lateral → conteúdo.
+- Tela de tarefa: voltar → título → campos → botão primário. O botão vem
+  depois dos campos no DOM em qualquer largura (§5.6).
+- Tela-raiz na tela estreita: ☰ → título ou saudação → conteúdo, a ordem do
+  DOM (§5.1). Com a gaveta aberta, o foco fica nela (§7.9).
+- A partir de `--bp-md`: "Pular para o conteúdo" (link que aparece ao
+  receber foco) → barra lateral → conteúdo.
 
 ### 20.5 Foco visível (WCAG 2.4.7 / 2.4.11)
 
-<!-- ⚠️  Esta seção é CONTRATO de script: `gen_tokens_css.py` confere que os
-     três valores abaixo aparecem aqui antes de escrever o anel de foco no
-     tokens.css. Mantenha-os em sincronia com `focus_ring` do tokens.json. -->
+**Botões, links e abas.** Anel de foco: outline de 2px sólido em
+`var(--navy-700)`, offset 2px. O offset deixa uma faixa do fundo entre o
+botão primário e o anel, que é da mesma cor do botão; por isso não é
+opcional. O tokens.css já aplica o anel em `:focus-visible`.
 
-Anel de foco visível: outline de **2px** sólido em `var(--navy-700)`, com
-offset 2px. Contraste do anel: 9.30:1 sobre branco, 7.26:1 sobre o céu. Sobre
-o botão primário (que já é `--navy-700`), o offset deixa uma faixa do fundo
-entre botão e anel: por isso o offset não é opcional. Nunca `outline: none`
-sem substituto.
+**Campos.** O foco marca o campo inteiro, não só o `<input>` de dentro:
 
-### 20.6 Alvos de toque e clique (WCAG 2.5.8)
+- O `<input>`/`<textarea>` interno fica com `outline: none`; o anel vai no
+  contêiner do campo (o `<label>` ou `<div>` que segura ícone, texto e
+  botão), via `:focus-within`.
+- Anel interno de 2px, por `box-shadow: inset`, sem offset, acompanhando o
+  `--radius-lg` do campo.
+- Campo com borda (texto, data, seleção, texto longo): a borda de 1px passa
+  para `--navy-700` e ganha `inset 0 0 0 1px var(--navy-700)`, somando 2px.
+  O fundo continua `--white`.
+- Campo sem borda (busca, fundo `--ink-100`): o fundo vira `--white` e ganha
+  `inset 0 0 0 2px var(--navy-700)`.
+- Com erro (§10.7), o anel e a borda usam `--danger-700` no lugar de
+  `--navy-700`.
+- Transição de fundo e sombra em `--dur-fast` `--ease-standard`.
+- Vale para clique e teclado (`:focus-within`, não `:focus-visible`): quem
+  digita precisa ver onde está o cursor.
 
-Mínimo **44×44px**: o token `--target-min`. Use `var(--target-min)` em
-`min-width` e `min-height` de todo elemento clicável, nunca 44px literal. O
-protótipo reprova em quatro lugares:
+Nunca `outline: none` sem um desses substitutos.
 
-| Elemento | Protótipo | PSIF |
-|---|---|---|
-| botão primário | 37–39px de altura | `min-height: var(--control-min)` (48px) |
-| campo | 39px | `min-height: var(--control-min)` (48px) |
-| filtro (Turma, Série, Período) | 23px | `min-height: var(--target-min)` |
-| atalho de Ações Rápidas | 48×43px | 48×48px |
+Tailwind (§26.8). O `aria-invalid` fica no `<input>`, por isso o contêiner
+lê o erro com `has-[[aria-invalid=true]]:`:
 
-Voltar, menu e chevron: ícone pequeno, área de toque `--target-min`.
+    contêiner: rounded-lg border border-input bg-card
+               focus-within:border-primary focus-within:ring-1
+               focus-within:ring-inset focus-within:ring-primary
+               has-[[aria-invalid=true]]:border-destructive
+               has-[[aria-invalid=true]]:focus-within:ring-destructive
+               transition-[background-color,box-shadow] duration-(--dur-fast)
+    busca:     rounded-lg bg-ink-100 focus-within:bg-card
+               focus-within:ring-2 focus-within:ring-inset
+               focus-within:ring-primary
+
+### 20.6 Alvos (WCAG 2.5.8)
+
+Todo clicável tem `min-width` e `min-height` de `var(--target-min)`; botão
+primário de largura total e campo, `var(--control-min)`; botão compacto,
+`var(--target-min)` (§8.1). Alvo com mouse: §5.12. Dia do calendário na tela
+estreita: §11.6. Ícone pequeno não encolhe
+a área: voltar, menu e chevron mantêm o alvo.
 
 ### 20.7 Rótulos, nomes e ARIA
 
-- Todo campo tem `<label>` visível. O login e o "Recuperar senha" do
-  protótipo usam só placeholder ("Seu E-mail"), o que reprova: o rótulo some
-  quando o usuário digita.
-- Botão só com ícone (←, ☰, ›) tem `aria-label`: "Voltar", "Abrir menu",
-  "Abrir perfil de Maria Ana".
+- Todo campo tem `<label>` visível; placeholder não é rótulo. A busca é a
+  única exceção (§7.7).
+- Botão só de ícone tem `aria-label`: "Voltar", "Abrir menu", "Abrir perfil
+  de Maria Ana".
 - Senha tem botão "Mostrar senha" com `aria-pressed`.
 
 ### 20.8 Leitores de tela
 
-- Barra superior é `<header>`, conteúdo é `<main>`, barra lateral e gaveta são
-  `<nav aria-label="Principal">` com `aria-current="page"` no destino ativo.
-- Indicador é lido como frase: "8 atendimentos hoje", não "08" seguido de
-  rótulo solto.
-- Lista de alunos, documentos e notificações é `<ul>`; dados tabulares
-  (se houver) são `<table>`, nunca grade de `<div>`.
+- Barra de ações em `<header>`, conteúdo em `<main>`, barra lateral e gaveta
+  em `<nav aria-label="Principal">` com `aria-current="page"` no destino
+  ativo.
+- Indicador é lido como frase: "8 atendimentos hoje".
+- Lista de alunos, documentos e notificações é `<ul>`; tabela é `<table>`,
+  nunca grade de `<div>`.
 
-### 20.9 Estados e feedback acessíveis
+### 20.9 Estados acessíveis
 
-Erro de campo: texto em `--danger-700` abaixo do campo, ligado por
-`aria-describedby`, campo com `aria-invalid="true"`. Confirmação de envio
-("Instruções enviadas") em região `role="status"`.
+Erro de campo em `--danger-700` abaixo do campo, ligado por
+`aria-describedby`, com `aria-invalid="true"` no campo. Confirmação
+("Instruções enviadas") em `role="status"`.
 
-### 20.10 Movimento e animação (WCAG 2.3.3 / 2.3.1)
+### 20.10 Movimento (WCAG 2.3.3)
 
-Respeite `prefers-reduced-motion` (§17.5). A barra de progresso do splash vira
-estado estático com texto "Carregando".
+Respeite `prefers-reduced-motion` (§17.5). Barra de progresso vira estado
+estático, com o mesmo rótulo da ação ("Enviando…", §10.4).
 
-### 20.11 Daltonismo e visão de cores
+### 20.11 Daltonismo
 
-Verde, amarelo e azul da linha do tempo são indistinguíveis para parte dos
-usuários: por isso o tipo de evento é escrito (§11.5).
+As cores da linha do tempo se confundem para parte das pessoas: o tipo de
+evento vai escrito (§11.5).
 
-### 20.12 Contexto de uso: atendimento com o aluno presente
+### 20.12 Aluno presente
 
-A tela pode estar virada para o aluno ou para a família. Nada sensível
-(laudo, diagnóstico, observação) aparece em tela de lista, em notificação ou
-em pré-visualização; só dentro do perfil, depois de um toque deliberado
-(§16.3).
+A tela pode estar virada para o aluno ou para a família. Dado sensível só
+dentro do perfil, depois de abrir o item (§16.3).
 
-### 20.13 Zoom, reflow e redimensionamento (WCAG 1.4.4 / 1.4.10)
+### 20.13 Zoom e reflow (WCAG 1.4.4 / 1.4.10)
 
-Nada de altura fixa em cartão com texto: o cartão cresce. A 200% e a 320px de
-largura nada rola na horizontal. Os indicadores continuam em 2×2: cada célula
-fica com uns 136px, que comportam o número de 32px e o rótulo em duas linhas.
+Cartão com texto não tem altura fixa: cresce. A 200% e a 320px de largura
+nada rola na horizontal. Os indicadores seguem em 2×2: cada célula fica com
+uns 120px (320 − 2 × `--page-pad` − 2 × `--card-pad`, dividido por 2), que
+comportam o número e o rótulo em duas linhas.
 
 ### 20.14 Tema escuro
 
-O tema "Sistema" segue `prefers-color-scheme` do aparelho, e o escuro usa só
-os pares verificados de §26.5. Toda tela é conferida nos dois temas: contraste,
-foco visível e estado que não depende só da cor.
+Toda tela é conferida nos dois temas: contraste (§25.5), foco visível e
+estado que não depende só da cor.

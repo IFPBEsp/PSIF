@@ -4,92 +4,72 @@
 
 | Tipo | Visual | Uso |
 |---|---|---|
-| **Primário** | fundo `--navy-700`, texto branco `--fs-h2` peso 600, `--radius-lg`, `--sh-sm`, largura total, `min-height: var(--control-min)` | a ação da tela: "Salvar atendimento", "Entrar", "Enviar instruções" |
-| **Secundário** | fundo branco, borda 1px `--navy-700`, texto `--navy-700` | ação alternativa ao lado do primário: "Saiba mais" |
-| **Compacto** | primário com `--fs-small`, largura automática, altura `--target-min` | ação no cabeçalho da página pública: "Entrar". O botão de tela (§5.6) já fica compacto sozinho no web; não some `--compacto` a ele |
-| **Link** | texto `--navy-700`, sublinhado | navegação dentro de texto: "Esqueceu a senha?", "Fale com a psicopedagoga do campus", "Voltar para o login" |
+| **Primário** | fundo `--navy-700`, texto `--white` `--fs-h2` 600, `--radius-lg`, `--sh-sm`, largura total, altura `--control-min` | a ação da tela: "Salvar atendimento", "Entrar" |
+| **Secundário** | fundo `--white`, borda 1px `--navy-700`, texto `--navy-700` | ação alternativa ao lado do primário |
+| **Compacto** | primário com `--fs-small`, largura automática, altura `--target-min` | "Entrar" no cabeçalho da página pública; o botão de tela já fica compacto a partir de `--bp-md` (§5.6) |
+| **Link** | texto `--navy-700`, sublinhado | navegação dentro de texto: "Esqueceu a senha?" |
 
-Estados: hover `--navy-800`, com transição de cor em `--dur-fast`;
-pressionado `--navy-900`; desabilitado
-`--o-disabled`; carregando troca o rótulo por "Salvando…" e bloqueia novo
-toque. Botão de adicionar começa com "+": "+ Novo agendamento", "+ Adicionar
-documento".
+Estados em §6. Carregando troca o rótulo ("Salvando…") e bloqueia novo
+clique. Botão de adicionar começa com "+": "+ Novo agendamento".
 
-**Barra de ação do celular.** O botão de tela (§5.6) fica numa faixa
-`--surface-base` presa à base, com linha de 1px `--divider-on-sky` em cima,
-`--sp-3` em cima e `--sp-6` nas laterais e embaixo. A regra que vale antes do
-envio ("PDF, até 20 MB") fica logo abaixo do botão, em `--fs-caption`
-`--ink-700`, ligada ao botão por `aria-describedby`.
+Barra de ação da tela estreita: §5.6.
 
 ### 8.2 Menu de opções
 
-Lista em folha modal (§9.6) quando uma linha tem mais de uma ação. Nunca menu
-flutuante pequeno: o alvo de toque não cabe.
+Linha com mais de uma ação abre a lista: `DropdownMenu` com mouse; no
+toque, folha (§9.6). Alvo dos itens em §5.12.
 
 ### 8.3 Campos
 
-Rótulo **acima** do campo, `--fs-h3`, `--ink-900` (medido no Novo
-atendimento). Campo: fundo branco, `--radius-lg`, `--input-pad`,
-`min-height: var(--control-min)`, valor em `--fs-h3` (16px) peso 500
-`--navy-700`: abaixo de 16px o Safari do iPhone dá zoom ao focar o campo,
-placeholder em `--fs-small` `--ink-700`.
+Rótulo acima do campo, `--fs-h3` `--ink-900`. Campo: fundo `--white`, borda
+1px `--ink-600` sobre qualquer fundo, `--radius-lg`, `--input-pad`, altura
+`--control-min`, valor em `--fs-h3` 500 `--navy-700`, placeholder em
+`--fs-small` `--ink-700`. A borda é o que mostra o campo vazio (§3.2).
 
-- Campo opcional: o rótulo termina em "(opcional)", em `--ink-700` peso 400.
-  Obrigatório não ganha marca (§15.4).
-- Borda 1px `--ink-600` sempre, sobre o céu e sobre o cartão. Branco sobre o
-  céu dá 1.28:1, e um campo vazio só se reconhece pelo contorno (WCAG
-  1.4.11); `--ink-600` passa 3:1 nos dois fundos. O Novo atendimento do
-  protótipo não tem borda: correção registrada em §28.2.
-- Ícone à esquerda (envelope, cadeado) em `--ink-600`, `--ic-md`.
-- Campo de texto longo ("Descrição", "Relatório semanal"): mesma caixa,
-  altura mínima de quatro linhas, `--lh-normal`.
-- Erro: borda `--danger-700` **e** mensagem em texto abaixo (§20.9).
+- Opcional e obrigatório: §15.4; "(opcional)" em `--ink-700` 400.
+- Ícone à esquerda (envelope, cadeado): `--ink-600`, `--ic-md`.
+- Texto longo ("Descrição"): mesma caixa, quatro linhas de altura mínima,
+  `--lh-normal`.
+- Erro: borda `--danger-700` e mensagem em texto embaixo (§10.7).
+- Foco: no contêiner do campo, por `:focus-within` (§20.5).
 
-### 8.4 Seleção e busca
+### 8.4 Seleção
 
-Seleção ("Aluno", "Tipo de atendimento") abre lista em folha modal. A lista
-ganha busca no topo quando passa de sete itens (Aluno sempre; Tipo de
-atendimento, com quatro opções, não precisa): no celular a busca abre o
-teclado por cima da lista. Chevron (⌄) `--ic-md` à direita. Aluno é sempre escolhido da lista,
-nunca digitado.
+"Aluno" e "Tipo de atendimento" abrem a lista como o menu de §8.2. Busca no topo da lista quando ela passa de sete itens (Aluno sempre).
+Chevron (⌄) `--ic-md` à direita. Aluno vem sempre da lista, nunca digitado.
+Tipo de atendimento: Individual, Em grupo, Com a família, Reunião com
+professor.
 
-Marcação: `<label>` visível + `<button aria-haspopup="dialog">` com
-`aria-labelledby` apontando para o rótulo **e** para o valor: o leitor de
-tela lê "Aluno, Anitta Peniwyse". Sem valor, o botão mostra "Selecione" no
-estilo de placeholder (§8.3). Escolher fecha a folha e devolve o foco ao
-botão.
-
-"Tipo de atendimento" no protótipo parece campo de texto (sem ⌄): é
-seleção: Individual, Em grupo, Com a família, Reunião com professor.
+Marcação: `<label>` visível e gatilho com `aria-labelledby` no rótulo e no
+valor ("Aluno, Anitta Peniwyse"). O gatilho anuncia o que abre:
+`aria-haspopup="listbox"` no menu com mouse (`Select`, ou `Command` num
+`Popover` quando há busca) e `aria-haspopup="dialog"` na folha do toque. Sem valor,
+"Selecione" no estilo de placeholder. Escolher fecha a lista e devolve o foco
+ao botão.
 
 ### 8.5 Envio de arquivo
 
-"+ Adicionar documento" abre o seletor do sistema. Depois do envio, a linha
-aparece na lista com nome, tamanho e data (§11.2). Tipos aceitos e tamanho
-máximo escritos antes do envio, não no erro. Os valores vêm do backend; o
-PSIF ainda não os definiu (§28.4). Em protótipo, escreva "PDF, até 20 MB" e
-avise que é provisório.
+"+ Adicionar documento" abre o seletor do sistema; depois do envio, a linha
+entra na lista com nome, tamanho e data (§11.2). Tipos aceitos e tamanho
+máximo aparecem antes do envio, nunca só no erro; os valores vêm do backend
+(§27).
 
-**Web**: além do botão "+ Adicionar documento" no cabeçalho do cartão de
-documentos, a coluna lateral tem uma área de envio: cartão branco
-(`--radius-2xl`) com borda tracejada de 2px `--line-on-sky`, quadro de ícone
-`--tile-icon-lg` em `--sky-100`, "Arraste um arquivo para cá" (`--fs-h3`
-600), "ou escolha no computador" (texto com estilo de link, sem `<a>`: um
-link dentro do `<button>` é HTML inválido e confunde o leitor de tela) e a
-regra de envio em
-`--fs-caption`. A área inteira é um `<button>`: o teclado abre o seletor.
-Hover `--ink-100`. **Celular**: sem área de envio; só o botão da barra de
-ação.
+Na tela larga, a coluna lateral de Documentos (§13.2) tem também uma área de
+envio: cartão `--white` `--radius-2xl` com borda tracejada de 2px
+`--line-on-sky`, quadro de ícone `--tile-icon-lg` em `--sky-100`, "Arraste um
+arquivo para cá" (`--fs-h3` 600), "ou escolha no computador" (texto com
+estilo de link, sem `<a>`) e a regra de envio em `--fs-caption`. A área
+inteira é um `<button>` que abre o seletor e aceita arrastar; hover
+`--ink-100`. Na tela estreita, só o botão da barra de ação.
 
 ### 8.6 Data e máscaras
 
-Data em `dd/mm/aaaa`, com ícone de calendário à direita que abre o seletor
-de mês (§11.6): botão próprio, `--ink-900`, alvo `--target-min` (§18). Hora em `hh:mm`, 24 horas. Matrícula só com dígitos.
+Data em `dd/mm/aaaa`, com botão de calendário à direita que abre o mês
+(§11.6), alvo `--target-min`. Hora em `hh:mm`, 24 horas. Matrícula só com
+dígitos.
 
 ### 8.7 Caixa de seleção
 
-Quadrado de 16px, `--radius-xs`, borda `--ink-600`; marcado: fundo
-`--navy-700` com ✓ branco. Rótulo clicável à direita ("Lembrar-me", desmarcado por padrão: a máquina
-pode ser compartilhada, §28.4); a área
-de toque é a linha toda, com altura `--target-min`. No projeto, `Checkbox`
-com `Label` (§6).
+Quadrado `--sp-4`, `--radius-xs`, borda `--ink-600`; marcado, fundo
+`--navy-700` com ✓ `--white`. O rótulo fica à direita e a linha inteira é o
+alvo, com `--target-min`. "Lembrar-me" no login vem desmarcado (§27).

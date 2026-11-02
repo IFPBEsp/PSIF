@@ -1,93 +1,41 @@
 #!/usr/bin/env python3
 """
-Acusa divergência entre os tokens da skill e a cópia colada num projeto.
-
-Por quê: "cole, não redigite" (SKILL.md, passo 1) mata o drift na origem, mas cria duas
-cópias — a da skill e a do `globals.css` (ou equivalente) do projeto que
-consome. `gen_tokens_css.py --check` cobre a primeira e não sabe da segunda.
-Sem isto, a paleta do produto e a paleta da skill divergem em silêncio, que é
-o mesmo modo de falha que o `--check` existe para impedir, um nível acima.
+Compara os tokens colados num projeto com o :root de assets/tokens.css da skill.
 
 Uso:
-    python check_consumer.py caminho/para/globals.css
-    python check_consumer.py app/globals.css --quiet   # só o resumo
+    python check_consumer.py src/app/globals.css [--quiet]
 
-Exit 0 = nenhuma divergência. Exit 2 = divergência encontrada.
-
-O que ele NÃO faz: reclamar de token que o projeto inventou. `--primary`,
-`--sidebar`, `--table-head` são do consumidor. Só entra no relatório o que tem
-nome de token da skill e valor diferente — ou nome quase igual, que costuma
-ser erro de digitação.
+Entrada: o CSS do projeto. Token que o projeto inventou não conta; só nome da
+skill com outro valor, ou nome quase igual a um da skill.
+Saída: 0 sem divergência; 2 com divergência.
 """
 
 import argparse
 import difflib
-import json
 import os
 import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-TOKENS_PATH = os.path.join(HERE, "tokens.json")
-
-# Grupos que guardam valores/exceções, não nomes de token (mesma lista do lint).
-NAO_SAO_TOKENS = {
-    "gradient_literals", "translucent_literals", "named_colors_allowed",
-    "text_color_banlist", "icon_color_allowed", "browser_surfaces",
-    "spacing_exceptions", "wcag_minimum", "touch_target_min_px", "_comment",
-    "absent_groups",
-}
+CSS_DA_SKILL = os.path.normpath(os.path.join(HERE, "..", "assets", "tokens.css"))
 
 DECL = re.compile(r"(?<![\w-])--([\w-]+)\s*:\s*([^;{}]+)(?=[;}])")
 ALIAS = re.compile(r"^var\(\s*--([\w-]+)\s*\)$")
 
-# Escopos que legitimamente redefinem token e NÃO são divergência:
-#   @theme      — ponte de namespace do Tailwind v4 (§27.2)
-#   .dark etc.  — sobrescrita de modo escuro (§26)
+# @theme (§26.2) e .dark (§25) redefinem token de propósito.
 ESCOPO_LEGITIMO = re.compile(
-    r"(^|\s)(@theme\b|\.dark\b|\[data-theme|@media[^{]*prefers-color-scheme)"
+    r"@theme\b|\.dark\b|\[data-theme|@media[^{]*prefers-color-scheme"
 )
 
 
-def tokens_da_skill():
-    with open(TOKENS_PATH, encoding="utf-8") as f:
-        dados = json.load(f)
-    plano = {}
-
-    def colhe(no):
-        for chave, valor in no.items():
-            if isinstance(valor, dict):
-                colhe(valor)
-            elif isinstance(chave, str) and not chave.startswith("_"):
-                plano[chave] = str(valor)
-
-    for grupo, conteudo in dados.items():
-        if grupo in NAO_SAO_TOKENS or not isinstance(conteudo, dict):
-            continue
-        colhe(conteudo)
-    return plano
-
-
-def normaliza(valor):
-    """Compara significado, não formatação: caixa, espaço e aspas não contam."""
-    valor = " ".join(valor.split()).strip().strip("\'\"")
-    return valor.lower().replace(", ", ",")
-
-
-def blocos_base(css):
-    """Devolve só os trechos de escopo base — tipicamente `:root`.
-
-    Sem isto o checker acusa a ponte `--radius-md: var(--tw-radius-md)` do
-    `@theme` e toda sobrescrita do `.dark` como divergência, que é ruído: as
-    duas são o uso previsto (§26, §27.2). Um checker com 20 falsos positivos
-    é pior que checker nenhum — ninguém lê o vigésimo primeiro.
-    """
-    trechos, i = [], 0
+def blocos(css):
+    """(seletor, deslocamento, corpo) de cada bloco de primeiro nível."""
+    i = 0
     while True:
         abre = css.find("{", i)
         if abre == -1:
-            break
-        seletor = css[css.rfind("}", 0, abre) + 1: abre]
+            return
+        seletor = css[css.rfind("}", 0, abre) + 1: abre].strip()
         profundidade, fim = 1, abre + 1
         while profundidade and fim < len(css):
             if css[fim] == "{":
@@ -95,15 +43,35 @@ def blocos_base(css):
             elif css[fim] == "}":
                 profundidade -= 1
             fim += 1
-        if not ESCOPO_LEGITIMO.search(seletor):
-            trechos.append((abre + 1, css[abre + 1:fim - 1]))
+        yield seletor, abre + 1, css[abre + 1:fim - 1]
         i = fim
-    return trechos
+
+
+def tokens_da_skill():
+    with open(CSS_DA_SKILL, encoding="utf-8") as f:
+        css = re.sub(r"/\*.*?\*/", "", f.read(), flags=re.S)
+    plano = {}
+    for seletor, _, corpo in blocos(css):
+        if seletor == ":root":
+            for m in DECL.finditer(corpo):
+                plano.setdefault(m.group(1), m.group(2).strip())
+    return plano
+
+
+def normaliza(valor):
+    """Ignora caixa, espaço e aspas."""
+    valor = " ".join(valor.split()).strip().strip("\'\"")
+    return valor.lower().replace(", ", ",")
+
+
+def blocos_base(css):
+    """(deslocamento, corpo) dos blocos fora de @theme e .dark."""
+    return [(ini, corpo) for seletor, ini, corpo in blocos(css)
+            if not ESCOPO_LEGITIMO.search(seletor)]
 
 
 def resolve(nome, valor, skill):
-    """`--surface-base: var(--sky-100)` não é divergência: é o alias que o
-    próprio tokens.css da skill emite. Segue o ponteiro antes de comparar."""
+    """Segue var(--token) da skill antes de comparar."""
     m = ALIAS.match(valor.strip())
     if m and m.group(1) in skill:
         return skill[m.group(1)]
@@ -128,9 +96,6 @@ def analisa(caminho, skill):
             ausentes.append(nome)
             continue
         valor_projeto, linha = vistos[nome]
-        # Resolve os DOIS lados: o tokens.json guarda `--surface-base` como
-        # "var(--ink-50)" e o projeto pode ter o hex, ou vice-versa. Comparar
-        # ponteiro com valor acusaria divergência onde não há.
         efetivo = resolve(nome, valor_projeto, skill)
         esperado = resolve(nome, valor_skill, skill)
         if normaliza(efetivo) != normaliza(esperado):
@@ -141,17 +106,19 @@ def analisa(caminho, skill):
         if nome in nomes_skill or nome.startswith("tw-") or len(nome) < 6:
             continue
         perto = difflib.get_close_matches(nome, sorted(nomes_skill), n=1, cutoff=0.92)
-        # Sufixo de escala próprio do Tailwind (2xl, 3xl…) não é typo da skill.
-        #
-        # A isenção já foi `-\d?xl$|-\d+$`, e o segundo ramo engolia a regra
-        # inteira: toda família de escala da skill termina em número
-        # (`navy-900`, `ink-700`, `sp-4`), então o detector de typo ficava
-        # cego para o grosso da paleta — `--navi-900` passava calado enquanto
-        # `--surfce-base` era pego. Só o sufixo `xl` precisa da isenção.
+        # Só o sufixo xl do Tailwind fica isento; isentar número cegaria a paleta inteira.
         if perto and not re.search(r"-\d?xl$", nome):
             parecidos.append((nome, perto[0], linha))
 
-    return divergentes, ausentes, parecidos
+    tema = []
+    for seletor, ini, corpo in blocos(re.sub(r"/\*.*?\*/", lambda m: " " * len(m.group(0)), css, flags=re.S)):
+        if not seletor.startswith("@theme"):
+            continue
+        for m in DECL.finditer(corpo):
+            if m.group(1) in skill:
+                tema.append((m.group(1), css.count("\n", 0, ini + m.start()) + 1))
+
+    return divergentes, ausentes, parecidos, tema
 
 
 def main():
@@ -161,27 +128,30 @@ def main():
     args = parser.parse_args()
 
     if not os.path.isfile(args.arquivo):
-        sys.exit(f"arquivo não encontrado: {args.arquivo}")
+        sys.exit(f"[ERRO] arquivo não encontrado: {args.arquivo}")
 
     skill = tokens_da_skill()
-    divergentes, ausentes, parecidos = analisa(args.arquivo, skill)
+    divergentes, ausentes, parecidos, tema = analisa(args.arquivo, skill)
 
     if not args.quiet:
-        for nome, esperado, achado, linha in divergentes:
-            print(f"[DIVERGE] linha {linha}: --{nome} vale '{achado}' no projeto, "
-                  f"'{esperado}' na skill. Um dos dois está desatualizado — "
-                  f"a skill é a fonte (§3).")
-        for nome, sugestao, linha in parecidos:
-            print(f"[AVISO] linha {linha}: --{nome} não existe na skill, mas é "
-                  f"quase --{sugestao}. Erro de digitação vira token morto: o "
-                  f"browser descarta a declaração em silêncio.")
-        if ausentes and not divergentes:
-            print(f"[INFO] {len(ausentes)} token(s) da skill não aparecem neste "
-                  f"arquivo — normal se o projeto usa só parte do sistema.")
+        linhas = [(linha, f"[ERRO] linha {linha}: --{nome} vale '{achado}' "
+                          f"('{esperado}' na skill, §26.5)")
+                  for nome, esperado, achado, linha in divergentes]
+        linhas += [(linha, f"[ERRO] linha {linha}: redefine --{nome} no @theme "
+                           f"(apague a escala calculada, §26.3)")
+                   for nome, linha in tema]
+        linhas += [(linha, f"[AVISO] linha {linha}: --{nome} não existe na skill "
+                           f"(--{sugestao}?, §26.5)")
+                   for nome, sugestao, linha in parecidos]
+        for _, texto in sorted(linhas):
+            print(texto)
+        if ausentes and not (divergentes or tema):
+            print(f"[INFO] {len(ausentes)} token(s) da skill fora deste arquivo.")
 
-    print(f"\n{len(divergentes)} divergência(s), {len(parecidos)} aviso(s), "
+    erros = len(divergentes) + len(tema)
+    print(f"\n{erros} divergência(s), {len(parecidos)} aviso(s), "
           f"{len(skill) - len(ausentes)}/{len(skill)} tokens da skill presentes.")
-    return 2 if divergentes else 0
+    return 2 if erros else 0
 
 
 if __name__ == "__main__":

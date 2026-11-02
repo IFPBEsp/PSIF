@@ -2,218 +2,163 @@
 
 ### 7.1 Navegação principal
 
-Uma navegação só, em dois formatos (seção 15 de
-`docs/frontend/architecture-and-stack.md`, no projeto):
-
-- **Web** (a partir de `--bp-md`): barra lateral fixa (§7.10).
-- **Celular**: a mesma barra lateral, como gaveta que abre pelo ☰ (§7.9).
-
-Não há barra inferior. Os destinos, nesta ordem: **Início · Atendimentos ·
-Alunos · Relatórios**, depois **Agenda · Notificações · Meu perfil**,
-e **Sair** no pé. "Termo", que o protótipo põe no menu e nos atalhos, fica
-escondido até alguém decidir o que ele é (§28.4), porque hoje ele não leva a
-tela nenhuma. A lista sai de uma configuração central de navegação, e cada
-item aparece só para o perfil com permissão para ele (§16.2).
+Uma navegação só: a barra lateral (§7.10), que vira gaveta na tela estreita
+(§7.9). Sem barra inferior. Destinos, nesta ordem: **Início · Atendimentos ·
+Alunos · Relatórios**, depois **Agenda · Notificações · Meu perfil**, e
+**Sair** no pé. A lista sai de uma configuração central, e cada item aparece
+só para o perfil com permissão para ele (§16.2). "Termo" fica fora até ter
+destino (§27).
 
 ### 7.2 Menu (☰)
 
-No celular, o ☰ fica à direita da barra superior das telas-raiz (Início e
-listas) e abre a gaveta (§7.9). `aria-label="Abrir menu"`,
-`aria-expanded` acompanhando a gaveta. Tela de tarefa e de detalhe não têm ☰:
-ela tem ← (§7.4). No web o ☰ some, porque a barra lateral já está aberta.
+Na tela estreita, o ☰ fica à direita da barra de ações das telas-raiz (Início
+e listas) e abre a gaveta: `aria-label="Abrir menu"`, `aria-expanded`
+acompanhando a gaveta. Tela de tarefa e de detalhe têm ← no lugar (§7.4).
 
-### 7.3 Barra superior
+### 7.3 Barra de ações e título
 
-**Celular.** A barra superior só tem ações, sobre `--surface-base`, sem
-sombra, com `--sp-2` em cima:
+A barra de ações fica sobre `--surface-base`, sem sombra, com o topo de
+§5.1, e só tem botões de ícone em `--radius-pill`, cada um com `aria-label`
+que diz o destino:
 
-- Esquerda: voltar (←), botão de ícone em `--radius-pill`, `--ic-sm` em alvo
-  `--target-min`, cor `--ink-900`, com `aria-label` que diz o destino
-  ("Voltar para Alunos").
-- Direita: busca (§7.7), ⋯ ("Mais ações do aluno") ou o ☰ das telas-raiz
-  (§7.2), também em `--radius-pill` e com `aria-label`.
+- Esquerda: voltar (←), `--ic-sm` em alvo `--target-min` ("Voltar para
+  Alunos").
+- Direita: busca (§7.7), ⋯ ("Mais ações do aluno") ou ☰ (§7.2).
 
-O título não fica na barra: vem logo abaixo, à esquerda, em `--fs-display`
-peso 600 `--navy-700`, seguido de uma linha de contexto em `--fs-body`
-`--ink-700` ("José Antonio · 4 arquivos"). Regra completa em §4.3. Folha
-modal e tela de autenticação mantêm o título centralizado.
+O título vem logo abaixo da barra (§4.3). Na tela larga, o topo do conteúdo
+tem os breadcrumbs e Notificações (§7.13), e a ação primária fica à direita
+do título (§5.6).
 
-O Início é a exceção: saudação à esquerda com o primeiro nome ("Olá, Ana!" em
-`--fs-h1` `--ink-900`) e, embaixo, a data de hoje ("Segunda-feira, 15 de
-junho" em `--fs-small` `--ink-700`), sem exclamação (§19.4), e ☰ à direita
-(§7.2). Padding `--sp-2` `--page-pad` `--sp-6`: a saudação alinha com os
-cartões (§5.7).
-
-**Web** (a partir de `--bp-md`). No topo do conteúdo ficam os breadcrumbs à
-esquerda e Notificações à direita (§7.13). Abaixo, o título em `--fs-display`
-à esquerda, com ← antes dele só em tela abaixo de outra, como o perfil; à
-direita do título, a ação primária da tela (§5.6).
+O Início é a exceção: no lugar do título, a saudação (texto em §19.4) em
+`--fs-h1` `--ink-900` e a data de hoje embaixo em `--fs-small` `--ink-700`.
 
 ### 7.4 Voltar
 
-Sempre o mesmo ícone (←), sempre no mesmo lugar, sempre volta um nível. Em
-formulário com conteúdo digitado, voltar pergunta antes de descartar
-(§15.3).
+Mesmo ícone (←), mesmo lugar, volta um nível. Formulário com conteúdo
+digitado pergunta antes de descartar (§10.3).
 
 ### 7.5 Seções do aluno
 
-**Celular**: grade de duas colunas de cartões (`--radius-xl`, altura mínima
-84px, `--sp-3` de vão), sob o título de grupo "Prontuário" (§4.3). Cada
-cartão: nome da seção em `--fs-body` peso 600 `--navy-700` e, embaixo, um
-resumo em `--fs-caption` `--ink-700` vindo do backend ("12 registros", "4
-arquivos", "Atualizada 22/10"); sem resumo, só o nome. Seções: Dados do aluno
-· Atendimentos · Relatórios · Documentos · Observações · Evolução. A grade
-fica sem ícone até Observações e Evolução terem o seu (§28.4).
+**Tela estreita**: grade de duas colunas de cartões (`--radius-xl`, mesma
+altura na linha, `--sp-3` de vão), sob o título de grupo "Prontuário". Cada
+cartão: nome da seção em `--fs-body` 600 `--navy-700` e, embaixo, um resumo em
+`--fs-caption` `--ink-700` vindo do backend ("12 registros", "4 arquivos");
+sem resumo, só o nome. Seções: Dados do aluno · Atendimentos · Relatórios ·
+Documentos · Observações · Evolução.
 
-**Web**: abas sob o cabeçalho do aluno (§9.10): Visão geral · Atendimentos ·
-Documentos · Relatórios. Aba ativa em `--navy-700` peso 600, com sublinhado
-de 3px e contador em pílula `--sky-100`; inativas em `--ink-700` peso 500.
-Cada aba é um link (`aria-current="page"` na ativa), com alvo de
+**Tela larga**: abas sob o cabeçalho do aluno (§9.9): Visão geral (com os
+dados do aluno) · Atendimentos · Relatórios · Documentos · Observações ·
+Evolução. Ativa em `--navy-700` 600, com
+sublinhado de 3px e contador em pílula `--sky-100`; inativas em `--ink-700`
+500. Cada aba é um link (`aria-current="page"` na ativa), com alvo
 `--target-min`.
 
-O resumo da seção Documentos mostra contagem ("2 sigilosos"), nunca nomes
-(§16.3).
+O resumo de Documentos mostra contagem ("2 sigilosos"), nunca nomes (§16.3).
 
 ### 7.6 Filtros de lista
 
-Linha de filtros sob a busca. Pílula (`--radius-pill`), altura
-`--target-min`, `--chip-pad`, `--fs-small`. Inativo: transparente, borda 1px
-`--line-on-sky`, texto `--navy-700` peso 500. Ativo: fundo `--navy-700`,
-texto branco, peso 600. No celular a linha rola na horizontal, sem quebrar.
+Pílula (`--radius-pill`), altura `--target-min`, `--chip-pad`, `--fs-small`.
+Inativo: transparente, borda `--line-on-sky`, texto `--navy-700` 500. Ativo:
+fundo `--navy-700`, texto `--white`, 600. Na tela estreita a linha rola na
+horizontal, sem quebrar.
 
-Dois tipos:
-
-- **Escolha direta** (lista de documentos: Todos · Laudos · Relatórios ·
-  Declarações): um ativo por vez, e cada pílula anuncia o estado. Botão solto
-  leva `aria-pressed`; o `ToggleGroup type="single"` do shadcn já anuncia
-  com `role="radio"` e `aria-checked`.
-- **Filtro com valor** (Turma · Série · Período, em Meus alunos): abre folha
-  de seleção (§11.4), com `aria-haspopup="dialog"`. Com valor escolhido, fica
-  no estilo ativo, mostra o valor e um × para limpar.
-
-O estado nunca está só na cor: o ativo muda fundo, peso e, no filtro com
-valor, o próprio texto (§20.2).
+- **Escolha direta** (documentos: Todos · Laudos · Relatórios ·
+  Declarações): um ativo por vez. Botão solto leva `aria-pressed`; o
+  `ToggleGroup type="single"` anuncia com `role="radio"` e `aria-checked`.
+- **Filtro com valor** (Turma · Série · Período, em Meus alunos): abre a
+  seleção (§11.4) com o `aria-haspopup` de §8.4; com valor, fica ativo, mostra
+  o valor e um × para limpar.
 
 ### 7.7 Busca
 
-Campo branco de largura total no topo da lista (no web, há também a busca
-global da barra lateral, §7.13), lupa à esquerda, espera ~300ms depois da digitação antes de filtrar,
-placeholder
-"Pesquisar aluno" / "Pesquisar documento". Tem rótulo acessível mesmo sem
-rótulo visível (é o único campo em que isso vale: a lupa e a posição dizem o
-que ele é).
+Campo de largura total no topo da lista, lupa à esquerda, placeholder
+"Pesquisar aluno" ou "Pesquisar documento", e espera ~300ms depois da
+digitação. Rótulo só acessível: é o único campo sem rótulo visível, porque a
+lupa e a posição dizem o que ele é.
 
-No celular, em tela com título grande (§4.3), a busca começa como botão de
-lupa na barra superior e abre o campo no lugar do título. No web, a busca pode
-ter fundo `--ink-100` sem borda: a lupa e a posição dizem o que ela é. Campo
-de formulário continua com borda (§8.3): sem ela, o contorno fica abaixo de
-3:1 (WCAG 1.4.11).
+Na tela estreita, em tela com título grande, a busca começa como botão de
+lupa na barra de ações e abre o campo no lugar do título. A busca pode ter
+fundo `--ink-100` sem borda; campo de formulário, não (§8.3).
 
 ### 7.8 Ações rápidas
 
-Cartão "Ações rápidas" no Início: até quatro atalhos por linha (quebram
-linha em vez de encolher o quadrado), cada um um
-quadrado `--sky-300` de 48px com ícone `--navy-700` `--ic-lg` e rótulo
-`--fs-caption` `--ink-700` embaixo. Agenda · Meu perfil · Notificações. No protótipo os quadrados estão vazios: o
-ícone é obrigatório
-(§18).
+Cartão "Ações rápidas" no Início: até quatro atalhos por linha, quebrando
+linha em vez de encolher. Cada um: quadrado `--sky-300` de `--sp-12` com
+ícone `--navy-700` `--ic-lg` e rótulo `--fs-caption` `--ink-700` embaixo.
+Agenda · Meu perfil · Notificações.
 
-### 7.9 Gaveta de navegação (celular)
+### 7.9 Gaveta
 
-Abaixo de `--bp-md`, a barra lateral (§7.10) vira gaveta: entra pela
-esquerda, sobre o véu `--overlay` (`--z-overlay`), com `--z-modal`, largura
-`--w-sidebar` e `--sh-md`. Mesmo conteúdo e mesma ordem do web. No projeto é o
-`Sidebar` do shadcn, que já vira `Sheet` no celular.
+Abaixo de `--bp-md`, a barra lateral vira gaveta: entra pela esquerda sobre
+`--overlay`, com `--z-modal`, largura `--w-sidebar` e `--sh-md`; mesmo
+conteúdo e ordem. No projeto, o `Sidebar` do shadcn já faz isso.
 
-- Fecha ao tocar num destino, no véu ou em Esc, e o foco volta para o ☰.
-- Abre com o foco no item ativo; o foco fica preso dentro dela enquanto
-  aberta.
-- Movimento de entrada em `--dur-normal` (§17.3); com movimento reduzido, aparece sem
-  deslizar (§17.5).
-- Sair continua a dois toques: ☰ e Sair (§16.3).
+- Fecha num destino, no véu ou em Esc, e o foco volta ao ☰.
+- Abre com o foco no item ativo e prende o foco enquanto aberta.
+- Entra em `--dur-normal` (§17.3).
 
-### 7.10 Barra lateral (web)
+### 7.10 Barra lateral
 
-A partir de `--bp-md`, fixa e sempre visível; no celular, vira a gaveta de
-§7.9. Fixa à
-esquerda, largura `--w-sidebar`, altura da janela, fundo `--surface-raised`
-(é cartão, não marinho, §2.2), sem borda e sem sombra: o branco a separa do
-céu. `<nav aria-label="Principal">`.
+A partir de `--bp-md`, fixa à esquerda, altura da janela, fundo
+`--surface-raised`, sem borda e sem sombra, `<nav aria-label="Principal">`.
+Entre `--bp-md` e `--bp-lg` começa recolhida (§7.12); a partir de `--bp-lg`,
+aberta com `--w-sidebar`.
 
 De cima para baixo, com `--sp-6` de padding:
 
-1. Símbolo do PSIF (§1.1) em `--ic-xl` e, ao lado, **PSIF** em `--fs-h1`
-   peso 600 `--navy-700`, com `--sp-3` de vão; à direita, o botão de
-   recolher (§7.12).
+1. Símbolo (§1.1) em `--ic-xl` e **PSIF** em `--fs-h1` 600 `--navy-700`; à
+   direita, o botão de recolher.
 2. Busca global "Pesquisar aluno" (§7.13).
-3. Destinos principais: Início · Atendimentos · Alunos · Relatórios.
+3. Início · Atendimentos · Alunos · Relatórios.
 4. Linha `--ink-200`, depois Agenda · Notificações · Meu perfil.
-5. No pé, um cartão `--ink-100` (`--radius-xl`) com as iniciais, o nome, o
-   papel ("Psicopedagoga") e o botão "Sair".
+5. No pé, cartão `--ink-100` (`--radius-xl`) com iniciais, nome, papel e
+   "Sair".
 
-Recolhível no web (§7.12). Item: ícone `--ic-lg` + rótulo `--fs-body` peso
-500, `--sp-3` de vão, padding `--sp-3` `--sp-4`, `--radius-lg`, altura mínima
-`--target-min`. Inativo: ícone e rótulo `--ink-700`. Ativo: fundo
-`--sky-100`, ícone e rótulo `--navy-700`, peso 600, `aria-current="page"`.
-Hover: fundo `--ink-100` (§17.2).
+Item: ícone `--ic-lg` e rótulo `--fs-body` 500, `--radius-lg`, alvo
+`--target-min`. Inativo `--ink-700`; ativo fundo `--sky-100`, `--navy-700`,
+600, `aria-current="page"`; hover com mouse `--ink-100`.
 
 ### 7.11 Breadcrumbs
 
-Trilha derivada da rota ou da configuração de navegação, nunca escrita à mão
-em cada página (seção 15 da doc de frontend do projeto): "Alunos › José
-Antonio › Relatórios". No projeto, o `Breadcrumb` do shadcn.
+Trilha derivada da rota ou da configuração de navegação ("Alunos › José
+Antonio › Relatórios"), com o `Breadcrumb` do shadcn.
 
-- **Web**: no topo do conteúdo, à esquerda, na linha do botão de
-  Notificações (§7.13), `--fs-small`. Itens anteriores em link
-  `--ink-700`; o atual em `--ink-900`, sem link, com `aria-current="page"`.
-  Separador › em `--ink-700`, `aria-hidden`. `<nav aria-label="Trilha">`.
-- **Celular**: não aparece. O ← (§7.4) volta um nível e o título diz onde se
-  está; uma trilha de três níveis não cabe em 390px sem quebrar.
-- Só a partir do segundo nível. No Início e nas telas-raiz, a barra lateral já
-  diz onde se está.
-- Nome de aluno na trilha segue o sigilo: nome, nunca dado clínico (§16.3).
+- A partir de `--bp-md`, no topo do conteúdo, à esquerda (§7.13),
+  `--fs-small`. Anteriores em link `--ink-700`; o atual em `--ink-900`, sem
+  link, `aria-current="page"`. Separador › `aria-hidden`.
+  `<nav aria-label="Trilha">`.
+- Na tela estreita não aparece: o ← volta um nível e o título diz onde se
+  está.
+- Só a partir do segundo nível.
+- Nome de aluno sim; dado clínico nunca (§16.3).
 
-### 7.12 Barra lateral recolhível (web)
+### 7.12 Barra lateral recolhida
 
-No web, a barra lateral (§7.10) recolhe para só ícones. No projeto, é o
-`Sidebar` do shadcn com `collapsible="icon"`, e o botão é o `SidebarTrigger`.
+A barra recolhe para só ícones (`Sidebar collapsible="icon"`, com o
+`SidebarTrigger`).
 
-- **Controle:** botão de ícone ☰ (`psif-menu`, `--ic-lg`, alvo
-  `--target-min`, `--radius-pill`) no topo da barra lateral, à direita da
-  marca. Recolhida, a barra mostra só o símbolo e o botão logo abaixo dele.
-  `aria-label` "Recolher menu" ou "Expandir menu", conforme o estado, e
-  `aria-expanded`.
-- **Recolhida**: largura automática, padding
-  `--sp-6` `--sp-3`; rótulos e o nome PSIF somem;
-  símbolo centralizado; itens centralizados com padding `--sp-3`; a busca vira
-  botão de lupa e o cartão do pé vira só as iniciais. Cada item mantém `title`
-  e nome acessível.
-- Ativo, hover e foco iguais aos de §7.10.
-- A escolha é preferência do aparelho, como o tema (§26.4).
-- No celular não muda: continua a gaveta de §7.9.
+- **Controle:** ☰ (`psif-menu`, `--ic-lg`, alvo `--target-min`,
+  `--radius-pill`) à direita da marca; recolhida, logo abaixo do símbolo.
+  `aria-label` "Recolher menu" ou "Expandir menu" e `aria-expanded`.
+- **Recolhida:** rótulos e nome PSIF somem; itens centralizados; a busca
+  vira botão de lupa, que abre a busca como em §7.13; o cartão do pé vira as iniciais. Cada item mantém
+  `title` e nome acessível.
+- Começa recolhida entre `--bp-md` e `--bp-lg`, e aberta depois. A escolha
+  da pessoa vale para o aparelho, como o tema (§25.4).
 
-### 7.13 Busca global e topo do conteúdo (web)
+### 7.13 Busca global e topo do conteúdo
 
-Só a partir de `--bp-md`. Não há faixa de cabeçalho.
+A partir de `--bp-md`.
 
-- **Busca global** fica na barra lateral, logo abaixo da marca (§7.10):
-  fundo `--ink-100` sem borda (§7.7), lupa à esquerda, placeholder
-  "Pesquisar aluno", `aria-label` igual, dentro de `role="search"`. A
-  consulta passa pelo BFF e espera a digitação parar (debounce). No projeto,
-  `Command` do shadcn num `Popover`.
-- **Resultados:** ao digitar, cartão branco ancorado no campo (`--sh-md`,
-  `--z-raised`) com linhas de aluno (avatar `--target-min`, nome, turma).
-  Tocar abre o perfil. Enter leva a Meus alunos com a busca aplicada; Esc
-  limpa. Sem resultado: estado vazio de §10.6 ("Nenhum aluno encontrado para
-  "Mar".").
-- **Topo do conteúdo:** os breadcrumbs à esquerda (§7.11) e, à direita, o
-  botão de Notificações em pílula branca (`--surface-raised`,
-  `--radius-pill`, alvo `--target-min`), com `aria-label` que diz quantas não
-  lidas há ("Notificações, 2 não lidas").
-- **Usuário:** iniciais, nome, papel e "Sair" no pé da barra lateral (§7.10).
-- **Sigilo:** resultado mostra só nome e turma, nunca dado clínico (§16.3).
-- **Perfil:** a busca só devolve os alunos que o perfil pode ver (§16.2).
-- No celular não aparece: a busca fica nas telas de lista (§7.7).
-
-O painel de resultados é exceção a §9.6, que pede sobreposição como folha:
-vale só no web, onde o alvo de toque não é problema (§28.2).
+- **Busca global** na barra lateral, sob a marca: fundo `--ink-100` sem
+  borda, lupa, placeholder e `aria-label` "Pesquisar aluno", dentro de
+  `role="search"`. Passa pelo BFF, com debounce. No projeto, `Command`;
+  resultados em `Popover` com mouse e na folha de §9.6 no toque.
+- **Resultados:** com mouse, cartão branco ancorado no campo (`--sh-md`,
+  `--z-overlay`); no toque, a folha de §9.6, em qualquer largura (§5.12).
+  Linhas com avatar `--target-min`, nome e turma. Clicar abre o perfil; Enter
+  leva a Meus alunos com a busca aplicada; Esc limpa. Sem resultado: §10.6.
+  Só nome e turma, só alunos que o perfil pode ver (§16.2, §16.3).
+- **Topo do conteúdo:** breadcrumbs à esquerda; à direita, Notificações em
+  pílula `--surface-raised`, alvo `--target-min`, com `aria-label` que diz
+  as não lidas ("Notificações, 2 não lidas").

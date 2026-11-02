@@ -2,100 +2,86 @@
 
 ### 9.1 Cartão
 
-Fundo `--surface-raised`, `--radius-md`, `--card-pad`, sem borda e sem
-sombra, largura total menos `--page-pad` de cada lado. Título do cartão
-(quando há) em `--fs-body` peso 600 `--navy-700`: "Próximos atendimentos",
-"Ações rápidas".
+Fundo `--surface-raised`, raio de §3.6, `--card-pad`, sem borda e sem
+sombra. Cartão não vai dentro de cartão: dentro dele, linha, quadro de ícone
+ou célula. Título do cartão, quando há, em `--fs-body` 600 `--navy-700`
+("Próximos atendimentos").
 
-### 9.2 Cartão de indicadores
+### 9.2 Indicadores
 
-Os indicadores do Início: **um** cartão com grade 2×2 (uma linha de 4 no
-web, §5.3), células separadas por linha `--ink-200`. Cada célula: número em `--fs-display` peso 600
-`--navy-700` e rótulo em `--fs-body` `--ink-700` embaixo.
-
-| Número | Rótulo |
-|---|---|
-| atendimentos de hoje | "Atendimentos hoje" |
-| alunos ativos | "Alunos ativos" |
-| relatórios pendentes | "Relatórios pendentes" |
-| alertas | "Alertas importantes" |
-
-Número com dois dígitos e zero à esquerda (08, 05, 02) é o desenho do
-protótipo; o leitor de tela lê "8" (§20.8). Cada célula é tocável e leva à
-lista filtrada correspondente.
+Um cartão só, com as células separadas por `--ink-200` (grade em §5.3). Cada
+célula: número em `--fs-display` 600 `--navy-700`, sem zero à esquerda, e
+rótulo em `--fs-body` `--ink-700`. Os quatro: "Atendimentos hoje", "Alunos
+ativos", "Relatórios pendentes", "Alertas importantes". Cada célula é um link
+para a lista filtrada, e o nome acessível é a frase inteira ("8 atendimentos
+hoje").
 
 ### 9.3 Cartão de lista
 
-Cartão branco com linhas separadas por `--ink-200`. Linha: dado-chave à
-esquerda em `--navy-700`, texto de apoio, chevron (›) `--ink-600` à direita.
+Linhas separadas por `--ink-200`: dado-chave em `--navy-700` à esquerda, apoio
+ao lado, chevron (›) `--ink-600` à direita.
 
-- Próximos atendimentos: horário (`--fs-body` peso 600) + nome do aluno.
+- Próximos atendimentos: horário em `--fs-body` 600 e nome do aluno.
 - Atendimentos do dia (Agenda): horário em `--fs-h1`, nome em `--fs-body`
-  peso 600, tipo em `--fs-caption` `--ink-700`.
+  600, tipo em `--fs-caption` `--ink-700`.
 
 ### 9.4 Cartão de aluno
 
-Cartão branco: avatar `--avatar-md` à esquerda (§12.1); à direita, nome em
-`--fs-h2` peso 600 `--navy-700`, curso e ano em `--fs-body` `--ink-700`,
-situação em `--fs-body` (§12.2). O cartão inteiro abre o perfil.
+Avatar `--avatar-md` à esquerda (§12.1); à direita, nome em `--fs-h2` 600
+`--navy-700`, curso e turma em `--fs-body` `--ink-700` e a situação (§12.2).
+O cartão inteiro abre o perfil.
 
-### 9.5 Cartão de notificação
+### 9.5 Notificação
 
-Cartão branco: título em `--fs-body` peso 600 (`--navy-700` para não lida,
-`--ink-900` para lida), corpo em `--fs-small` `--ink-700` `--lh-normal`, tempo
-relativo ("Há 15 min") em `--fs-caption` `--ink-700` (metadado, §4.3; o
-protótipo usa preto, §28.2) no canto superior
-direito. Notificação de pendência ("Acompanhamento pendente") ganha marcador
-`--warning-700` e a palavra "Pendente" no título.
+Título em `--fs-body` 600 (`--navy-700` não lida, `--ink-900` lida), corpo em
+`--fs-small` `--ink-700`, tempo relativo ("Há 15 min") em `--fs-caption`
+`--ink-700` à direita. Não lida ganha ponto `--navy-700` de `--sp-2` antes do
+título e "não lida" no nome acessível. Pendência ("Acompanhamento pendente")
+ganha ponto `--warning-700` e "Pendente" no título.
 
-Não lida não se distingue só pela cor (§20.2): ganha também um ponto
-`--navy-700` de `--sp-2` antes do título e "não lida" no nome acessível.
+### 9.6 Folha e diálogo
 
-### 9.6 Folha modal
+Só para o que não cabe na tela de onde se abriu: seletor de data, lista de
+seleção, confirmação, menu no toque (§8.2). `--surface-overlay`,
+`--sh-md`, véu `--overlay`, `--z-modal`, foco preso enquanto aberto.
 
-Só como **folha** que sobe da base: seletor de data, lista de seleção,
-confirmação de descarte. Fundo `--surface-overlay`, cantos superiores
-`--radius-lg`, `--sh-md`, véu `--overlay` atrás, `--z-modal`. Fecha com
-gesto, botão "Fechar" e Esc.
+- **Tela estreita:** folha que sobe da base (`Drawer`), cantos de cima em
+  `--radius-lg`; fecha arrastando, em "Fechar" ou Esc.
+- **A partir de `--bp-md`:** diálogo centralizado (`Dialog`), `--radius-lg`,
+  até `--w-form`; fecha em "Fechar", no véu ou Esc.
 
-Exceção: os resultados da busca global do web abrem como cartão logo abaixo
-do campo (§7.13).
+Exceção: com mouse, os resultados da busca global abrem como cartão ancorado
+no campo (§7.13). Folha, diálogo e lista são renderizados na raiz do documento, senão
+o `overflow` do cartão os corta.
 
 ### 9.7 Cartão de funcionalidade (página pública)
 
-Cartão branco com círculo `--navy-700` de 48px contendo ícone branco, título
-em `--fs-body` peso 600 `--ink-900` e descrição em `--fs-small` `--ink-700`.
-Só na página pública.
+Círculo `--navy-700` de `--control-min` com ícone `--white`, título em
+`--fs-body` 600 `--ink-900` e descrição em `--fs-small` `--ink-700`.
 
 ### 9.8 Cartão de autenticação
 
-Cartão branco central, `--radius-lg`, `--sh-sm`, com logo, subtítulo, campos e
-botão primário. Login e Recuperar senha.
+Cartão central até `--w-auth`, `--radius-lg`, `--sh-sm`: símbolo e "PSIF",
+nome por extenso, campos e botão primário. Login e Recuperar senha.
 
-### 9.9 Sobreposição fora do contêiner (regra de implementação)
+### 9.9 Cabeçalho do aluno (tela larga)
 
-Folha modal e lista de seleção são renderizadas na raiz do documento, não
-dentro do cartão que as abriu, senão o `overflow` do cartão as corta.
-
-### 9.10 Cabeçalho do aluno (web)
-
-Cartão branco `--radius-2xl` no topo da área do aluno: avatar `--avatar-sm`
-em `--sky-300`, nome em `--fs-display` 600 `--navy-700`, curso e turma em
+Cartão `--radius-2xl` no topo da área do aluno: avatar `--avatar-sm` em
+`--sky-300`, nome em `--fs-display` 600 `--navy-700`, curso e turma em
 `--fs-small` `--ink-700` e o selo de situação (§12.2). Embaixo, as abas
 (§7.5).
 
-### 9.11 Próximo atendimento
+### 9.10 Próximo atendimento
 
-Cartão branco com quadro de ícone `--tile-icon-lg` (`psif-calendario`, fundo
-`--sky-100`), rótulo "Próximo atendimento" em `--fs-caption` 600 `--ink-700`,
-quando em `--fs-h3` 600 `--navy-700` ("Quinta, 05/11 · 10:00"), tipo em
-`--fs-small` `--ink-700` e chevron que leva à agenda. Sem atendimento
-marcado: "Nenhum atendimento marcado." e o link "+ Novo agendamento".
+Quadro de ícone `--tile-icon-lg` (`psif-calendario`, `--sky-100`), rótulo
+"Próximo atendimento" em `--fs-caption` 600 `--ink-700`, quando em `--fs-h3`
+600 `--navy-700` ("Quinta, 05/11 · 10:00"), tipo em `--fs-small` `--ink-700`
+e chevron para a agenda. Sem atendimento: "Nenhum atendimento marcado." e
+"+ Novo agendamento".
 
-### 9.12 Aviso de sigilo
+### 9.11 Aviso de sigilo
 
-Cartão branco com o ícone `psif-cadeado` num círculo `--warning-100`, ícone
-em `--warning-700`, título "Documentos sigilosos" e o texto de quem pode ver
-("Laudos e relatórios psicológicos são da psicopedagoga. Outros perfis só
-abrem o que for liberado para eles."). Fica na coluna lateral da aba Documentos, no web.
-
+Ícone `psif-cadeado` num círculo `--warning-100` com o ícone em
+`--warning-700`, título "Documentos sigilosos" e o texto "Laudos e relatórios
+psicológicos são da psicopedagoga. Outros perfis só abrem o que for liberado
+para eles." Fica na coluna lateral da aba Documentos, na tela larga.
