@@ -1,3 +1,5 @@
+import "server-only";
+
 import { mapApiError } from "./api-error";
 
 const DEFAULT_TIMEOUT_MS = 10_000;
@@ -57,7 +59,7 @@ function buildHeaders(
     requestHeaders.set("Accept", "application/json, application/problem+json");
   }
 
-  if (body !== undefined && body !== null && !requestHeaders.has("Content-Type")) {
+  if (typeof body === "string" && !requestHeaders.has("Content-Type")) {
     requestHeaders.set("Content-Type", "application/json");
   }
 

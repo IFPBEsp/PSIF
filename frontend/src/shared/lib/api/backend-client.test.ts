@@ -38,6 +38,21 @@ describe("backendFetch", () => {
     expect(headers.get("Content-Type")).toBe("application/json");
   });
 
+  it("does not force JSON content-type for FormData bodies", async () => {
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 204 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const formData = new FormData();
+    formData.append("file", new Blob(["conteúdo"]), "arquivo.txt");
+
+    await backendFetch("/uploads", { method: "POST", body: formData });
+
+    const [, init] = fetchMock.mock.calls[0];
+    const headers = new Headers(init?.headers);
+
+    expect(headers.has("Content-Type")).toBe(false);
+  });
+
   it("ignores NEXT_PUBLIC_API_URL", async () => {
     vi.stubEnv("NEXT_PUBLIC_API_URL", "http://public:9999");
 
