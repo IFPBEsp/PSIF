@@ -5,7 +5,9 @@ scripts/design_md_body.md, com cada {{token}} preenchido.
 
 Uso:
     python gen_design_md.py            # escreve ../assets/DESIGN.md
-    python gen_design_md.py --check    # não escreve; saída 2 se defasado
+    python gen_design_md.py --check    # só confere, sem escrever
+
+Saída: 0 escreveu ou está em dia; 2 DESIGN.md defasado (--check); 1 fonte inválida.
 """
 
 import argparse

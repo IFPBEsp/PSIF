@@ -39,7 +39,7 @@ digitado pergunta antes de descartar (§10.3).
 
 ### 7.5 Seções do aluno
 
-**Tela estreita**: grade de duas colunas de cartões (`--radius-xl`, mesma
+**Tela estreita**: grade de duas colunas de cartões (raio de §3.6, mesma
 altura na linha, `--sp-3` de vão), sob o título de grupo "Prontuário". Cada
 cartão: nome da seção em `--fs-body` 600 `--navy-700` e, embaixo, um resumo em
 `--fs-caption` `--ink-700` vindo do backend ("12 registros", "4 arquivos");
@@ -113,7 +113,7 @@ De cima para baixo, com `--sp-6` de padding:
 2. Busca global "Pesquisar aluno" (§7.13).
 3. Início · Atendimentos · Alunos · Relatórios.
 4. Linha `--ink-200`, depois Agenda · Notificações · Meu perfil.
-5. No pé, cartão `--ink-100` (`--radius-xl`) com iniciais, nome, papel e
+5. No pé, cartão `--ink-100` (raio de §3.6) com iniciais, nome, papel e
    "Sair".
 
 Item: ícone `--ic-lg` e rótulo `--fs-body` 500, `--radius-lg`, alvo

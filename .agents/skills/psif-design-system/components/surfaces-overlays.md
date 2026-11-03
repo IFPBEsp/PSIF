@@ -68,7 +68,7 @@ senha.
 
 ### 9.9 Cabeçalho do aluno (tela larga)
 
-Cartão `--radius-2xl` no topo da área do aluno: avatar `--avatar-sm` em
+Cartão (raio de §3.6) no topo da área do aluno: avatar `--avatar-sm` em
 `--sky-300`, nome em `--fs-display` 600 `--navy-700`, curso e turma em
 `--fs-small` `--ink-700` e o selo de situação (§12.2). Embaixo, as abas
 (§7.5).

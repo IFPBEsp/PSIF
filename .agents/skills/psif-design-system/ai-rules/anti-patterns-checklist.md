@@ -20,7 +20,7 @@ e `lint_output.py` conferem. Item `· manual`: decisão humana; o
 - [ ] Nenhum texto abaixo de `--fs-caption` (§4.2) · manual
 - [ ] Texto corrido até 70ch (§4.3) · manual
 - [ ] Raio na escala (§3.6)
-- [ ] Raio pelo papel da peça, filho menor ou igual ao pai (§6) · manual
+- [ ] Raio pelo papel da peça, filho menor ou igual ao pai (§3.6) · manual
 
 ### 24.3 Componentes e layout
 

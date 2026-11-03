@@ -30,7 +30,7 @@ Sem blur e sem vidro: o que flutua é branco e opaco.
 | `--radius-xs` | caixa de seleção |
 | `--radius-md` | quadro de ícone, linha clicável, item de menu, atalho |
 | `--radius-lg` | botão, campo, folha e diálogo, cartão de login, item da barra lateral |
-| `--radius-xl` | cartão em tela estreita |
+| `--radius-xl` | cartão em tela estreita, cartão do pé da barra lateral |
 | `--radius-2xl` | cartão em tela larga |
 | `--radius-pill` | avatar, filtro, selo, botão só de ícone |
 

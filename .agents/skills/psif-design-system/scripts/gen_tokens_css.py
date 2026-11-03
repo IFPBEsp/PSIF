@@ -4,7 +4,9 @@ Gera assets/tokens.css a partir de scripts/tokens.json.
 
 Uso:
     python gen_tokens_css.py            # escreve ../assets/tokens.css
-    python gen_tokens_css.py --check    # não escreve; saída 2 se defasado
+    python gen_tokens_css.py --check    # só confere, sem escrever
+
+Saída: 0 escreveu ou está em dia; 2 tokens.css defasado (--check); 1 fonte inválida.
 """
 
 import argparse

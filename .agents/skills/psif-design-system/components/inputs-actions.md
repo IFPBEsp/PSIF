@@ -55,7 +55,7 @@ máximo aparecem antes do envio, nunca só no erro; os valores vêm do backend
 (§27).
 
 Na tela larga, a coluna lateral de Documentos (§13.2) tem também uma área de
-envio: cartão `--white` `--radius-2xl` com borda tracejada de 2px
+envio: cartão `--white` (raio de §3.6) com borda tracejada de 2px
 `--line-on-sky`, quadro de ícone `--tile-icon-lg` em `--sky-100`, "Arraste um
 arquivo para cá" (`--fs-h3` 600), "ou escolha no computador" (texto com
 estilo de link, sem `<a>`) e a regra de envio em `--fs-caption`. A área

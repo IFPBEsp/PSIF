@@ -10,7 +10,7 @@ filtros. A partir de `--bp-md`: tabela (§11.8). Ordem alfabética.
 ### 11.2 Lista de documentos
 
 Agrupada por período, cada grupo com título de grupo ("Este mês",
-"Anteriores", §4.3) e um cartão `--radius-xl` com `--sp-1` de respiro
+"Anteriores", §4.3) e um cartão (raio de §3.6) com `--sp-1` de respiro
 interno. Cada linha: `--list-row-pad` em volta, `--radius-md`, hover `--ink-100`;
 quadro de ícone `--tile-icon` com `psif-termo`; nome em `--fs-body` 500
 `--navy-700` com extensão ("Laudo médico.pdf"); embaixo, tamanho e data em
@@ -76,7 +76,7 @@ estreita; muda a apresentação.
 - **Estado na URL** (nuqs): `?page=0&size=20&search=mar&sort=name,asc`.
   Busca com `--dur-debounce` (§7.7). Recarregar e compartilhar o link
   mantêm a lista.
-- **Cartão**: dentro de um cartão `--radius-2xl`; tabela que não cabe rola
+- **Cartão**: dentro de um cartão (raio de §3.6); tabela que não cabe rola
   dentro dele.
 - **Faixa intermediária**: só as colunas principais; as secundárias ("Enviado
   por", data) aparecem a partir de `--bp-lg`.
