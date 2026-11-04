@@ -31,5 +31,5 @@ export default defineConfig([
     },
   },
   prettier,
-  globalIgnores([".next/**", "node_modules/**", "out/**"]),
+  globalIgnores([".next/**", "node_modules/**", "out/**", "src/generated/**"]),
 ]);
