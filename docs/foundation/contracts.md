@@ -47,7 +47,7 @@ Nomes em UPPER_SNAKE_CASE com prefixo do grupo. `NEXT_PUBLIC_` só para o que o 
 | --- | --- |
 | `APP_ENV` | Ambiente (`dev` ou `production`); perfil do Spring no `backend` |
 | `NEXT_PUBLIC_APP_URL` | URL pública da aplicação |
-| `API_INTERNAL_URL` | URL do `backend` usada pelo BFF |
+| `API_INTERNAL_URL` | URL do `backend` usada pelo BFF e pelo Orval ao gerar o client |
 | `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD` | Nome, usuário e senha do banco; lidas pelo `backend` diretamente no datasource |
 | `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD` | Usuário e senha do administrador do MinIO |
 | `APP_DOMAIN`, `API_DOMAIN` | Domínios públicos da aplicação e da API em produção |
@@ -77,3 +77,12 @@ postgres saudável → backend conecta → migrations executadas → backend sau
 ## 6. OpenAPI
 
 O `backend` publica a especificação em `/v3/api-docs` (padrão do springdoc-openapi). Em dev, o `frontend` a lê do `backend` em execução para gerar o client da API.
+
+O client gerado fica em `frontend/src/generated/api`, versionado no Git. Para regerar, suba o `backend` em dev e rode:
+
+```bash
+cd frontend
+npm run api:generate
+```
+
+O Orval lê a especificação em `${API_INTERNAL_URL}/v3/api-docs` e usa `http://localhost:8080` quando a variável não está no ambiente. Ele não lê o `.env`: para outra URL, exporte a variável no próprio comando. A mudança de contrato no `backend` e o client regerado vão no mesmo commit.
