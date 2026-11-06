@@ -134,7 +134,7 @@ docker compose --env-file .env -f docker-compose.dev.yml down
 docker compose --env-file .env -f docker-compose.dev.yml restart
 ```
 
-O Compose de desenvolvimento não declara healthchecks. `depends_on` apenas ordena a inicialização do backend após o PostgreSQL, sem garantir que o banco esteja pronto para conexões. O MinIO é iniciado e persistido, mas ainda não há integração dele no backend.
+O Compose de desenvolvimento não declara healthchecks. `depends_on` apenas ordena a inicialização do backend após o PostgreSQL, sem garantir que o banco esteja pronto para conexões. Por isso, o `docker-entrypoint.sh` do backend verifica a disponibilidade da porta TCP do PostgreSQL a cada 2 segundos, por até 60 segundos, antes de iniciar o Spring Boot. Essa espera é provisória até a implementação da issue `#17`. O MinIO é iniciado e persistido, mas ainda não há integração dele no backend.
 
 ## 8. Produção
 
