@@ -1,11 +1,21 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Figtree } from "next/font/google";
 import type { ReactNode } from "react";
 
 import "@/app/globals.css";
 import { ThemeProvider } from "@/shared/components/theme-provider";
 
+const figtree = Figtree({
+  subsets: ["latin"],
+  variable: "--font-figtree",
+});
+
 export const metadata: Metadata = {
   title: "PSIF",
+};
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
 };
 
 type RootLayoutProps = Readonly<{
@@ -14,7 +24,7 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="pt-BR" className={figtree.variable} suppressHydrationWarning>
       <body>
         <ThemeProvider
           attribute="class"
