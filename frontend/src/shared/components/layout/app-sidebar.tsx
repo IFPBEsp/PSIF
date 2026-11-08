@@ -7,9 +7,11 @@ import { navigationGroups } from "@/config/navigation.config";
 import { Icon } from "@/shared/components/icon";
 import { SidebarCollapseButton } from "@/shared/components/layout/sidebar-collapse-button";
 import { PsifSymbol } from "@/shared/components/psif-symbol";
+import { ThemeSelector } from "@/shared/components/theme-selector";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -79,6 +81,9 @@ export function AppSidebar() {
           ))}
         </nav>
       </SidebarContent>
+      <SidebarFooter className="p-6 group-data-[collapsible=icon]:hidden">
+        <ThemeSelector />
+      </SidebarFooter>
     </Sidebar>
   );
 }
