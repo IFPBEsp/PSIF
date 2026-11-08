@@ -47,7 +47,7 @@ export function AppSidebar() {
         <nav aria-label="Principal">
           {navigationGroups.map((group, index) => (
             <div key={group[0]?.href}>
-              {index > 0 ? <SidebarSeparator /> : null}
+              {index > 0 ? <SidebarSeparator className="w-auto!" /> : null}
               <SidebarGroup>
                 <SidebarGroupContent>
                   <SidebarMenu>
