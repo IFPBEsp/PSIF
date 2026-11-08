@@ -8,15 +8,13 @@ export type NavigationItem = {
 
 export const navigationItems: readonly NavigationItem[] = [
   { label: "Início", href: "/", icon: House },
-  { label: "Alunos", href: "/alunos", icon: GraduationCap },
-  { label: "Agenda", href: "/agenda", icon: CalendarDays },
-  { label: "Usuários", href: "/usuarios", icon: Users },
+  { label: "Alunos", href: "/students", icon: GraduationCap },
+  { label: "Agenda", href: "/schedule", icon: CalendarDays },
+  { label: "Usuários", href: "/users", icon: Users },
 ];
 
 export const segmentLabels: ReadonlyMap<string, string> = new Map([
-  ["novo", "Novo"],
   ["new", "Novo"],
-  ["editar", "Editar"],
   ["edit", "Editar"],
 ]);
 
