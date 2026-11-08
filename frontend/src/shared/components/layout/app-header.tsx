@@ -1,17 +1,25 @@
-import { AppBreadcrumbs } from "@/shared/components/layout/app-breadcrumbs";
-import { ThemeToggle } from "@/shared/components/theme-toggle";
-import { Separator } from "@/shared/components/ui/separator";
-import { SidebarTrigger } from "@/shared/components/ui/sidebar";
+"use client";
+
+import { Icon } from "@/shared/components/icon";
+import { Button } from "@/shared/components/ui/button";
+import { useSidebar } from "@/shared/components/ui/sidebar";
 
 export function AppHeader() {
+  const { openMobile, setOpenMobile } = useSidebar();
+
   return (
-    <header className="bg-background sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b px-4">
-      <SidebarTrigger aria-label="Abrir ou fechar menu" />
-      <Separator orientation="vertical" className="h-4" />
-      <AppBreadcrumbs />
-      <div className="ml-auto">
-        <ThemeToggle />
-      </div>
+    <header className="flex items-center justify-end px-4 pt-[max(var(--sp-4),env(safe-area-inset-top))] pb-2 md:hidden">
+      <Button
+        type="button"
+        variant="ghost"
+        size="icon"
+        onClick={() => setOpenMobile(true)}
+        aria-label="Abrir menu"
+        aria-expanded={openMobile}
+        className="text-ink-900 min-h-(--target-min) min-w-(--target-min) rounded-full"
+      >
+        <Icon name="psif-menu" size="lg" />
+      </Button>
     </header>
   );
 }

@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 
+import { AppBreadcrumbs } from "@/shared/components/layout/app-breadcrumbs";
 import { AppHeader } from "@/shared/components/layout/app-header";
 import { AppSidebar } from "@/shared/components/layout/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/shared/components/ui/sidebar";
@@ -14,6 +15,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <AppSidebar />
       <SidebarInset>
         <AppHeader />
+        <AppBreadcrumbs />
         {children}
       </SidebarInset>
     </SidebarProvider>

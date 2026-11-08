@@ -5,29 +5,28 @@ export type Breadcrumb = {
   href?: string;
 };
 
-const home = navigationItems.find((item) => item.href === "/");
 const sections = navigationItems.filter((item) => item.href !== "/");
 
 export function buildBreadcrumbs(pathname: string): Breadcrumb[] {
-  const trail: Breadcrumb[] = [{ label: home?.label ?? "Início", href: "/" }];
-  let currentPath = "";
-  let afterSection = false;
+  const [first, ...rest] = pathname.split("/").filter(Boolean);
+  const section = sections.find((item) => item.href === `/${first}`);
 
-  for (const segment of pathname.split("/").filter(Boolean)) {
+  if (!section) {
+    return [];
+  }
+
+  const trail: Breadcrumb[] = [{ label: section.label, href: section.href }];
+  let currentPath = section.href;
+
+  for (const segment of rest) {
     currentPath += `/${segment}`;
 
-    const section = sections.find((item) => item.href === currentPath);
-    const label =
-      section?.label ??
-      segmentLabels.get(segment) ??
-      (afterSection ? dynamicSegmentLabel : undefined);
-
-    if (!label) {
-      break;
-    }
-
+    const label = segmentLabels.get(segment) ?? dynamicSegmentLabel;
     trail.push({ label, href: currentPath });
-    afterSection = section !== undefined;
+  }
+
+  if (trail.length < 2) {
+    return [];
   }
 
   return trail.map((crumb, index) => (index === trail.length - 1 ? { label: crumb.label } : crumb));
