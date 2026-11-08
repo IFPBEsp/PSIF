@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import { AppHeader } from "@/shared/components/layout/app-header";
 import { AppSidebar } from "@/shared/components/layout/app-sidebar";
@@ -10,7 +10,7 @@ type AdminLayoutProps = Readonly<{
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
-    <SidebarProvider>
+    <SidebarProvider style={{ "--sidebar-width": "var(--w-sidebar)" } as CSSProperties}>
       <AppSidebar />
       <SidebarInset>
         <AppHeader />

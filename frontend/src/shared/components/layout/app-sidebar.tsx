@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { navigationItems } from "@/config/navigation.config";
+import { navigationGroups } from "@/config/navigation.config";
+import { Icon } from "@/shared/components/icon";
+import { SidebarCollapseButton } from "@/shared/components/layout/sidebar-collapse-button";
+import { PsifSymbol } from "@/shared/components/psif-symbol";
 import {
   Sidebar,
   SidebarContent,
@@ -13,6 +16,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
 } from "@/shared/components/ui/sidebar";
 
 function isActive(pathname: string, href: string) {
@@ -27,33 +31,53 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar>
-      <SidebarHeader>
-        <span className="px-2 py-1 text-lg font-semibold">PSIF</span>
+    <Sidebar collapsible="icon">
+      <SidebarHeader className="p-6 group-data-[collapsible=icon]:p-2">
+        <div className="flex items-center gap-3 group-data-[collapsible=icon]:flex-col">
+          <PsifSymbol decorative />
+          <span className="text-h1 text-primary font-semibold group-data-[collapsible=icon]:hidden">
+            PSIF
+          </span>
+          <SidebarCollapseButton className="ml-auto group-data-[collapsible=icon]:ml-0" />
+        </div>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <nav aria-label="Navegação principal">
-              <SidebarMenu>
-                {navigationItems.map((item) => {
-                  const active = isActive(pathname, item.href);
+        <nav aria-label="Principal">
+          {navigationGroups.map((group, index) => (
+            <div key={group[0]?.href}>
+              {index > 0 ? <SidebarSeparator /> : null}
+              <SidebarGroup>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    {group.map((item) => {
+                      const active = isActive(pathname, item.href);
 
-                  return (
-                    <SidebarMenuItem key={item.href}>
-                      <SidebarMenuButton asChild isActive={active}>
-                        <Link href={item.href} aria-current={active ? "page" : undefined}>
-                          <item.icon />
-                          <span>{item.label}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  );
-                })}
-              </SidebarMenu>
-            </nav>
-          </SidebarGroupContent>
-        </SidebarGroup>
+                      return (
+                        <SidebarMenuItem key={item.href}>
+                          <SidebarMenuButton
+                            asChild
+                            isActive={active}
+                            tooltip={item.label}
+                            className="text-body text-ink-700 data-[active=true]:bg-sky-100 data-[active=true]:text-primary h-auto min-h-(--target-min) rounded-lg font-medium data-[active=true]:font-semibold"
+                          >
+                            <Link href={item.href} aria-current={active ? "page" : undefined}>
+                              <Icon
+                                name={active && item.activeIcon ? item.activeIcon : item.icon}
+                                size="lg"
+                                className="size-(--ic-lg)!"
+                              />
+                              <span>{item.label}</span>
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      );
+                    })}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+            </div>
+          ))}
+        </nav>
       </SidebarContent>
     </Sidebar>
   );
