@@ -3,6 +3,7 @@ import { Figtree } from "next/font/google";
 import type { ReactNode } from "react";
 
 import "@/app/globals.css";
+import { IconSprite } from "@/shared/components/icon-sprite";
 import { ThemeProvider } from "@/shared/components/theme-provider";
 
 const figtree = Figtree({
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pt-BR" className={figtree.variable} suppressHydrationWarning>
       <body>
+        <IconSprite />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
