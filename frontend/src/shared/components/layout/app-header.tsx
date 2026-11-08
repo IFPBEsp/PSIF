@@ -8,7 +8,7 @@ export function AppHeader() {
   const { openMobile, setOpenMobile } = useSidebar();
 
   return (
-    <header className="flex items-center justify-end px-4 pt-[max(var(--sp-4),env(safe-area-inset-top))] pb-2 md:hidden">
+    <header className="flex items-center justify-end px-(--page-pad) pt-[max(var(--sp-4),env(safe-area-inset-top))] pb-2 md:hidden">
       <Button
         type="button"
         variant="ghost"

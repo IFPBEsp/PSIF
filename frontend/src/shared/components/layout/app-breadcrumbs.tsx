@@ -23,7 +23,7 @@ export function AppBreadcrumbs() {
   }
 
   return (
-    <div className="mx-auto hidden w-full max-w-6xl px-4 pt-6 md:block md:px-6">
+    <div className="mx-auto hidden w-full max-w-(--w-content) px-(--page-pad) pt-6 md:block md:px-8">
       <Breadcrumb aria-label="Trilha">
         <BreadcrumbList className="text-small">
           {items.map((item, index) => (

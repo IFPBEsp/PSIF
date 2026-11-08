@@ -1,6 +1,5 @@
 "use client";
 
-import { TriangleAlert } from "lucide-react";
 import { useEffect } from "react";
 
 import { EmptyState } from "@/shared/components/empty-state";
@@ -21,10 +20,10 @@ export default function AdminError({ error, reset }: AdminErrorProps) {
     <PageContainer>
       <EmptyState
         headingLevel={1}
-        icon={TriangleAlert}
+        icon="psif-alerta"
         title="Não foi possível carregar a página"
-        description="Tente novamente em instantes. Se o erro continuar, fale com a equipe do PSIF."
-        action={<Button onClick={reset}>Tentar novamente</Button>}
+        description="Tente de novo em instantes. Se o erro continuar, fale com a equipe do PSIF."
+        action={<Button onClick={reset}>Tentar de novo</Button>}
       />
     </PageContainer>
   );

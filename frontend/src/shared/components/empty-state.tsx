@@ -1,12 +1,12 @@
-import { Inbox, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
+import { Icon, type IconName } from "@/shared/components/icon";
 import { cn } from "@/shared/lib/cn";
 
 type EmptyStateProps = Readonly<{
   title: string;
   description?: string;
-  icon?: LucideIcon;
+  icon?: IconName;
   action?: ReactNode;
   headingLevel?: 1 | 2;
   className?: string;
@@ -15,7 +15,7 @@ type EmptyStateProps = Readonly<{
 export function EmptyState({
   title,
   description,
-  icon: Icon = Inbox,
+  icon,
   action,
   headingLevel = 2,
   className,
@@ -25,15 +25,19 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center gap-4 rounded-lg border border-dashed p-8 text-center",
+        "bg-card flex flex-col items-center justify-center gap-4 rounded-xl p-8 text-center md:rounded-2xl",
         className,
       )}
     >
-      <Icon aria-hidden="true" className="text-muted-foreground size-10" />
+      {icon ? (
+        <span className="text-primary flex size-(--tile-icon-lg) items-center justify-center rounded-md bg-sky-100">
+          <Icon name={icon} size="lg" />
+        </span>
+      ) : null}
       <div className="flex flex-col gap-1">
-        <Heading className="text-lg font-semibold">{title}</Heading>
+        <Heading className="text-h2 text-primary font-semibold">{title}</Heading>
         {description ? (
-          <p className="text-muted-foreground max-w-md text-sm">{description}</p>
+          <p className="text-body text-ink-700 max-w-(--w-form)">{description}</p>
         ) : null}
       </div>
       {action ? <div className="flex items-center gap-2">{action}</div> : null}
