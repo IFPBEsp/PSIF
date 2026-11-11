@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 import { navigationGroups } from "@/config/navigation.config";
 import { Icon } from "@/shared/components/icon";
 import { SidebarCollapseButton } from "@/shared/components/layout/sidebar-collapse-button";
-import { PsifSymbol } from "@/shared/components/psif-symbol";
-import { ThemeSelector } from "@/shared/components/theme-selector";
+import { SidebarSearch } from "@/shared/components/layout/sidebar-search";
+import { SidebarUserCard } from "@/shared/components/layout/sidebar-user-card";
 import {
   Sidebar,
   SidebarContent,
@@ -33,24 +33,24 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader className="p-6 group-data-[collapsible=icon]:p-2">
-        <div className="flex items-center gap-3 group-data-[collapsible=icon]:flex-col">
-          <PsifSymbol decorative />
+    <Sidebar collapsible="icon" className="group-data-[side=left]:border-r-0">
+      <SidebarHeader className="px-6 pt-6 pb-3 group-data-[collapsible=icon]:p-2">
+        <div className="flex items-center justify-between group-data-[collapsible=icon]:justify-center">
           <span className="text-h1 text-primary font-semibold group-data-[collapsible=icon]:hidden">
             PSIF
           </span>
-          <SidebarCollapseButton className="ml-auto group-data-[collapsible=icon]:ml-0" />
+          <SidebarCollapseButton />
         </div>
       </SidebarHeader>
+      <SidebarSearch />
       <SidebarContent>
         <nav aria-label="Principal">
           {navigationGroups.map((group, index) => (
             <div key={group[0]?.href}>
-              {index > 0 ? <SidebarSeparator className="w-auto!" /> : null}
-              <SidebarGroup>
+              {index > 0 ? <SidebarSeparator className="mx-6 w-auto!" /> : null}
+              <SidebarGroup className="px-3 py-2">
                 <SidebarGroupContent>
-                  <SidebarMenu>
+                  <SidebarMenu className="gap-0.5">
                     {group.map((item) => {
                       const active = isActive(pathname, item.href);
 
@@ -60,7 +60,7 @@ export function AppSidebar() {
                             asChild
                             isActive={active}
                             tooltip={item.label}
-                            className="text-body text-ink-700 data-[active=true]:bg-sky-100 data-[active=true]:text-primary h-auto min-h-(--target-min) rounded-lg font-medium data-[active=true]:font-semibold"
+                            className="text-body text-ink-700 hover:text-ink-700 data-[active=true]:bg-sky-100 data-[active=true]:text-primary data-[active=true]:hover:bg-sky-100 data-[active=true]:hover:text-primary h-auto min-h-(--target-min) gap-2.5 rounded-lg px-3 font-medium data-[active=true]:font-semibold"
                           >
                             <Link href={item.href} aria-current={active ? "page" : undefined}>
                               <Icon
@@ -81,8 +81,8 @@ export function AppSidebar() {
           ))}
         </nav>
       </SidebarContent>
-      <SidebarFooter className="p-6 group-data-[collapsible=icon]:hidden">
-        <ThemeSelector />
+      <SidebarFooter className="p-3">
+        <SidebarUserCard />
       </SidebarFooter>
     </Sidebar>
   );

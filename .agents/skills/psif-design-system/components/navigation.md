@@ -4,7 +4,7 @@
 
 Uma navegação só: a barra lateral (§7.10), que vira gaveta na tela estreita
 (§7.9). Sem barra inferior. Destinos, nesta ordem: **Início · Atendimentos ·
-Alunos · Relatórios**, depois **Agenda · Notificações · Meu perfil**, e
+Alunos · Relatórios · Agenda**, depois **Notificações · Meu perfil**, e
 **Sair** no pé. A lista sai de uma configuração central, e cada item aparece
 só para o perfil com permissão para ele (§16.2). "Termo" fica fora até ter
 destino (§27).
@@ -108,11 +108,11 @@ React.CSSProperties}`.
 
 De cima para baixo, com `--sp-6` de padding:
 
-1. Símbolo (§1.1) em `--ic-xl` e **PSIF** em `--fs-h1` 600 `--navy-700`; à
+1. **PSIF** em `--fs-h1` 600 `--navy-700`, sem o símbolo; à
    direita, o botão de recolher.
 2. Busca global "Pesquisar aluno" (§7.13).
-3. Início · Atendimentos · Alunos · Relatórios.
-4. Linha `--ink-200`, depois Agenda · Notificações · Meu perfil.
+3. Início · Atendimentos · Alunos · Relatórios · Agenda.
+4. Linha `--ink-200`, recuada dos dois lados, depois Notificações · Meu perfil.
 5. No pé, cartão `--ink-100` (raio de §3.6) com iniciais, nome, papel e
    "Sair".
 
