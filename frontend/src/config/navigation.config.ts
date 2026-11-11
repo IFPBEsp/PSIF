@@ -33,9 +33,9 @@ export const navigationGroups: readonly (readonly NavigationItem[])[] = [
       icon: "psif-relatorios",
       activeIcon: "psif-relatorios-ativo",
     },
+    { label: "Agenda", href: "/schedule", icon: "psif-calendario" },
   ],
   [
-    { label: "Agenda", href: "/schedule", icon: "psif-calendario" },
     {
       label: "Notificações",
       href: "/notifications",
@@ -45,7 +45,8 @@ export const navigationGroups: readonly (readonly NavigationItem[])[] = [
   ],
 ];
 
-export const navigationItems: readonly NavigationItem[] = navigationGroups.flat();
+export const navigationItems: readonly NavigationItem[] =
+  navigationGroups.flat();
 
 export const segmentLabels: ReadonlyMap<string, string> = new Map([
   ["new", "Novo"],
