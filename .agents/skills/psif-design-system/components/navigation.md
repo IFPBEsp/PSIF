@@ -140,7 +140,7 @@ A barra recolhe para só ícones (`Sidebar collapsible="icon"`, com o
 `SidebarTrigger`).
 
 - **Controle:** ☰ (`psif-menu`, `--ic-lg`, alvo `--target-min`,
-  `--radius-pill`) à direita da marca; recolhida, logo abaixo do símbolo.
+  `--radius-pill`) à direita da marca; recolhida, no topo da barra.
   `aria-label` "Recolher menu" ou "Expandir menu" e `aria-expanded`.
 - **Recolhida:** rótulos e nome PSIF somem; itens centralizados; a busca vira
   botão de lupa, que abre a busca como em §7.13; o cartão do pé vira as

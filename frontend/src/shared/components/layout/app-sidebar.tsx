@@ -49,7 +49,9 @@ export function AppSidebar() {
         <nav aria-label="Principal">
           {navigationGroups.map((group, index) => (
             <div key={group[0]?.href}>
-              {index > 0 ? <SidebarSeparator className="mx-6 w-auto!" /> : null}
+              {index > 0 ? (
+                <SidebarSeparator className="mx-6 w-auto! group-data-[collapsible=icon]:mx-3" />
+              ) : null}
               <SidebarGroup className="px-3 py-2">
                 <SidebarGroupContent>
                   <SidebarMenu className="gap-0.5">
@@ -62,7 +64,7 @@ export function AppSidebar() {
                             asChild
                             isActive={active}
                             tooltip={item.label}
-                            className="text-body text-ink-700 hover:text-ink-700 data-[active=true]:bg-sky-100 data-[active=true]:text-primary data-[active=true]:hover:bg-sky-100 data-[active=true]:hover:text-primary h-auto min-h-(--target-min) gap-2.5 rounded-lg px-3 font-medium data-[active=true]:font-semibold"
+                            className="text-body text-ink-700 hover:text-ink-700 data-[active=true]:bg-sky-100 data-[active=true]:text-primary data-[active=true]:hover:bg-sky-100 data-[active=true]:hover:text-primary h-auto min-h-(--target-min) gap-2.5 rounded-lg px-3 font-medium group-data-[collapsible=icon]:mx-auto group-data-[collapsible=icon]:gap-0 group-data-[collapsible=icon]:size-(--target-min)! group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0! data-[active=true]:font-semibold"
                           >
                             <Link
                               href={item.href}
@@ -74,7 +76,9 @@ export function AppSidebar() {
                                 size="lg"
                                 className="size-(--ic-lg)!"
                               />
-                              <span>{item.label}</span>
+                              <span className="group-data-[collapsible=icon]:sr-only">
+                                {item.label}
+                              </span>
                             </Link>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
