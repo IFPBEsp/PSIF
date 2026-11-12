@@ -86,3 +86,5 @@ npm run api:generate
 ```
 
 O Orval lê a especificação em `${API_INTERNAL_URL}/v3/api-docs` e usa `http://localhost:8080` quando a variável não está no ambiente. Ele não lê o `.env`: para outra URL, exporte a variável no próprio comando. A mudança de contrato no `backend` e o client regerado vão no mesmo commit.
+
+As funções geradas chamam o `backend` pelo `orvalMutator` (`frontend/src/shared/lib/api/orval-mutator.ts`), que passa pelo `backendFetch` e é server-only: importar uma delas num Client Component quebra o `next build`. No cliente, use apenas os tipos de `@/generated/api/schemas`.
