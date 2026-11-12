@@ -364,7 +364,7 @@ Listagens vazias têm estado próprio, com ação sugerida quando fizer sentido 
 
 ## 12. API client
 
-O backend disponibiliza OpenAPI e o frontend usa Orval para gerar types, schemas, HTTP clients e contratos:
+O backend disponibiliza OpenAPI e o frontend usa Orval para gerar types, schemas, HTTP clients, hooks de React Query e contratos:
 
 ```text
 src/generated/api
@@ -386,8 +386,6 @@ A regeneração tem comando padronizado, de modo que mudança de contrato no bac
   }
 }
 ```
-
-Para regerar, suba o backend em dev e rode `npm run api:generate`. O passo a passo e a variável `API_INTERNAL_URL` estão em `docs/foundation/contracts.md`, seção 6.
 
 Os helpers de chamada server-side ficam reunidos, cuidando de base URL, headers, auth, refresh, erro, timeout, error mapping e correlation id:
 
