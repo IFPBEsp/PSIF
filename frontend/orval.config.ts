@@ -16,6 +16,15 @@ export default defineConfig({
       mode: "tags-split",
       client: "fetch",
       clean: true,
+      override: {
+        mutator: {
+          path: "src/shared/lib/api/orval-mutator.ts",
+          name: "orvalMutator",
+        },
+        fetch: {
+          includeHttpResponseReturnType: false,
+        },
+      },
     },
   },
 });
