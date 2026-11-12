@@ -91,9 +91,9 @@ Agenda · Meu perfil · Notificações.
 
 Abaixo de `--bp-md`, a barra lateral vira gaveta: entra pela esquerda sobre
 `--overlay`, com `--z-modal`, largura `--w-sidebar` e `--sh-md`; mesmo
-conteúdo e ordem. No projeto, o `Sidebar` do shadcn já faz isso.
+conteúdo e ordem. No projeto, o `Sidebar` do shadcn monta a gaveta com o `Drawer`, que fecha arrastando.
 
-- Fecha num destino, no véu ou em Esc, e o foco volta ao ☰.
+- Fecha num destino, no véu, em Esc ou arrastando para a esquerda, e o foco volta ao ☰.
 - Abre com o foco no item ativo e prende o foco enquanto aberta.
 - Entra em `--dur-normal` (§17.3).
 

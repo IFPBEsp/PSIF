@@ -19,6 +19,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
+  useSidebar,
 } from "@/shared/components/ui/sidebar";
 
 function isActive(pathname: string, href: string) {
@@ -31,6 +32,7 @@ function isActive(pathname: string, href: string) {
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { setOpenMobile } = useSidebar();
 
   return (
     <Sidebar collapsible="icon" className="group-data-[side=left]:border-r-0">
@@ -62,7 +64,11 @@ export function AppSidebar() {
                             tooltip={item.label}
                             className="text-body text-ink-700 hover:text-ink-700 data-[active=true]:bg-sky-100 data-[active=true]:text-primary data-[active=true]:hover:bg-sky-100 data-[active=true]:hover:text-primary h-auto min-h-(--target-min) gap-2.5 rounded-lg px-3 font-medium data-[active=true]:font-semibold"
                           >
-                            <Link href={item.href} aria-current={active ? "page" : undefined}>
+                            <Link
+                              href={item.href}
+                              onClick={() => setOpenMobile(false)}
+                              aria-current={active ? "page" : undefined}
+                            >
                               <Icon
                                 name={active && item.activeIcon ? item.activeIcon : item.icon}
                                 size="lg"

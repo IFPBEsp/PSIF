@@ -11,12 +11,12 @@ import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Separator } from "@/shared/components/ui/separator";
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/shared/components/ui/sheet";
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/shared/components/ui/drawer";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import {
   Tooltip,
@@ -28,7 +28,6 @@ import {
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = "16rem";
-const SIDEBAR_WIDTH_MOBILE = "18rem";
 const SIDEBAR_WIDTH_ICON = "3rem";
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
 
@@ -179,26 +178,21 @@ function Sidebar({
 
   if (isMobile) {
     return (
-      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-        <SheetContent
+      <Drawer open={openMobile} onOpenChange={setOpenMobile} direction={side}>
+        <DrawerContent
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-          style={
-            {
-              "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
-            } as React.CSSProperties
-          }
-          side={side}
+          className="bg-sidebar text-sidebar-foreground data-[vaul-drawer-direction=left]:w-(--sidebar-width) data-[vaul-drawer-direction=left]:border-r-0 data-[vaul-drawer-direction=left]:sm:max-w-none data-[vaul-drawer-direction=right]:w-(--sidebar-width) data-[vaul-drawer-direction=right]:border-l-0 data-[vaul-drawer-direction=right]:sm:max-w-none p-0"
+          style={{ "--sidebar-width": "var(--w-sidebar)" } as React.CSSProperties}
         >
-          <SheetHeader className="sr-only">
-            <SheetTitle>Menu de navegação</SheetTitle>
-            <SheetDescription>Lista as seções do sistema.</SheetDescription>
-          </SheetHeader>
+          <DrawerHeader className="sr-only">
+            <DrawerTitle>Menu de navegação</DrawerTitle>
+            <DrawerDescription>Lista as seções do sistema.</DrawerDescription>
+          </DrawerHeader>
           <div className="flex h-full w-full flex-col">{children}</div>
-        </SheetContent>
-      </Sheet>
+        </DrawerContent>
+      </Drawer>
     );
   }
 
