@@ -7,9 +7,9 @@ psicopedagoga, pelos professores, pelos alunos atendidos e pelos responsáveis
 ### 1.1 Símbolo
 
 O símbolo é o cérebro com cruz, branco, sobre quadrado `--blue-300` de cantos
-arredondados. Aparece no topo da barra lateral (§7.10, em `--ic-xl`), no
-cartão de login (§9.8, em `--tile-icon-lg`), no cabeçalho da página pública
-(em branco sobre quadrado `--navy-700`) e como favicon.
+arredondados. Aparece no cartão de login (§9.8, em `--tile-icon-lg`), no
+cabeçalho da página pública (em branco sobre quadrado `--navy-700`) e como
+favicon. Na barra lateral (§7.10), a marca é só o texto **PSIF**, sem o símbolo.
 
 - `assets/simbolo-psif.svg`: o símbolo completo, para colar inline.
 - `assets/simbolo-psif-glifo.svg`: só o glifo, em `currentColor`: branco
@@ -30,7 +30,7 @@ Não redesenhe, não distorça e não ponha texto por cima. Inline, leva
 
 ### 1.3 Marca dentro do sistema
 
-A marca aparece no topo da barra lateral (§7.10), no login e no cabeçalho da
+A marca aparece no topo da barra lateral (§7.10, só o texto PSIF), no login e no cabeçalho da
 página pública. A barra de ações de cada tela é funcional (§7.3), sem marca.
 
 ### 1.4 Tokens de marca
