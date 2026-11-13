@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "api:generate": "orval"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
@@ -34,6 +35,7 @@
     "eslint-config-next": "^16.4.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
+    "orval": "^8.46.0",
     "prettier": "^3.9.10",
     "typescript": "^5.9.3",
     "vitest": "^5.0.5"
