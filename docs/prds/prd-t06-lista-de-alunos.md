@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T06 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor |
 | Telas relacionadas | [T02 Início](prd-t02-inicio.md), [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md), [T08 Perfil do aluno](prd-t08-perfil-do-aluno.md), [T19 Turmas](prd-t19-turmas.md), [T20 Cursos](prd-t20-cursos.md), [T22 Dificuldades](prd-t22-dificuldades.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -61,7 +61,7 @@ Permitir que a psicopedagoga e o professor encontrem um aluno e abram o perfil d
 | Cidade | Cidade do aluno. Só a psicopedagoga. |
 | E-mail acadêmico | E-mail de acesso do aluno. Só a psicopedagoga. |
 | Responsável | Primeiro responsável cadastrado, com "+N" quando há mais de um (RN-05). Só a psicopedagoga. |
-| Contato do responsável | Contato do primeiro responsável cadastrado, com "+N" quando há mais de um responsável (RN-05). Só a psicopedagoga. O dado mostrado está em "Contato do responsável" na 7.2. |
+| Contato do responsável | Contato do primeiro responsável cadastrado, com "+N" quando há mais de um responsável (RN-05). Só a psicopedagoga. O dado mostrado está em "Contato do responsável" na 7.1.1. |
 | Situação | "Ativo" ou "Inativo" (situações do aluno, seção 6 do índice). Só a psicopedagoga. |
 | Paginação | 20 itens por página (RG-19). |
 | Cadastrar aluno | Botão principal que abre [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md). Só a psicopedagoga. |
@@ -147,20 +147,24 @@ Não se aplica. A tela não tem formulário.
 | RN-11 | Aluno e responsável não usam esta tela. O menu "Alunos" só existe para psicopedagoga e professor (seção 8 do índice). |
 | RN-12 | A busca da psicopedagoga considera o nome e o e-mail acadêmico. A busca do professor considera só o nome, porque ele não vê o e-mail acadêmico (RG-11). |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
 | Foto ausente | Aluno sem foto mostra um círculo com as iniciais do nome. |
 | Aluno sem responsável | Aluno com 18 anos ou mais pode não ter responsável. As colunas "Responsável" e "Contato do responsável" ficam com "Não informado". |
 | Contato do responsável | A coluna mostra o telefone do primeiro responsável cadastrado. |
-| Filtro Série | A lista de séries vai de 1º a 4º quando o filtro Curso está em "Todos". Com um curso escolhido, mostra só as séries do curso. Trocar o curso limpa a série escolhida. |
+| Filtro Série | Com o filtro Curso em "Todos", a lista mostra as séries existentes nos cursos ativos. Com um curso escolhido, mostra só as séries desse curso. Trocar o curso limpa a série escolhida se ela não existir no novo curso. |
 | Ordenação por curso e série | Ordena pela sigla do curso, de A a Z, e depois pela série, de 1º a 4º. Clicar de novo no título da coluna inverte o sentido. O professor usa a mesma ordenação, aplicada à turma. |
 | Dificuldade "Em avaliação" na ordenação | Na ordenação por dificuldade, os alunos "Em avaliação" ficam no fim da lista, nos dois sentidos. |
 | Dificuldades inativas no filtro | O filtro Dificuldade também lista dificuldades inativas, para encontrar alunos que ainda as têm. |
 | Turmas inativas no filtro | O filtro Turma lista só turmas do ano letivo atual. Para ver alunos de turmas antigas, a psicopedagoga usa a busca e o perfil do aluno. |
 | Aluno inativo em destaque | Aluno inativo mostra o selo "Inativo" na coluna Situação e a linha em cor mais fraca. |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -171,10 +175,10 @@ Não se aplica. Esta tela não gera nem recebe notificações.
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
 | Aluno sem dificuldade cadastrada | Aviso | Em avaliação |
-| Lista vazia, sem nenhum aluno, psicopedagoga | Aviso | Nenhum aluno cadastrado. Use "Cadastrar aluno" para incluir o primeiro. (proposta) |
-| Lista vazia, sem nenhum aluno, professor | Aviso | Nenhum aluno ativo nas suas turmas. (proposta) |
-| Lista vazia por causa dos filtros | Aviso | Nenhum aluno encontrado com estes filtros. Limpe os filtros para ver todos os alunos. (proposta) |
-| Busca com 1 caractere | Aviso | Digite pelo menos 2 caracteres para buscar. (proposta) |
+| Lista vazia, sem nenhum aluno, psicopedagoga | Aviso | Nenhum aluno cadastrado. Use "Cadastrar aluno" para incluir o primeiro. |
+| Lista vazia, sem nenhum aluno, professor | Aviso | Nenhum aluno ativo nas suas turmas. |
+| Lista vazia por causa dos filtros | Aviso | Nenhum aluno encontrado com estes filtros. Limpe os filtros para ver todos os alunos. |
+| Busca com 1 caractere | Aviso | Digite pelo menos 2 caracteres para buscar. |
 
 ## 10. Permissões
 
@@ -197,7 +201,7 @@ Não se aplica. Esta tela não gera nem recebe notificações.
 - [ ] Dado que a psicopedagoga abre o filtro Curso, quando vê as opções, então aparecem só cursos ativos e a opção "Todos" (RN-08).
 - [ ] Dado que a psicopedagoga abre o filtro Situação, quando escolhe "Inativos", então a lista mostra só alunos inativos, e com "Todos" mostra ativos e inativos.
 - [ ] Dado que o usuário digita "jose" na busca, quando a lista é atualizada, então aparecem alunos com "José" no nome, ignorando maiúsculas e acentos (RG-20).
-- [ ] Dado que o usuário digita 1 caractere na busca, quando a busca é feita, então a lista não muda (RG-20).
+- [ ] Dado que o usuário digita 1 caractere na busca, quando a busca é feita, então a lista não muda e mostra "Digite pelo menos 2 caracteres para buscar." (RG-20).
 - [ ] Dado que a psicopedagoga busca por parte do e-mail acadêmico, quando a lista é atualizada, então aparece o aluno com esse e-mail.
 - [ ] Dado que o professor busca por parte do e-mail acadêmico de um aluno da sua turma, quando a lista é atualizada, então o aluno não aparece por esse e-mail, porque a busca do professor considera só o nome (RN-12, RG-11).
 - [ ] Dado que o usuário escolheu filtros, quando abre um perfil e volta para a lista, então os filtros continuam aplicados e visíveis (RG-21).
@@ -208,6 +212,7 @@ Não se aplica. Esta tela não gera nem recebe notificações.
 - [ ] Dado que um aluno tem dois responsáveis, quando a psicopedagoga vê a lista, então as colunas de responsável mostram o primeiro cadastrado e "+1" (RN-05).
 - [ ] Dado que a psicopedagoga ordena por dificuldade, quando a lista é atualizada, então a ordem usa a dificuldade mostrada na coluna (RN-06).
 - [ ] Dado que a psicopedagoga ordena por curso e série, quando a lista é atualizada, então os alunos aparecem agrupados por curso e série.
+- [ ] Dado o filtro Curso em "Todos", quando a psicopedagoga abre o filtro Série, então vê somente séries existentes nos cursos ativos; ao trocar o curso, uma série incompatível é limpa.
 - [ ] Dado que nenhum aluno atende aos filtros, quando a lista é mostrada, então aparece a mensagem de lista vazia e a opção de limpar os filtros (RG-22).
 - [ ] Dado que a psicopedagoga abre a lista sem nenhum aluno cadastrado, quando a lista é mostrada, então aparece a mensagem de lista vazia e a ação "Cadastrar aluno" (RG-22).
 - [ ] Dado que a psicopedagoga está na lista, quando escolhe "Cadastrar aluno", então abre o [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md).

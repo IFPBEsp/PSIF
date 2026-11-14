@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T08 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor, Aluno, Responsável |
 | Telas relacionadas | [T02 Início](prd-t02-inicio.md), [T03 Notificações](prd-t03-notificacoes.md), [T06 Lista de alunos](prd-t06-lista-de-alunos.md), [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md), [T09 Dados de saúde](prd-t09-dados-de-saude.md), [T10 Acompanhamentos](prd-t10-acompanhamentos.md), [T11 Características e orientações](prd-t11-caracteristicas-e-orientacoes.md), [T12 Planejamento semanal](prd-t12-planejamento-semanal.md), [T13 Agenda](prd-t13-agenda.md), [T15 Pedidos de agendamento](prd-t15-pedidos-de-agendamento.md), [T16 Atividades adaptadas](prd-t16-atividades-adaptadas.md), [T17 Observações dos professores](prd-t17-observacoes-dos-professores.md), [T18 Informações para a psicopedagoga](prd-t18-informacoes-para-a-psicopedagoga.md), [T19 Turmas](prd-t19-turmas.md), [T22 Dificuldades](prd-t22-dificuldades.md), [T24 Formulários](prd-t24-formularios.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -128,7 +128,7 @@ Não se aplica. A aba "Agenda do aluno" abre a agenda já filtrada para o aluno 
 | Estado | Comportamento esperado |
 | --- | --- |
 | Carregando | Segue RG-33. |
-| Vazio, sem nenhum registro | Não se aplica. O perfil sempre tem os dados do aluno. Aluno sem responsável e aba sem registros seguem 7.2 e a tela da aba. |
+| Vazio, sem nenhum registro | Não se aplica. O perfil sempre tem os dados do aluno. Aluno sem responsável e aba sem registros seguem 7.1.1 e a tela da aba. |
 | Vazio, por causa dos filtros | Não se aplica. |
 | Sem permissão | Aluno que o usuário não pode ver abre "Não encontrado" (RG-13). "Acesso negado" não se aplica, porque todos os perfis usam esta tela. As telas estão em [T26 Estados do sistema](prd-t26-estados-do-sistema.md). |
 | Erro | Falha de conexão abre "Sem conexão" e falha inesperada abre "Erro inesperado", em [T26 Estados do sistema](prd-t26-estados-do-sistema.md). A mensagem diz o que aconteceu e o que fazer (RG-24). |
@@ -177,9 +177,9 @@ Efeito por perfil na fase 1:
 | RN-16 | Para o aluno, a tela se chama "Meu perfil". Para o responsável, "Perfil do aluno", do aluno escolhido (menu, seção 8 do índice). |
 | RN-17 | A ficha impressa traz o cabeçalho e o conteúdo da aba "Dados pessoais e escolares", na versão impressa padrão (nome do campus, nome do sistema e data de impressão). Não traz dados de saúde. A ficha leva a marcação "Documento confidencial", por conter dados pessoais do aluno (RG-30). |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
 | Dados da aba para aluno e responsável | O aluno vê todos os próprios dados pessoais e escolares, inclusive o e-mail acadêmico, e os responsáveis com nome, parentesco e telefone. O responsável vê os dados pessoais e escolares do aluno e, dos responsáveis, só nome e parentesco. Telefone e e-mail de outro responsável não aparecem para ele. |
 | Histórico de turmas e de responsáveis | A psicopedagoga vê, na aba de dados, o histórico de turmas anteriores e dos responsáveis desvinculados. Os outros perfis não veem. |
@@ -188,7 +188,11 @@ Efeito por perfil na fase 1:
 | Dificuldades no cabeçalho | O cabeçalho mostra o nome de todas as dificuldades, separadas por vírgula. Aluno sem dificuldade mostra "Em avaliação", como na [T06 Lista de alunos](prd-t06-lista-de-alunos.md). |
 | Aluno sem responsável | A seção "Responsáveis" mostra "Nenhum responsável cadastrado." |
 | Cálculo da idade | A idade conta anos completos pela data de nascimento, no horário de Brasília. |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -199,8 +203,8 @@ Não se aplica. Esta tela não gera notificações. As ações do cabeçalho lev
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
 | Aluno inativo (só a psicopedagoga vê o perfil) | Aviso | Aluno inativo |
-| Aluno sem responsável | Aviso | Nenhum responsável cadastrado. (proposta) |
-| Ficha impressa | Sucesso | Ficha enviada para impressão. (proposta) |
+| Aluno sem responsável | Aviso | Nenhum responsável cadastrado. |
+| Ficha impressa | Sucesso | Ficha enviada para impressão. |
 
 ## 10. Permissões
 

@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T22 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga |
 | Telas relacionadas | [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md), [T06 Lista de alunos](prd-t06-lista-de-alunos.md), [T08 Perfil do aluno](prd-t08-perfil-do-aluno.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -137,15 +137,20 @@ A busca segue RG-20.
 | RN-06 | A dificuldade nunca é excluída. Ela é inativada e reativada, e o histórico é mantido (RG-14). |
 | RN-07 | O professor vê o nome e a descrição ("O que é") das dificuldades dos seus alunos no perfil do aluno ([T08 Perfil do aluno](prd-t08-perfil-do-aluno.md)), dentro do que RG-08 e RG-11 permitem. |
 | RN-08 | A lista de alunos ([T06 Lista de alunos](prd-t06-lista-de-alunos.md)) usa as dificuldades do catálogo no filtro e na coluna "Dificuldade". |
+| RN-09 | O campo "O que é" aceita até 300 caracteres. A quantidade de alunos vinculados conta somente os alunos ativos. Nomes não se repetem ao ignorar maiúsculas, minúsculas e acentos. |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
 | Limite de "O que é" | Até 300 caracteres. |
 | Quantidade de alunos vinculados | Conta só alunos ativos. |
 | Nome único sem diferenciar maiúsculas e acentos | "Dislexia" e "dislexia" contam como o mesmo nome. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -156,15 +161,15 @@ Não se aplica.
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
 | Dificuldade cadastrada | Sucesso | Dificuldade cadastrada |
-| Dificuldade atualizada | Sucesso | Dificuldade atualizada. (proposta) |
-| Dificuldade inativada | Sucesso | Dificuldade inativada. (proposta) |
-| Dificuldade reativada | Sucesso | Dificuldade reativada. (proposta) |
-| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar a dificuldade. (proposta) |
-| Nome repetido | Erro | Já existe uma dificuldade com este nome. Use outro nome e salve de novo. (proposta) |
-| Inativar dificuldade | Confirmação | Inativar a dificuldade {nome}? Ela deixa de aparecer para novos vínculos e continua nos alunos que já a têm. (proposta) |
-| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. (proposta) |
-| Lista vazia, sem nenhuma dificuldade | Aviso | Nenhuma dificuldade cadastrada. (proposta) |
-| Lista vazia, por causa dos filtros | Aviso | Nenhuma dificuldade encontrada com estes filtros. (proposta) |
+| Dificuldade atualizada | Sucesso | Dificuldade atualizada. |
+| Dificuldade inativada | Sucesso | Dificuldade inativada. |
+| Dificuldade reativada | Sucesso | Dificuldade reativada. |
+| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar a dificuldade. |
+| Nome repetido | Erro | Já existe uma dificuldade com este nome. Use outro nome e salve de novo. |
+| Inativar dificuldade | Confirmação | Inativar a dificuldade {nome}? Ela deixa de aparecer para novos vínculos e continua nos alunos que já a têm. |
+| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. |
+| Lista vazia, sem nenhuma dificuldade | Aviso | Nenhuma dificuldade cadastrada. |
+| Lista vazia, por causa dos filtros | Aviso | Nenhuma dificuldade encontrada com estes filtros. |
 
 ## 10. Permissões
 
@@ -184,6 +189,8 @@ Não se aplica.
 - [ ] Dado que a dificuldade foi cadastrada, quando a psicopedagoga abre o cadastro de aluno, então a dificuldade aparece na lista de dificuldades para escolha (RN-04).
 - [ ] Dado que a psicopedagoga está no formulário de aluno, quando cadastra uma dificuldade nova sem sair do formulário, então a dificuldade é cadastrada, o que já foi digitado do aluno continua no formulário e a dificuldade nova pode ser escolhida (RN-05).
 - [ ] Dado que já existe uma dificuldade com o mesmo nome, quando a psicopedagoga tenta salvar outra com esse nome, então o sistema não salva e mostra o erro de nome repetido (RN-02).
+- [ ] Dado que já existe a dificuldade "Dislexia", quando a psicopedagoga tenta salvar "disléxia", então o sistema não salva e mostra o erro de nome repetido.
+- [ ] Dado o campo "O que é" com mais de 300 caracteres, quando a psicopedagoga tenta salvar, então o sistema não salva e informa o limite.
 - [ ] Dado que nome, tipo ou "O que é" estão vazios, quando a psicopedagoga tenta salvar, então o sistema não salva e indica o campo (RN-02).
 - [ ] Dado que a psicopedagoga deixou "Características" e "Mais informações" vazios, quando salva, então a dificuldade é cadastrada, porque os dois campos não são obrigatórios.
 - [ ] Dado que a dificuldade está Ativo, quando a psicopedagoga escolhe "Inativar" e confirma, então ela passa a Inativo, deixa de aparecer para novos vínculos e continua nos alunos que já a têm (RN-03).

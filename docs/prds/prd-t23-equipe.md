@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T23 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga |
 | Telas relacionadas | [T04 Minha conta](prd-t04-minha-conta.md), [T14 Evento](prd-t14-evento.md), [T03 Notificações](prd-t03-notificacoes.md), [T21 Professores](prd-t21-professores.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -153,12 +153,16 @@ Os filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao v
 | RN-11 | A lista tem o filtro "Situação" com Ativos, Inativos e Todos, com padrão Ativos, e a busca por nome ou e-mail. A ordenação é por nome, de A a Z. |
 | RN-12 | Na janela de confirmação da inativação, a psicopedagoga pode escrever o motivo do cancelamento dos eventos. Se não escrever, o motivo é "A pessoa responsável deixou a equipe". |
 
+#### 7.1.1 Decisões de validação aprovadas
+
+| Regra | Decisão aprovada |
+| --- | --- |
+| Mensagens | Os textos da seção 9 estão aprovados. |
+| Cargo | Texto livre, com sugestão dos cargos já usados. |
+
 ### 7.2 Regras propostas para validação
 
-| Regra | Definição sugerida |
-| --- | --- |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
-| Cargo | Texto livre, com sugestão dos cargos já usados. |
+Não se aplica.
 
 ## 8. Notificações
 
@@ -170,23 +174,23 @@ Os filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao v
 
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
-| Pessoa cadastrada | Sucesso | Pessoa cadastrada. Repasse a senha provisória: ela aparece só desta vez. (proposta) |
-| Pessoa atualizada | Sucesso | Pessoa atualizada. (proposta) |
-| Senha redefinida | Sucesso | Senha redefinida. Repasse a nova senha provisória: ela aparece só desta vez. (proposta) |
-| Pessoa inativada | Sucesso | Pessoa inativada. (proposta) |
-| Pessoa reativada | Sucesso | Pessoa reativada. (proposta) |
-| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar a pessoa. (proposta) |
-| E-mail fora do domínio | Erro | Use um e-mail institucional com o domínio @ifpb.edu.br. (proposta) |
-| E-mail já cadastrado | Erro | Já existe uma conta com este e-mail. Use outro e-mail e salve de novo. (proposta) |
-| Senha provisória fora da regra | Erro | A senha deve ter no mínimo 8 caracteres, com letras e números. Corrija e salve de novo. (proposta) |
-| Inativar a última pessoa ativa | Erro | Esta é a última pessoa ativa com o perfil Psicopedagoga. Cadastre outra pessoa antes de inativar esta. (proposta) |
-| Inativar a si mesma | Erro | Você não pode inativar a própria conta. Peça a outra pessoa da equipe. (proposta) |
-| Redefinir senha | Confirmação | Redefinir a senha de {pessoa}? A senha atual deixa de valer e ela precisa trocar a nova senha no próximo acesso. (proposta) |
-| Inativar pessoa sem eventos futuros | Confirmação | Inativar {pessoa}? Ela perde o acesso ao sistema e tudo o que registrou é mantido. (proposta) |
-| Inativar pessoa com eventos futuros | Confirmação | {pessoa} criou {número} eventos futuros. Inativar a pessoa e cancelar esses eventos, ou inativar e manter os eventos? Os participantes dos eventos cancelados são avisados. (proposta) |
-| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. (proposta) |
-| Lista vazia, sem nenhuma pessoa | Aviso | Nenhuma pessoa cadastrada. (proposta) |
-| Lista vazia por causa dos filtros | Aviso | Nenhuma pessoa encontrada com estes filtros. (proposta) |
+| Pessoa cadastrada | Sucesso | Pessoa cadastrada. Repasse a senha provisória: ela aparece só desta vez. |
+| Pessoa atualizada | Sucesso | Pessoa atualizada. |
+| Senha redefinida | Sucesso | Senha redefinida. Repasse a nova senha provisória: ela aparece só desta vez. |
+| Pessoa inativada | Sucesso | Pessoa inativada. |
+| Pessoa reativada | Sucesso | Pessoa reativada. |
+| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar a pessoa. |
+| E-mail fora do domínio | Erro | Use um e-mail institucional com o domínio @ifpb.edu.br. |
+| E-mail já cadastrado | Erro | Já existe uma conta com este e-mail. Use outro e-mail e salve de novo. |
+| Senha provisória fora da regra | Erro | A senha deve ter no mínimo 8 caracteres, com letras e números. Corrija e salve de novo. |
+| Inativar a última pessoa ativa | Erro | Esta é a última pessoa ativa com o perfil Psicopedagoga. Garanta outra pessoa ativa antes de inativar esta. |
+| Inativar a si mesma | Erro | Você não pode inativar a própria conta. Peça a outra pessoa da equipe. |
+| Redefinir senha | Confirmação | Redefinir a senha de {pessoa}? A senha atual deixa de valer e ela precisa trocar a nova senha no próximo acesso. |
+| Inativar pessoa sem eventos futuros | Confirmação | Inativar {pessoa}? Ela perde o acesso ao sistema e tudo o que registrou é mantido. |
+| Inativar pessoa com eventos futuros | Confirmação | {pessoa} criou {número} eventos futuros. Inativar a pessoa e cancelar esses eventos, ou inativar e manter os eventos? Os participantes dos eventos cancelados são avisados. |
+| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. |
+| Lista vazia, sem nenhuma pessoa | Aviso | Nenhuma pessoa cadastrada. |
+| Lista vazia por causa dos filtros | Aviso | Nenhuma pessoa encontrada com estes filtros. |
 
 ## 10. Permissões
 
