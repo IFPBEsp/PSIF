@@ -12,7 +12,7 @@ O código é organizado por domínio, e código da mesma funcionalidade fica jun
 
 ### Stack
 
-Base: Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, React Hook Form, Zod, TanStack Query, TanStack Table, nuqs, Zustand, Orval, Sonner, ESLint, Prettier e Docker.
+Base: Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, React Hook Form, Zod, TanStack Query, TanStack Table, nuqs, Zustand, Orval, Sonner, ESLint, Prettier, pnpm e Docker.
 
 Opcionais: Tiptap, Recharts, date-fns, React Dropzone, Sentry, OpenTelemetry, Playwright, Vitest, Testing Library e MSW. Adicione dependência apenas quando houver necessidade concreta.
 
@@ -23,6 +23,7 @@ Opcionais: Tiptap, Recharts, date-fns, React Dropzone, Sentry, OpenTelemetry, Pl
 | Framework         | Next.js                               |
 | Router            | App Router                            |
 | Linguagem         | TypeScript                            |
+| Pacotes           | pnpm                                  |
 | Arquitetura       | Feature-Based                         |
 | Renderização      | Server-first                          |
 | UI                | shadcn/ui                             |
@@ -387,6 +388,8 @@ A regeneração tem comando padronizado, de modo que mudança de contrato no bac
 }
 ```
 
+Para regenerar, com o backend em execução: `pnpm api:generate`.
+
 Os helpers de chamada server-side ficam reunidos, cuidando de base URL, headers, auth, refresh, erro, timeout, error mapping e correlation id:
 
 ```text
@@ -545,6 +548,7 @@ frontend
  ├── next.config.ts
  ├── orval.config.ts
  ├── package.json
+ ├── pnpm-lock.yaml
  ├── prettier.config.js
  ├── tailwind.config.ts
  └── tsconfig.json
@@ -562,6 +566,17 @@ AUTH_REFRESH_COOKIE_NAME=refresh_token
 
 NODE_ENV=production
 ```
+
+### Gerenciador de pacotes
+
+Só pnpm: um lockfile, instalação igual em toda máquina e no Docker, e nenhum import de pacote não declarado. A configuração impõe a regra:
+
+- `"packageManager": "pnpm@<versão>"` no `package.json` fixa a versão.
+- `"preinstall": "npx only-allow pnpm"` faz `npm install` e `yarn` falharem. É o único `npx` permitido.
+- `pnpm-lock.yaml` é o único lockfile versionado. `package-lock.json` e `yarn.lock` ficam no `.gitignore`.
+- O `Dockerfile` usa `pnpm install --frozen-lockfile`.
+
+Use `pnpm dlx` no lugar de `npx`. Script de instalação de dependência só roda depois de `pnpm approve-builds`.
 
 ## 24. Qualidade de código
 
@@ -588,7 +603,7 @@ Nada de `utils.ts` gigante. Prefira `currency.ts`, `date.ts`, `string.ts`, `prod
 Em um repositório vazio:
 
 ```text
- 1. Criar projeto Next.js com TypeScript strict.
+ 1. Criar projeto Next.js com TypeScript strict e pnpm (seção 23).
  2. Configurar ESLint, Prettier e Tailwind.
  3. Configurar shadcn/ui.
  4. Criar a estrutura app / features / shared / generated / config.
@@ -615,6 +630,7 @@ Em um repositório vazio:
 - Tokens em `localStorage`.
 - Browser acessando diretamente a API autenticada.
 - Duplicar tipos do OpenAPI ou editar código gerado.
+- Usar npm, npx ou yarn no frontend, ou versionar outro lockfile além do `pnpm-lock.yaml`.
 - Regra de negócio no frontend.
 - `shared` contendo código específico de domínio.
 - Componente genérico extremamente configurável para resolver apenas dois casos, ou uma abstração para cada componente simples.
