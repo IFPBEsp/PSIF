@@ -91,9 +91,9 @@ Agenda · Meu perfil · Notificações.
 
 Abaixo de `--bp-md`, a barra lateral vira gaveta: entra pela esquerda sobre
 `--overlay`, com `--z-modal`, largura `--w-sidebar` e `--sh-md`; mesmo
-conteúdo e ordem. No projeto, o `Sidebar` do shadcn já faz isso.
+conteúdo e ordem. No projeto, o `Sidebar` do shadcn monta a gaveta com o `Drawer`, que fecha arrastando.
 
-- Fecha num destino, no véu ou em Esc, e o foco volta ao ☰.
+- Fecha num destino, no véu, em Esc ou arrastando para a esquerda, e o foco volta ao ☰.
 - Abre com o foco no item ativo e prende o foco enquanto aberta.
 - Entra em `--dur-normal` (§17.3).
 
@@ -108,11 +108,11 @@ React.CSSProperties}`.
 
 De cima para baixo, com `--sp-6` de padding:
 
-1. Símbolo (§1.1) em `--ic-xl` e **PSIF** em `--fs-h1` 600 `--navy-700`; à
+1. **PSIF** em `--fs-h1` 600 `--navy-700`, sem o símbolo; à
    direita, o botão de recolher.
 2. Busca global "Pesquisar aluno" (§7.13).
 3. Início · Atendimentos · Alunos · Relatórios.
-4. Linha `--ink-200`, depois Agenda · Notificações · Meu perfil.
+4. Linha `--ink-200`, recuada dos dois lados, depois Agenda · Notificações · Meu perfil.
 5. No pé, cartão `--ink-100` (raio de §3.6) com iniciais, nome, papel e
    "Sair".
 
@@ -140,7 +140,7 @@ A barra recolhe para só ícones (`Sidebar collapsible="icon"`, com o
 `SidebarTrigger`).
 
 - **Controle:** ☰ (`psif-menu`, `--ic-lg`, alvo `--target-min`,
-  `--radius-pill`) à direita da marca; recolhida, logo abaixo do símbolo.
+  `--radius-pill`) à direita da marca; recolhida, no topo da barra.
   `aria-label` "Recolher menu" ou "Expandir menu" e `aria-expanded`.
 - **Recolhida:** rótulos e nome PSIF somem; itens centralizados; a busca vira
   botão de lupa, que abre a busca como em §7.13; o cartão do pé vira as
