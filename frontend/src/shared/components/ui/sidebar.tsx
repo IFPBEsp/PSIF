@@ -183,7 +183,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground data-[vaul-drawer-direction=left]:w-(--sidebar-width) data-[vaul-drawer-direction=left]:border-r-0 data-[vaul-drawer-direction=left]:sm:max-w-none data-[vaul-drawer-direction=right]:w-(--sidebar-width) data-[vaul-drawer-direction=right]:border-l-0 data-[vaul-drawer-direction=right]:sm:max-w-none p-0"
+          className="bg-sidebar text-sidebar-foreground data-[vaul-drawer-direction=left]:w-(--sidebar-width) data-[vaul-drawer-direction=left]:border-r-0 data-[vaul-drawer-direction=left]:sm:max-w-none data-[vaul-drawer-direction=right]:w-(--sidebar-width) data-[vaul-drawer-direction=right]:border-l-0 data-[vaul-drawer-direction=right]:sm:max-w-none p-0 [&_[data-sidebar=content]]:touch-pan-y"
           style={{ "--sidebar-width": "var(--w-sidebar)" } as React.CSSProperties}
         >
           <DrawerHeader className="sr-only">
