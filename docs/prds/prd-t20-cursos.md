@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T20 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga |
 | Telas relacionadas | [T19 Turmas](prd-t19-turmas.md), [T06 Lista de alunos](prd-t06-lista-de-alunos.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -133,14 +133,19 @@ Os filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao v
 | RN-07 | As turmas usam só cursos ativos ([T19 Turmas](prd-t19-turmas.md)), e o filtro "Curso" de [T06 Lista de alunos](prd-t06-lista-de-alunos.md) usa só cursos ativos. |
 | RN-08 | A série é identificada de 1º a 4º, até o número de séries do curso (seção 4 do índice). |
 | RN-09 | A lista tem o filtro "Situação" com Ativos, Inativos e Todos, com padrão Ativos, e a busca por sigla ou nome. A ordenação é pela sigla, de A a Z. |
+| RN-10 | Sigla e nome não se repetem entre cursos. A comparação da sigla não diferencia maiúsculas e minúsculas. |
+
+#### 7.1.1 Decisões de validação aprovadas
+
+| Regra | Decisão aprovada |
+| --- | --- |
+| Mensagens | Os textos da seção 9 estão aprovados. |
+| Sigla única sem diferenciar maiúsculas | "tin" e "TIN" contam como a mesma sigla. |
+| Nome único | O nome do curso também não se repete entre os cursos. |
 
 ### 7.2 Regras propostas para validação
 
-| Regra | Definição sugerida |
-| --- | --- |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
-| Sigla única sem diferenciar maiúsculas | "tin" e "TIN" contam como a mesma sigla. |
-| Nome único | O nome do curso também não se repete entre os cursos. |
+Não se aplica.
 
 ## 8. Notificações
 
@@ -150,20 +155,20 @@ Não se aplica.
 
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
-| Curso cadastrado | Sucesso | Curso cadastrado. (proposta) |
-| Curso atualizado | Sucesso | Curso atualizado. (proposta) |
-| Curso inativado | Sucesso | Curso inativado. (proposta) |
-| Curso reativado | Sucesso | Curso reativado. (proposta) |
-| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar o curso. (proposta) |
-| Sigla repetida | Erro | Já existe um curso com esta sigla. Use outra sigla e salve de novo. (proposta) |
-| Sigla com mais de 10 caracteres | Erro | A sigla pode ter até 10 caracteres. Reduza a sigla e salve de novo. (proposta) |
-| Número de séries fora do limite | Erro | O número de séries deve ser de 1 a 4. Corrija e salve de novo. (proposta) |
-| Número de séries menor que a maior série de turma ativa | Erro | Este curso tem turma ativa na {série}. Informe pelo menos {série} séries ou inative a turma antes. (proposta) |
-| Inativar curso com turmas ativas | Erro | Este curso tem turmas ativas. Inative as turmas antes de inativar o curso. (proposta) |
-| Inativar curso | Confirmação | Inativar o curso {sigla}? Ele deixa de aparecer para novas turmas e o histórico é mantido. (proposta) |
-| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. (proposta) |
-| Lista vazia, sem nenhum curso | Aviso | Nenhum curso cadastrado. (proposta) |
-| Lista vazia por causa dos filtros | Aviso | Nenhum curso encontrado com estes filtros. (proposta) |
+| Curso cadastrado | Sucesso | Curso cadastrado. |
+| Curso atualizado | Sucesso | Curso atualizado. |
+| Curso inativado | Sucesso | Curso inativado. |
+| Curso reativado | Sucesso | Curso reativado. |
+| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar o curso. |
+| Sigla repetida | Erro | Já existe um curso com esta sigla. Use outra sigla e salve de novo. |
+| Sigla com mais de 10 caracteres | Erro | A sigla pode ter até 10 caracteres. Reduza a sigla e salve de novo. |
+| Número de séries fora do limite | Erro | O número de séries deve ser de 1 a 4. Corrija e salve de novo. |
+| Número de séries menor que a maior série de turma ativa | Erro | Este curso tem turma ativa na {série}. Informe pelo menos {série} séries ou inative a turma antes. |
+| Inativar curso com turmas ativas | Erro | Este curso tem turmas ativas. Inative as turmas antes de inativar o curso. |
+| Inativar curso | Confirmação | Inativar o curso {sigla}? Ele deixa de aparecer para novas turmas e o histórico é mantido. |
+| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. |
+| Lista vazia, sem nenhum curso | Aviso | Nenhum curso cadastrado. |
+| Lista vazia por causa dos filtros | Aviso | Nenhum curso encontrado com estes filtros. |
 
 ## 10. Permissões
 
@@ -183,6 +188,7 @@ Não se aplica.
 - [ ] Dado que o filtro "Situação" está em Inativos e não há curso inativo, quando a lista carrega, então aparece a mensagem de lista vazia com a opção de limpar os filtros (RG-22).
 - [ ] Dado que a psicopedagoga preencheu sigla, nome e número de séries válidos, quando escolhe "Salvar", então o curso é cadastrado como Ativo e o sistema mostra a confirmação.
 - [ ] Dado que já existe um curso com a mesma sigla, quando a psicopedagoga tenta salvar outro com essa sigla, então o sistema não salva e mostra o erro de sigla repetida (RN-02).
+- [ ] Dado que já existe um curso com a sigla "TIN" ou com o mesmo nome, quando a psicopedagoga tenta salvar um curso com sigla "tin" ou com esse nome, então o sistema não salva e explica o conflito.
 - [ ] Dado que a sigla tem mais de 10 caracteres, quando a psicopedagoga tenta salvar, então o sistema não salva e mostra o erro do limite de caracteres (RN-02).
 - [ ] Dado que o número de séries é 0 ou 5, quando a psicopedagoga tenta salvar, então o sistema não salva e mostra o erro do limite (RN-02).
 - [ ] Dado que sigla ou nome estão vazios, quando a psicopedagoga tenta salvar, então o sistema não salva e indica o campo (RN-02).

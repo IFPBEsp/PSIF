@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T03 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor, Aluno, Responsável |
 | Telas relacionadas | [T02 Início](prd-t02-inicio.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md), [T14 Evento](prd-t14-evento.md), [T15 Pedidos de agendamento](prd-t15-pedidos-de-agendamento.md), [T16 Atividades adaptadas](prd-t16-atividades-adaptadas.md), [T17 Observações dos professores](prd-t17-observacoes-dos-professores.md), [T10 Acompanhamentos](prd-t10-acompanhamentos.md), [T11 Características e orientações](prd-t11-caracteristicas-e-orientacoes.md), [T12 Planejamento semanal](prd-t12-planejamento-semanal.md), [T18 Informações para a psicopedagoga](prd-t18-informacoes-para-a-psicopedagoga.md) |
 | Fase de entrega | 1 (cada tipo de notificação aparece quando a tela de origem for entregue) |
@@ -49,7 +49,7 @@ Permitir que cada usuário veja o que mudou e o que depende dele, para agir sem 
 | Informação | Descrição funcional |
 | --- | --- |
 | Sino | Fica no topo de todas as telas. Mostra a quantidade de notificações não lidas. Acima de 99, mostra "99+". |
-| Painel rápido | Lista as 10 notificações mais recentes. Ver "Conteúdo do painel rápido" em 7.2. |
+| Painel rápido | Lista as 10 notificações mais recentes. Ver "Conteúdo do painel rápido" em 7.1.1. |
 | Tela completa | Lista todas as notificações do usuário, com filtros, paginação e o total de resultados (RG-19). |
 | Tipo | Categoria da notificação, que vem do acontecimento que a gerou (seção 8). |
 | Título | Nome do acontecimento que gerou a notificação (RN-18). |
@@ -92,7 +92,7 @@ Os filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao v
 
 - Item removido ou sem acesso: ao abrir a notificação, aparece "Item indisponível" ([T26 Estados do sistema](prd-t26-estados-do-sistema.md)) (RN-13).
 - Marcar como lida sem abrir o item: o usuário usa "Marcar como lida" e a notificação passa para "Lida".
-- Marcar todas como lidas: as notificações não lidas passam para "Lida" (alcance em 7.2).
+- Marcar todas como lidas: as notificações não lidas passam para "Lida" (alcance em 7.1.1).
 - Filtro sem resultado: a lista mostra a mensagem de lista vazia com a opção de limpar os filtros (RG-22).
 - Notificação com mais de 90 dias: deixa de estar disponível (RN-14).
 - Responsável sem conta ativa: não recebe notificações (RN-04).
@@ -103,7 +103,7 @@ Os filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao v
 | --- | --- | --- |
 | Abrir o item relacionado | Todos os perfis, nas próprias notificações | Abre o item que gerou a notificação e marca a notificação como lida. Se o item não existe mais ou o usuário perdeu o acesso, abre "Item indisponível". |
 | Marcar como lida | Todos os perfis, nas próprias notificações | Muda a situação para "Lida", sem abrir o item, e diminui a quantidade do sino. |
-| Marcar todas como lidas | Todos os perfis, nas próprias notificações | Muda as notificações não lidas para "Lida" e atualiza a quantidade do sino (alcance em 7.2). |
+| Marcar todas como lidas | Todos os perfis, nas próprias notificações | Muda as notificações não lidas para "Lida" e atualiza a quantidade do sino (alcance em 7.1.1). |
 | Filtrar por situação ou tipo | Todos os perfis | Mostra só as notificações que atendem ao filtro. |
 | Limpar filtros | Todos os perfis | Volta para Todas e Todos os tipos (RG-21). |
 
@@ -112,8 +112,8 @@ Os filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao v
 | Estado | Comportamento esperado |
 | --- | --- |
 | Carregando | Segue RG-33. |
-| Vazio, sem nenhum registro | Mostra a mensagem "Você não tem notificações. (proposta)". Como o usuário não cria notificações, não há ação principal (ver 7.2). |
-| Vazio, por causa dos filtros | Mostra a mensagem "Nenhuma notificação encontrada com estes filtros. (proposta)" e a opção "Limpar filtros" (RG-22). |
+| Vazio, sem nenhum registro | Mostra a mensagem "Você não tem notificações.". Como o usuário não cria notificações, não há ação principal (ver 7.1.1). |
+| Vazio, por causa dos filtros | Mostra a mensagem "Nenhuma notificação encontrada com estes filtros." e a opção "Limpar filtros" (RG-22). |
 | Sem permissão | Todos os perfis usam esta tela (matriz de permissões, seção 10 do índice), e cada um vê só as próprias notificações. Item sem acesso abre "Item indisponível". "Acesso negado" e "Não encontrado" (RG-13) não se aplicam à lista. |
 | Erro | "Sem conexão" e "Erro inesperado" ([T26 Estados do sistema](prd-t26-estados-do-sistema.md)). |
 
@@ -124,7 +124,7 @@ A tela é entregue na fase 1. Cada tipo de notificação só aparece quando a te
 | Fase | Tela de origem | Tipos de notificação que passam a aparecer |
 | --- | --- | --- |
 | 1 | [T11 Características e orientações](prd-t11-caracteristicas-e-orientacoes.md) | Características ou orientações atualizadas. |
-| 1 | [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md) | Aluno com responsável com acesso completa 18 anos em 30 dias (ver 7.2). |
+| 1 | [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md) | Aluno com responsável com acesso completa 18 anos em 30 dias (ver 7.1.1). |
 | 2 | [T14 Evento](prd-t14-evento.md) | Evento criado, evento alterado ou remarcado, participante retirado do evento, evento cancelado, lembrete 24 horas antes e participante recusa presença. |
 | 2 | [T15 Pedidos de agendamento](prd-t15-pedidos-de-agendamento.md) | Pedido criado, aceito ou recusado, cancelado pelo autor, cancelado automaticamente e expirado. |
 | 3 | [T16 Atividades adaptadas](prd-t16-atividades-adaptadas.md) | Atividade adaptada registrada. |
@@ -159,14 +159,14 @@ A tela é entregue na fase 1. Cada tipo de notificação só aparece quando a te
 | RN-18 | O título da notificação repete o nome do acontecimento, por exemplo "Evento criado". O texto é uma frase com o nome do evento, do pedido ou do aluno e, quando houver, a data e a hora. Nas notificações de evento e de pedido, o texto segue RG-31. |
 | RN-19 | Nas notificações que o sistema gera sozinho, como o lembrete de evento, o pedido expirado, o pedido cancelado automaticamente e o aluno prestes a completar 18 anos, "Quem gerou" mostra "Sistema". |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
 | Conteúdo do painel rápido | Cada item mostra as mesmas informações da tela completa. O painel rápido mostra as 10 mais recentes, lidas e não lidas, sem filtros, e tem a ação "Ver todas as notificações" para abrir a tela completa. |
 | Sino sem não lidas | Quando não há notificações não lidas, o sino aparece sem quantidade. |
-| Marcar todas como lidas | A ação vale para todas as notificações não lidas do usuário, mesmo as de outras páginas ou fora do filtro, e não pede confirmação. |
+| Marcar todas como lidas | A ação vale para todas as notificações não lidas do usuário, mesmo as de outras páginas ou fora do filtro, e pede confirmação informando essa consequência. |
 | Depois de 90 dias | A notificação some da lista, do painel e da quantidade do sino. |
 | Atualização do sino | O sino atualiza a quantidade sem o usuário recarregar a tela. |
 | Destino de cada tipo | Cada notificação abre a tela do item que a gerou: o evento, o pedido de agendamento, a atividade adaptada, a observação, a informação, o acompanhamento, as características e orientações, o planejamento semanal ou o perfil do aluno. |
@@ -174,6 +174,10 @@ A tela é entregue na fase 1. Cada tipo de notificação só aparece quando a te
 | Lista vazia sem ação principal | A lista vazia mostra só a mensagem, sem ação principal, porque o usuário não cria notificações. |
 | Abrir o aviso de retirada do evento | O aviso "Participante retirado do evento" não abre o evento, porque a pessoa não é mais participante. Abrir o aviso só o marca como lido. |
 | Fase do aviso de maioridade | O aviso de aluno com responsável com acesso que completa 18 anos em 30 dias aparece desde a fase 1, com o cadastro de aluno. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -205,9 +209,9 @@ Esta tela mostra as notificações de todos os acontecimentos abaixo (seção 7 
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
 | Item removido ou sem acesso | Aviso | Este item não está mais disponível. |
-| Nenhuma notificação | Aviso | Você não tem notificações. (proposta) |
-| Nenhuma notificação com os filtros | Aviso | Nenhuma notificação encontrada com estes filtros. (proposta) |
-| Todas marcadas como lidas | Sucesso | Todas as notificações foram marcadas como lidas. (proposta) |
+| Nenhuma notificação | Aviso | Você não tem notificações. |
+| Nenhuma notificação com os filtros | Aviso | Nenhuma notificação encontrada com estes filtros. |
+| Todas marcadas como lidas | Sucesso | Todas as notificações foram marcadas como lidas. |
 | Falha de conexão | Erro | Sem conexão com a internet. O que você digitou não foi perdido. |
 | Erro do sistema | Erro | Algo deu errado. Tente de novo em alguns minutos. |
 
@@ -235,7 +239,7 @@ Esta tela mostra as notificações de todos os acontecimentos abaixo (seção 7 
 - [ ] Dado um filtro ativo, quando o usuário sai da lista e volta, então o filtro continua ativo e visível, e pode ser limpo de uma vez (RG-21).
 - [ ] Dada uma notificação "Não lida", quando o usuário abre o item relacionado, então o sistema abre o item, a notificação passa para "Lida" e a quantidade do sino diminui em um.
 - [ ] Dada uma notificação "Não lida", quando o usuário escolhe "Marcar como lida", então a notificação passa para "Lida" sem abrir o item.
-- [ ] Dado um usuário com várias notificações não lidas, quando ele escolhe "Marcar todas como lidas", então as notificações não lidas passam para "Lida" (alcance em 7.2).
+- [ ] Dado um usuário com várias notificações não lidas, quando ele escolhe "Marcar todas como lidas", então o sistema pede confirmação informando que todas as não lidas, inclusive as fora do filtro e de outras páginas, passarão para "Lida"; depois da confirmação, elas passam para "Lida".
 - [ ] Dada uma notificação cujo item foi removido, quando o usuário a abre, então o sistema mostra "Item indisponível" com a mensagem "Este item não está mais disponível." e a ação "Voltar às notificações".
 - [ ] Dada uma notificação de um item que o usuário não pode mais ver, quando ele a abre, então o sistema mostra o mesmo estado "Item indisponível", sem revelar que o item existe (RG-13).
 - [ ] Dada uma notificação com mais de 90 dias, quando o usuário abre a lista, então a notificação não está mais disponível.

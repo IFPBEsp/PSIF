@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T01 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor, Aluno, Responsável |
 | Telas relacionadas | [T02 Início](prd-t02-inicio.md), [T04 Minha conta](prd-t04-minha-conta.md), [T05 Ajuda e termos de uso](prd-t05-ajuda-e-termos-de-uso.md), [T23 Equipe](prd-t23-equipe.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 e 5 (a recuperação de senha por e-mail é da fase 5) |
@@ -119,7 +119,7 @@ Não se aplica.
 - Nova versão dos termos sem aceitar: o usuário só pode sair (RN-07).
 - Usuário toca em "Esqueci a senha" nas fases 1 a 4: o sistema mostra a mensagem de orientação, sem formulário (RN-08).
 - Usuário pede o link na fase 5: o sistema mostra sempre a mesma resposta, com e-mail cadastrado ou não (RN-10).
-- Link expirado ou já usado (fase 5): o sistema não permite redefinir a senha (RN-11). O que a tela oferece está em "Link expirado ou já usado" na 7.2.
+- Link expirado ou já usado (fase 5): o sistema não permite redefinir a senha (RN-11). O que a tela oferece está em "Link expirado ou já usado" na 7.1.1.
 - Sessão encerrada depois de 2 horas sem uso: o usuário entra de novo e volta para a tela em que estava (RG-28).
 - Falha de conexão ou erro do sistema: aparece o estado "Sem conexão" ou "Erro inesperado" ([T26 Estados do sistema](prd-t26-estados-do-sistema.md)).
 
@@ -173,12 +173,13 @@ Não se aplica.
 | RN-12 | Depois de redefinir a senha, o sistema encerra as outras sessões do usuário. Quem estava nelas vê "Sessão encerrada" ([T26 Estados do sistema](prd-t26-estados-do-sistema.md)). |
 | RN-13 | Os termos de uso podem ser lidos sem login, inclusive pela opção de ler no primeiro acesso ([T05 Ajuda e termos de uso](prd-t05-ajuda-e-termos-de-uso.md)). |
 | RN-14 | O único e-mail que o sistema envia é o link de redefinição de senha, a partir da fase 5 (seção 11 do índice). |
+| RN-15 | No primeiro acesso, a nova senha não pode ser igual à senha provisória. |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
 | Botões de senha | O botão do primeiro acesso e o da redefinição se chamam "Salvar senha". |
 | E-mail fora do domínio do perfil | O sistema trata como e-mail inexistente e mostra o mesmo erro de login. |
 | Nova senha igual à provisória | A nova senha do primeiro acesso não pode ser igual à senha provisória. |
@@ -188,6 +189,10 @@ Não se aplica.
 | Situação depois de redefinir pelo link | A situação do usuário não muda. Só a redefinição feita pela psicopedagoga volta o usuário para "Aguardando primeiro acesso". |
 | Usuário "Aguardando primeiro acesso" e o link | O usuário "Aguardando primeiro acesso" não recebe o link. Ele entra com a senha provisória e faz o primeiro acesso. |
 | Aceite do primeiro acesso | O aceite feito no primeiro acesso vale como aceite da versão vigente dos termos. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -199,13 +204,13 @@ Não se aplica.
 | --- | --- | --- |
 | Login bloqueado por excesso de tentativas | Erro | Login bloqueado por excesso de tentativas. Tente de novo em 15 minutos |
 | "Esqueci a senha", fases 1 a 4 | Aviso | Procure a psicopedagoga para redefinir sua senha |
-| E-mail inexistente, senha errada ou usuário inativo | Erro | E-mail ou senha incorretos. Confira os dados e tente de novo. (proposta) |
-| Resposta ao "Enviar link", com e-mail cadastrado ou não | Aviso | Se este e-mail estiver cadastrado, enviaremos um link para redefinir a senha. (proposta) |
-| Link expirado ou já usado | Erro | Este link expirou ou já foi usado. Peça um novo link. (proposta) |
-| Nova senha fora da regra | Erro | A senha precisa ter no mínimo 8 caracteres, com letras e números. (proposta) |
-| Senha e confirmação diferentes | Erro | A senha e a confirmação são diferentes. Digite as duas de novo. (proposta) |
-| Primeiro acesso sem aceitar os termos | Erro | Aceite os termos de uso para continuar. (proposta) |
-| Senha redefinida pelo link | Sucesso | Senha redefinida. Entre com a nova senha. (proposta) |
+| E-mail inexistente, senha errada ou usuário inativo | Erro | E-mail ou senha incorretos. Confira os dados e tente de novo. |
+| Resposta ao "Enviar link", com e-mail cadastrado ou não | Aviso | Se este e-mail estiver cadastrado, enviaremos um link para redefinir a senha. |
+| Link expirado ou já usado | Erro | Este link expirou ou já foi usado. Peça um novo link. |
+| Nova senha fora da regra | Erro | A senha precisa ter no mínimo 8 caracteres, com letras e números. |
+| Senha e confirmação diferentes | Erro | A senha e a confirmação são diferentes. Digite as duas de novo. |
+| Primeiro acesso sem aceitar os termos | Erro | Aceite os termos de uso para continuar. |
+| Senha redefinida pelo link | Sucesso | Senha redefinida. Entre com a nova senha. |
 | Sessão encerrada | Aviso | Sua sessão foi encerrada. Entre de novo para continuar. |
 | Sem conexão | Erro | Sem conexão com a internet. O que você digitou não foi perdido. |
 | Erro inesperado | Erro | Algo deu errado. Tente de novo em alguns minutos. |
@@ -227,6 +232,7 @@ Não se aplica.
 - [ ] Dado um usuário "Ativo" cuja sessão foi encerrada em outra tela, quando ele entra de novo, então o sistema abre a tela em que ele estava (RG-28).
 - [ ] Dado um usuário "Aguardando primeiro acesso", quando ele entra com a senha provisória, então o sistema abre o primeiro acesso, e não o Início.
 - [ ] Dado o primeiro acesso, quando o usuário informa nova senha com 8 caracteres ou mais, com letras e números, confirma a senha e aceita os termos, então o sistema grava a senha, registra o aceite com data, hora e versão e a situação passa a "Ativo".
+- [ ] Dado o primeiro acesso, quando o usuário informa como nova senha a própria senha provisória, então o sistema não salva a senha e explica que ele deve escolher outra.
 - [ ] Dado o primeiro acesso, quando o usuário não aceita os termos ou não troca a senha, então o sistema não libera o uso e ele não chega ao Início.
 - [ ] Dado o primeiro acesso, quando o usuário escolhe ler os termos, então o texto dos termos abre sem pedir login.
 - [ ] Dado um usuário "Ativo" e termos que mudaram desde o último aceite, quando ele entra, então o sistema mostra o texto da nova versão e o botão "Aceitar" antes de qualquer tela.
@@ -234,6 +240,7 @@ Não se aplica.
 - [ ] Dado o aviso da nova versão dos termos, quando o usuário escolhe "Aceitar", então o sistema registra o aceite com data, hora e versão e abre o Início ou a tela em que ele estava.
 - [ ] Dado um e-mail que não existe, uma senha errada ou um usuário inativo, quando alguém tenta entrar, então o sistema mostra o mesmo erro nos três casos.
 - [ ] Dado um e-mail com cinco tentativas erradas seguidas, quando alguém tenta entrar com ele, então o sistema mostra "Login bloqueado por excesso de tentativas. Tente de novo em 15 minutos" e não faz o login por 15 minutos, mesmo com a senha certa.
+- [ ] Dado um e-mail com tentativas erradas anteriores, quando ocorre um login correto, então a contagem de tentativas erradas desse e-mail volta a zero.
 - [ ] Dada a tela de login, quando o usuário a abre, então ela não mostra opção "Criar conta" (RG-01).
 - [ ] Dada a fase 1, 2, 3 ou 4, quando o usuário escolhe "Esqueci a senha", então o sistema mostra "Procure a psicopedagoga para redefinir sua senha" e nenhum formulário.
 - [ ] Dado um usuário cuja senha a psicopedagoga redefiniu, quando ele entra, então ele cai no primeiro acesso, com a situação "Aguardando primeiro acesso".

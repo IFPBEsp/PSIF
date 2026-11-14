@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T26 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor, Aluno, Responsável |
 | Telas relacionadas | [T01 Acesso ao sistema](prd-t01-acesso-ao-sistema.md), [T02 Início](prd-t02-inicio.md), [T03 Notificações](prd-t03-notificacoes.md), [T04 Minha conta](prd-t04-minha-conta.md), [T05 Ajuda e termos de uso](prd-t05-ajuda-e-termos-de-uso.md) |
 | Fase de entrega | 1 |
@@ -102,8 +102,8 @@ Não se aplica.
 | Voltar ao Início | Todos os perfis | Abre o Início ([T02 Início](prd-t02-inicio.md)). Está em "Não encontrado", "Acesso negado" e "Erro inesperado". |
 | Voltar às notificações | Todos os perfis | Abre a lista de notificações ([T03 Notificações](prd-t03-notificacoes.md)). Está em "Item indisponível". |
 | Entrar | Todos os perfis | Abre o acesso ao sistema ([T01 Acesso ao sistema](prd-t01-acesso-ao-sistema.md)). Depois do login, volta para a tela em que o usuário estava. Está em "Sessão encerrada". Sem login, também aparece como link em todos os estados. |
-| Sair | Todos os perfis | Encerra a sessão. Está em "Acesso desativado". O destino depois de sair está em 7.2. |
-| Tentar de novo | Todos os perfis | Tenta de novo o que falhou. Está em "Sem conexão" e "Erro inesperado" (ver 7.2). |
+| Sair | Todos os perfis | Encerra a sessão. Está em "Acesso desativado". O destino depois de sair está em 7.1.1. |
+| Tentar de novo | Todos os perfis | Tenta de novo o que falhou. Está em "Sem conexão" e "Erro inesperado" (ver 7.1.1). |
 
 ### 6.4 Estados da tela
 
@@ -133,13 +133,17 @@ Não se aplica.
 | RN-10 | "Sem conexão" e "Erro inesperado" em uma ação, como salvar, aparecem como aviso na própria tela, sem trocar de tela. |
 | RN-11 | Todas as telas usam as mensagens deste PRD para estes estados, sem mudar o texto. |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
 | "Tentar de novo" | A ação repete o que falhou: em uma ação, como salvar, tenta a ação de novo com o que o usuário digitou. Em uma tela, abre a tela de novo. |
 | "Acesso desativado" e a sessão | Ao mostrar "Acesso desativado", o sistema encerra a sessão do usuário. A ação "Sair" leva ao login. |
 | "Não encontrado" sem login | Sem login, o link "Entrar" aparece no lugar da ação "Voltar ao Início". |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 

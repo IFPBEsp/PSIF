@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T05 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor, Aluno, Responsável |
 | Telas relacionadas | [T01 Acesso ao sistema](prd-t01-acesso-ao-sistema.md), [T04 Minha conta](prd-t04-minha-conta.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 (termos de uso) e 5 (ajuda) |
@@ -107,8 +107,8 @@ Não se aplica.
 | Estado | Comportamento esperado |
 | --- | --- |
 | Carregando | Segue RG-33. |
-| Vazio, sem nenhum registro | Não se aplica: os termos de uso sempre existem. Ajuda sem nenhum tópico para o perfil: ver "Ajuda sem conteúdo" em 7.2. |
-| Vazio, por causa dos filtros | A busca sem resultado mostra a mensagem "Nenhum tópico encontrado. Tente outras palavras. (proposta)" e a opção de limpar a busca. |
+| Vazio, sem nenhum registro | Não se aplica: os termos de uso sempre existem. Ajuda sem nenhum tópico para o perfil: ver "Ajuda sem conteúdo" em 7.1.1. |
+| Vazio, por causa dos filtros | A busca sem resultado mostra a mensagem "Nenhum tópico encontrado. Tente outras palavras." e a opção de limpar a busca. |
 | Sem permissão | Todos os perfis usam esta tela e os termos podem ser lidos sem login (matriz de permissões, seção 10 do índice). "Acesso negado" e "Não encontrado" (RG-13) não se aplicam. Quem foi inativado com o sistema aberto vê "Acesso desativado" (RG-05, [T26 Estados do sistema](prd-t26-estados-do-sistema.md)). |
 | Erro | "Sem conexão" e "Erro inesperado" ([T26 Estados do sistema](prd-t26-estados-do-sistema.md)). |
 
@@ -136,16 +136,20 @@ Não se aplica.
 | RN-09 | Sem login, a tela mostra só os termos de uso. Tópicos de ajuda, perguntas frequentes e busca dependem do perfil do usuário e exigem login. |
 | RN-10 | A parte de ajuda só aparece na fase 5. Na fase 1, a tela tem só os termos de uso (seção 9 do índice). |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
 | Conteúdo dos tópicos e das perguntas frequentes | Cada perfil tem tópicos próprios: Psicopedagoga (cadastros, agenda, pedidos e informações), Professor (alunos das turmas, características e orientações, atividades adaptadas e observações), Aluno e Responsável (perfil, planejamento, agenda, pedidos e envio de informação). A equipe que opera o sistema publica o conteúdo. |
 | Ajuda sem conteúdo | Se o perfil não tiver nenhum tópico publicado, a tela mostra "Ainda não há tópicos de ajuda para o seu perfil." |
 | Versões anteriores dos termos | O usuário vê só a versão em vigor. |
 | Registro do próprio aceite | O usuário logado vê no fim dos termos a data, a hora e a versão do próprio aceite. |
-| Alcance da busca | A busca procura no título e no texto dos tópicos e das perguntas frequentes. |
+| Alcance da busca | A busca procura no título e no texto dos tópicos. As perguntas frequentes são mostradas dentro do tópico correspondente. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -155,9 +159,9 @@ Não se aplica.
 
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
-| Busca sem resultado | Aviso | Nenhum tópico encontrado. Tente outras palavras. (proposta) |
-| Busca com menos de 2 caracteres | Aviso | Digite pelo menos 2 caracteres para buscar. (proposta) |
-| Ajuda sem tópicos para o perfil | Aviso | Ainda não há tópicos de ajuda para o seu perfil. (proposta) |
+| Busca sem resultado | Aviso | Nenhum tópico encontrado. Tente outras palavras. |
+| Busca com menos de 2 caracteres | Aviso | Digite pelo menos 2 caracteres para buscar. |
+| Ajuda sem tópicos para o perfil | Aviso | Ainda não há tópicos de ajuda para o seu perfil. |
 | Sem conexão | Erro | Sem conexão com a internet. O que você digitou não foi perdido. |
 | Erro inesperado | Erro | Algo deu errado. Tente de novo em alguns minutos. |
 
@@ -182,7 +186,7 @@ Não se aplica.
 - [ ] Dada uma nova versão dos termos publicada pela equipe que opera o sistema, quando o usuário entra, então ele precisa aceitá-la e o aceite fica registrado com data, hora e versão (RG-06).
 - [ ] Dada a fase 5, quando o usuário logado abre a Ajuda, então a tela mostra só os tópicos do perfil dele e as perguntas frequentes.
 - [ ] Dada a Ajuda aberta por um professor, quando ele a lê, então ele não vê tópicos exclusivos dos outros perfis.
-- [ ] Dada a busca nos tópicos, quando o usuário digita 2 caracteres ou mais, então o sistema filtra os tópicos ignorando maiúsculas, minúsculas e acentos (RG-20).
+- [ ] Dada a busca nos tópicos, quando o usuário digita 2 caracteres ou mais, então o sistema filtra o título e o texto dos tópicos, ignorando maiúsculas, minúsculas e acentos (RG-20).
 - [ ] Dada a busca nos tópicos, quando o usuário digita "ajuda" ou "AJUDA" ou "ajúda", então o resultado é o mesmo.
 - [ ] Dada a busca sem resultado, quando o usuário busca um texto que não existe nos tópicos, então o sistema mostra a mensagem de busca vazia.
 - [ ] Dada a fase 1, quando o usuário abre a tela, então ela não mostra tópicos de ajuda, perguntas frequentes nem busca.

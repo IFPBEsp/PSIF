@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T21 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga |
 | Telas relacionadas | [T19 Turmas](prd-t19-turmas.md), [T04 Minha conta](prd-t04-minha-conta.md), [T14 Evento](prd-t14-evento.md), [T03 Notificações](prd-t03-notificacoes.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -153,17 +153,22 @@ A busca segue RG-20.
 | RN-08 | Vincular ou desvincular o professor de uma turma muda, na hora, quais alunos ele vê (RG-08). |
 | RN-09 | Os eventos futuros que não forem cancelados na inativação continuam na agenda e podem ser geridos por qualquer pessoa com o perfil Psicopedagoga. |
 | RN-10 | Na janela de confirmação da inativação, a psicopedagoga pode escrever o motivo do cancelamento dos eventos. Se não escrever, o motivo é "O professor responsável deixou de atuar no sistema". |
+| RN-11 | Professor inativo permanece como participante histórico de eventos de outras pessoas, mas não recebe notificações enquanto a conta estiver inativa. |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
 | Participação do professor inativado em eventos de outros | O professor inativado continua como participante dos eventos de outros, com a resposta e a presença que já tinha. |
 | Reativar professor | Não pede nova senha. O professor volta com a senha que tinha, e a psicopedagoga pode redefinir a senha na mesma tela. |
 | Senha na redefinição | Segue o cadastro: digitada ou gerada, e aparece uma vez. |
 | Texto do primeiro acesso | A coluna "Primeiro acesso" mostra "Aguardando primeiro acesso" ou "Primeiro acesso feito". |
 | Turmas para vincular | Só turmas ativas entram na escolha de turma. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -175,22 +180,22 @@ A busca segue RG-20.
 
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
-| Professor cadastrado | Sucesso | Professor cadastrado. Repasse a senha provisória: ela aparece só desta vez. (proposta) |
-| Professor atualizado | Sucesso | Professor atualizado. (proposta) |
-| Senha redefinida | Sucesso | Senha redefinida. Repasse a nova senha provisória: ela aparece só desta vez. (proposta) |
-| Professor inativado | Sucesso | Professor inativado. (proposta) |
-| Professor reativado | Sucesso | Professor reativado. (proposta) |
-| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar o professor. (proposta) |
-| Nome sem sobrenome | Erro | Informe o nome e o sobrenome do professor. (proposta) |
-| E-mail fora do domínio | Erro | Use um e-mail institucional com o domínio @ifpb.edu.br. (proposta) |
-| E-mail já cadastrado | Erro | Já existe uma conta com este e-mail. Use outro e-mail e salve de novo. (proposta) |
-| Senha provisória fora da regra | Erro | A senha deve ter no mínimo 8 caracteres, com letras e números. Corrija e salve de novo. (proposta) |
-| Redefinir senha | Confirmação | Redefinir a senha de {professor}? A senha atual deixa de valer e ele precisa trocar a nova senha no próximo acesso. (proposta) |
-| Inativar professor sem eventos futuros | Confirmação | Inativar {professor}? Ele perde o acesso ao sistema e tudo o que registrou é mantido. (proposta) |
-| Inativar professor com eventos futuros | Confirmação | {professor} criou {número} eventos futuros. Inativar o professor e cancelar esses eventos, ou inativar e manter os eventos? Os participantes dos eventos cancelados são avisados. (proposta) |
-| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. (proposta) |
-| Lista vazia, sem nenhum professor | Aviso | Nenhum professor cadastrado. (proposta) |
-| Lista vazia, por causa dos filtros | Aviso | Nenhum professor encontrado com estes filtros. (proposta) |
+| Professor cadastrado | Sucesso | Professor cadastrado. Repasse a senha provisória: ela aparece só desta vez. |
+| Professor atualizado | Sucesso | Professor atualizado. |
+| Senha redefinida | Sucesso | Senha redefinida. Repasse a nova senha provisória: ela aparece só desta vez. |
+| Professor inativado | Sucesso | Professor inativado. |
+| Professor reativado | Sucesso | Professor reativado. |
+| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar o professor. |
+| Nome sem sobrenome | Erro | Informe o nome e o sobrenome do professor. |
+| E-mail fora do domínio | Erro | Use um e-mail institucional com o domínio @ifpb.edu.br. |
+| E-mail já cadastrado | Erro | Já existe uma conta com este e-mail. Use outro e-mail e salve de novo. |
+| Senha provisória fora da regra | Erro | A senha deve ter no mínimo 8 caracteres, com letras e números. Corrija e salve de novo. |
+| Redefinir senha | Confirmação | Redefinir a senha de {professor}? A senha atual deixa de valer e ele precisa trocar a nova senha no próximo acesso. |
+| Inativar professor sem eventos futuros | Confirmação | Inativar {professor}? Ele perde o acesso ao sistema e tudo o que registrou é mantido. |
+| Inativar professor com eventos futuros | Confirmação | {professor} criou {número} eventos futuros. Inativar o professor e cancelar esses eventos, ou inativar e manter os eventos? Os participantes dos eventos cancelados são avisados. |
+| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. |
+| Lista vazia, sem nenhum professor | Aviso | Nenhum professor cadastrado. |
+| Lista vazia, por causa dos filtros | Aviso | Nenhum professor encontrado com estes filtros. |
 
 ## 10. Permissões
 
@@ -222,6 +227,7 @@ A busca segue RG-20.
 - [ ] Dado que o professor criou eventos futuros, quando a psicopedagoga escolhe "Inativar", então o sistema mostra quantos eventos futuros ele criou e pergunta se devem ser cancelados (RN-07).
 - [ ] Dado que a psicopedagoga escolheu cancelar os eventos futuros, quando confirma, então os eventos passam a "Cancelado" e os participantes, menos a própria psicopedagoga, recebem a notificação "Evento cancelado" com o motivo (RN-07, RG-25).
 - [ ] Dado que a psicopedagoga cancela os eventos futuros do professor sem escrever o motivo, quando confirma, então o motivo dos eventos cancelados é "O professor responsável deixou de atuar no sistema" (RN-10).
+- [ ] Dado um professor inativado que participa de evento de outra pessoa, quando o evento é consultado, então ele continua no histórico com resposta e presença já registradas, mas não recebe novas notificações enquanto estiver inativo.
 - [ ] Dado que a psicopedagoga escreve um motivo na janela de inativação, quando confirma o cancelamento dos eventos, então esse motivo aparece nos eventos e na notificação (RN-10).
 - [ ] Dado que a psicopedagoga escolhe manter os eventos futuros do professor, quando confirma, então os eventos continuam "Agendado" na agenda e qualquer psicopedagoga pode geri-los (RN-09).
 - [ ] Dado que o professor inativado estava com o sistema aberto, quando faz a próxima ação, então perde o acesso (RG-05).

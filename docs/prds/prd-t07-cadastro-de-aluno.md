@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T07 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga |
 | Telas relacionadas | [T02 Início](prd-t02-inicio.md), [T03 Notificações](prd-t03-notificacoes.md), [T04 Minha conta](prd-t04-minha-conta.md), [T06 Lista de alunos](prd-t06-lista-de-alunos.md), [T08 Perfil do aluno](prd-t08-perfil-do-aluno.md), [T14 Evento](prd-t14-evento.md), [T15 Pedidos de agendamento](prd-t15-pedidos-de-agendamento.md), [T19 Turmas](prd-t19-turmas.md), [T22 Dificuldades](prd-t22-dificuldades.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -149,7 +149,7 @@ O formulário não tem outros filtros.
 
 ### 6.2 Fluxos alternativos
 
-- Dado inválido ou campo obrigatório vazio: o sistema aponta o campo e diz o que corrigir (RG-24). Ver "Salvar entre etapas" em 7.2.
+- Dado inválido ou campo obrigatório vazio: o sistema aponta o campo e diz o que corrigir (RG-24). Ver "Salvar entre etapas" em 7.1.1.
 - Falha ao salvar: o que foi digitado continua no formulário (RG-29).
 - Sair com alterações não salvas: o sistema pede confirmação (RG-29).
 - Cancelar: o sistema não grava nada e volta para a tela de origem. Se houver alterações não salvas, pede confirmação (RG-29).
@@ -164,7 +164,7 @@ O formulário não tem outros filtros.
 
 | Ação | Quem pode | Comportamento esperado |
 | --- | --- | --- |
-| Salvar | Psicopedagoga | Grava o cadastro e abre o [T08 Perfil do aluno](prd-t08-perfil-do-aluno.md). Mostra as senhas provisórias novas uma vez. Ver "Salvar entre etapas" em 7.2. |
+| Salvar | Psicopedagoga | Grava o cadastro e abre o [T08 Perfil do aluno](prd-t08-perfil-do-aluno.md). Mostra as senhas provisórias novas uma vez. Ver "Salvar entre etapas" em 7.1.1. |
 | Cancelar | Psicopedagoga | Sai sem gravar. Pede confirmação se houver alterações não salvas (RG-29). |
 | Voltar a uma etapa | Psicopedagoga | Abre qualquer etapa antes de salvar, sem perder o que foi digitado (seção 6.5). |
 | Redefinir senha do aluno | Psicopedagoga | A psicopedagoga digita ou pede para gerar uma nova senha provisória, que aparece uma vez. O usuário volta para "Aguardando primeiro acesso" (RN-12). |
@@ -269,9 +269,9 @@ Quando o responsável volta a ter um aluno ativo vinculado com acesso permitido,
 | RN-36 | Quando a psicopedagoga marca "Dar acesso ao sistema" para um responsável de aluno com 18 anos ou mais sem autorização registrada, a conta é criada e fica "Inativo" (RN-28). A senha provisória fica guardada até a autorização ser registrada, e a tela avisa que o acesso do responsável depende dela. |
 | RN-37 | O pedido de agendamento cancelado automaticamente, pela inativação do aluno ou porque o autor perdeu o acesso ao aluno (RN-05, RN-23), gera notificação para as psicopedagogas, com o motivo (seção 7 do índice). |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
 | Reativar não reabre nada | Reativar o aluno não reabre pedidos nem eventos cancelados. Os responsáveis voltam a ter acesso. A psicopedagoga cria novos eventos se precisar. |
 | Outra cidade | A opção "Outra cidade" abre um campo de texto livre, obrigatório quando escolhida. |
@@ -282,7 +282,11 @@ Quando o responsável volta a ter um aluno ativo vinculado com acesso permitido,
 | Nome e sobrenome | O nome completo precisa ter pelo menos duas palavras, cada uma com pelo menos 2 letras. |
 | Confirmação ao retirar a autorização | A janela de confirmação avisa que os responsáveis perdem o acesso na hora e que os contatos continuam no cadastro. |
 | Salvar entre etapas | O botão "Salvar" fica disponível em todas as etapas. Se houver erro em outra etapa, o sistema leva a psicopedagoga até ela. |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -300,29 +304,29 @@ Reativar o aluno, redefinir senha, vincular, desvincular e dar ou retirar acesso
 | --- | --- | --- |
 | Responsável vinculado a mais de um aluno | Aviso | Este responsável também está vinculado a: <nomes dos alunos> |
 | Dificuldade nova cadastrada no formulário | Sucesso | Dificuldade cadastrada |
-| Cadastro novo salvo | Sucesso | Aluno cadastrado. (proposta) |
-| Edição salva | Sucesso | Alterações salvas. (proposta) |
-| Senha provisória gerada ou redefinida | Aviso | Senha provisória: <senha>. Ela aparece só desta vez. Repasse ao usuário. (proposta) |
-| Nome sem sobrenome | Erro | Informe nome e sobrenome. (proposta) |
-| Data de nascimento futura | Erro | A data de nascimento não pode ser futura. Corrija a data. (proposta) |
-| Campo obrigatório vazio | Erro | Preencha este campo para continuar. (proposta) |
-| Foto fora do formato ou do tamanho | Erro | A foto deve ser JPG ou PNG com até 5 MB. Escolha outro arquivo. (proposta) |
-| Telefone fora do formato | Erro | Digite o telefone no formato (00) 00000-0000. (proposta) |
-| E-mail acadêmico fora do domínio | Erro | O e-mail acadêmico deve terminar com @academico.ifpb.edu.br. Corrija o e-mail. (proposta) |
-| E-mail já usado em outra conta | Erro | Este e-mail já está em uso. Use outro e-mail. (proposta) |
-| Senha fora da regra | Erro | A senha deve ter no mínimo 8 caracteres, com letras e números. Digite outra senha. (proposta) |
-| Aluno menor de 18 anos sem responsável | Erro | Aluno menor de 18 anos precisa de pelo menos um responsável. Adicione um responsável para continuar. (proposta) |
-| Desvincular o único responsável de aluno menor de 18 anos | Erro | Este é o único responsável do aluno. Cadastre outro responsável antes de desvincular. (proposta) |
-| Busca de responsável sem resultado | Aviso | Nenhum responsável encontrado. Confira o nome ou o e-mail, ou adicione um responsável novo. (proposta) |
-| Falha ao salvar | Erro | Não foi possível salvar. O que você digitou foi mantido. Tente salvar de novo. (proposta) |
-| Sair com alterações não salvas | Confirmação | Há alterações não salvas. Se você sair agora, elas serão perdidas. (proposta) |
-| Redefinir senha | Confirmação | Ao redefinir, a senha atual de <nome> deixa de valer e a pessoa volta para "Aguardando primeiro acesso". (proposta) |
-| Desvincular responsável | Confirmação | Ao desvincular, <nome do responsável> deixa de ser responsável de <nome do aluno>, sai dos eventos futuros dele e tem os pedidos pendentes cancelados. O vínculo fica no histórico. (proposta) |
-| Retirar o acesso de um responsável | Confirmação | Ao retirar o acesso, a conta de <nome do responsável> fica inativa para todos os alunos vinculados, ele sai dos eventos futuros e tem os pedidos pendentes cancelados. Ele continua como contato. (proposta) |
-| Retirar a autorização do aluno | Confirmação | Ao retirar a autorização, os responsáveis perdem o acesso a <nome do aluno> agora. Os contatos continuam no cadastro. (proposta) |
-| Inativar o aluno | Confirmação | <nome do aluno> tem <N> eventos futuros. Ao inativar, o aluno perde o acesso e os responsáveis sem outro aluno ativo também perdem. Cancelar os eventos futuros? (proposta) |
-| Acesso marcado sem autorização do aluno com 18 anos ou mais | Aviso | O acesso de <nome do responsável> só começa quando a autorização de <nome do aluno> for registrada. (proposta) |
-| Reativar o aluno | Confirmação | Ao reativar, <nome do aluno> e os responsáveis vinculados voltam a ter acesso. (proposta) |
+| Cadastro novo salvo | Sucesso | Aluno cadastrado. |
+| Edição salva | Sucesso | Alterações salvas. |
+| Senha provisória gerada ou redefinida | Aviso | Senha provisória: <senha>. Ela aparece só desta vez. Repasse ao usuário. |
+| Nome sem sobrenome | Erro | Informe nome e sobrenome. |
+| Data de nascimento futura | Erro | A data de nascimento não pode ser futura. Corrija a data. |
+| Campo obrigatório vazio | Erro | Preencha este campo para continuar. |
+| Foto fora do formato ou do tamanho | Erro | A foto deve ser JPG ou PNG com até 5 MB. Escolha outro arquivo. |
+| Telefone fora do formato | Erro | Digite o telefone no formato (00) 00000-0000. |
+| E-mail acadêmico fora do domínio | Erro | O e-mail acadêmico deve terminar com @academico.ifpb.edu.br. Corrija o e-mail. |
+| E-mail já usado em outra conta | Erro | Este e-mail já está em uso. Use outro e-mail. |
+| Senha fora da regra | Erro | A senha deve ter no mínimo 8 caracteres, com letras e números. Digite outra senha. |
+| Aluno menor de 18 anos sem responsável | Erro | Aluno menor de 18 anos precisa de pelo menos um responsável. Adicione um responsável para continuar. |
+| Desvincular o único responsável de aluno menor de 18 anos | Erro | Este é o único responsável do aluno. Cadastre outro responsável antes de desvincular. |
+| Busca de responsável sem resultado | Aviso | Nenhum responsável encontrado. Confira o nome ou o e-mail, ou adicione um responsável novo. |
+| Falha ao salvar | Erro | Não foi possível salvar. O que você digitou foi mantido. Tente salvar de novo. |
+| Sair com alterações não salvas | Confirmação | Há alterações não salvas. Se você sair agora, elas serão perdidas. |
+| Redefinir senha | Confirmação | Ao redefinir, a senha atual de <nome> deixa de valer e a pessoa volta para "Aguardando primeiro acesso". |
+| Desvincular responsável | Confirmação | Ao desvincular, <nome do responsável> deixa de ser responsável de <nome do aluno>, sai dos eventos futuros dele e tem os pedidos pendentes cancelados. O vínculo fica no histórico. |
+| Retirar o acesso de um responsável | Confirmação | Ao retirar o acesso, a conta de <nome do responsável> fica inativa para todos os alunos vinculados, ele sai dos eventos futuros e tem os pedidos pendentes cancelados. Ele continua como contato. |
+| Retirar a autorização do aluno | Confirmação | Ao retirar a autorização, os responsáveis perdem o acesso a <nome do aluno> agora. Os contatos continuam no cadastro. |
+| Inativar o aluno | Confirmação | <nome do aluno> tem <N> eventos futuros. Ao inativar, o aluno perde o acesso e os responsáveis sem outro aluno ativo também perdem. Cancelar os eventos futuros? |
+| Acesso marcado sem autorização do aluno com 18 anos ou mais | Aviso | O acesso de <nome do responsável> só começa quando a autorização de <nome do aluno> for registrada. |
+| Reativar o aluno | Confirmação | Ao reativar, <nome do aluno> e os responsáveis vinculados voltam a ter acesso. |
 
 ## 10. Permissões
 
