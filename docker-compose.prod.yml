@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:?defina POSTGRES_DB no .env}
       POSTGRES_USER: ${POSTGRES_USER:?defina POSTGRES_USER no .env}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
@@ -20,6 +22,8 @@ services:
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:?defina MINIO_ROOT_USER no .env}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?defina MINIO_ROOT_PASSWORD no .env (mínimo de 8 caracteres)}
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - minio-data:/bitnami/minio/data
     networks:
@@ -31,7 +35,7 @@ services:
       target: prod
     restart: unless-stopped
     environment:
-      APP_ENV: production
+      APP_ENV: ${APP_ENV:?defina APP_ENV no .env}
       POSTGRES_DB: ${POSTGRES_DB:?defina POSTGRES_DB no .env}
       POSTGRES_USER: ${POSTGRES_USER:?defina POSTGRES_USER no .env}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
@@ -50,7 +54,7 @@ services:
         NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:?defina NEXT_PUBLIC_APP_URL no .env}
     restart: unless-stopped
     environment:
-      APP_ENV: production
+      APP_ENV: ${APP_ENV:?defina APP_ENV no .env}
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:?defina NEXT_PUBLIC_APP_URL no .env}
       API_INTERNAL_URL: ${API_INTERNAL_URL:?defina API_INTERNAL_URL no .env}
     depends_on:

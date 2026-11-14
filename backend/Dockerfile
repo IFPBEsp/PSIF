@@ -26,14 +26,17 @@ RUN ./mvnw -B package -DskipTests
 
 FROM eclipse-temurin:21-jre-alpine AS prod
 
-RUN addgroup -S app && adduser -S app -G app
+RUN addgroup -S app && adduser -S app -G app \
+    && apk add --no-cache bash
 
 WORKDIR /app
 
 COPY --from=builder --chown=app:app /app/target/*.jar app.jar
+COPY --chown=app:app docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh
 
 USER app
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["bash", "/app/docker-entrypoint.sh", "java", "-jar", "/app/app.jar"]
