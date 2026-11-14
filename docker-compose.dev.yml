@@ -30,7 +30,9 @@ services:
       - psif-dev
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      target: dev
     environment:
       APP_ENV: ${APP_ENV}
       POSTGRES_DB: ${POSTGRES_DB:?defina POSTGRES_DB no .env}
@@ -47,7 +49,9 @@ services:
       - psif-dev
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      target: dev
     environment:
       APP_ENV: ${APP_ENV}
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
