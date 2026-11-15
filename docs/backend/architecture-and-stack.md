@@ -198,7 +198,7 @@ Transações são controladas na camada de aplicação e representam o limite de
 
 A aplicação recebe configuração por variáveis de ambiente, agrupadas por aplicação, banco, autenticação, storage, integrações, jobs e observabilidade. Secrets nunca ficam no código-fonte.
 
-Os logs registram o suficiente para operar e diagnosticar (inicialização, falhas, integrações, jobs, webhooks e operações relevantes) e nunca senhas, tokens, secrets ou dados sensíveis sem necessidade. Healthchecks ficam disponíveis para a infraestrutura quando necessário.
+Os logs registram o suficiente para operar e diagnosticar (inicialização, falhas, integrações, jobs, webhooks e operações relevantes) e nunca senhas, tokens, secrets ou dados sensíveis sem necessidade. O Spring Boot Actuator expõe só `/actuator/health`, sem detalhes, com o status do banco incluído; é o healthcheck do container (`docs/deployment/docker.md`, seção 6).
 
 Segurança mínima, aplicada independentemente do que o frontend faça: senhas armazenadas de forma segura, autenticação e autorização no backend, secrets fora do código, entrada validada, erros sem exposição de detalhes internos, logs sem credenciais, integrações protegidas e arquivos privados protegidos.
 
