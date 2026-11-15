@@ -12,6 +12,11 @@ services:
       - no-new-privileges:true
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
       - psif-prod
 
@@ -26,6 +31,11 @@ services:
       - no-new-privileges:true
     volumes:
       - minio-data:/bitnami/minio/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - psif-prod
 
@@ -40,9 +50,16 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:?defina POSTGRES_USER no .env}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     security_opt:
       - no-new-privileges:true
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/actuator/health | grep -q '\"status\":\"UP\"'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 180s
     networks:
       - psif-prod
 
@@ -58,9 +75,16 @@ services:
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:?defina NEXT_PUBLIC_APP_URL no .env}
       API_INTERNAL_URL: ${API_INTERNAL_URL:?defina API_INTERNAL_URL no .env}
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     security_opt:
       - no-new-privileges:true
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/api/health | grep -q '\"status\":\"UP\"'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 120s
     networks:
       - psif-prod
 
