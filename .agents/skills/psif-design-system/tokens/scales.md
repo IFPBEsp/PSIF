@@ -56,7 +56,7 @@ entre rótulo e campo `--sp-2`.
 | `--ic-sm` | voltar, chevron, cadeado do selo "Sigiloso" |
 | `--ic-md` | ícone em linha e em campo |
 | `--ic-lg` | ícone de atalho e da barra lateral |
-| `--ic-xl` | símbolo na barra lateral |
+| `--ic-xl` | sem uso fixo por enquanto |
 | `--tile-icon` | quadro de ícone em lista e tabela |
 | `--tile-icon-lg` | quadro de ícone em cartão de destaque e na área de envio; símbolo no cartão de login |
 
