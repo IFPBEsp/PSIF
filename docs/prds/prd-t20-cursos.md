@@ -140,8 +140,6 @@ Os filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao v
 | Regra | Decisão aprovada |
 | --- | --- |
 | Mensagens | Os textos da seção 9 estão aprovados. |
-| Sigla única sem diferenciar maiúsculas | "tin" e "TIN" contam como a mesma sigla. |
-| Nome único | O nome do curso também não se repete entre os cursos. |
 
 ### 7.2 Regras propostas para validação
 

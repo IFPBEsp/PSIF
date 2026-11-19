@@ -92,7 +92,7 @@ Os filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao v
 
 - Item removido ou sem acesso: ao abrir a notificação, aparece "Item indisponível" ([T26 Estados do sistema](prd-t26-estados-do-sistema.md)) (RN-13).
 - Marcar como lida sem abrir o item: o usuário usa "Marcar como lida" e a notificação passa para "Lida".
-- Marcar todas como lidas: as notificações não lidas passam para "Lida" (alcance em 7.1.1).
+- Marcar todas como lidas: o sistema pede confirmação e informa que a ação alcança todas as notificações não lidas do usuário, inclusive as de outras páginas ou fora do filtro. Depois da confirmação, todas passam para "Lida" e a quantidade do sino é atualizada.
 - Filtro sem resultado: a lista mostra a mensagem de lista vazia com a opção de limpar os filtros (RG-22).
 - Notificação com mais de 90 dias: deixa de estar disponível (RN-14).
 - Responsável sem conta ativa: não recebe notificações (RN-04).
@@ -103,7 +103,7 @@ Os filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao v
 | --- | --- | --- |
 | Abrir o item relacionado | Todos os perfis, nas próprias notificações | Abre o item que gerou a notificação e marca a notificação como lida. Se o item não existe mais ou o usuário perdeu o acesso, abre "Item indisponível". |
 | Marcar como lida | Todos os perfis, nas próprias notificações | Muda a situação para "Lida", sem abrir o item, e diminui a quantidade do sino. |
-| Marcar todas como lidas | Todos os perfis, nas próprias notificações | Muda as notificações não lidas para "Lida" e atualiza a quantidade do sino (alcance em 7.1.1). |
+| Marcar todas como lidas | Todos os perfis, nas próprias notificações | Pede confirmação informando que a ação alcança todas as notificações não lidas do usuário, inclusive as de outras páginas ou fora do filtro. Depois da confirmação, muda todas para "Lida" e atualiza a quantidade do sino. |
 | Filtrar por situação ou tipo | Todos os perfis | Mostra só as notificações que atendem ao filtro. |
 | Limpar filtros | Todos os perfis | Volta para Todas e Todos os tipos (RG-21). |
 
@@ -150,7 +150,7 @@ A tela é entregue na fase 1. Cada tipo de notificação só aparece quando a te
 | RN-09 | O painel rápido mostra as 10 notificações mais recentes. |
 | RN-10 | A tela completa tem os filtros Situação (Todas ou Não lidas, padrão Todas) e Tipo. A ordenação é das mais recentes para as mais antigas. |
 | RN-11 | A notificação tem a situação "Não lida" ou "Lida" (seção 6 do índice). |
-| RN-12 | A notificação vira "Lida" quando o usuário abre o item relacionado ou escolhe "Marcar como lida". "Marcar todas como lidas" muda todas de uma vez. |
+| RN-12 | A notificação vira "Lida" quando o usuário abre o item relacionado ou escolhe "Marcar como lida". "Marcar todas como lidas" pede confirmação e, depois de confirmada, muda todas as notificações não lidas do usuário, inclusive as de outras páginas ou fora do filtro. |
 | RN-13 | Se o item foi removido ou o usuário perdeu o acesso a ele, a notificação abre o estado "Item indisponível" ([T26 Estados do sistema](prd-t26-estados-do-sistema.md)). O sistema nunca revela que o item existe para quem não pode vê-lo (RG-13). |
 | RN-14 | As notificações ficam disponíveis por 90 dias. |
 | RN-15 | Cada tipo de notificação só aparece quando a tela de origem do acontecimento for entregue (seção 9 do índice e subseção 6.5). |
@@ -166,7 +166,6 @@ A tela é entregue na fase 1. Cada tipo de notificação só aparece quando a te
 | Mensagens | Os textos da seção 9 estão aprovados. |
 | Conteúdo do painel rápido | Cada item mostra as mesmas informações da tela completa. O painel rápido mostra as 10 mais recentes, lidas e não lidas, sem filtros, e tem a ação "Ver todas as notificações" para abrir a tela completa. |
 | Sino sem não lidas | Quando não há notificações não lidas, o sino aparece sem quantidade. |
-| Marcar todas como lidas | A ação vale para todas as notificações não lidas do usuário, mesmo as de outras páginas ou fora do filtro, e pede confirmação informando essa consequência. |
 | Depois de 90 dias | A notificação some da lista, do painel e da quantidade do sino. |
 | Atualização do sino | O sino atualiza a quantidade sem o usuário recarregar a tela. |
 | Destino de cada tipo | Cada notificação abre a tela do item que a gerou: o evento, o pedido de agendamento, a atividade adaptada, a observação, a informação, o acompanhamento, as características e orientações, o planejamento semanal ou o perfil do aluno. |
@@ -211,6 +210,7 @@ Esta tela mostra as notificações de todos os acontecimentos abaixo (seção 7 
 | Item removido ou sem acesso | Aviso | Este item não está mais disponível. |
 | Nenhuma notificação | Aviso | Você não tem notificações. |
 | Nenhuma notificação com os filtros | Aviso | Nenhuma notificação encontrada com estes filtros. |
+| Marcar todas como lidas | Confirmação | Marcar todas as notificações como lidas? Esta ação também alcança notificações fora do filtro e de outras páginas. |
 | Todas marcadas como lidas | Sucesso | Todas as notificações foram marcadas como lidas. |
 | Falha de conexão | Erro | Sem conexão com a internet. O que você digitou não foi perdido. |
 | Erro do sistema | Erro | Algo deu errado. Tente de novo em alguns minutos. |
@@ -239,7 +239,7 @@ Esta tela mostra as notificações de todos os acontecimentos abaixo (seção 7 
 - [ ] Dado um filtro ativo, quando o usuário sai da lista e volta, então o filtro continua ativo e visível, e pode ser limpo de uma vez (RG-21).
 - [ ] Dada uma notificação "Não lida", quando o usuário abre o item relacionado, então o sistema abre o item, a notificação passa para "Lida" e a quantidade do sino diminui em um.
 - [ ] Dada uma notificação "Não lida", quando o usuário escolhe "Marcar como lida", então a notificação passa para "Lida" sem abrir o item.
-- [ ] Dado um usuário com várias notificações não lidas, quando ele escolhe "Marcar todas como lidas", então o sistema pede confirmação informando que todas as não lidas, inclusive as fora do filtro e de outras páginas, passarão para "Lida"; depois da confirmação, elas passam para "Lida".
+- [ ] Dado um usuário com várias notificações não lidas, quando ele escolhe "Marcar todas como lidas", então o sistema pede confirmação informando que todas as não lidas, inclusive as fora do filtro e de outras páginas, passarão para "Lida"; quando ele confirma, todas passam para "Lida" e a quantidade do sino é atualizada.
 - [ ] Dada uma notificação cujo item foi removido, quando o usuário a abre, então o sistema mostra "Item indisponível" com a mensagem "Este item não está mais disponível." e a ação "Voltar às notificações".
 - [ ] Dada uma notificação de um item que o usuário não pode mais ver, quando ele a abre, então o sistema mostra o mesmo estado "Item indisponível", sem revelar que o item existe (RG-13).
 - [ ] Dada uma notificação com mais de 90 dias, quando o usuário abre a lista, então a notificação não está mais disponível.

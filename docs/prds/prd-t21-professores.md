@@ -153,14 +153,13 @@ A busca segue RG-20.
 | RN-08 | Vincular ou desvincular o professor de uma turma muda, na hora, quais alunos ele vê (RG-08). |
 | RN-09 | Os eventos futuros que não forem cancelados na inativação continuam na agenda e podem ser geridos por qualquer pessoa com o perfil Psicopedagoga. |
 | RN-10 | Na janela de confirmação da inativação, a psicopedagoga pode escrever o motivo do cancelamento dos eventos. Se não escrever, o motivo é "O professor responsável deixou de atuar no sistema". |
-| RN-11 | Professor inativo permanece como participante histórico de eventos de outras pessoas, mas não recebe notificações enquanto a conta estiver inativa. |
+| RN-11 | Professor inativo permanece como participante dos eventos de outras pessoas, com a resposta e a presença que já tinha, mas não recebe notificações enquanto a conta estiver inativa. |
 
 #### 7.1.1 Decisões de validação aprovadas
 
 | Regra | Decisão aprovada |
 | --- | --- |
 | Mensagens | Os textos da seção 9 estão aprovados. |
-| Participação do professor inativado em eventos de outros | O professor inativado continua como participante dos eventos de outros, com a resposta e a presença que já tinha. |
 | Reativar professor | Não pede nova senha. O professor volta com a senha que tinha, e a psicopedagoga pode redefinir a senha na mesma tela. |
 | Senha na redefinição | Segue o cadastro: digitada ou gerada, e aparece uma vez. |
 | Texto do primeiro acesso | A coluna "Primeiro acesso" mostra "Aguardando primeiro acesso" ou "Primeiro acesso feito". |

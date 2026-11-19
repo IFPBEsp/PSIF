@@ -144,9 +144,6 @@ A busca segue RG-20.
 | Regra | Decisão aprovada |
 | --- | --- |
 | Mensagens | Os textos da seção 9 estão aprovados. |
-| Limite de "O que é" | Até 300 caracteres. |
-| Quantidade de alunos vinculados | Conta só alunos ativos. |
-| Nome único sem diferenciar maiúsculas e acentos | "Dislexia" e "dislexia" contam como o mesmo nome. |
 
 ### 7.2 Regras propostas para validação
 

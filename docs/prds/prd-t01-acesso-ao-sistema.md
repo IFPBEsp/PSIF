@@ -182,7 +182,6 @@ Não se aplica.
 | Mensagens | Os textos da seção 9 estão aprovados. |
 | Botões de senha | O botão do primeiro acesso e o da redefinição se chamam "Salvar senha". |
 | E-mail fora do domínio do perfil | O sistema trata como e-mail inexistente e mostra o mesmo erro de login. |
-| Nova senha igual à provisória | A nova senha do primeiro acesso não pode ser igual à senha provisória. |
 | Contagem de tentativas | A contagem de tentativas erradas (RG-04) volta a zero depois de um login certo. |
 | Link expirado ou já usado | A tela mostra a mensagem e a opção de pedir um novo link. |
 | Depois de redefinir pelo link | O sistema leva o usuário ao login com a mensagem de sucesso. O usuário não precisa aceitar os termos de novo, a menos que a versão tenha mudado. |
