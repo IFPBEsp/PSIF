@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T11 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor |
 | Telas relacionadas | [T03 Notificações](prd-t03-notificacoes.md), [T06 Lista de alunos](prd-t06-lista-de-alunos.md), [T08 Perfil do aluno](prd-t08-perfil-do-aluno.md), [T22 Dificuldades](prd-t22-dificuldades.md), [T25 Busca no acervo](prd-t25-busca-no-acervo.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -67,7 +67,7 @@ Os campos valem para cada uma das duas seções, Características e Orientaçõe
 
 | Campo | Obrigatório | Regra |
 | --- | --- | --- |
-| Texto | Não | Aceita negrito e listas. A seção pode ficar sem conteúdo. Ver "Limite de texto" em 7.2. |
+| Texto | Não | Aceita negrito e listas. A seção pode ficar sem conteúdo. Ver "Limite de texto" em 7.1.1. |
 | Anexos | Não | PDF, JPG ou PNG com até 10 MB cada e até 5 por registro (RG-16). |
 
 ### 5.2 Filtros
@@ -76,7 +76,7 @@ Não se aplica.
 
 ### 5.3 Ordenação e paginação
 
-- Ordenação padrão: ver "Ordem das versões anteriores" em 7.2.
+- Ordenação padrão: ver "Ordem das versões anteriores" em 7.1.1.
 - Outras ordenações: não se aplica.
 - Paginação: não se aplica.
 
@@ -153,9 +153,9 @@ Não se aplica.
 | RN-15 | A tela funciona no computador e no celular e só com o teclado (RG-26). Botões e erros seguem RG-24. |
 | RN-16 | A psicopedagoga edita características e orientações de aluno inativo, como faz com aluno ativo. |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
 | Mensagem de Características vazia | O professor vê "A psicopedagoga ainda não registrou características para este aluno". |
 | Vazio para a psicopedagoga | A seção vazia mostra a mensagem da seção 9 e o botão "Editar". |
@@ -164,7 +164,11 @@ Não se aplica.
 | Limite de texto | O texto de cada seção aceita até 10.000 caracteres. |
 | Salvamento por seção | Cada seção é salva separadamente. A notificação diz qual seção mudou. |
 | Ordem das versões anteriores | As versões aparecem da mais recente para a mais antiga. |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -177,15 +181,15 @@ Não se aplica.
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
 | Orientações vazias, vistas pelo professor | Aviso | A psicopedagoga ainda não registrou orientações para este aluno |
-| Características vazias, vistas pelo professor | Aviso | A psicopedagoga ainda não registrou características para este aluno (proposta) |
-| Seção vazia, vista pela psicopedagoga | Aviso | Esta seção ainda não tem conteúdo. Escolha Editar para escrever. (proposta) |
-| Texto salvo | Sucesso | Texto salvo. Os professores do aluno foram avisados. (proposta) |
-| Notificação aos professores | Aviso | As características ou orientações de <nome do aluno> foram atualizadas. (proposta) |
-| Anexo fora das regras | Erro | O anexo não foi aceito. Envie um PDF, JPG ou PNG com até 10 MB. (proposta) |
-| Limite de anexos | Erro | Cada seção aceita até 5 anexos. Remova um anexo para enviar outro. (proposta) |
-| Remover anexo | Confirmação | Remover o anexo "<nome do arquivo>"? Ele deixará de aparecer para os professores do aluno. (proposta) |
-| Falha ao salvar | Erro | Não foi possível salvar. Verifique a conexão e tente de novo. O que você digitou foi mantido. (proposta) |
-| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. (proposta) |
+| Características vazias, vistas pelo professor | Aviso | A psicopedagoga ainda não registrou características para este aluno |
+| Seção vazia, vista pela psicopedagoga | Aviso | Esta seção ainda não tem conteúdo. Escolha Editar para escrever. |
+| Texto salvo | Sucesso | Texto salvo. Os professores do aluno foram avisados. |
+| Notificação aos professores | Aviso | As características ou orientações de <nome do aluno> foram atualizadas. |
+| Anexo fora das regras | Erro | O anexo não foi aceito. Envie um PDF, JPG ou PNG com até 10 MB. |
+| Limite de anexos | Erro | Cada seção aceita até 5 anexos. Remova um anexo para enviar outro. |
+| Remover anexo | Confirmação | Remover o anexo "<nome do arquivo>"? Ele deixará de aparecer para os professores do aluno. |
+| Falha ao salvar | Erro | Não foi possível salvar. Verifique a conexão e tente de novo. O que você digitou foi mantido. |
+| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. |
 
 ## 10. Permissões
 

@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T04 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor, Aluno, Responsável |
 | Telas relacionadas | [T01 Acesso ao sistema](prd-t01-acesso-ao-sistema.md), [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md), [T21 Professores](prd-t21-professores.md), [T23 Equipe](prd-t23-equipe.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -54,7 +54,7 @@ Permitir que o usuário veja os dados da própria conta e troque a senha, para m
 | Turmas e disciplinas | Aparecem só para o professor, com as turmas em que ele leciona e a disciplina de cada uma. |
 | Alunos vinculados | Aparecem só para o responsável, com os alunos ligados a ele. |
 | Trocar senha | Formulário com senha atual, nova senha e confirmação (seção 5.1). |
-| Sair | Encerra a sessão do usuário (destino em 7.2). |
+| Sair | Encerra a sessão do usuário (destino em 7.1.1). |
 
 ## 5. Campos, filtros e ordenação
 
@@ -99,14 +99,14 @@ Não se aplica.
 | Ação | Quem pode | Comportamento esperado |
 | --- | --- | --- |
 | Trocar senha | Todos os perfis, na própria conta | Confere a senha atual, grava a nova senha e encerra as outras sessões do usuário. |
-| Sair | Todos os perfis | Encerra a sessão do usuário. O destino depois de sair está em 7.2. |
+| Sair | Todos os perfis | Encerra a sessão do usuário. O destino depois de sair está em 7.1.1. |
 
 ### 6.4 Estados da tela
 
 | Estado | Comportamento esperado |
 | --- | --- |
 | Carregando | Segue RG-33. |
-| Vazio, sem nenhum registro | Não se aplica. A tela sempre mostra nome, e-mail e perfil. O professor sem turmas e o responsável sem alunos vinculados são tratados em 7.2. |
+| Vazio, sem nenhum registro | Não se aplica. A tela sempre mostra nome, e-mail e perfil. O professor sem turmas e o responsável sem alunos vinculados são tratados em 7.1.1. |
 | Vazio, por causa dos filtros | Não se aplica. |
 | Sem permissão | Todos os perfis usam esta tela e cada um vê só a própria conta (matriz de permissões, seção 10 do índice). "Acesso negado" e "Não encontrado" (RG-13) não se aplicam. |
 | Erro | "Sem conexão" e "Erro inesperado" ([T26 Estados do sistema](prd-t26-estados-do-sistema.md)) aparecem como aviso na própria tela, e o que foi digitado continua nos campos (RG-29). |
@@ -125,17 +125,21 @@ Não se aplica.
 | RN-06 | Ao trocar a senha, o sistema encerra as outras sessões do usuário. A sessão em que o usuário trocou a senha continua aberta. |
 | RN-07 | Cada usuário vê só a própria conta. |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
 | Cargo da psicopedagoga | Quem tem o perfil Psicopedagoga vê também o cargo (por exemplo, "Assistente estudantil"), só para leitura. |
 | Erros de senha atual e o bloqueio | Os erros de senha atual nesta tela não contam para as cinco tentativas que bloqueiam o login (RG-04). |
-| Alunos vinculados sem acesso ou inativos | O responsável vê todos os alunos vinculados, ativos ou não, com a indicação "Sem acesso" ou "Inativo" nos que ele não pode abrir. |
+| Alunos vinculados sem acesso ou inativos | O responsável vê somente os alunos vinculados aos quais ainda tem acesso. Aluno inativo ou aluno com 18 anos ou mais sem autorização não aparece. |
 | Professor sem turmas e responsável sem alunos | A tela mostra "Nenhuma turma vinculada" para o professor e "Nenhum aluno vinculado" para o responsável. |
 | Destino depois de "Sair" | Depois de "Sair", o sistema abre o login ([T01 Acesso ao sistema](prd-t01-acesso-ao-sistema.md)). |
 | Turmas e disciplinas do professor | A tela mostra uma linha por vínculo, com turma e disciplina, só dos vínculos ativos. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -145,12 +149,12 @@ Não se aplica.
 
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
-| Senha trocada | Sucesso | Senha trocada. As outras sessões foram encerradas. (proposta) |
-| Senha atual errada | Erro | A senha atual está incorreta. Digite de novo. (proposta) |
-| Nova senha igual à atual | Erro | A nova senha precisa ser diferente da atual. Escolha outra. (proposta) |
-| Nova senha fora da regra | Erro | A senha precisa ter no mínimo 8 caracteres, com letras e números. (proposta) |
-| Senha e confirmação diferentes | Erro | A senha e a confirmação são diferentes. Digite as duas de novo. (proposta) |
-| Sair com senha digitada e não salva | Confirmação | Você digitou uma nova senha que não foi salva. Se sair agora, ela será descartada. (proposta) |
+| Senha trocada | Sucesso | Senha trocada. As outras sessões foram encerradas. |
+| Senha atual errada | Erro | A senha atual está incorreta. Digite de novo. |
+| Nova senha igual à atual | Erro | A nova senha precisa ser diferente da atual. Escolha outra. |
+| Nova senha fora da regra | Erro | A senha precisa ter no mínimo 8 caracteres, com letras e números. |
+| Senha e confirmação diferentes | Erro | A senha e a confirmação são diferentes. Digite as duas de novo. |
+| Sair com senha digitada e não salva | Confirmação | Você digitou uma nova senha que não foi salva. Se sair agora, ela será descartada. |
 | Sessão encerrada, nas outras sessões | Aviso | Sua sessão foi encerrada. Entre de novo para continuar. |
 | Sem conexão | Erro | Sem conexão com a internet. O que você digitou não foi perdido. |
 | Erro inesperado | Erro | Algo deu errado. Tente de novo em alguns minutos. |
@@ -170,7 +174,7 @@ Não se aplica.
 - [ ] Dado um usuário de qualquer perfil, quando ele escolhe "Minha conta" no menu do usuário, então o sistema mostra o nome, o e-mail e o perfil dele.
 - [ ] Dado um aluno, quando ele abre Minha conta, então a tela mostra a foto dele.
 - [ ] Dado um professor, quando ele abre Minha conta, então a tela mostra as turmas em que ele leciona e as disciplinas.
-- [ ] Dado um responsável, quando ele abre Minha conta, então a tela mostra os alunos vinculados a ele.
+- [ ] Dado um responsável, quando ele abre Minha conta, então a tela mostra somente os alunos vinculados aos quais ele ainda tem acesso.
 - [ ] Dada a psicopedagoga, quando ela abre Minha conta, então a tela não mostra foto, turmas, disciplinas nem alunos vinculados.
 - [ ] Dado qualquer perfil, quando abre Minha conta, então nome, e-mail e vínculos não podem ser editados na tela (só a psicopedagoga os altera, no cadastro correspondente).
 - [ ] Dado um usuário com a senha atual certa, quando ele informa nova senha com 8 caracteres ou mais, com letras e números, diferente da atual, e a confirma, então o sistema grava a nova senha.

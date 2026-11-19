@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T02 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor, Aluno, Responsável |
 | Telas relacionadas | [T01 Acesso ao sistema](prd-t01-acesso-ao-sistema.md), [T03 Notificações](prd-t03-notificacoes.md), [T06 Lista de alunos](prd-t06-lista-de-alunos.md), [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md), [T08 Perfil do aluno](prd-t08-perfil-do-aluno.md), [T12 Planejamento semanal](prd-t12-planejamento-semanal.md), [T13 Agenda](prd-t13-agenda.md), [T14 Evento](prd-t14-evento.md), [T15 Pedidos de agendamento](prd-t15-pedidos-de-agendamento.md), [T16 Atividades adaptadas](prd-t16-atividades-adaptadas.md), [T17 Observações dos professores](prd-t17-observacoes-dos-professores.md), [T18 Informações para a psicopedagoga](prd-t18-informacoes-para-a-psicopedagoga.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1. Cada bloco aparece na fase da tela de onde vêm os dados (ver 6.6). |
@@ -64,7 +64,7 @@ Permitir que cada perfil veja, logo depois de entrar, o que precisa da atenção
 | Planejamento da semana atual (aluno e responsável) | Planejamento semanal confirmado da semana atual do aluno (RN-10). Origem: [T12 Planejamento semanal](prd-t12-planejamento-semanal.md). |
 | Pedidos pendentes (aluno e responsável) | Pedidos de agendamento do aluno com a situação "Pendente". Origem: [T15 Pedidos de agendamento](prd-t15-pedidos-de-agendamento.md). |
 | Atalho "Registrar atividade adaptada" (professor) | Abre o formulário de [T16 Atividades adaptadas](prd-t16-atividades-adaptadas.md). |
-| Atalho "Registrar observação" (professor) | Abre o formulário de [T17 Observações dos professores](prd-t17-observacoes-dos-professores.md) para um aluno escolhido (ver "Aluno do atalho Registrar observação" em 7.2). |
+| Atalho "Registrar observação" (professor) | Abre o formulário de [T17 Observações dos professores](prd-t17-observacoes-dos-professores.md) para um aluno escolhido (ver "Aluno do atalho Registrar observação" em 7.1.1). |
 | Atalho "Pedir agendamento" (aluno e responsável) | Abre o formulário de [T15 Pedidos de agendamento](prd-t15-pedidos-de-agendamento.md). |
 | Atalho "Enviar informação" (aluno e responsável) | Abre o formulário de [T18 Informações para a psicopedagoga](prd-t18-informacoes-para-a-psicopedagoga.md). |
 
@@ -80,7 +80,7 @@ Não se aplica. O Início não tem filtros (RG-21 não vale aqui).
 
 ### 5.3 Ordenação e paginação
 
-- Ordenação padrão: pedidos de agendamento pendentes, do mais antigo para o mais recente. Os outros blocos seguem "Limite e ordem dos itens por bloco" em 7.2.
+- Ordenação padrão: pedidos de agendamento pendentes, do mais antigo para o mais recente. Os outros blocos seguem "Limite e ordem dos itens por bloco" em 7.1.1.
 - Outras ordenações: Não se aplica.
 - Paginação: Não se aplica. O Início não mostra listas paginadas (RG-19 não vale aqui).
 
@@ -194,15 +194,19 @@ O que cada perfil vê em cada fase:
 | RN-19 | O bloco de eventos da psicopedagoga mostra todos os eventos da agenda, não só os que ela criou ou de que participa. |
 | RN-20 | Quando o acesso do responsável é encerrado por inatividade (RG-28), ele entra de novo e volta para a tela em que estava, com o mesmo aluno escolhido. Nos outros logins, ele escolhe o aluno de novo (RN-14). |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
 | Alunos nos cartões do responsável | Os cartões mostram só alunos ativos e com acesso permitido ao responsável. |
 | Limite e ordem dos itens por bloco | Cada bloco mostra até 5 itens. Eventos e planejamento do mais próximo ao mais distante. Eventos sem presença e informações não lidas do mais antigo para o mais recente. Atividades adaptadas e observações do mais recente para o mais antigo. |
 | Aluno do atalho Registrar observação | O formulário de observação não tem campo "Aluno". Ao usar o atalho, o professor escolhe antes um aluno atendido das suas turmas. |
 | Ordem dos blocos | Os blocos aparecem na ordem em que estão listados na seção 4 para cada perfil, abaixo das boas-vindas. |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -213,17 +217,17 @@ Não se aplica. O Início não gera notificações. O bloco de alunos que comple
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
 | Frase de boas-vindas | Aviso | A inclusão acontece quando se aprende com as diferenças e com as igualdades! (Paulo Freire) |
-| Boas-vindas ao usuário | Aviso | Boas-vindas, [nome do usuário] (proposta) |
+| Boas-vindas ao usuário | Aviso | Boas-vindas, [nome do usuário] |
 | Bloco de eventos vazio | Aviso | Nenhum evento nos próximos 7 dias |
-| Bloco de pedidos pendentes vazio | Aviso | Nenhum pedido de agendamento pendente (proposta) |
-| Bloco de eventos sem presença vazio | Aviso | Nenhum evento sem presença registrada (proposta) |
-| Bloco de informações não lidas vazio | Aviso | Nenhuma informação não lida (proposta) |
-| Bloco de atividades adaptadas vazio | Aviso | Nenhuma atividade adaptada nos últimos 7 dias (proposta) |
-| Bloco de observações dos professores vazio | Aviso | Nenhuma observação dos professores nos últimos 7 dias (proposta) |
-| Bloco de 18 anos vazio | Aviso | Nenhum aluno completa 18 anos nos próximos 30 dias (proposta) |
-| Bloco de alunos atendidos vazio | Aviso | Nenhum aluno atendido nas suas turmas (proposta) |
-| Bloco de planejamento vazio | Aviso | Nenhum planejamento confirmado para esta semana (proposta) |
-| Bloco de pedidos pendentes do aluno vazio | Aviso | Nenhum pedido pendente (proposta) |
+| Bloco de pedidos pendentes vazio | Aviso | Nenhum pedido de agendamento pendente |
+| Bloco de eventos sem presença vazio | Aviso | Nenhum evento sem presença registrada |
+| Bloco de informações não lidas vazio | Aviso | Nenhuma informação não lida |
+| Bloco de atividades adaptadas vazio | Aviso | Nenhuma atividade adaptada nos últimos 7 dias |
+| Bloco de observações dos professores vazio | Aviso | Nenhuma observação dos professores nos últimos 7 dias |
+| Bloco de 18 anos vazio | Aviso | Nenhum aluno completa 18 anos nos próximos 30 dias |
+| Bloco de alunos atendidos vazio | Aviso | Nenhum aluno atendido nas suas turmas |
+| Bloco de planejamento vazio | Aviso | Nenhum planejamento confirmado para esta semana |
+| Bloco de pedidos pendentes do aluno vazio | Aviso | Nenhum pedido pendente |
 
 ## 10. Permissões
 
@@ -267,6 +271,7 @@ Não se aplica. O Início não gera notificações. O bloco de alunos que comple
 - [ ] Dado um planejamento semanal em "Rascunho", quando o aluno abre o Início, então o planejamento não aparece (RN-10).
 - [ ] Dado um responsável com um aluno vinculado, quando abre o Início, então o Início abre direto com o conteúdo do aluno (RN-12).
 - [ ] Dado um responsável com três alunos vinculados, quando abre o Início, então vê três cartões, cada um com foto, nome, turma, quantidade de eventos nos próximos 7 dias e quantidade de pedidos pendentes (RN-13).
+- [ ] Dado um responsável com aluno inativo ou aluno maior de 18 anos sem autorização de acesso, quando abre o Início, então esse aluno não aparece nos cartões.
 - [ ] Dado os cartões dos alunos, quando o responsável escolhe um cartão, então o Início mostra o conteúdo do aluno escolhido (RN-11, RN-13).
 - [ ] Dado um aluno escolhido, quando o responsável abre qualquer tela, então o cabeçalho mostra o aluno escolhido com a opção "Trocar aluno" (RN-14).
 - [ ] Dado um aluno escolhido, quando o responsável abre Perfil do aluno, Agenda, Meus pedidos ou Enviar informação, então a tela mostra os dados do aluno escolhido (RN-14).

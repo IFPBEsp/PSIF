@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 | --- | --- |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Conteúdo | Telas do produto e regras que valem para mais de uma tela |
 
 Este índice reúne as regras transversais do produto. Os PRDs de tela citam estas regras pelo identificador ou pelo número da seção deste índice, sem copiar o texto. Por exemplo: "ver RG-19 no índice" ou "ver seção 7 do índice".
@@ -158,7 +158,7 @@ Valem para todas as telas. Os PRDs de tela citam estas regras pelo identificador
 | RG-19 | Listas mostram 20 itens por página e o total de resultados. |
 | RG-20 | A busca por texto ignora maiúsculas, minúsculas e acentos, e começa a partir de 2 caracteres. |
 | RG-21 | Filtros ativos ficam visíveis, podem ser limpos de uma vez e se mantêm ao voltar para a lista. Um link copiado da lista abre com os mesmos filtros. |
-| RG-22 | Lista vazia mostra uma mensagem e a ação principal (por exemplo, "Cadastrar aluno"). Lista vazia por causa de filtros mostra a opção de limpar os filtros. |
+| RG-22 | Lista vazia mostra uma mensagem e a ação principal (por exemplo, "Cadastrar aluno"). Quando o usuário não pode criar registros naquele contexto, a lista mostra só a mensagem. Lista vazia por causa de filtros mostra a opção de limpar os filtros. |
 | RG-23 | Ações que não podem ser desfeitas ou que afetam outras pessoas pedem confirmação. A confirmação diz a ação e a consequência, nunca "Tem certeza?". |
 | RG-24 | Botões usam verbo no infinitivo ("Salvar", "Pedir agendamento"). Mensagens de erro dizem o que aconteceu e o que fazer, sem detalhe técnico. |
 | RG-25 | Ninguém recebe notificação da própria ação. |
@@ -283,7 +283,9 @@ Legenda:
 | T17 Observações dos professores | Lê | Próprio, Turmas | Não | Não |
 | T18 Informações para a psicopedagoga | Recebe | Não | Envia, Próprio | Envia, Próprio |
 | T19 Turmas | Sim | Lê, as suas | Não | Não |
-| T20 a T25 | Sim | Não | Não | Não |
+| T20 a T22 | Sim | Não | Não | Não |
+| T23 Equipe | Sim, conforme T23 | Não | Não | Não |
+| T24 e T25 | Sim | Não | Não | Não |
 
 ## 11. Fora do escopo
 

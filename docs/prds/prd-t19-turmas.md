@@ -3,7 +3,7 @@
 | Campo | Valor |
 | --- | --- |
 | Identificador | T19 |
-| Situação | Rascunho |
+| Situação | Aprovado |
 | Perfis | Psicopedagoga, Professor |
 | Telas relacionadas | [T20 Cursos](prd-t20-cursos.md), [T21 Professores](prd-t21-professores.md), [T07 Cadastro de aluno](prd-t07-cadastro-de-aluno.md), [T06 Lista de alunos](prd-t06-lista-de-alunos.md), [T08 Perfil do aluno](prd-t08-perfil-do-aluno.md), [T04 Minha conta](prd-t04-minha-conta.md), [T26 Estados do sistema](prd-t26-estados-do-sistema.md) |
 | Fase de entrega | 1 |
@@ -84,8 +84,8 @@ Os filtros valem para os dois perfis. A lista do professor só traz as turmas de
 
 ### 5.3 Ordenação e paginação
 
-- Ordenação padrão: não definida. Ver "Ordenação e busca por texto" em 7.2.
-- Outras ordenações: não definidas. Ver 7.2.
+- Ordenação padrão: não definida. Ver "Ordenação e busca por texto" em 7.1.1.
+- Outras ordenações: não definidas. Ver 7.1.1.
 - Paginação: 20 itens por página, com o total de resultados (RG-19).
 
 ## 6. Comportamento esperado
@@ -102,6 +102,7 @@ Os filtros valem para os dois perfis. A lista do professor só traz as turmas de
 
 - Turma repetida: o sistema não salva e avisa que já existe turma com o mesmo curso, série e ano letivo (RN-02).
 - Campo obrigatório vazio: o sistema não salva e indica o campo.
+- Editar curso, série ou ano letivo de turma que tem ou já teve alunos vinculados: o sistema não salva e orienta a cadastrar outra turma e, se houver alunos atualmente vinculados, transferi-los pelo cadastro (RN-13).
 - Inativar turma com alunos ativos: o sistema não inativa e avisa o que fazer (RN-04).
 - Vincular ou desvincular professor: o sistema pede confirmação e, depois de confirmado, muda na hora quais alunos o professor vê (RN-05).
 - Sair do formulário com alterações não salvas: o sistema pede confirmação (RG-29).
@@ -117,7 +118,7 @@ Os filtros valem para os dois perfis. A lista do professor só traz as turmas de
 | Abrir o detalhe da turma | Psicopedagoga, Professor (só as suas) | Mostra dados da turma, alunos atendidos e professores com as disciplinas. |
 | Abrir o perfil de um aluno | Psicopedagoga, Professor (só alunos ativos das suas turmas) | Abre [T08 Perfil do aluno](prd-t08-perfil-do-aluno.md). |
 | Cadastrar turma | Psicopedagoga | Valida os campos e as regras RN-02 e RN-03, cria a turma como Ativo e mostra a confirmação. |
-| Editar turma | Psicopedagoga | Salva as alterações e passa a mostrar "Editado em" (RG-15). |
+| Editar turma | Psicopedagoga | Salva as alterações e passa a mostrar "Editado em" (RG-15). Curso, série e ano letivo só podem ser alterados quando a turma nunca teve alunos vinculados (RN-13). |
 | Vincular professor | Psicopedagoga | Pede confirmação, cria o par de professor e disciplina e atualiza na hora quais alunos o professor vê (RN-05). |
 | Desvincular professor | Psicopedagoga | Pede confirmação, remove o par e atualiza na hora quais alunos o professor vê (RN-05). O histórico é mantido (RG-14). |
 | Inativar turma | Psicopedagoga | Pede confirmação. Só inativa se não houver alunos ativos (RN-04). |
@@ -157,20 +158,24 @@ Os filtros valem para os dois perfis. A lista do professor só traz as turmas de
 | RN-10 | O ano letivo atual é o ano letivo mais recente que tem pelo menos uma turma ativa. É o padrão do filtro "Ano letivo" (seção 4 do índice). |
 | RN-11 | O número de séries de um curso não pode ficar menor que a maior série de uma turma ativa dele (regra de [T20 Cursos](prd-t20-cursos.md)). |
 | RN-12 | O filtro "Turma" de [T06 Lista de alunos](prd-t06-lista-de-alunos.md) usa as turmas do ano letivo atual. O professor vê em [T04 Minha conta](prd-t04-minha-conta.md) as suas turmas e disciplinas, e só a psicopedagoga altera. |
+| RN-13 | Curso, série e ano letivo não podem ser alterados quando a turma tem ou já teve alunos vinculados, ativos ou inativos. Para corrigir esses dados, a psicopedagoga cadastra outra turma e transfere os alunos atualmente vinculados pelo cadastro, preservando o histórico. |
 
-### 7.2 Regras propostas para validação
+#### 7.1.1 Decisões de validação aprovadas
 
-| Regra | Definição sugerida |
+| Regra | Decisão aprovada |
 | --- | --- |
-| Mensagens propostas | Os textos marcados com (proposta) na seção 9 dependem de validação. |
+| Mensagens | Os textos da seção 9 estão aprovados. |
 | Ordenação e busca por texto | Sem busca por texto. Ordenação padrão por ano letivo do mais recente para o mais antigo, depois curso e série. |
 | Vínculos ao inativar a turma | Os vínculos de professor continuam guardados com a turma inativa. O professor deixa de ver alunos por ela porque a turma não tem alunos ativos (RN-04). |
-| Editar curso, série e ano de turma com alunos | Permite editar. Os alunos continuam na turma, e a regra RN-02 continua valendo. |
 | Ano letivo atual sem turma ativa | O filtro "Ano letivo" mostra "Todos" até existir uma turma ativa. |
 | Quantidade de alunos atendidos | Conta só alunos ativos, e o detalhe lista só alunos ativos. |
 | Professores e turmas para vincular | Só professores ativos e só turmas ativas entram na escolha. |
 | Par repetido | Não permite o mesmo professor e a mesma disciplina duas vezes na mesma turma. |
 | Reativar turma de curso inativo | Pede reativar o curso antes, em [T20 Cursos](prd-t20-cursos.md). |
+
+### 7.2 Regras propostas para validação
+
+Não se aplica.
 
 ## 8. Notificações
 
@@ -180,19 +185,20 @@ Não se aplica.
 
 | Situação | Tipo | Mensagem |
 | --- | --- | --- |
-| Turma cadastrada | Sucesso | Turma cadastrada. (proposta) |
-| Turma atualizada | Sucesso | Turma atualizada. (proposta) |
-| Turma reativada | Sucesso | Turma reativada. (proposta) |
-| Turma inativada | Sucesso | Turma inativada. (proposta) |
-| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar a turma. (proposta) |
-| Turma repetida | Erro | Já existe uma turma com este curso, série e ano letivo. Altere um deles e salve de novo. (proposta) |
-| Inativar turma com alunos ativos | Erro | Esta turma tem alunos ativos. Troque a turma deles no cadastro de aluno e tente de novo. (proposta) |
-| Inativar turma | Confirmação | Inativar a turma {turma}? Ela deixa de aparecer para novos cadastros de aluno e o histórico é mantido. (proposta) |
-| Vincular professor | Confirmação | Vincular {professor} à turma {turma}? Ele passa a ver agora os alunos ativos desta turma. (proposta) |
-| Desvincular professor | Confirmação | Desvincular {professor} da turma {turma}? Ele deixa de ver agora os alunos desta turma. (proposta) |
-| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. (proposta) |
-| Lista vazia, sem nenhuma turma | Aviso | Nenhuma turma cadastrada. (proposta) |
-| Lista vazia, por causa dos filtros | Aviso | Nenhuma turma encontrada com estes filtros. (proposta) |
+| Turma cadastrada | Sucesso | Turma cadastrada. |
+| Turma atualizada | Sucesso | Turma atualizada. |
+| Turma reativada | Sucesso | Turma reativada. |
+| Turma inativada | Sucesso | Turma inativada. |
+| Campo obrigatório vazio | Erro | Preencha o campo {campo} para salvar a turma. |
+| Turma repetida | Erro | Já existe uma turma com este curso, série e ano letivo. Altere um deles e salve de novo. |
+| Editar turma com alunos vinculados | Erro | Esta turma tem ou já teve alunos vinculados. Curso, série e ano letivo não podem ser alterados. Cadastre outra turma e, se houver alunos atualmente vinculados, transfira-os pelo cadastro. |
+| Inativar turma com alunos ativos | Erro | Esta turma tem alunos ativos. Troque a turma deles no cadastro de aluno e tente de novo. |
+| Inativar turma | Confirmação | Inativar a turma {turma}? Ela deixa de aparecer para novos cadastros de aluno e o histórico é mantido. |
+| Vincular professor | Confirmação | Vincular {professor} à turma {turma}? Ele passa a ver agora os alunos ativos desta turma. |
+| Desvincular professor | Confirmação | Desvincular {professor} da turma {turma}? Ele deixa de ver agora os alunos desta turma. |
+| Sair com alterações não salvas | Confirmação | Você tem alterações não salvas. Se sair agora, elas serão perdidas. |
+| Lista vazia, sem nenhuma turma | Aviso | Nenhuma turma cadastrada. |
+| Lista vazia, por causa dos filtros | Aviso | Nenhuma turma encontrada com estes filtros. |
 
 ## 10. Permissões
 
@@ -211,6 +217,8 @@ Não se aplica.
 - [ ] Dado que a psicopedagoga abre o formulário de cadastro, quando escolhe o curso, então a lista de cursos mostra só cursos ativos e a série vai de 1 até o número de séries do curso (RN-03).
 - [ ] Dado que a psicopedagoga preencheu curso, série e ano letivo, quando escolhe "Salvar", então a turma é cadastrada como Ativo, o sistema mostra a confirmação e abre o detalhe.
 - [ ] Dado que já existe uma turma com o mesmo curso, série e ano letivo, quando a psicopedagoga tenta salvar outra igual, então o sistema não salva e mostra o erro de turma repetida (RN-02).
+- [ ] Dada uma turma que tem ou já teve alunos vinculados, ativos ou inativos, quando a psicopedagoga tenta alterar curso, série ou ano letivo, então o sistema não salva e orienta a cadastrar outra turma e transferir pelo cadastro os alunos atualmente vinculados (RN-13).
+- [ ] Dada uma turma que nunca teve alunos vinculados, quando a psicopedagoga altera curso, série ou ano letivo para valores válidos, então o sistema salva a alteração (RN-13).
 - [ ] Dado que o ano letivo tem menos de quatro dígitos, quando a psicopedagoga tenta salvar, então o sistema não salva e indica o campo (RN-03).
 - [ ] Dado que a psicopedagoga cadastra uma turma sem professores, quando salva, então a turma é cadastrada, porque "Professores e disciplinas" não é obrigatório.
 - [ ] Dado que a psicopedagoga acrescentou dois pares de professor e disciplina, quando salva, então o detalhe mostra os dois professores com as disciplinas (RN-06).
