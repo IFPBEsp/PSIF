@@ -1,0 +1,57 @@
+{
+  "_comment": "Nome, pastas e arquivos exportados desta skill; os scripts leem daqui.",
+  "name": "psif-design-system",
+  "title": "PSIF Design System",
+  "layers": [
+    "core",
+    "design"
+  ],
+  "content_dirs": [
+    "ai-rules",
+    "components",
+    "foundations",
+    "screen-patterns",
+    "tokens",
+    "ux-patterns"
+  ],
+  "export": {
+    "files": [
+      "SKILL.md",
+      "assets/tokens.css",
+      "assets/icones.svg",
+      "assets/simbolo-psif.svg",
+      "assets/simbolo-psif-glifo.svg",
+      "assets/simbolo-psif-quadrado.png",
+      "assets/simbolo-psif.png",
+      "assets/DESIGN.md",
+      "assets/PRODUCT.md",
+      "scripts/tokens.json",
+      "scripts/lint_output.py",
+      "scripts/check_contrast.py",
+      "scripts/check_dominance.py",
+      "scripts/check_checklist.py",
+      "scripts/check_consumer.py",
+      "scripts/gen_tokens_css.py",
+      "scripts/gen_design_md.py",
+      "scripts/design_md_body.md",
+      "scripts/skill_config.py",
+      "skill.config.json",
+      "scripts/README.md",
+      "scripts/check_all.py",
+      "scripts/check_refs.py",
+      "scripts/tests/_fixtures.py",
+      "scripts/tests/test_check_checklist.py",
+      "scripts/tests/test_check_consumer.py",
+      "scripts/tests/test_check_contrast.py",
+      "scripts/tests/test_check_dominance.py",
+      "scripts/tests/test_check_refs.py",
+      "scripts/tests/test_colors_table.py",
+      "scripts/tests/test_contrast_table.py",
+      "scripts/tests/test_doc_counts.py",
+      "scripts/tests/test_gen_design_md.py",
+      "scripts/tests/test_gen_tokens_css.py",
+      "scripts/tests/test_lint_output.py",
+      "scripts/tests/test_tailwind_theme.py"
+    ]
+  }
+}
