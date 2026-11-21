@@ -571,10 +571,12 @@ NODE_ENV=production
 
 Só pnpm: um lockfile, instalação igual em toda máquina e no Docker, e nenhum import de pacote não declarado. A configuração impõe a regra:
 
-- `"packageManager": "pnpm@<versão>"` no `package.json` fixa a versão.
-- `"preinstall": "npx only-allow pnpm"` faz `npm install` e `yarn` falharem. É o único `npx` permitido.
+- `"packageManager": "pnpm@10.34.9"` no `package.json` fixa a versão; o Corepack ativa exatamente essa versão (`corepack enable`, ou `corepack pnpm ...` quando não houver permissão para habilitar os shims).
+- `"preinstall": "npx --yes only-allow pnpm"` faz `npm install` e `yarn` falharem. É o único `npx` permitido.
 - `pnpm-lock.yaml` é o único lockfile versionado. `package-lock.json` e `yarn.lock` ficam no `.gitignore`.
-- O `Dockerfile` usa `pnpm install --frozen-lockfile`.
+- Os builds de dependências aprovados ficam no `package.json` (`pnpm.onlyBuiltDependencies` e `pnpm.ignoredBuiltDependencies`), revisados com `pnpm approve-builds`.
+- O `Dockerfile` habilita o pnpm via Corepack e usa `pnpm install --frozen-lockfile`.
+- O `docker-compose.dev.yml` roda `pnpm install --frozen-lockfile && pnpm dev --hostname 0.0.0.0`.
 
 Use `pnpm dlx` no lugar de `npx`. Script de instalação de dependência só roda depois de `pnpm approve-builds`.
 

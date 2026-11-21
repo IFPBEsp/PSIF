@@ -133,6 +133,8 @@ docker compose --env-file .env -f docker-compose.dev.yml up -d --build
 
 Aqui portas adicionais podem ser expostas quando isso facilitar testes e depuração.
 
+A imagem do frontend habilita o pnpm via Corepack e instala com `pnpm install --frozen-lockfile`; se o `pnpm-lock.yaml` estiver fora de sincronia com o `package.json`, o build falha em vez de resolver versões novas.
+
 ## 8. Produção
 
 Na VPS, mantenha o `.env` fora do Git com os valores reais de produção. Para subir:
