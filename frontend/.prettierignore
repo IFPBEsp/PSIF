@@ -1,3 +1,4 @@
 src/app/tokens.css
 src/shared/components/svg-assets.generated.ts
 src/generated/
+pnpm-lock.yaml

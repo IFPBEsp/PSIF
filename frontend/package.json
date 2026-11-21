@@ -2,7 +2,9 @@
   "name": "psif-frontend",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.34.9",
   "scripts": {
+    "preinstall": "npx --yes only-allow pnpm",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -42,5 +44,14 @@
     "prettier": "^3.9.10",
     "typescript": "^5.9.3",
     "vitest": "^5.0.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "unrs-resolver"
+    ],
+    "ignoredBuiltDependencies": [
+      "fsevents"
+    ]
   }
 }
