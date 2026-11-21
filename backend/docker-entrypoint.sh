@@ -9,6 +9,10 @@ readonly timeout=60
 readonly started_at=$SECONDS
 probe_pid=""
 
+if (($# == 0)); then
+  set -- ./mvnw spring-boot:run
+fi
+
 cleanup_probe() {
   if [[ -n "${probe_pid}" ]] && kill -0 "${probe_pid}" 2>/dev/null; then
     kill "${probe_pid}" 2>/dev/null || true
@@ -42,7 +46,7 @@ while true; do
   if wait "${probe_pid}"; then
     probe_pid=""
     echo "PostgreSQL is reachable after ${elapsed}s. Starting Spring Boot."
-    exec ./mvnw spring-boot:run
+    exec "$@"
   fi
   probe_pid=""
 

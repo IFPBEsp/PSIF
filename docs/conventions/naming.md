@@ -48,6 +48,7 @@ product.types.ts
 ```
 
 - Arquivo e pasta em kebab-case, exceto os do Next.js (`page.tsx`, `layout.tsx`).
+- Segmento de rota em inglês, plural e kebab-case, com o mesmo nome do recurso da API: `/students`, `/students/new`, `/students/[id]/edit`. O rótulo exibido ao usuário segue em português.
 - Tipo em PascalCase, sem prefixo `I`. Props como `<Componente>Props`.
 - Tipos gerados pelo Orval mantêm o nome do contrato.
 
