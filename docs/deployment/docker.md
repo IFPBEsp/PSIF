@@ -123,6 +123,17 @@ PostgreSQL inicia → backend conecta → migrations são executadas → backend
 
 A aplicação não depende de alteração manual no schema para iniciar corretamente.
 
+Dev e produção usam os mesmos healthchecks, com as verificações de `docs/foundation/contracts.md`, seção 5:
+
+| Serviço | Comando no container |
+| --- | --- |
+| `postgres` | `pg_isready` com o usuário e o banco do `.env` |
+| `minio` | `curl` em `/minio/health/live` |
+| `backend` | `wget` em `/actuator/health`, esperando `"status":"UP"` |
+| `frontend` | `wget` em `/api/health`, esperando `"status":"UP"` |
+
+O `backend` sobe com `depends_on` em `condition: service_healthy` sobre o `postgres`, e o `frontend` de produção espera o `backend` saudável. Não há espera própria no container do `backend`: a ordem fica com o Compose. Como o Liquibase roda antes de a aplicação ficar pronta, o `/actuator/health` só responde depois das migrations, e o `backend` só fica saudável depois delas. `docker compose ps` mostra o estado de saúde de cada serviço.
+
 ## 7. Desenvolvimento
 
 O ambiente de dev roda com `docker-compose.dev.yml` e as variáveis do `.env`:
