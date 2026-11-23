@@ -1,14 +1,14 @@
 FROM node:24-alpine AS deps
 
-ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0 \
-    npm_config_store_dir=/pnpm-store
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
 WORKDIR /app
 
 RUN corepack enable pnpm
 
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm-store \
+    pnpm install --frozen-lockfile --store-dir=/pnpm-store
 
 FROM deps AS dev
 
