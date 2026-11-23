@@ -88,9 +88,33 @@ services:
     networks:
       - psif-prod
 
+  caddy:
+    image: caddy:2.11.9-alpine
+    restart: unless-stopped
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?defina APP_DOMAIN no .env}
+      API_DOMAIN: ${API_DOMAIN:?defina API_DOMAIN no .env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - frontend
+      - backend
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - psif-prod
+
 volumes:
   postgres-data:
   minio-data:
+  caddy-data:
+  caddy-config:
 
 networks:
   psif-prod:
