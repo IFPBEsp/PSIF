@@ -82,7 +82,7 @@ O client gerado fica em `frontend/src/generated/api`, versionado no Git. Para re
 
 ```bash
 cd frontend
-npm run api:generate
+pnpm api:generate
 ```
 
 O Orval lê a especificação em `${API_INTERNAL_URL}/v3/api-docs` e usa `http://localhost:8080` quando a variável não está no ambiente. Ele não lê o `.env`: para outra URL, exporte a variável no próprio comando. A mudança de contrato no `backend` e o client regerado vão no mesmo commit.

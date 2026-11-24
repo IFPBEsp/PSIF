@@ -1,9 +1,14 @@
 FROM node:24-alpine AS deps
 
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci
+RUN corepack enable pnpm
+
+COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=cache,id=pnpm,target=/pnpm-store \
+    pnpm install --frozen-lockfile --store-dir=/pnpm-store
 
 FROM deps AS dev
 
@@ -11,7 +16,7 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev", "--", "--hostname", "0.0.0.0"]
+CMD ["pnpm", "dev", "--hostname", "0.0.0.0"]
 
 FROM deps AS builder
 
@@ -19,7 +24,7 @@ ARG NEXT_PUBLIC_APP_URL
 ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL NEXT_TELEMETRY_DISABLED=1
 
 COPY . .
-RUN npm run build
+RUN pnpm build
 
 FROM node:24-alpine AS prod
 
