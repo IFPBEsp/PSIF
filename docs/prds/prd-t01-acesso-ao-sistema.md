@@ -115,6 +115,7 @@ Não se aplica.
 - E-mail inexistente, senha errada ou usuário inativo: o sistema mostra o mesmo erro de login (RN-06).
 - Cinco tentativas erradas seguidas no mesmo e-mail: o sistema mostra a mensagem de bloqueio por 15 minutos (RN-04).
 - Nova senha fora da regra ou confirmação diferente da nova senha: o sistema não grava a senha e mostra o erro no campo.
+- Nova senha igual à senha provisória, no primeiro acesso: o sistema não grava a senha e mostra o erro no campo (RN-15).
 - Primeiro acesso sem aceitar os termos: o sistema não conclui o primeiro acesso (RN-05).
 - Nova versão dos termos sem aceitar: o usuário só pode sair (RN-07).
 - Usuário toca em "Esqueci a senha" nas fases 1 a 4: o sistema mostra a mensagem de orientação, sem formulário (RN-08).
@@ -207,6 +208,7 @@ Não se aplica.
 | Resposta ao "Enviar link", com e-mail cadastrado ou não | Aviso | Se este e-mail estiver cadastrado, enviaremos um link para redefinir a senha. |
 | Link expirado ou já usado | Erro | Este link expirou ou já foi usado. Peça um novo link. |
 | Nova senha fora da regra | Erro | A senha precisa ter no mínimo 8 caracteres, com letras e números. |
+| Nova senha igual à provisória | Erro | A nova senha precisa ser diferente da senha provisória. Escolha outra. |
 | Senha e confirmação diferentes | Erro | A senha e a confirmação são diferentes. Digite as duas de novo. |
 | Primeiro acesso sem aceitar os termos | Erro | Aceite os termos de uso para continuar. |
 | Senha redefinida pelo link | Sucesso | Senha redefinida. Entre com a nova senha. |
@@ -231,7 +233,7 @@ Não se aplica.
 - [ ] Dado um usuário "Ativo" cuja sessão foi encerrada em outra tela, quando ele entra de novo, então o sistema abre a tela em que ele estava (RG-28).
 - [ ] Dado um usuário "Aguardando primeiro acesso", quando ele entra com a senha provisória, então o sistema abre o primeiro acesso, e não o Início.
 - [ ] Dado o primeiro acesso, quando o usuário informa nova senha com 8 caracteres ou mais, com letras e números, confirma a senha e aceita os termos, então o sistema grava a senha, registra o aceite com data, hora e versão e a situação passa a "Ativo".
-- [ ] Dado o primeiro acesso, quando o usuário informa como nova senha a própria senha provisória, então o sistema não salva a senha e explica que ele deve escolher outra.
+- [ ] Dado o primeiro acesso, quando o usuário informa como nova senha a própria senha provisória, então o sistema não salva a senha e mostra "A nova senha precisa ser diferente da senha provisória. Escolha outra." (RN-15).
 - [ ] Dado o primeiro acesso, quando o usuário não aceita os termos ou não troca a senha, então o sistema não libera o uso e ele não chega ao Início.
 - [ ] Dado o primeiro acesso, quando o usuário escolhe ler os termos, então o texto dos termos abre sem pedir login.
 - [ ] Dado um usuário "Ativo" e termos que mudaram desde o último aceite, quando ele entra, então o sistema mostra o texto da nova versão e o botão "Aceitar" antes de qualquer tela.

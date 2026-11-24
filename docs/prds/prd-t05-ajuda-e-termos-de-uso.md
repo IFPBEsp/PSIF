@@ -142,7 +142,7 @@ Não se aplica.
 | Ajuda sem conteúdo | Se o perfil não tiver nenhum tópico publicado, a tela mostra "Ainda não há tópicos de ajuda para o seu perfil." |
 | Versões anteriores dos termos | O usuário vê só a versão em vigor. |
 | Registro do próprio aceite | O usuário logado vê no fim dos termos a data, a hora e a versão do próprio aceite. |
-| Alcance da busca | A busca procura no título e no texto dos tópicos. Não procura no texto das perguntas e respostas. As perguntas frequentes são mostradas dentro do tópico correspondente. |
+| Alcance da busca | A busca procura no título e no texto dos tópicos e nas perguntas e respostas frequentes que estão dentro de cada tópico. O resultado é sempre o tópico, e as perguntas frequentes são mostradas dentro dele. |
 
 ### 7.2 Regras propostas para validação
 
@@ -183,8 +183,8 @@ Não se aplica.
 - [ ] Dada uma nova versão dos termos publicada pela equipe que opera o sistema, quando o usuário entra, então ele precisa aceitá-la e o aceite fica registrado com data, hora e versão (RG-06).
 - [ ] Dada a fase 5, quando o usuário logado abre a Ajuda, então a tela mostra só os tópicos do perfil dele, com as perguntas frequentes dentro do tópico correspondente.
 - [ ] Dada a Ajuda aberta por um professor, quando ele a lê, então ele não vê tópicos exclusivos dos outros perfis.
-- [ ] Dada a busca nos tópicos, quando o usuário digita 2 caracteres ou mais, então o sistema filtra o título e o texto dos tópicos, ignorando maiúsculas, minúsculas e acentos (RG-20).
-- [ ] Dada uma palavra que aparece somente em uma pergunta ou resposta frequente, quando o usuário busca essa palavra, então o tópico não aparece por causa dela.
+- [ ] Dada a busca nos tópicos, quando o usuário digita 2 caracteres ou mais, então o sistema filtra pelo título, pelo texto e pelas perguntas e respostas frequentes dos tópicos, ignorando maiúsculas, minúsculas e acentos (RG-20).
+- [ ] Dada uma palavra que aparece somente em uma pergunta ou resposta frequente, quando o usuário busca essa palavra, então o tópico que contém essa pergunta aparece no resultado.
 - [ ] Dada a busca nos tópicos, quando o usuário digita "ajuda" ou "AJUDA" ou "ajúda", então o resultado é o mesmo.
 - [ ] Dada a busca sem resultado, quando o usuário busca um texto que não existe nos tópicos, então o sistema mostra a mensagem de busca vazia.
 - [ ] Dada a fase 1, quando o usuário abre a tela, então ela não mostra tópicos de ajuda, perguntas frequentes nem busca.

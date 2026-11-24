@@ -174,7 +174,7 @@ Não se aplica.
 
 | Acontecimento | Quem recebe | Conteúdo |
 | --- | --- | --- |
-| Características ou orientações atualizadas | Professores do aluno. A psicopedagoga que salvou não recebe (RG-25). | Avisa que o conteúdo do aluno foi atualizado. Texto na seção 9. |
+| Características ou orientações atualizadas | Professores do aluno. A psicopedagoga que salvou não recebe (RG-25). | Avisa qual seção do aluno foi atualizada, Características ou Orientações. Texto na seção 9. |
 
 ## 9. Mensagens
 
@@ -184,7 +184,8 @@ Não se aplica.
 | Características vazias, vistas pelo professor | Aviso | A psicopedagoga ainda não registrou características para este aluno |
 | Seção vazia, vista pela psicopedagoga | Aviso | Esta seção ainda não tem conteúdo. Escolha Editar para escrever. |
 | Texto salvo | Sucesso | Texto salvo. Os professores do aluno foram avisados. |
-| Notificação aos professores | Aviso | As características ou orientações de <nome do aluno> foram atualizadas. |
+| Notificação aos professores, seção Características | Aviso | As características de <nome do aluno> foram atualizadas. |
+| Notificação aos professores, seção Orientações | Aviso | As orientações de <nome do aluno> foram atualizadas. |
 | Anexo fora das regras | Erro | O anexo não foi aceito. Envie um PDF, JPG ou PNG com até 10 MB. |
 | Limite de anexos | Erro | Cada seção aceita até 5 anexos. Remova um anexo para enviar outro. |
 | Remover anexo | Confirmação | Remover o anexo "<nome do arquivo>"? Ele deixará de aparecer para os professores do aluno. |
@@ -209,7 +210,7 @@ Não se aplica.
 - [ ] Dado um texto salvo, quando a psicopedagoga salva uma nova alteração, então o sistema guarda uma nova versão e mantém a anterior.
 - [ ] Dado uma seção com várias versões, quando a psicopedagoga escolhe "Ver versões anteriores", então vê as versões guardadas com data e autor.
 - [ ] Dado um professor, quando abre a seção, então não vê o botão nem a lista de versões anteriores.
-- [ ] Dado que a psicopedagoga salva uma seção, quando o salvamento termina, então todos os professores do aluno recebem a notificação "Características ou orientações atualizadas".
+- [ ] Dado que a psicopedagoga salva uma seção, quando o salvamento termina, então todos os professores do aluno recebem a notificação "Características ou orientações atualizadas", com o texto que indica a seção salva (seção 9).
 - [ ] Dado que a psicopedagoga salva uma seção, quando o salvamento termina, então ela não recebe a notificação da própria ação (RG-25).
 - [ ] Dado um aluno que mudou de turma, quando um professor da turma anterior tenta abrir o conteúdo, então o sistema abre "Não encontrado" (RG-08, RG-13).
 - [ ] Dado um professor de uma turma do aluno, quando abre o perfil do aluno ativo, então ele lê características, orientações e anexos, sem poder editar nem remover (RG-11).
