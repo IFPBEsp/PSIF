@@ -14,4 +14,6 @@ Documentação de referência do projeto. Leia apenas os arquivos relevantes par
 
 - `conventions/AGENTS.md`: roteamento das convenções desse projeto.
 
+- `prds/prd-indice.md`: índice dos PRDs, com link para o PRD de cada tela do sistema. Os PRDs são a fonte da verdade do produto.
+
 - `deployment/docker.md`: Docker, Docker Compose e Caddy em `dev` e `production`. Cobre rede, persistência, HTTPS, healthchecks e operação.
