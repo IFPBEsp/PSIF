@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fundação do PSIF</title>
+<link rel="icon" type="image/png" href="assets/simbolo-psif-quadrado.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* PSIF Design System: tokens. Gerado de scripts/tokens.json por gen_tokens_css.py; não edite.
+ * Consuma por var(--token).
+ * Nunca como cor de texto: --ink-600, --ink-500, --navy-500, --sky-300, --blue-300 (§3.2).
+ */
+
+:root {
+
+  /* Cor — paleta canônica — §3.1 */
+  --navy-900: #162E41;
+  --navy-800: #1D3B54;
+  --navy-700: #244A69;
+  --navy-500: #5586A3;
+  --sky-300: #A4C7E4;
+  --sky-100: #CFE7F5;
+  --blue-700: #1760B1;
+  --blue-300: #72BAFC;
+  --success-700: #0E782E;
+  --success-100: #E3F1E7;
+  --warning-700: #8A5300;
+  --warning-100: #FDF3D6;
+  --danger-700: #B42318;
+  --danger-100: #FDECEA;
+  --ink-900: #000000;
+  --ink-700: #616161;
+  --ink-600: #7D7D7D;
+  --ink-500: #999999;
+  --ink-200: #E8E8E8;
+  --ink-100: #F3F3F3;
+  --white: #FFFFFF;
+
+  /* Elevação e sombra — §3.4 */
+  --sh-sm: 0 4px 4px rgba(36,74,105,.25);
+  --sh-md: 0 12px 32px rgba(36,74,105,.24);
+
+  /* Scrim de modal e drawer — §3.5 */
+  --overlay: rgba(36,74,105,.48);
+
+  /* Linhas sobre o céu — §3.5 */
+  --line-on-sky: rgba(36,74,105,.35);
+  --divider-on-sky: rgba(36,74,105,.12);
+
+  /* Opacidade — §3.5 */
+  --o-disabled: .45;
+
+  /* Raio — filho sempre com raio menor ou igual ao do pai — §3.6 */
+  --radius-xs: 2px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-pill: 999px;
+
+  /* Espaçamento — §3.7 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* Padding canônico de componente — §3.7 */
+  --btn-pad: 12px 16px;
+  --input-pad: 12px 16px;
+  --card-pad: 16px;
+  --chip-pad: 8px 16px;
+  --list-row-pad: 16px;
+  --page-pad: 24px;
+
+  /* Tamanho de ícone — §3.8 */
+  --ic-sm: 16px;
+  --ic-md: 20px;
+  --ic-lg: 24px;
+  --ic-xl: 32px;
+  --tile-icon: 40px;
+  --tile-icon-lg: 48px;
+
+  /* Alvo de toque — mínimo de todo clicável; botão e campo têm o seu — §20.6 */
+  --target-min: 44px;
+  --control-min: 48px;
+  --target-fine: 32px;
+
+  /* Avatar — cartão de aluno e perfil — §12.1 */
+  --avatar-sm: 56px;
+  --avatar-md: 80px;
+  --avatar-lg: 120px;
+
+  /* Z-index — cada camada tem seu valor nominal, nunca 9999 avulso — §3.10 */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 600;
+
+  /* Superfície — §3.10 */
+  --surface-base: var(--sky-100);
+  --surface-raised: var(--white);
+  --surface-overlay: var(--white);
+
+  /* Paleta do modo escuro (o bloco .dark no fim do arquivo aponta cada token para cá) — §25 */
+  --dark-navy-900: #DBEEFA;
+  --dark-navy-800: #BEE0F6;
+  --dark-navy-700: #9ECDF0;
+  --dark-navy-500: #5D91B7;
+  --dark-sky-300: #23415C;
+  --dark-sky-100: #0C1824;
+  --dark-blue-700: #8CC2FF;
+  --dark-blue-300: #356CA6;
+  --dark-success-700: #74D394;
+  --dark-success-100: #132E1C;
+  --dark-warning-700: #F0B95A;
+  --dark-warning-100: #33270F;
+  --dark-danger-700: #FF968C;
+  --dark-danger-100: #3B1916;
+  --dark-ink-900: #F0F5F9;
+  --dark-ink-700: #ACBECD;
+  --dark-ink-600: #7B92A5;
+  --dark-ink-500: #485E71;
+  --dark-ink-200: #253B4F;
+  --dark-ink-100: #1E3347;
+  --dark-white: #142738;
+  --dark-overlay: rgba(3,9,15,.65);
+  --dark-sh-sm: 0 4px 4px rgba(3,9,15,.35);
+  --dark-sh-md: 0 12px 32px rgba(3,9,15,.45);
+  --dark-line-on-sky: rgba(255,255,255,.35);
+  --dark-divider-on-sky: rgba(255,255,255,.12);
+
+  /* Larguras: conteúdo, barra lateral, coluna lateral, diálogo e login — §5.2 */
+  --w-auth: 400px;
+  --w-form: 720px;
+  --w-sidebar: 240px;
+  --w-aside: 320px;
+  --w-content: 1440px;
+
+  /* Breakpoints — da tela estreita para a larga, por min-width — §5.4 */
+  --bp-md: 768px;
+  --bp-lg: 1200px;
+
+  /* Família — §4.1 */
+  --font-sans: var(--font-figtree, 'Figtree'), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Escala tipográfica — §4.2 */
+  --fs-display: 32px;
+  --fs-h1: 20px;
+  --fs-h2: 18px;
+  --fs-h3: 16px;
+  --fs-body: 15px;
+  --fs-small: 14px;
+  --fs-caption: 12px;
+
+  /* Altura de linha — §4.4 */
+  --lh-tight: 1.2;
+  --lh-snug: 1.35;
+  --lh-normal: 1.5;
+
+  /* Motion — Duração — §3.9 */
+  --dur-fast: 150ms;
+  --dur-normal: 200ms;
+  --dur-debounce: 300ms;
+  --dur-toast: 4000ms;
+
+  /* Motion — Easing — §3.9 */
+  --ease-standard: cubic-bezier(.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0, 0, 0, 1);
+}
+
+/* Modo escuro (§25): .dark no <html> */
+:root.dark {
+  color-scheme: dark;
+  --navy-900: var(--dark-navy-900);
+  --navy-800: var(--dark-navy-800);
+  --navy-700: var(--dark-navy-700);
+  --navy-500: var(--dark-navy-500);
+  --sky-300: var(--dark-sky-300);
+  --sky-100: var(--dark-sky-100);
+  --blue-700: var(--dark-blue-700);
+  --blue-300: var(--dark-blue-300);
+  --success-700: var(--dark-success-700);
+  --success-100: var(--dark-success-100);
+  --warning-700: var(--dark-warning-700);
+  --warning-100: var(--dark-warning-100);
+  --danger-700: var(--dark-danger-700);
+  --danger-100: var(--dark-danger-100);
+  --ink-900: var(--dark-ink-900);
+  --ink-700: var(--dark-ink-700);
+  --ink-600: var(--dark-ink-600);
+  --ink-500: var(--dark-ink-500);
+  --ink-200: var(--dark-ink-200);
+  --ink-100: var(--dark-ink-100);
+  --white: var(--dark-white);
+  --overlay: var(--dark-overlay);
+  --sh-sm: var(--dark-sh-sm);
+  --sh-md: var(--dark-sh-md);
+  --line-on-sky: var(--dark-line-on-sky);
+  --divider-on-sky: var(--dark-divider-on-sky);
+}
+
+/* Regras de elemento em @layer base: a utilitária da tela vence. */
+@layer base {
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--ink-900);
+  background: var(--surface-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Foco visível (§20.5) */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--navy-700);
+  outline-offset: 2px;
+}
+
+/* Superfícies do navegador (§2.4) */
+::selection { background: var(--sky-300); color: var(--ink-900); }
+:root { accent-color: var(--navy-700); }
+input, textarea { caret-color: var(--navy-700); }
+a { text-underline-offset: .2em; }
+time, data, td { font-variant-numeric: tabular-nums; }
+input, select, textarea { font-size: var(--fs-h3); }
+
+/* Movimento reduzido (§17.5) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+}
+
+
+/* ===== Deck: medidas próprias, derivadas da escala do PSIF para leitura à distância ===== */
+:root {
+  --stage-w: 1280px;
+  --stage-h: 720px;
+  --deck-display: 56px;
+  --deck-title: 40px;
+  --deck-h3: 24px;
+  --deck-body: 20px;
+  --deck-small: 16px;
+  --deck-stat: 64px;
+}
+
+html, body { height: 100%; }
+body { overflow: hidden; }
+
+.deck {
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  background: var(--surface-base);
+}
+.stage {
+  width: var(--stage-w); height: var(--stage-h);
+  position: relative;
+  transform-origin: center center;
+}
+
+.slide {
+  position: absolute; inset: 0;
+  padding: var(--sp-12) 64px var(--sp-12);
+  display: flex; flex-direction: column; gap: var(--sp-6);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--dur-normal) var(--ease-standard), visibility var(--dur-normal);
+  font-size: var(--deck-body);
+  line-height: var(--lh-normal);
+}
+.slide.is-active { opacity: 1; visibility: visible; }
+
+/* Texto sobre o céu: eyebrow, título e subtítulo */
+.eyebrow {
+  margin: 0;
+  font-size: var(--deck-small); font-weight: 600;
+  color: var(--ink-700);
+  letter-spacing: .02em;
+}
+.slide-title {
+  margin: 0;
+  font-size: var(--deck-title); font-weight: 600; line-height: var(--lh-tight);
+  color: var(--navy-700);
+  max-width: 22ch;
+}
+.lead {
+  margin: 0;
+  font-size: var(--deck-h3); color: var(--ink-700);
+  max-width: 48ch;
+}
+
+/* Capa de parte e capa geral */
+.slide-cover { justify-content: center; gap: var(--sp-5); }
+.slide-cover .cover-num {
+  width: 72px; height: 72px; border-radius: var(--radius-2xl);
+  display: grid; place-items: center;
+  background: var(--navy-700); color: var(--white);
+  font-size: 32px; font-weight: 600;
+}
+.slide-cover .cover-title {
+  margin: 0;
+  font-size: var(--deck-display); font-weight: 600; line-height: var(--lh-tight);
+  color: var(--navy-700);
+  max-width: 18ch;
+}
+.slide-cover .cover-sub { margin: 0; font-size: var(--deck-h3); color: var(--ink-700); max-width: 44ch; }
+.brand { display: flex; align-items: center; gap: var(--sp-4); }
+.brand .symbol {
+  width: 88px; height: 88px; border-radius: 19px;
+  background: var(--blue-300); color: #FFFFFF;
+  display: grid; place-items: center;
+}
+.brand .symbol svg { width: 72px; height: 72px; }
+.brand .brand-name { font-size: var(--deck-title); font-weight: 600; color: var(--navy-700); }
+
+/* Grades */
+.grid { display: grid; gap: var(--sp-5); align-content: start; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+/* Cartão: branco, sem borda, sem sombra, raio 2xl */
+.card {
+  background: var(--surface-raised);
+  border-radius: var(--radius-2xl);
+  padding: var(--sp-6);
+  display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.card-icon {
+  width: var(--tile-icon-lg); height: var(--tile-icon-lg);
+  border-radius: var(--radius-xl);
+  background: var(--sky-100); color: var(--navy-700);
+  display: grid; place-items: center;
+  margin-bottom: var(--sp-2);
+}
+.card-icon .ic { width: var(--ic-lg); height: var(--ic-lg); }
+.card-title { margin: 0; font-size: var(--deck-h3); font-weight: 600; color: var(--navy-700); line-height: var(--lh-snug); }
+.card-text { margin: 0; font-size: var(--deck-small); color: var(--ink-700); line-height: var(--lh-normal); }
+.issue {
+  align-self: flex-start;
+  font-size: var(--fs-small); font-weight: 600;
+  color: var(--navy-700); background: var(--sky-100);
+  padding: 2px var(--sp-2); border-radius: var(--radius-md);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Números */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); }
+.stat { background: var(--surface-raised); border-radius: var(--radius-2xl); padding: var(--sp-6); }
+.stat-num { display: block; font-size: var(--deck-stat); font-weight: 600; line-height: 1; color: var(--navy-700); font-variant-numeric: tabular-nums; }
+.stat-label { display: block; margin-top: var(--sp-2); font-size: var(--deck-small); color: var(--ink-700); }
+
+/* Chips e selos */
+.chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin: 0; padding: 0; list-style: none; }
+.chip {
+  font-size: var(--deck-small); font-weight: 500;
+  padding: var(--chip-pad); border-radius: var(--radius-pill);
+  background: var(--surface-raised); color: var(--navy-700);
+}
+.card .chip { background: var(--sky-100); }
+.badge { display: inline-block; align-self: flex-start; font-size: var(--fs-small); font-weight: 600; padding: 2px var(--sp-2); border-radius: var(--radius-md); }
+.badge-success { background: var(--success-100); color: var(--success-700); }
+.badge-warning { background: var(--warning-100); color: var(--warning-700); }
+.badge-neutral { background: var(--ink-100); color: var(--ink-700); }
+
+/* Fluxo horizontal */
+.flow { display: flex; align-items: stretch; gap: var(--sp-3); }
+.flow-step {
+  flex: 1;
+  background: var(--surface-raised); border-radius: var(--radius-2xl);
+  padding: var(--sp-5); text-align: center;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--sp-1);
+}
+.flow-step strong { font-size: var(--deck-h3); font-weight: 600; color: var(--navy-700); }
+.flow-step span { font-size: var(--deck-small); color: var(--ink-700); }
+.flow-step.is-action { background: var(--navy-700); }
+.flow-step.is-action strong, .flow-step.is-action span { color: var(--white); }
+.flow-arrow { align-self: center; color: var(--navy-700); }
+.flow-arrow .ic { width: var(--ic-lg); height: var(--ic-lg); }
+
+/* Barra de progresso (marinho sobre cartão) */
+.bar { height: 12px; background: var(--ink-100); border-radius: var(--radius-pill); overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--navy-700); border-radius: var(--radius-pill); }
+
+
+/* Amostras do design system (slide da skill) */
+.compact { gap: var(--sp-4); }
+.compact .flow-step { padding: var(--sp-3) var(--sp-4); }
+.compact .flow-step strong { font-size: var(--fs-h1); }
+.compact .card { padding: var(--sp-5); gap: var(--sp-3); }
+.card-label { margin: 0; font-size: var(--fs-small); font-weight: 600; color: var(--ink-700); }
+.swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); }
+.swatch { height: 40px; border-radius: var(--radius-md); }
+.swatch.has-edge { box-shadow: inset 0 0 0 1px var(--ink-200); }
+.type-sample { margin: 0; color: var(--navy-700); font-weight: 600; line-height: var(--lh-tight); }
+.type-sample.t-display { font-size: var(--fs-display); }
+.type-sample.t-h1 { font-size: var(--fs-h1); }
+.type-sample.t-body { font-size: var(--fs-body); font-weight: 400; color: var(--ink-900); }
+.type-sample.t-caption { font-size: var(--fs-caption); font-weight: 400; color: var(--ink-700); }
+.icon-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); color: var(--navy-700); }
+.icon-row span { height: 40px; border-radius: var(--radius-md); background: var(--sky-100); display: grid; place-items: center; }
+.icon-row .ic { width: var(--ic-lg); height: var(--ic-lg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: var(--control-min); padding: var(--btn-pad); border-radius: var(--radius-lg); font-size: var(--fs-h3); font-weight: 600; border: 0; font-family: inherit; }
+.btn-primary { background: var(--navy-700); color: var(--white); }
+.btn-secondary { background: var(--surface-raised); color: var(--navy-700); box-shadow: inset 0 0 0 1px var(--navy-700); }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
+.priorities { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); margin: 0; padding: 0; list-style: none; }
+.priorities li { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--deck-small); font-weight: 600; color: var(--navy-700); background: var(--surface-raised); padding: var(--chip-pad); border-radius: var(--radius-pill); }
+.priorities b { width: 24px; height: 24px; border-radius: var(--radius-pill); background: var(--navy-700); color: var(--white); display: grid; place-items: center; font-size: var(--fs-caption); }
+.priorities .sep { background: none; padding: 0 var(--sp-2) 0 var(--sp-4); color: var(--ink-700); font-weight: 500; }
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .9em; color: var(--navy-700);
+  background: var(--sky-100); padding: 1px 6px; border-radius: var(--radius-xs);
+}
+.card code { background: var(--ink-100); }
+
+.ic { width: var(--ic-md); height: var(--ic-md); flex: none; }
+
+/* Rodapé fixo do deck */
+.deck-footer {
+  position: absolute; left: 64px; right: 64px; bottom: var(--sp-5);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: var(--fs-small); color: var(--ink-700);
+}
+.deck-footer .controls { display: flex; gap: var(--sp-2); }
+.deck-footer button {
+  width: var(--target-min); height: var(--target-min);
+  border: 0; border-radius: var(--radius-lg);
+  background: var(--surface-raised); color: var(--navy-700);
+  display: grid; place-items: center; cursor: pointer;
+}
+.deck-footer button:disabled { opacity: var(--o-disabled); cursor: default; }
+.progress { position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--divider-on-sky); }
+.progress > span { display: block; height: 100%; background: var(--navy-700); transition: width var(--dur-normal) var(--ease-standard); }
+.counter { font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<svg style="display:none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<!-- Ícones do PSIF (§18). Linha de 2px, grid de 24, cantos arredondados; cor
+     herdada (currentColor). Uso no projeto: <Icon name="psif-calendario" />
+     (§18), com este sprite inline no layout raiz. Os "-ativo" são o
+     estado ativo da navegação (§7.1). -->
+
+<symbol id="psif-voltar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></symbol>
+<symbol id="psif-avancar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="psif-anterior" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol>
+<symbol id="psif-abrir-lista" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="psif-fechar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></symbol>
+<symbol id="psif-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
+<symbol id="psif-mais" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></symbol>
+
+<symbol id="psif-inicio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="psif-inicio-ativo" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="psif-atendimentos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="16" rx="2"/><rect x="9" y="3" width="6" height="4" rx="1"/></symbol>
+<symbol id="psif-atendimentos-ativo" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="16" rx="2"/><rect x="9" y="3" width="6" height="4" rx="1"/></symbol>
+<symbol id="psif-alunos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.8.3 5 2.6 5 5.8"/></symbol>
+<symbol id="psif-alunos-ativo" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6z"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.8.3 5 2.6 5 5.8h-5z"/></symbol>
+<symbol id="psif-relatorios" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8l5 5v3"/><path d="M14 3v5h5"/><circle cx="16" cy="16" r="3"/><path d="M18.2 18.2L21 21"/></symbol>
+<symbol id="psif-relatorios-ativo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" stroke="none" d="M6 2h7.6l6.4 6.4V12a6 6 0 0 0-8.5 9H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><circle cx="16" cy="16" r="3"/><path d="M18.2 18.2L21 21"/></symbol>
+
+<symbol id="psif-calendario" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></symbol>
+<symbol id="psif-perfil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></symbol>
+<symbol id="psif-notificacoes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></symbol>
+<symbol id="psif-termo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><path d="M8 13h8"/><path d="M8 17h5"/></symbol>
+<symbol id="psif-sair" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M9 8l-4 4 4 4"/><path d="M5 12h11"/></symbol>
+
+<symbol id="psif-alerta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6"/><path d="M12 17h.01"/></symbol>
+<symbol id="psif-sucesso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></symbol>
+<symbol id="psif-busca" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+<symbol id="psif-email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="psif-cadeado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="psif-mostrar-senha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+</svg>
+
+<main class="deck" aria-roledescription="apresentação">
+  <div class="stage" id="stage">
+    <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+<section class="slide slide-cover" data-part="Abertura">
+  <div class="brand">
+    <div class="symbol"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M207.2 83.3 L219.5 83.3 L228.4 85.3 L234.6 87.8 L246.8 95.5 L255.8 105.3 L264.4 96.4 L272.9 90.2 L284 85.3 L290.5 83.7 L305.2 83.3 L313.4 84.9 L324 89.4 L331.7 94.7 L340.1 103.5 L345.4 112.5 L348.7 122.7 L349.5 132.5 L359.5 135.6 L368.9 140.9 L378.9 150 L384.6 158.2 L389.9 170.9 L392 182.7 L390.7 197.8 L388.3 206 L385 213.3 L391.3 218 L401.4 228.8 L407.5 239.5 L411.6 251.7 L412.8 258.7 L412.8 272.1 L411.2 281.1 L407.1 292.5 L400.5 303.6 L396.9 308.1 L389.7 314.8 L378.7 321.7 L367.1 325.6 L368.3 339.1 L367.1 346.8 L364.6 355.4 L360.1 364.8 L356.8 369.7 L348.9 378.5 L337.9 386.2 L325.6 391.1 L315.8 392.8 L305.2 392.8 L294.2 390.7 L286.4 387.9 L276.2 382.2 L267.8 375.4 L267.8 390.5 L269.1 397.9 L272.7 408.5 L278 417.1 L277.8 417.7 L233.5 417.5 L239.7 406.9 L242.5 398.3 L243.8 391.3 L243.5 375.6 L232.9 383.8 L224.4 388.3 L215.8 391.1 L206.8 392.8 L194.6 392.8 L184.3 390.7 L172.9 385.8 L165.2 380.5 L158 373.8 L154.7 369.7 L151.1 364 L147.4 356.2 L145.4 350.1 L143.7 341.9 L143.7 330.9 L144.5 325.6 L134.5 322.6 L125.1 317.7 L119.8 313.6 L112.3 306 L105.3 295.4 L103.3 290.9 L99.6 278.3 L98.8 272.1 L99.2 256.6 L103.3 242.3 L107.4 234.2 L113.1 226 L119 219.7 L127 213.3 L122.9 203.9 L121.3 197.8 L120 183.9 L122.1 171.7 L125.3 163.1 L128.2 157.8 L133.5 150.5 L144.3 140.5 L154.9 134.7 L163.3 132.5 L164.5 120.7 L167.4 112.5 L172.7 103.5 L178.6 96.8 L184.8 91.9 L191.7 87.8 L197.8 85.3Z M209.3 105.7 L201.5 107.8 L197.8 109.8 L191.5 115.8 L188.2 121.5 L186.6 128.8 L187.4 134.9 L189.9 140.7 L190.3 145.6 L187.8 151.3 L185.2 153.5 L181.5 155.2 L167.6 155.2 L161.9 156.8 L157 159.2 L150.3 165.2 L145.8 172.5 L143.7 178.6 L142.9 184.3 L143.7 192.9 L147 201.5 L156 213.7 L156.4 220.7 L154.7 224.4 L151.7 227.4 L148.8 229.1 L143.5 230.7 L136.2 235.2 L130.2 241.1 L125.8 248.4 L123.3 255 L122.1 261.9 L122.5 272.5 L125.8 282.7 L131.5 291.3 L136.2 295.6 L141.5 298.9 L151.3 302.1 L166 303 L168.8 304.2 L171.5 306.4 L173.9 311.3 L173.9 316.2 L170.3 323.6 L168.2 329.7 L168.2 343.6 L169.9 348.5 L175.2 357.5 L181.5 363.4 L188 367.1 L198.2 369.5 L208 369.1 L215.4 367.1 L221.1 364.2 L227.2 359.7 L233.5 352.6 L239.3 341.9 L242.5 329.3 L243.3 315.8 L244.8 314.4 L267.2 314.4 L268.2 315.4 L269.5 330.5 L273.6 344.4 L279.7 354.6 L287.6 362.2 L295.4 366.6 L306.4 369.5 L316.6 369.1 L323.6 367.1 L331.3 362.6 L337.3 356.6 L339.7 353 L343.4 344.4 L344.2 339.9 L343.8 330.1 L342.1 324.8 L338.1 316.6 L338.1 311.3 L339.3 308.1 L341.5 305.4 L345.6 303 L362 301.7 L370.5 298.5 L373.8 296.4 L381.3 289.3 L383.4 286.4 L386.2 281.1 L388.7 273.4 L389.5 267.2 L389.1 259.5 L387.1 251.3 L384.2 245.2 L378.9 238.2 L374.6 234.4 L369.3 231.1 L360.3 227.4 L357.3 224.4 L355.2 219.5 L355.2 216.6 L356.4 212.5 L363 204.8 L367.5 195.4 L368.7 190.1 L368.7 181.5 L367.1 174.5 L362.6 166.4 L358.7 162.1 L354.2 158.8 L348.9 156.4 L344 155.2 L330.9 155.2 L326.8 153.5 L324.8 151.9 L322.6 148.4 L321.7 143.1 L325 134.5 L325.4 126.4 L324.2 121.9 L322.1 117.8 L317.4 112.3 L311.3 108.2 L303.2 105.7 L295 105.7 L286.8 108.2 L279.5 112.7 L273.6 119 L268.7 128.8 L267.4 134.5 L267 190.9 L266 191.5 L245.2 191.5 L243.8 190.1 L243.8 134.5 L240.9 124.3 L234.8 115.3 L227.2 109.4 L218.6 106.2Z M242.7 202.9 L268 202.9 L269.5 203.9 L269.7 238.4 L305.2 238.4 L306.2 239.5 L306.2 266.4 L304.8 267.8 L269.5 268 L269.5 301.9 L268.5 303 L242.7 303 L241.7 301.9 L241.7 268.5 L241.1 267.8 L206 267.8 L204.6 266 L204.6 239.9 L206 238.4 L241.1 238.4 L241.7 237.8 L241.7 203.9Z"/></svg></div>
+    <span class="brand-name">PSIF</span>
+  </div>
+  <h1 class="cover-title">Fundação do projeto</h1>
+  <p class="cover-sub">Plataforma de Suporte Psicopedagógico do IFPB Campus Esperança</p>
+  <ul class="chips">
+    <li class="chip">0 · Produto e board</li>
+    <li class="chip">1 · SDD e docs</li>
+    <li class="chip">2 · Backend</li>
+    <li class="chip">3 · Design system</li>
+    <li class="chip">4 · Frontend e BFF</li>
+    <li class="chip">5 · Infra e deploy</li>
+  </ul>
+</section>
+
+<section class="slide" data-part="Parte 0 · O produto e o board">
+  <p class="eyebrow">Parte 0</p>
+  <h2 class="slide-title">O produto e o board</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Hoje</strong><span>Papel e aba do SUAP</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>PSIF</strong><span>Plataforma totalmente web</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>Diferencial</strong><span>Agenda de reuniões</span></div>
+  </div>
+  <ul class="chips">
+    <li class="chip">Psicopedagoga</li>
+    <li class="chip">Professor</li>
+    <li class="chip">Aluno</li>
+    <li class="chip">Responsável</li>
+  </ul>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">44</span><span class="stat-label">itens no board</span></div>
+    <div class="stat"><span class="stat-num">19</span><span class="stat-label">concluídos</span></div>
+    <div class="stat"><span class="stat-num">22</span><span class="stat-label">no Backlog</span></div>
+    <div class="stat"><span class="stat-num">39%</span><span class="stat-label">dos pontos feitos</span><div class="bar"><span style="width:39%"></span></div></div>
+  </div>
+  <ul class="chips">
+    <li class="chip"><span class="badge badge-success">14/14</span> #4 Fundação</li>
+    <li class="chip"><span class="badge badge-warning">1/5</span> #22 PRDs</li>
+  </ul>
+</section>
+
+<section class="slide" data-part="Parte 1 · Base de SDD e documentação">
+  <p class="eyebrow">Parte 1</p>
+  <h2 class="slide-title">Base de SDD e documentação</h2>
+  <div class="grid grid-3">
+    <article class="card">
+      <span class="issue">#2</span>
+      <h3 class="card-title">OpenSpec</h3>
+      <p class="card-text">Spec antes do código</p>
+    </article>
+    <article class="card">
+      <span class="issue">#2</span>
+      <h3 class="card-title">Roteamento</h3>
+      <p class="card-text"><code>AGENTS.md</code> diz o que ler</p>
+    </article>
+    <article class="card">
+      <span class="issue">#2</span>
+      <h3 class="card-title">Skills dos agentes</h3>
+      <p class="card-text"><code>.agents/skills</code></p>
+    </article>
+    <article class="card">
+      <h3 class="card-title">Constituição e convenções</h3>
+      <p class="card-text">Missão, commits, nomes, escrita</p>
+    </article>
+    <article class="card">
+      <h3 class="card-title">Arquitetura</h3>
+      <p class="card-text">Backend, frontend e Docker</p>
+    </article>
+    <article class="card">
+      <span class="issue">#21 · #23</span>
+      <h3 class="card-title">PRDs</h3>
+      <p class="card-text">26 telas em 5 fases</p>
+    </article>
+  </div>
+</section>
+
+<section class="slide" data-part="Parte 2 · Contratos e backend">
+  <p class="eyebrow">Parte 2</p>
+  <h2 class="slide-title">Contratos e backend</h2>
+  <div class="grid grid-5">
+    <article class="card">
+      <span class="issue">#5</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-termo"/></svg></div>
+      <h3 class="card-title">Contratos</h3>
+      <p class="card-text">Serviços, portas, URLs</p>
+      <ul class="chips"><li class="chip">BFF</li><li class="chip">Variáveis</li></ul>
+    </article>
+    <article class="card">
+      <span class="issue">#6</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-menu"/></svg></div>
+      <h3 class="card-title">Backend</h3>
+      <p class="card-text">Organizado por domínio</p>
+      <ul class="chips"><li class="chip">Java 21</li><li class="chip">Spring Boot 4.1</li></ul>
+    </article>
+    <article class="card">
+      <span class="issue">#7</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-cadeado"/></svg></div>
+      <h3 class="card-title">Banco</h3>
+      <p class="card-text">Só validado: <code>validate</code></p>
+      <ul class="chips"><li class="chip">PostgreSQL</li><li class="chip">Liquibase</li></ul>
+    </article>
+    <article class="card">
+      <span class="issue">#8</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-alerta"/></svg></div>
+      <h3 class="card-title">Erros</h3>
+      <p class="card-text">Resposta padronizada</p>
+      <ul class="chips"><li class="chip"><code>ProblemDetail</code></li></ul>
+    </article>
+    <article class="card">
+      <span class="issue">#9</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-busca"/></svg></div>
+      <h3 class="card-title">OpenAPI</h3>
+      <p class="card-text">Swagger da API</p>
+      <ul class="chips"><li class="chip"><span class="badge badge-success">Dev liga</span></li><li class="chip"><span class="badge badge-neutral">Produção desliga</span></li></ul>
+    </article>
+  </div>
+</section>
+
+<section class="slide compact" data-part="Parte 3 · Skill de design system">
+  <p class="eyebrow">Parte 3 · <span class="issue">#29</span></p>
+  <h2 class="slide-title">Skill de design system</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Fundo céu</strong><span>O fundo deste slide</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>Cartão branco</strong><span>Conteúdo</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step is-action"><strong>Ação em marinho</strong><span>Botões e links</span></div>
+  </div>
+  <div class="grid grid-4">
+    <article class="card">
+      <p class="card-label">Cores</p>
+      <div class="swatches" role="img" aria-label="Paleta: marinho, céu, sucesso, aviso e erro">
+        <span class="swatch" style="background:var(--navy-900)"></span>
+        <span class="swatch" style="background:var(--navy-700)"></span>
+        <span class="swatch" style="background:var(--navy-500)"></span>
+        <span class="swatch" style="background:var(--sky-300)"></span>
+        <span class="swatch has-edge" style="background:var(--sky-100)"></span>
+        <span class="swatch" style="background:var(--success-700)"></span>
+        <span class="swatch" style="background:var(--warning-700)"></span>
+        <span class="swatch" style="background:var(--danger-700)"></span>
+      </div>
+    </article>
+    <article class="card">
+      <p class="card-label">Figtree</p>
+      <p class="type-sample t-display">Aa 32</p>
+      <p class="type-sample t-h1">Título 20</p>
+      <p class="type-sample t-body">Corpo 15</p>
+      <p class="type-sample t-caption">Legenda 12</p>
+    </article>
+    <article class="card">
+      <p class="card-label">Ícones</p>
+      <div class="icon-row">
+        <span><svg class="ic" aria-hidden="true"><use href="#psif-inicio"/></svg></span>
+        <span><svg class="ic" aria-hidden="true"><use href="#psif-alunos"/></svg></span>
+        <span><svg class="ic" aria-hidden="true"><use href="#psif-calendario"/></svg></span>
+        <span><svg class="ic" aria-hidden="true"><use href="#psif-relatorios"/></svg></span>
+        <span><svg class="ic" aria-hidden="true"><use href="#psif-notificacoes"/></svg></span>
+        <span><svg class="ic" aria-hidden="true"><use href="#psif-atendimentos"/></svg></span>
+        <span><svg class="ic" aria-hidden="true"><use href="#psif-busca"/></svg></span>
+        <span><svg class="ic" aria-hidden="true"><use href="#psif-cadeado"/></svg></span>
+      </div>
+    </article>
+    <article class="card">
+      <p class="card-label">Componentes</p>
+      <span class="btn btn-primary">Salvar</span>
+      <span class="btn btn-secondary">Cancelar</span>
+      <div class="row">
+        <span class="badge badge-success">Ativo</span>
+        <span class="badge badge-warning">Pendente</span>
+        <span class="badge badge-neutral">Inativo</span>
+      </div>
+    </article>
+  </div>
+  <ul class="priorities" aria-label="Prioridades">
+    <li><b>1</b>Sigilo do aluno</li>
+    <li><b>2</b>WCAG 2.2 AA</li>
+    <li><b>3</b>Consistência</li>
+    <li class="sep">Tema claro e escuro · verificadores</li>
+  </ul>
+</section>
+
+<section class="slide" data-part="Parte 4 · Frontend e BFF">
+  <p class="eyebrow">Parte 4</p>
+  <h2 class="slide-title">Frontend e BFF</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Navegador</strong><span>chama <code>/api</code></span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>Frontend / BFF</strong><span>Next.js · porta 3000</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>Backend</strong><span>Spring · porta 8080</span></div>
+  </div>
+  <div class="grid grid-5">
+    <article class="card">
+      <span class="issue">#10</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-inicio"/></svg></div>
+      <h3 class="card-title">Base do frontend</h3>
+      <p class="card-text">Next.js, React, TS, Tailwind, shadcn</p>
+    </article>
+    <article class="card">
+      <span class="issue">#41</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-sucesso"/></svg></div>
+      <h3 class="card-title">Só pnpm</h3>
+      <p class="card-text">Um gerenciador de pacotes</p>
+    </article>
+    <article class="card">
+      <span class="issue">#13</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-cadeado"/></svg></div>
+      <h3 class="card-title">BFF</h3>
+      <p class="card-text"><code>backendFetch</code> só no servidor</p>
+    </article>
+    <article class="card">
+      <span class="issue">#12</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-termo"/></svg></div>
+      <h3 class="card-title">Client OpenAPI</h3>
+      <p class="card-text">Orval gera client tipado</p>
+    </article>
+    <article class="card">
+      <span class="issue">#11</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-menu"/></svg></div>
+      <h3 class="card-title">Layout base</h3>
+      <p class="card-text">Sidebar, gaveta, breadcrumbs, temas, estados</p>
+    </article>
+  </div>
+</section>
+
+<section class="slide" data-part="Parte 5 · Infra e deploy">
+  <p class="eyebrow">Parte 5</p>
+  <h2 class="slide-title">Infra e deploy</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Internet</strong><span>HTTPS</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>Caddy</strong><span>80 / 443</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>frontend / backend</strong><span>3000 / 8080</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>postgres / minio</strong><span>5432 / 9000</span></div>
+  </div>
+  <div class="grid grid-4">
+    <article class="card">
+      <span class="issue">#14</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-inicio"/></svg></div>
+      <h3 class="card-title">Docker dev</h3>
+      <p class="card-text">postgres, minio, backend, frontend</p>
+    </article>
+    <article class="card">
+      <span class="issue">#15</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-cadeado"/></svg></div>
+      <h3 class="card-title">Docker produção</h3>
+      <p class="card-text">Rede privada, volumes persistentes</p>
+    </article>
+    <article class="card">
+      <span class="issue">#16</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+      <h3 class="card-title">Caddy</h3>
+      <p class="card-text">Entrada única com HTTPS</p>
+    </article>
+    <article class="card">
+      <span class="issue">#17</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-sucesso"/></svg></div>
+      <h3 class="card-title">Healthchecks</h3>
+      <p class="card-text">Actuator, <code>/api/health</code>, subida por saúde</p>
+    </article>
+  </div>
+  <ul class="chips">
+    <li class="chip">Produção: só o Caddy publica portas</li>
+  </ul>
+</section>
+
+<section class="slide" data-part="Fechamento">
+  <p class="eyebrow">Fechamento</p>
+  <h2 class="slide-title">Base pronta. Próximo passo: fase 1</h2>
+  <div class="grid grid-3">
+    <article class="card">
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-sucesso"/></svg></div>
+      <h3 class="card-title">Entregue</h3>
+      <p class="card-text">Navegador, BFF, backend e banco ligados, com erros, contratos e deploy padronizados</p>
+    </article>
+    <article class="card">
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-alerta"/></svg></div>
+      <h3 class="card-title">Ficou para depois</h3>
+      <ul class="chips">
+        <li class="chip">Autenticação</li>
+        <li class="chip">Storage</li>
+        <li class="chip">Modelo de dados</li>
+      </ul>
+    </article>
+    <article class="card">
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+      <h3 class="card-title">A seguir</h3>
+      <ul class="chips">
+        <li class="chip">#43 Modelo de dados</li>
+        <li class="chip">#44 Identidade e sessão</li>
+        <li class="chip">#45 e #46 Cursos</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+
+    <footer class="deck-footer">
+      <span id="part-label"></span>
+      <div class="controls">
+        <button type="button" id="prev" aria-label="Slide anterior"><svg class="ic" aria-hidden="true"><use href="#psif-anterior"/></svg></button>
+        <span class="counter" id="counter" aria-live="polite" style="align-self:center;min-width:56px;text-align:center"></span>
+        <button type="button" id="next" aria-label="Próximo slide"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></button>
+      </div>
+    </footer>
+  </div>
+</main>
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const stage = document.getElementById('stage');
+  const label = document.getElementById('part-label');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  let i = Math.min(Math.max(parseInt(location.hash.slice(1), 10) - 1 || 0, 0), slides.length - 1);
+
+  function fit() {
+    const s = Math.min(innerWidth / 1280, innerHeight / 720);
+    stage.style.transform = `scale(${s})`;
+  }
+  function show(n) {
+    i = Math.min(Math.max(n, 0), slides.length - 1);
+    slides.forEach((el, k) => {
+      el.classList.toggle('is-active', k === i);
+      el.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+    });
+    label.textContent = slides[i].dataset.part || '';
+    counter.textContent = `${i + 1} / ${slides.length}`;
+    progress.style.width = `${((i + 1) / slides.length) * 100}%`;
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+    history.replaceState(null, '', `#${i + 1}`);
+  }
+  addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(i + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(i - 1); }
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+    if (e.key === 't') document.documentElement.classList.toggle('dark');
+  });
+  prev.addEventListener('click', () => show(i - 1));
+  next.addEventListener('click', () => show(i + 1));
+  addEventListener('resize', fit);
+  fit(); show(i);
+})();
+</script>
+</body>
+</html>

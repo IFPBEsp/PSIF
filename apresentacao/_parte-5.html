@@ -1,0 +1,42 @@
+<section class="slide" data-part="Parte 5 · Infra e deploy">
+  <p class="eyebrow">Parte 5</p>
+  <h2 class="slide-title">Infra e deploy</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Internet</strong><span>HTTPS</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>Caddy</strong><span>80 / 443</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>frontend / backend</strong><span>3000 / 8080</span></div>
+    <div class="flow-arrow"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+    <div class="flow-step"><strong>postgres / minio</strong><span>5432 / 9000</span></div>
+  </div>
+  <div class="grid grid-4">
+    <article class="card">
+      <span class="issue">#14</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-inicio"/></svg></div>
+      <h3 class="card-title">Docker dev</h3>
+      <p class="card-text">postgres, minio, backend, frontend</p>
+    </article>
+    <article class="card">
+      <span class="issue">#15</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-cadeado"/></svg></div>
+      <h3 class="card-title">Docker produção</h3>
+      <p class="card-text">Rede privada, volumes persistentes</p>
+    </article>
+    <article class="card">
+      <span class="issue">#16</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></div>
+      <h3 class="card-title">Caddy</h3>
+      <p class="card-text">Entrada única com HTTPS</p>
+    </article>
+    <article class="card">
+      <span class="issue">#17</span>
+      <div class="card-icon"><svg class="ic" aria-hidden="true"><use href="#psif-sucesso"/></svg></div>
+      <h3 class="card-title">Healthchecks</h3>
+      <p class="card-text">Actuator, <code>/api/health</code>, subida por saúde</p>
+    </article>
+  </div>
+  <ul class="chips">
+    <li class="chip">Produção: só o Caddy publica portas</li>
+  </ul>
+</section>

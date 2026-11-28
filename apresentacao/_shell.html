@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fundação do PSIF</title>
+<link rel="icon" type="image/png" href="assets/simbolo-psif-quadrado.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/*__TOKENS__*/
+
+/* ===== Deck: medidas próprias, derivadas da escala do PSIF para leitura à distância ===== */
+:root {
+  --stage-w: 1280px;
+  --stage-h: 720px;
+  --deck-display: 56px;
+  --deck-title: 40px;
+  --deck-h3: 24px;
+  --deck-body: 20px;
+  --deck-small: 16px;
+  --deck-stat: 64px;
+}
+
+html, body { height: 100%; }
+body { overflow: hidden; }
+
+.deck {
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  background: var(--surface-base);
+}
+.stage {
+  width: var(--stage-w); height: var(--stage-h);
+  position: relative;
+  transform-origin: center center;
+}
+
+.slide {
+  position: absolute; inset: 0;
+  padding: var(--sp-12) 64px var(--sp-12);
+  display: flex; flex-direction: column; gap: var(--sp-6);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--dur-normal) var(--ease-standard), visibility var(--dur-normal);
+  font-size: var(--deck-body);
+  line-height: var(--lh-normal);
+}
+.slide.is-active { opacity: 1; visibility: visible; }
+
+/* Texto sobre o céu: eyebrow, título e subtítulo */
+.eyebrow {
+  margin: 0;
+  font-size: var(--deck-small); font-weight: 600;
+  color: var(--ink-700);
+  letter-spacing: .02em;
+}
+.slide-title {
+  margin: 0;
+  font-size: var(--deck-title); font-weight: 600; line-height: var(--lh-tight);
+  color: var(--navy-700);
+  max-width: 22ch;
+}
+.lead {
+  margin: 0;
+  font-size: var(--deck-h3); color: var(--ink-700);
+  max-width: 48ch;
+}
+
+/* Capa de parte e capa geral */
+.slide-cover { justify-content: center; gap: var(--sp-5); }
+.slide-cover .cover-num {
+  width: 72px; height: 72px; border-radius: var(--radius-2xl);
+  display: grid; place-items: center;
+  background: var(--navy-700); color: var(--white);
+  font-size: 32px; font-weight: 600;
+}
+.slide-cover .cover-title {
+  margin: 0;
+  font-size: var(--deck-display); font-weight: 600; line-height: var(--lh-tight);
+  color: var(--navy-700);
+  max-width: 18ch;
+}
+.slide-cover .cover-sub { margin: 0; font-size: var(--deck-h3); color: var(--ink-700); max-width: 44ch; }
+.brand { display: flex; align-items: center; gap: var(--sp-4); }
+.brand .symbol {
+  width: 88px; height: 88px; border-radius: 19px;
+  background: var(--blue-300); color: #FFFFFF;
+  display: grid; place-items: center;
+}
+.brand .symbol svg { width: 72px; height: 72px; }
+.brand .brand-name { font-size: var(--deck-title); font-weight: 600; color: var(--navy-700); }
+
+/* Grades */
+.grid { display: grid; gap: var(--sp-5); align-content: start; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+/* Cartão: branco, sem borda, sem sombra, raio 2xl */
+.card {
+  background: var(--surface-raised);
+  border-radius: var(--radius-2xl);
+  padding: var(--sp-6);
+  display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.card-icon {
+  width: var(--tile-icon-lg); height: var(--tile-icon-lg);
+  border-radius: var(--radius-xl);
+  background: var(--sky-100); color: var(--navy-700);
+  display: grid; place-items: center;
+  margin-bottom: var(--sp-2);
+}
+.card-icon .ic { width: var(--ic-lg); height: var(--ic-lg); }
+.card-title { margin: 0; font-size: var(--deck-h3); font-weight: 600; color: var(--navy-700); line-height: var(--lh-snug); }
+.card-text { margin: 0; font-size: var(--deck-small); color: var(--ink-700); line-height: var(--lh-normal); }
+.issue {
+  align-self: flex-start;
+  font-size: var(--fs-small); font-weight: 600;
+  color: var(--navy-700); background: var(--sky-100);
+  padding: 2px var(--sp-2); border-radius: var(--radius-md);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Números */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); }
+.stat { background: var(--surface-raised); border-radius: var(--radius-2xl); padding: var(--sp-6); }
+.stat-num { display: block; font-size: var(--deck-stat); font-weight: 600; line-height: 1; color: var(--navy-700); font-variant-numeric: tabular-nums; }
+.stat-label { display: block; margin-top: var(--sp-2); font-size: var(--deck-small); color: var(--ink-700); }
+
+/* Chips e selos */
+.chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin: 0; padding: 0; list-style: none; }
+.chip {
+  font-size: var(--deck-small); font-weight: 500;
+  padding: var(--chip-pad); border-radius: var(--radius-pill);
+  background: var(--surface-raised); color: var(--navy-700);
+}
+.card .chip { background: var(--sky-100); }
+.badge { display: inline-block; align-self: flex-start; font-size: var(--fs-small); font-weight: 600; padding: 2px var(--sp-2); border-radius: var(--radius-md); }
+.badge-success { background: var(--success-100); color: var(--success-700); }
+.badge-warning { background: var(--warning-100); color: var(--warning-700); }
+.badge-neutral { background: var(--ink-100); color: var(--ink-700); }
+
+/* Fluxo horizontal */
+.flow { display: flex; align-items: stretch; gap: var(--sp-3); }
+.flow-step {
+  flex: 1;
+  background: var(--surface-raised); border-radius: var(--radius-2xl);
+  padding: var(--sp-5); text-align: center;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--sp-1);
+}
+.flow-step strong { font-size: var(--deck-h3); font-weight: 600; color: var(--navy-700); }
+.flow-step span { font-size: var(--deck-small); color: var(--ink-700); }
+.flow-step.is-action { background: var(--navy-700); }
+.flow-step.is-action strong, .flow-step.is-action span { color: var(--white); }
+.flow-arrow { align-self: center; color: var(--navy-700); }
+.flow-arrow .ic { width: var(--ic-lg); height: var(--ic-lg); }
+
+/* Barra de progresso (marinho sobre cartão) */
+.bar { height: 12px; background: var(--ink-100); border-radius: var(--radius-pill); overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--navy-700); border-radius: var(--radius-pill); }
+
+
+/* Amostras do design system (slide da skill) */
+.compact { gap: var(--sp-4); }
+.compact .flow-step { padding: var(--sp-3) var(--sp-4); }
+.compact .flow-step strong { font-size: var(--fs-h1); }
+.compact .card { padding: var(--sp-5); gap: var(--sp-3); }
+.card-label { margin: 0; font-size: var(--fs-small); font-weight: 600; color: var(--ink-700); }
+.swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); }
+.swatch { height: 40px; border-radius: var(--radius-md); }
+.swatch.has-edge { box-shadow: inset 0 0 0 1px var(--ink-200); }
+.type-sample { margin: 0; color: var(--navy-700); font-weight: 600; line-height: var(--lh-tight); }
+.type-sample.t-display { font-size: var(--fs-display); }
+.type-sample.t-h1 { font-size: var(--fs-h1); }
+.type-sample.t-body { font-size: var(--fs-body); font-weight: 400; color: var(--ink-900); }
+.type-sample.t-caption { font-size: var(--fs-caption); font-weight: 400; color: var(--ink-700); }
+.icon-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); color: var(--navy-700); }
+.icon-row span { height: 40px; border-radius: var(--radius-md); background: var(--sky-100); display: grid; place-items: center; }
+.icon-row .ic { width: var(--ic-lg); height: var(--ic-lg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: var(--control-min); padding: var(--btn-pad); border-radius: var(--radius-lg); font-size: var(--fs-h3); font-weight: 600; border: 0; font-family: inherit; }
+.btn-primary { background: var(--navy-700); color: var(--white); }
+.btn-secondary { background: var(--surface-raised); color: var(--navy-700); box-shadow: inset 0 0 0 1px var(--navy-700); }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
+.priorities { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); margin: 0; padding: 0; list-style: none; }
+.priorities li { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--deck-small); font-weight: 600; color: var(--navy-700); background: var(--surface-raised); padding: var(--chip-pad); border-radius: var(--radius-pill); }
+.priorities b { width: 24px; height: 24px; border-radius: var(--radius-pill); background: var(--navy-700); color: var(--white); display: grid; place-items: center; font-size: var(--fs-caption); }
+.priorities .sep { background: none; padding: 0 var(--sp-2) 0 var(--sp-4); color: var(--ink-700); font-weight: 500; }
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .9em; color: var(--navy-700);
+  background: var(--sky-100); padding: 1px 6px; border-radius: var(--radius-xs);
+}
+.card code { background: var(--ink-100); }
+
+.ic { width: var(--ic-md); height: var(--ic-md); flex: none; }
+
+/* Rodapé fixo do deck */
+.deck-footer {
+  position: absolute; left: 64px; right: 64px; bottom: var(--sp-5);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: var(--fs-small); color: var(--ink-700);
+}
+.deck-footer .controls { display: flex; gap: var(--sp-2); }
+.deck-footer button {
+  width: var(--target-min); height: var(--target-min);
+  border: 0; border-radius: var(--radius-lg);
+  background: var(--surface-raised); color: var(--navy-700);
+  display: grid; place-items: center; cursor: pointer;
+}
+.deck-footer button:disabled { opacity: var(--o-disabled); cursor: default; }
+.progress { position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--divider-on-sky); }
+.progress > span { display: block; height: 100%; background: var(--navy-700); transition: width var(--dur-normal) var(--ease-standard); }
+.counter { font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<!--__SPRITE__-->
+<main class="deck" aria-roledescription="apresentação">
+  <div class="stage" id="stage">
+    <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+<!--__SLIDES__-->
+
+    <footer class="deck-footer">
+      <span id="part-label"></span>
+      <div class="controls">
+        <button type="button" id="prev" aria-label="Slide anterior"><svg class="ic" aria-hidden="true"><use href="#psif-anterior"/></svg></button>
+        <span class="counter" id="counter" aria-live="polite" style="align-self:center;min-width:56px;text-align:center"></span>
+        <button type="button" id="next" aria-label="Próximo slide"><svg class="ic" aria-hidden="true"><use href="#psif-avancar"/></svg></button>
+      </div>
+    </footer>
+  </div>
+</main>
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const stage = document.getElementById('stage');
+  const label = document.getElementById('part-label');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  let i = Math.min(Math.max(parseInt(location.hash.slice(1), 10) - 1 || 0, 0), slides.length - 1);
+
+  function fit() {
+    const s = Math.min(innerWidth / 1280, innerHeight / 720);
+    stage.style.transform = `scale(${s})`;
+  }
+  function show(n) {
+    i = Math.min(Math.max(n, 0), slides.length - 1);
+    slides.forEach((el, k) => {
+      el.classList.toggle('is-active', k === i);
+      el.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+    });
+    label.textContent = slides[i].dataset.part || '';
+    counter.textContent = `${i + 1} / ${slides.length}`;
+    progress.style.width = `${((i + 1) / slides.length) * 100}%`;
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+    history.replaceState(null, '', `#${i + 1}`);
+  }
+  addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(i + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(i - 1); }
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+    if (e.key === 't') document.documentElement.classList.toggle('dark');
+  });
+  prev.addEventListener('click', () => show(i - 1));
+  next.addEventListener('click', () => show(i + 1));
+  addEventListener('resize', fit);
+  fit(); show(i);
+})();
+</script>
+</body>
+</html>
