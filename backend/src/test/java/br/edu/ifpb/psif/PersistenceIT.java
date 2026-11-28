@@ -39,4 +39,25 @@ class PersistenceIT {
             assertThat(resultSet.getInt(1)).isEqualTo(2);
         }
     }
+
+    @Test
+    void shouldRemoveAccentsWithImmutableUnaccentFunction() throws SQLException {
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT immutable_unaccent('Disl\u00e9xia')")) {
+            assertThat(resultSet.next()).isTrue();
+            assertThat(resultSet.getString(1)).isEqualTo("Dislexia");
+        }
+    }
+
+    @Test
+    void shouldDeclareUnaccentWrapperAsImmutable() throws SQLException {
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(
+                     "SELECT provolatile FROM pg_proc WHERE proname = 'immutable_unaccent'")) {
+            assertThat(resultSet.next()).isTrue();
+            assertThat(resultSet.getString(1)).isEqualTo("i");
+        }
+    }
 }
